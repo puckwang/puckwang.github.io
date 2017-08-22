@@ -1,0 +1,62 @@
+baseurl = "https://www.example.com/"
+title = "Puck's Blog"
+author = "Wang YiXiang"
+# Shown in the side menu
+copyright = "&copy; 2017. All rights reserved."
+canonifyurls = true
+paginate = 10
+theme = "blackburn"
+
+[indexes]
+  tag = "tags"
+  topic = "topics"
+
+[params]
+  # Shown in the home page
+  subtitle = "Now or Never!"
+  brand = "Puck's Blog"
+  googleAnalytics = "Your Google Analytics tracking ID"
+  disqus = "wyx"
+  # CSS name for highlight.js
+  highlightjs = "androidstudio"
+  highlightjs_extra_languages = ["yaml"]
+  dateFormat = "2006-01-02 15:04:05"
+  # Include any custom CSS and/or JS files
+  # (relative to /static folder)
+  custom_css = ["css/my.css"]
+  custom_js = ["js/my.js"]
+
+[menu]
+      [[menu.main]]
+        name = "Home"
+        pre = "<i class='fa fa-home fa-fw'></i>"
+        weight = 1
+        identifier = "home"
+        url = "/"
+      [[menu.main]]
+        name = "About"
+        pre = "<i class='fa fa-user fa-fw'></i>"
+        weight = 2
+        identifier = "about"
+        url = "/about/"
+    [[menu.main]]
+        name = "Contact"
+        pre = "<i class='fa fa-phone fa-fw'></i>"
+        weight = 3
+        url = "/contact/"
+    [[menu.main]]
+        name = "Posts"
+        pre = "<i class='fa fa-list fa-fw'></i>"
+        weight = 4
+        identifier = "post"
+        url = "/post/"
+
+[social]
+  # Link your social networking accounts to the side menu
+  # by entering your username or ID.
+
+  facebook = "kirdyss"
+  googleplus = "12321068"
+
+  # Techie
+  github = "s9801077"
