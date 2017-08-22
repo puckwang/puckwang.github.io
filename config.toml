@@ -1,4 +1,4 @@
-baseurl = "https://www.example.com/"
+baseurl = "https://s9801077.github.io/myblog/"
 title = "Puck's Blog"
 author = "Wang YiXiang"
 # Shown in the side menu
@@ -15,7 +15,7 @@ theme = "blackburn"
   # Shown in the home page
   subtitle = "Now or Never!"
   brand = "Puck's Blog"
-  googleAnalytics = "Your Google Analytics tracking ID"
+  googleAnalytics = "UA-44442837-6"
   disqus = "wyx"
   # CSS name for highlight.js
   highlightjs = "androidstudio"
@@ -23,8 +23,8 @@ theme = "blackburn"
   dateFormat = "2006-01-02 15:04:05"
   # Include any custom CSS and/or JS files
   # (relative to /static folder)
-  custom_css = ["css/my.css"]
-  custom_js = ["js/my.js"]
+  custom_css = []
+  custom_js = []
 
 [menu]
       [[menu.main]]
