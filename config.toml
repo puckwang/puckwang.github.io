@@ -1,5 +1,5 @@
 baseurl = "https://s9801077.github.io/myblog/"
-title = "Puck's Blog"
+title = "Puckwang's Blog"
 author = "Wang YiXiang"
 # Shown in the side menu
 copyright = "&copy; 2017. All rights reserved."
@@ -14,7 +14,7 @@ theme = "blackburn"
 [params]
   # Shown in the home page
   subtitle = "Now or Never!"
-  brand = "Puck's Blog"
+  brand = "Puckwang's Blog"
   googleAnalytics = "UA-44442837-6"
   disqus = "wyx"
   # CSS name for highlight.js
@@ -26,6 +26,9 @@ theme = "blackburn"
   custom_css = []
   custom_js = []
 
+[permalinks]
+  post = "/:year/:month/:title/"
+  
 [menu]
       [[menu.main]]
         name = "Home"
