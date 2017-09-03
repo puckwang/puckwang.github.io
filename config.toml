@@ -1,65 +1,72 @@
 baseurl = "https://s9801077.github.io/myblog/"
 title = "Puckwang's Blog"
-author = "Wang YiXiang"
-# Shown in the side menu
-copyright = "&copy; 2017. All rights reserved."
-canonifyurls = true
-paginate = 10
-theme = "blackburn"
+languageCode = "zh-TW"
+paginate = "10" # Number of posts per page
+theme = "mainroad"
+disqusShortname = "wyx" # Enable comments by entering your Disqus shortname
+googleAnalytics = "UA-44442837-6" # Enable Google Analytics by entering your tracking id
 
-[indexes]
-  tag = "tags"
-  topic = "topics"
+[Author] # Used in authorbox
+    name = "Puckwang"
+    bio = ""
+    avatar = "https://s.gravatar.com/avatar/9eafa3bd5e29341304c3c7341d1a161d?s=300"
 
-[params]
-  # Shown in the home page
-  subtitle = "Now or Never!"
-  brand = "Puckwang's Blog"
-  googleAnalytics = "UA-44442837-6"
-  disqus = "wyx"
-  # CSS name for highlight.js
-  highlightjs = "androidstudio"
-  highlightjs_extra_languages = ["yaml"]
-  dateFormat = "2006-01-02 15:04:05"
-  # Include any custom CSS and/or JS files
-  # (relative to /static folder)
-  custom_css = []
-  custom_js = []
+[taxonomies]
+    tag = "tags"
+    category = "categories"
 
 [permalinks]
-  post = "/:year/:month/:title/"
-  
+    post = "/:year/:month/:title/"
+
+[Params]
+    subtitle = "Now or Never!" # Subtitle of your site. Used in site header
+    description = "" # Description of your site. Used in meta description
+    opengraph = true # Enable OpenGraph if true
+    readmore = false # Show "Read more" button in list if true
+    leftsidebar = false # Move sidebar to the left side if true
+    authorbox = true # Show authorbox at bottom of pages if true
+    post_navigation = true # Show post navigation at bottom of pages if true
+    postSections = ["post"] # the section pages to show on home page and the "Recent articles" widget
+    #postSections = ["blog", "news"] # alternative that shows more than one section's pages
+    #dateformat = "2006-01-02" # change the format of dates
+
+[Params.widgets]
+    search = true # Enable "Search" widget
+    recent_articles = true # Enable "Recent articles" widget
+    recent_articles_num = 5 # Set the number of articles in the "Recent articles" widget
+    categories = true # Enable "Categories" widget
+    tags = true # Enable "Tags" widget
+    tags_counter = true # Enable counter for each tag in "Tags" widget (disabled by default)
+
+    # Enable "Social" widget, if any of "social_*" set a value
+    social_facebook = "kirdyss"
+    social_twitter = ""
+    social_linkedin = ""
+    social_github = "s9801077"
+    social_email = "s9801077@gmail.com"
+
 [menu]
-      [[menu.main]]
+    [[menu.main]]
         name = "Home"
         pre = "<i class='fa fa-home fa-fw'></i>"
         weight = 1
         identifier = "home"
         url = "/"
-      [[menu.main]]
+    [[menu.main]]
         name = "About"
         pre = "<i class='fa fa-user fa-fw'></i>"
         weight = 2
         identifier = "about"
         url = "/about/"
     [[menu.main]]
-        name = "Contact"
-        pre = "<i class='fa fa-phone fa-fw'></i>"
-        weight = 3
-        url = "/contact/"
-    [[menu.main]]
         name = "Posts"
         pre = "<i class='fa fa-list fa-fw'></i>"
-        weight = 4
+        weight = 3
         identifier = "post"
         url = "/post/"
-
-[social]
-  # Link your social networking accounts to the side menu
-  # by entering your username or ID.
-
-  facebook = "kirdyss"
-  googleplus = "12321068"
-
-  # Techie
-  github = "s9801077"
+    [[menu.main]]
+        name = "Tags"
+        pre = "<i class='fa fa-tags fa-fw'></i>"
+        weight = 4
+        identifier = "tags"
+        url = "/tags/"
