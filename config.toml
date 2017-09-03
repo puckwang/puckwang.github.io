@@ -64,9 +64,3 @@ googleAnalytics = "UA-44442837-6" # Enable Google Analytics by entering your tra
         weight = 3
         identifier = "post"
         url = "/post/"
-    [[menu.main]]
-        name = "Tags"
-        pre = "<i class='fa fa-tags fa-fw'></i>"
-        weight = 4
-        identifier = "tags"
-        url = "/tags/"
