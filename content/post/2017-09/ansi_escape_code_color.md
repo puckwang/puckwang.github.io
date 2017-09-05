@@ -5,7 +5,7 @@ description = ""
 thumbnail = "" # Optional, thumbnail
 disable_comments = false # Optional, disable Disqus comments if true
 tags = ['tips']
-categories = []
+categories = ['筆記']
 +++
 
 藉由`ANSI escape code`可以更改Console上字的顏色、背景顏色、粗體、下畫線等..

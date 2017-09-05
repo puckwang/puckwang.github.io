@@ -5,6 +5,7 @@ paginate = "10" # Number of posts per page
 theme = "mainroad"
 disqusShortname = "wyx" # Enable comments by entering your Disqus shortname
 googleAnalytics = "UA-44442837-6" # Enable Google Analytics by entering your tracking id
+canonifyurls = true
 
 [Author] # Used in authorbox
     name = "Puckwang"
@@ -22,7 +23,7 @@ googleAnalytics = "UA-44442837-6" # Enable Google Analytics by entering your tra
     subtitle = "Now or Never!" # Subtitle of your site. Used in site header
     description = "" # Description of your site. Used in meta description
     opengraph = true # Enable OpenGraph if true
-    readmore = false # Show "Read more" button in list if true
+    readmore = true # Show "Read more" button in list if true
     leftsidebar = false # Move sidebar to the left side if true
     authorbox = true # Show authorbox at bottom of pages if true
     post_navigation = true # Show post navigation at bottom of pages if true
