@@ -9,6 +9,7 @@ categories = ['筆記']
 +++
 
 藉由`ANSI escape code`可以更改Console上字的顏色、背景顏色、粗體、下畫線等..
+<!--more-->
 
 詳細資料：https://en.wikipedia.org/wiki/ANSI_escape_code
 
