@@ -1,4 +1,4 @@
-baseurl = "https://s9801077.github.io/myblog/"
+baseurl = "https://s9801077.github.io"
 title = "Puckwang's Blog"
 languageCode = "zh-TW"
 paginate = "10" # Number of posts per page
