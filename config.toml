@@ -1,67 +1,97 @@
+# The URL of your website.
+# End your URL with a `/` trailing slash, e.g. `https://example.com/`.
 baseurl = "https://blog.puckwang.com"
-title = "Puckwang's Blog"
-languageCode = "zh-TW"
-paginate = "10" # Number of posts per page
-theme = "mainroad"
-disqusShortname = "wyx" # Enable comments by entering your Disqus shortname
-googleAnalytics = "UA-44442837-6" # Enable Google Analytics by entering your tracking id
-canonifyurls = true
 
-[Author] # Used in authorbox
-    name = "Puckwang"
-    bio = ""
-    avatar = "https://s.gravatar.com/avatar/9eafa3bd5e29341304c3c7341d1a161d?s=300"
+# Title of your site
+title = "Puck's Blog"
 
-[taxonomies]
-    tag = "tags"
-    category = "categories"
+# Your copyright notice - appears in site footer.
+# To display a copyright symbol, type `&copy;`.
+copyright = "&copy; Puck Wang 2018"
 
-[permalinks]
-    post = "/:year/:month/:title/"
+theme = "minimal-academic"
+enableEmoji = true
+footnotereturnlinkcontents = "<sup>^</sup>"
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+preserveTaxonomyNames = true
+paginate = 10
 
-[Params]
-    subtitle = "Now or Never!" # Subtitle of your site. Used in site header
-    description = "" # Description of your site. Used in meta description
-    opengraph = true # Enable OpenGraph if true
-    readmore = true # Show "Read more" button in list if true
-    leftsidebar = false # Move sidebar to the left side if true
-    authorbox = true # Show authorbox at bottom of pages if true
-    post_navigation = true # Show post navigation at bottom of pages if true
-    postSections = ["post"] # the section pages to show on home page and the "Recent articles" widget
-    #postSections = ["blog", "news"] # alternative that shows more than one section's pages
-    #dateformat = "2006-01-02" # change the format of dates
+# Enable comments by entering your Disqus shortname
+disqusShortname = "puckwang"
 
-[Params.widgets]
-    search = true # Enable "Search" widget
-    recent_articles = true # Enable "Recent articles" widget
-    recent_articles_num = 5 # Set the number of articles in the "Recent articles" widget
-    categories = true # Enable "Categories" widget
-    tags = true # Enable "Tags" widget
-    tags_counter = true # Enable counter for each tag in "Tags" widget (disabled by default)
+# Enable analytics by entering your Google Analytics tracking ID
+googleAnalytics = "UA-44442837-6"
 
-    # Enable "Social" widget, if any of "social_*" set a value
-    social_facebook = "kirdyss"
-    social_twitter = ""
-    social_linkedin = ""
-    social_github = "s9801077"
-    social_email = "s9801077@gmail.com"
+# Get last modified date for content from Git?
+enableGitInfo = false
 
-[menu]
-    [[menu.main]]
-        name = "Home"
-        pre = "<i class='fa fa-home fa-fw'></i>"
-        weight = 1
-        identifier = "home"
-        url = "/"
-    [[menu.main]]
-        name = "About"
-        pre = "<i class='fa fa-user fa-fw'></i>"
-        weight = 2
-        identifier = "about"
-        url = "/about/"
-    [[menu.main]]
-        name = "Posts"
-        pre = "<i class='fa fa-list fa-fw'></i>"
-        weight = 3
-        identifier = "post"
-        url = "/post/"
+[outputs]
+  home = [ "HTML", "CSS", "RSS" ]
+  section = [ "HTML", "RSS" ]
+
+# Configure BlackFriday Markdown rendering.
+#   See: https://gohugo.io/readfiles/bfconfig/
+[blackfriday]
+  hrefTargetBlank = true  # `true` opens external links in a new tab.
+  fractions = true  # `false` disables smart fractions (e.g. 5/12 formatted as a fraction).
+  smartypants = true  # `false` disables all smart punctuation substitutions (e.g. smart quotes, dashes, fractions).
+
+[params]
+  # Your details.
+  name = "Puck Wang"
+  bio = "Now or Never!"
+
+  avatar = "portrait.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
+
+  location = "Taiwan"
+
+  # Discussion link (e.g. link to a forum, mailing list, or chat).
+  #   Uncomment line below to use.
+  #   discussion = { name = "Discuss", url = "https://discourse.gohugo.io" }
+
+  # Date and time format (refer to Go's date format: http://fuckinggodateformat.com )
+  #   Examples: "Mon, Jan 2, 2006" or "2006-01-02"
+  date_format = "2006-01-02"
+  #   Examples: "3:04 pm" or "15:04"
+  time_format = "15:04"
+
+  # Display comment count? Requires commenting to be enabled.
+  comment_count = true
+
+  # Enable native social sharing buttons?
+  sharing = true
+
+  # Privacy pack
+  #   Show a cookie consent message to visitors
+  #   Anonymize IP in Google Analytics (if enabled)
+  privacy_pack = false
+
+  [[params.social]]
+    icon = "facebook-official"
+    icon_pack = "fa"
+    link = "//www.facebook.com/puckwang14"
+    text = "Facebook"
+
+  [[params.social]]
+    icon = "twitter"
+    icon_pack = "fa"
+    link = "//twitter.com/puckwang14"
+    text = "Twitter"
+
+  [[params.social]]
+    icon = "github"
+    icon_pack = "fa"
+    link = "//github.com/s9801077"
+    text = "Github"
+
+  [[params.social]]
+    icon = "linkedin"
+    icon_pack = "fa"
+    link = "//linkedin.com/in/joshua-hu-12290a43"
+    text = "LinkedIn"
+
+# Taxonomies.
+ [taxonomies]
+   tag = "tags"
+   category = "categories"
+#   publication_type = "publication_types"
