@@ -9,6 +9,8 @@ categories = ["問題解決"]
 最近開始在用laravel 5.5開發專案時發現的問題，只要用執行`npm run watch`後，
 每次跑完編譯phpstorm都會停頓幾秒。
 
+<!--more-->
+
 經過一番搜尋，終於在laracasts找到的國外網友也有發生類似問題。 
 [原文](https://laracasts.com/discuss/channels/javascript/laravel-mix-phpstorm-lag)
 

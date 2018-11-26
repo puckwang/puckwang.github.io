@@ -8,6 +8,8 @@ categories = ["問題解決"]
 
 在你把vuex的Actions與getters注入到components中時，可能會使用到展開運算子(...)，此時你可能會遇到語法錯誤的問題。
 
+<!--more-->
+
 ```text
  ERROR  Failed to compile with 2 errors                                                                                                                                               上午1:06:35
 
