@@ -76,6 +76,10 @@ animation: name duration timing-function delay iteration-count direction fill-mo
     * both: 套用上述兩個規則
 * **animation-play-state**: 指定動畫當下的播放狀態，可以是 paused 或 running。
 
+推薦工具：http://animista.net/play/basic/scale-up
+
+可以先用這個工具試過各種動畫，在作微調。
+
 # Demo 
 
 用簡單的 CSS 動畫語法，就可以做出不錯的 Loading 圖示。
