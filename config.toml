@@ -33,7 +33,7 @@ enableGitInfo = false
   # Your details.
   name = "Puck Wang"
   description = "Puck 的筆記型部落格"
-  bio = "Now or Never!"
+  bio = "Full stack web developer, Gamer."
   avatar = "portrait.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
   location = "Kaohsiung, Taiwan"
   twitter = ""
