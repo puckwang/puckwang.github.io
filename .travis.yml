@@ -1,0 +1,17 @@
+language: linux
+
+before_install:
+ - sudo apt-get install hugo
+
+script:
+ - hugo
+
+deploy:
+  provider: pages
+  target-branch: master
+  local-dir: public
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: develop

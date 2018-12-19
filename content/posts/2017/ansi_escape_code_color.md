@@ -2,8 +2,8 @@
 title = "Console Colors Table"
 date = "2017-09-03T01:12:16+08:00"
 description = ""
-tags = ['tips']
-categories = ['筆記']
+tags = ['Tips']
+categories = ['筆記', "Console"]
 +++
 
 藉由`ANSI escape code`可以更改Console上字的顏色、背景顏色、粗體、下畫線等..

@@ -2,7 +2,7 @@
 title = "解決使用 Laravel-mix 時 Phpstorm 會 lag 的問題"
 date = "2017-09-05T22:21:26+08:00"
 description = ""
-tags = ["laravel", "phpstorm"]
+tags = ["Laravel", "phpstorm"]
 categories = ["問題解決"]
 +++
 

@@ -2,7 +2,7 @@
 title = "解決 vuex 在 Laravel-mix 中使用展開運算子(...)出現語法錯誤的問題"
 date = "2017-09-06T01:09:04+08:00"
 description = ""
-tags = ["laravel", "Vue"]
+tags = ["Laravel", "Vue"]
 categories = ["問題解決"]
 +++
 

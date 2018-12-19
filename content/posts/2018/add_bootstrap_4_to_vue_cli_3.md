@@ -3,8 +3,8 @@ title: "新增 Bootstrap 4 到用 vue-cli 3.x 建立的專案中"
 date: 2018-12-04T22:31:10+08:00
 draft: false
 description: "新增 Bootstrap 4 到用 vue-cli 3.x 建立的專案中"
-tags: ["Web", "Font-End"]
-categories: ["Vue", "筆記"]
+tags: ["Font-End", "Vue"]
+categories: ["Web", "筆記"]
 ---
 
 在這邊紀錄一下怎麼將 Bootstrap 4 新增進 vue-cli 3.x 所建立的專案中。

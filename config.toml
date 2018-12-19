@@ -88,3 +88,4 @@ enableGitInfo = false
  [taxonomies]
    tag = "tags"
    category = "categories"
+   series = "series"
