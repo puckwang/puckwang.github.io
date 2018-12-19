@@ -21,7 +21,7 @@ echo "# Removing existing files"
 rm -rf public/*
 
 echo "# Generating site"
-hugo -D
+hugo
 
 echo "# Updating gh-pages branch"
 echo "blog.puckwang.com" > public/CNAME
