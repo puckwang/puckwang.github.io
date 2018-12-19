@@ -1,7 +1,10 @@
-language: linux
+language: go
+
+go:
+  - master
 
 before_install:
- - sudo apt-get install hugo
+ - go get github.com/gohugoio/hugo
 
 script:
  - hugo
