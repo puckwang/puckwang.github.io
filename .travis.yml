@@ -1,7 +1,7 @@
 language: linux
 
 script:
- - hugo
+ - ./hugo
 
 deploy:
   provider: pages
