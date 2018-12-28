@@ -10,8 +10,7 @@
         {{ end }}
         {{ template "_internal/opengraph.html" . }}
         {{ template "_internal/twitter_cards.html" . }}
-
-
+        {{ partial "adsense" . }}
 
         <title>{{ block "title" . }}{{ with .Params.Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
 
