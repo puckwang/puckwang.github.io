@@ -16,7 +16,7 @@ googleAnalytics = "UA-44442837-6"
 
 [Params]
 author = "Puck Wang"
-images = ["/images/og_image.png"]
+images = ["images/og_image.png"]
 introDescription = "I'm full stack web developer and Gamer."
 contentSharing = "Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with."
 data_format = "2006-01-02 15:04:05"
