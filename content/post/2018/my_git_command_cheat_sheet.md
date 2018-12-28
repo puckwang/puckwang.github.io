@@ -113,7 +113,16 @@ git rebase [<branch>]  #將該分支接到目標分支最上層
 git rebase master
 ```
 
-  * `-i`: 自訂對每個 Commit 的操作。
+  * `-i`: 可以自訂對每個 Commit 的操作及調整其順序，而操作命令及縮寫如下 (可以打第一個縮寫代替)。
+    * `p, pick` = 使用這個 commit。 (default)
+    * `r, reword` = 使用這個 commit，但編輯 commit 訊息。
+    * `e, edit` = 使用這個 commit，但暫停 rebase 來編輯這個 commit。
+    * `s, squash` = 使用這個 Commit，但與前一個 commit 合併。
+    * `f, fixup` = 類似 squash，差在會捨棄這個 commit 的訊息。
+    * `x, exec` = 執行後面接的的 Shell
+    * `d, drop` = 移除這個 commit
+
+> 如果使用 Vim 來編輯，`:wq` 存檔離開就可以完成 rebase
 
 ### Merge
 ```bash
@@ -126,15 +135,18 @@ git show <object>...  #顯示詳細資訊
 ```
 
 ### Submodule
-```git
-git submodule 
+```bash
+git submodule  #列出子模組清單
+git submodule add <repository> [<path>]  #新增某遠端倉庫為子模組，執行後會自動 clone
+git submodule init [<path>...]  #初始化子模組
+git submodule sync [<path>...]  #同步
 ```
 
 # 遠端倉庫相關
 ### Remote
 ```bash
 git remote  #列出遠端倉庫清單
-git remote add <name> <url>  #新增一筆遠端倉庫
+git remote add <name> <repository>  #新增一筆遠端倉庫
 git remote get-url <name>  #取得某筆遠端倉庫的 URL
 git remote set-url <name> <newurl>  #設定某比遠端倉庫的 URL
 ```
