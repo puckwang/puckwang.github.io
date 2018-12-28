@@ -125,6 +125,11 @@ git merge <commit>...  #將指定 Commit 合併到目前所在分支
 git show <object>...  #顯示詳細資訊
 ```
 
+### Submodule
+```git
+git submodule 
+```
+
 # 遠端倉庫相關
 ### Remote
 ```bash

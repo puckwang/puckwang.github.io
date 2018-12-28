@@ -1,3 +1,6 @@
 [submodule "themes/silhouette-hugo"]
 	path = themes/silhouette-hugo
 	url = https://github.com/mattbutton/silhouette-hugo.git
+[submodule "themes/minimal-academic"]
+	path = themes/minimal-academic
+	url = git@github.com:puckwang/minimal-academic.git
