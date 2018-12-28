@@ -3,6 +3,8 @@ title: "CSS Animation 入門筆記"
 date: 2018-12-03T12:00:00+08:00
 draft: false
 description: "快速學會怎麼使用 CSS 做出動畫效果"
+images:
+    - "/images/og_image.png"
 tags: ["CSS3", "Font-End"]
 categories: ["筆記", "Web"]
 ---

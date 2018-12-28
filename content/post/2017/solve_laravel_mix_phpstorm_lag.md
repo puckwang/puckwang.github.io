@@ -1,10 +1,12 @@
-+++
-title = "解決使用 Laravel-mix 時 Phpstorm 會 lag 的問題"
-date = "2017-09-05T22:21:26+08:00"
-description = ""
-tags = ["Laravel", "phpstorm"]
-categories = ["問題解決"]
-+++
+---
+title: "解決使用 Laravel-mix 時 Phpstorm 會 lag 的問題"
+date: "2017-09-05T22:21:26+08:00"
+description: ""
+images:
+    - "/images/og_image.png"
+tags: ["Laravel", "phpstorm"]
+categories: ["問題解決"]
+---
 
 最近開始在用laravel 5.5開發專案時發現的問題，只要用執行`npm run watch`後，
 每次跑完編譯phpstorm都會停頓幾秒。

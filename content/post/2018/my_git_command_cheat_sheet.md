@@ -3,6 +3,8 @@ title: "Git 常用指令與設定筆記"
 date: 2018-12-24T12:59:13+08:00
 draft: false
 description: "使用 Git 也有一段時間了，除了常用的 commit 等常用基本指令外，還有許多很實用的指令，在這邊做一下紀錄。"
+images:
+    - "/images/og_image.png"
 tags: 
     - Command
     - Config

@@ -1,10 +1,12 @@
-+++
-title = "解決 vuex 在 Laravel-mix 中使用展開運算子(...)出現語法錯誤的問題"
-date = "2017-09-06T01:09:04+08:00"
-description = ""
-tags = ["Laravel", "Vue"]
-categories = ["問題解決"]
-+++
+---
+title: "解決 vuex 在 Laravel-mix 中使用展開運算子(...)出現語法錯誤的問題"
+date: "2017-09-06T01:09:04+08:00"
+description: ""
+images:
+    - "/images/og_image.png"
+tags: ["Laravel", "Vue"]
+categories: ["問題解決"]
+---
 
 在你把vuex的Actions與getters注入到components中時，可能會使用到展開運算子(...)，此時你可能會遇到語法錯誤的問題。
 

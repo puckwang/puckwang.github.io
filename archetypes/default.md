@@ -2,12 +2,14 @@
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
 draft: true
+images:
+    - "/images/og_image.png"
 categories:
-  - Software Development
+    - Software Development
 tags:
-  - Untagged
+    - Untagged
 series: 
-  - OAO
+    - OAO
 ---
 
 **Insert Lead paragraph here.**

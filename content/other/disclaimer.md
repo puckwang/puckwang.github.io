@@ -1,6 +1,8 @@
 ---
 title: "Disclaimer"
 date: 2018-12-28T12:40:10+08:00
+images:
+    - "/images/og_image.png"
 noshare: true
 nocomments: true
 ---

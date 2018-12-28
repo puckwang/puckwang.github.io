@@ -1,7 +1,8 @@
 ---
 title: "About"
 date: 2017-09-01T22:31:10+08:00
-image: "/images/author.jpg"
+images:
+    - /images/author.jpg
 noshare: true
 nocomments: true
 ---
