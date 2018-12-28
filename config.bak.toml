@@ -1,0 +1,91 @@
+# The URL of your website.
+# End your URL with a `/` trailing slash, e.g. `https://example.com/`.
+baseurl = "https://blog.puckwang.com"
+
+# Title of your site
+title = "Puck's Blog"
+
+copyright = "&copy; Puck Wang 2018"
+
+theme = "silhouette-hugo"
+enableEmoji = true
+footnotereturnlinkcontents = "<sup>^</sup>"
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+preserveTaxonomyNames = true
+paginate = 10
+pygmentsCodeFences = true
+languageCode = "zh-TW"
+
+# Enable comments by entering your Disqus shortname
+disqusShortname = "puckwang"
+
+# Enable analytics by entering your Google Analytics tracking ID
+googleAnalytics = "UA-44442837-6"
+
+# Get last modified date for content from Git?
+enableGitInfo = false
+
+[outputs]
+  home = [ "HTML", "CSS", "RSS" ]
+  section = [ "HTML", "RSS" ]
+
+[params]
+  # Your details.
+  name = "Puck Wang"
+  description = "Puck 的筆記型部落格"
+  bio = "Full stack web developer, Gamer."
+  avatar = "portrait.jpg"  # Specify an avatar image (in `static/img/` folder) or delete value to disable avatar.
+  location = "Kaohsiung, Taiwan"
+  twitter = ""
+  date_format = "2006-01-02" # Examples: "Mon, Jan 2, 2006" or "2006-01-02"
+  time_format = "15:04"   # Examples: "3:04 pm" or "15:04"
+
+  # Display comment count? Requires commenting to be enabled.
+  comment_count = true
+
+  # Enable native social sharing buttons?
+  sharing = true
+
+  # Privacy pack
+  #   Show a cookie consent message to visitors
+  #   Anonymize IP in Google Analytics (if enabled)
+  privacy_pack = false
+
+  [[params.social]]
+    icon = "facebook-official"
+    icon_pack = "fa"
+    link = "//www.facebook.com/puckwang14"
+    text = "Facebook"
+
+  [[params.social]]
+    icon = "twitter"
+    icon_pack = "fa"
+    link = "//twitter.com/puckwang14"
+    text = "Twitter"
+
+  [[params.social]]
+    icon = "github"
+    icon_pack = "fa"
+    link = "//github.com/puckwang"
+    text = "Github"
+
+  [[params.social]]
+    icon = "linkedin"
+    icon_pack = "fa"
+    link = "//linkedin.com/in/joshua-hu-12290a43"
+    text = "LinkedIn"
+
+# Menus
+  [[params.menu]]
+    name = "Home"
+    url = "/"
+
+  [[params.menu]]
+      name = "About"
+      url = "/about"
+
+# Taxonomies.
+ [taxonomies]
+   tag = "tags"
+   category = "categories"
+   series = "series"

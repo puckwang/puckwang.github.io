@@ -6,19 +6,19 @@ noshare: true
 nocomments: true
 ---
 
-<img src="/img/author.jpg" style="width: 20vh">
+<img src="/images/author.jpg" style="width: 20vh">
 
-## Puck Wang
+### Puck Wang
 
 高雄人，樂於學習新技術，常因為熱衷於某事就忘了時間的存在。
 
-### 技術領域
+#### 技術領域
 * 前後端網站開發
 * 程式設計
 * 網路設備維護
 * Linux 伺服器維護
 
-### 涉略的技術
+#### 涉略的技術
 * Laravel
 * PHP
 * C/C++
@@ -32,13 +32,13 @@ nocomments: true
 * React Native
 * .net MVC
 
-### 曾獲獎項
+#### 曾獲獎項
 > 待捕
 
-### 聯絡資訊
+#### 聯絡資訊
 [s9801077@gmail.com](mailto:s9801077@gmail.com)
 
-### 本站資訊
+#### 本站資訊
 * 使用系統: [Hugo](https://gohugo.io/)
-* 使用樣式: [Minimal Academic Puck 修改版](https://github.com/s9801077/minimal-academic)
-
+* 使用樣式: [silhouette-hugo](https://github.com/mattbutton/silhouette-hugo)
+* 免責申明: [Disclaimer Link](/other/disclaimer/)

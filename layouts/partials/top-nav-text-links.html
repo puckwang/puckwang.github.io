@@ -1,0 +1,5 @@
+{{ range $.Site.Params.menus }}
+<li class="nav-item">
+    <a class="nav-link active" href="{{ .link | absURL }}">{{ .name }}</a>
+</li>
+{{ end }}

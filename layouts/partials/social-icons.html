@@ -1,0 +1,4 @@
+{{ range $.Site.Params.socials }}
+<a class="py-2 px-2 d-none d-lg-inline-block" href="{{ .link }}"><i class="{{ .icon }}"></i></a>
+{{ end }}
+<a class="py-2 px-2 d-none d-lg-inline-block" href='{{ "index.xml" | absURL }}'><i class="fas fa-rss"></i></a>

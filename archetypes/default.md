@@ -1,11 +1,13 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
-Lastmod: {{ .Date }}
 draft: true
-description: ""
-tags: []
-categories: []
+categories:
+  - Software Development
+tags:
+  - Untagged
+series: 
+  - OAO
 ---
 
-<!--more-->
+**Insert Lead paragraph here.**
