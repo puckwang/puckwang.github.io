@@ -366,6 +366,51 @@ var videoCard = new VideoCard()
 ### 結果
 <img src="/images/2019/bot_framework_video_card_demo.png" alt="Hero Card Demo Image" width="500">
 
+## Adaptive Card
+
+如果內建的卡片都不符合需求，可以使用 Adaptive Card 來自己設計符合需求的卡片。使用上有兩種方法，分別為使用 JSON 匯入以及用 API 自己組合，
+如果是固定的內容可以選用 JSON 就好了，而如果想要內容可以動態輸入，那就用 API 物件自己刻比較好。
+
+另外，官方也有提供線上工具供開發者可以方便設計 [連結](https://adaptivecards.io/designer/)
+
+```csharp
+AdaptiveCard adaptiveCard = new AdaptiveCard()
+    {
+        Body = new List<AdaptiveElement>()
+        {
+            new AdaptiveTextBlock()
+            {
+                Text = title,
+                Color = AdaptiveTextColor.Accent,
+                Size = AdaptiveTextSize.Medium,
+                Weight = AdaptiveTextWeight.Bolder
+            },
+            new AdaptiveTextBlock()
+            {
+                Text = dateTime.ToLocalTime().ToString(CultureInfo.InvariantCulture),
+                Size = AdaptiveTextSize.Small,
+                Spacing = AdaptiveSpacing.Small,
+                Color = AdaptiveTextColor.Dark,
+                HorizontalAlignment = AdaptiveHorizontalAlignment.Left
+            },
+            new AdaptiveTextBlock()
+            {
+                Text = body,
+                Wrap = true
+            }
+        },
+        Version = "1.0"
+    };
+
+    Attachment attachment = new Attachment()
+    {
+        ContentType = AdaptiveCard.ContentType,
+        Content = adaptiveCard  // 如果是要用 JSON 的方式匯入，直接接再這邊就可以了，不用像上面一樣。
+    };
+```
+
+<img src="/images/2019/bot_framework_adaptive_card_demo.png" alt="Hero Card Demo Image" width="500">
+
 ## 卡片的排版
 當卡片有兩張以上在同一筆訊息時，就會需要排版，內建有水平跟垂直兩種排版方式。
 
