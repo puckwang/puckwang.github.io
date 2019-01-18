@@ -4,7 +4,7 @@ description: "在開發聊天機器人時，現今給使用者的資料呈現方
 date: 2019-01-07T12:29:01+08:00
 draft: false
 images:
-    - "/images/og_image.png"
+    - "/images/2019/bot_framework_hero_card_demo.png"
 categories:
     - 筆記
     - bot framework
@@ -371,7 +371,8 @@ var videoCard = new VideoCard()
 如果內建的卡片都不符合需求，可以使用 Adaptive Card 來自己設計符合需求的卡片。使用上有兩種方法，分別為使用 JSON 匯入以及用 API 自己組合，
 如果是固定的內容可以選用 JSON 就好了，而如果想要內容可以動態輸入，那就用 API 物件自己刻比較好。
 
-另外，官方也有提供線上工具供開發者可以方便設計 [連結](https://adaptivecards.io/designer/)，想自己寫 Code 的也可以參考 [API](https://docs.microsoft.com/en-us/adaptive-cards/authoring-cards/card-schema)
+另外，官方也有提供線上工具供開發者可以方便設計 [連結](https://adaptivecards.io/designer/)，想自己寫 Code 的也可以參考 [API 文件](https://docs.microsoft.com/en-us/adaptive-cards/authoring-cards/card-schema) 
+或是 [官方範例](https://adaptivecards.io/samples/ActivityUpdate.html)
 
 ```csharp
 AdaptiveCard adaptiveCard = new AdaptiveCard()
