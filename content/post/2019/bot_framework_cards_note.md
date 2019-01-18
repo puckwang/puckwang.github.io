@@ -1,5 +1,5 @@
 ---
-title: "Bot Framework 內建 Cards 種類"
+title: "Microsoft Bot Framework 內建 Cards 種類"
 description: "在開發聊天機器人時，現今給使用者的資料呈現方式除了一般的字串形式外，另外一種較常出現的就是以卡片形式呈現，運用卡片形式呈現不僅讓使用者更容易閱讀，也不會造成聊天頻道看起來很雜亂。"
 date: 2019-01-07T12:29:01+08:00
 draft: false
@@ -371,7 +371,7 @@ var videoCard = new VideoCard()
 如果內建的卡片都不符合需求，可以使用 Adaptive Card 來自己設計符合需求的卡片。使用上有兩種方法，分別為使用 JSON 匯入以及用 API 自己組合，
 如果是固定的內容可以選用 JSON 就好了，而如果想要內容可以動態輸入，那就用 API 物件自己刻比較好。
 
-另外，官方也有提供線上工具供開發者可以方便設計 [連結](https://adaptivecards.io/designer/)
+另外，官方也有提供線上工具供開發者可以方便設計 [連結](https://adaptivecards.io/designer/)，想自己寫 Code 的也可以參考 [API](https://docs.microsoft.com/en-us/adaptive-cards/authoring-cards/card-schema)
 
 ```csharp
 AdaptiveCard adaptiveCard = new AdaptiveCard()
