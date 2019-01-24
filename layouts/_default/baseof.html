@@ -81,4 +81,132 @@
 
         {{ template "_internal/google_analytics_async.html" . }}
     </body>
+    <style>
+        .zoom-in-thumbnail {
+            visibility: hidden;
+            position: fixed;
+            z-index: 100000;
+            box-sizing: border-box;
+            border: 5px solid #ffffff;
+            border-radius: 3px;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            pointer-events: none;
+            transition-duration: 0.3s;
+            transition-delay: 0.1s;
+            transition-property: opacity;
+        }
+
+        .zoom-in-thumbnail-img {
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        img:hover + .zoom-in-thumbnail {
+            visibility: visible;
+            top: var(--zoom-image-y, 0);
+            left: var(--zoom-image-x, 0);
+            opacity: 1;
+        }
+    </style>
+    <script>
+        const root = document.documentElement;
+
+        $(function () {
+
+            $(".main-content img").each(function () {
+                if (this.complete) {
+                    generateImageDiv(this);
+                } else {
+                    $(this).on("load", function () {
+                        generateImageDiv(this);
+                    });
+                }
+                this.style.cursor = "pointer";
+
+                $(this).on("mousemove", function (evt) {
+                    let x = evt.clientX;
+                    let y = evt.clientY;
+                    let showXY;
+
+                    if ($(this).next().width() >= $(this).next().height()) {
+                        if (innerHeight - y <= $(this).next().height() + 50) {
+                            showXY = getShowXY(this, "top", x, y);
+                        } else {
+                            showXY = getShowXY(this, "bottom", x, y);
+                        }
+                    } else {
+                        if (innerWidth - x <= $(this).next().width() + 50) {
+                            showXY = getShowXY(this, "left", x, y);
+                        } else {
+                            showXY = getShowXY(this, "right", x, y);
+                        }
+                    }
+                    root.style.setProperty("--zoom-image-x", showXY.x + "px");
+                    root.style.setProperty("--zoom-image-y", showXY.y + "px");
+                });
+
+                $(this).on("click", function (evt) {
+                    window.open(this.src);
+                });
+            });
+        });
+
+        function getShowXY(element, direction, x, y) {
+            let divElement = $(element).next();
+            switch (direction) {
+                case 'top':
+                    x -= (divElement.width() / 2);
+                    y -= divElement.height();
+                    y -= 25;
+                    break;
+                case 'bottom':
+                    x -= (divElement.width() / 2);
+                    y += 25;
+                    break;
+                case 'right':
+                    y -= (divElement.height() / 2);
+                    x += 25;
+                    break;
+                case 'left':
+                    x -= divElement.width();
+                    y -= divElement.height() / 2;
+                    x -= 25;
+                    break;
+            }
+
+            return {x: x, y: y};
+        }
+
+        function generateImageDiv(element) {
+            var maxWidth = screen.width * 0.5; // Max width for the image
+            var maxHeight = screen.height * 0.4; // Max height for the image
+
+            var ratio = 0;
+            var height = element.naturalHeight;
+            var width = element.naturalWidth;
+
+            if (width > maxWidth) {
+                ratio = maxWidth / width;
+                width = maxWidth;
+                height = height * ratio;
+            }
+
+            if (height > maxHeight) {
+                ratio = maxHeight / height;
+                height = maxHeight;
+                width = width * ratio;
+            }
+
+            var html = "<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-image:url('" +
+                element.src +
+                "'); height: " +
+                height +
+                "px; width: " +
+                width +
+                'px;"></div></div>';
+
+            $(element).after(html);
+        }
+    </script>
 </html>

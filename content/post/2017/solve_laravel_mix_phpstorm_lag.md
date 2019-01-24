@@ -18,4 +18,4 @@ categories: ["問題解決"]
 
 原因是因為每次build完後phpstorm都去重建index，所以才照成延遲問題，其解法就是將`public\js`跟`public\css`在phpstorm設定排除就可以了。
 
-![image](/images/2017/2017_09_05_solve_laravel_mix_phpstorm_lag.png)
+<img src="/images/2017/2017_09_05_solve_laravel_mix_phpstorm_lag.png" alt="Image" width="500">

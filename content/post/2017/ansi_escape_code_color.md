@@ -16,5 +16,4 @@ categories: ['筆記', "Console"]
 
 為了方便使用，我將它整理成如下圖，歡迎下載使用。
 
-![Console Colors Table](/images/2017/2017_09_03_ansi_escape_code_color_1.jpg)
-
+<img src="/images/2017/2017_09_03_ansi_escape_code_color_1.jpg"  alt="Hero Card Demo Image" width="400">

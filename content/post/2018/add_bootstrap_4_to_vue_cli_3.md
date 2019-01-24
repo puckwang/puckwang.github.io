@@ -36,7 +36,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Import css file
 
 接下來就可以去檢查看看有沒有匯入成功囉！
 
-![](/images/2018/vue_cli_bootstrap4_success.png?width=250)
+<img src="/images/2018/vue_cli_bootstrap4_success.png" alt="Image" width="500">
 
 ---
 ## 客製化 Bootstrap
