@@ -43,3 +43,4 @@ nocomments: true
 * 使用系統: [Hugo](https://gohugo.io/)
 * 使用樣式: [silhouette-hugo](https://github.com/mattbutton/silhouette-hugo)
 * 免責申明: [Disclaimer Link](/other/disclaimer/)
+* <div>Logo通過<a href="https://www.designevo.com/tw/" title="免費線上logo製作軟體">DesignEvo</a>設計製作</div>
