@@ -179,8 +179,8 @@
         }
 
         function generateImageDiv(element) {
-            var maxWidth = screen.width * 0.5; // Max width for the image
-            var maxHeight = screen.height * 0.4; // Max height for the image
+            var maxWidth = screen.width * 0.6; // Max width for the image
+            var maxHeight = screen.height * 0.5; // Max height for the image
 
             var ratio = 0;
             var height = element.naturalHeight;
@@ -198,7 +198,7 @@
                 width = width * ratio;
             }
 
-            var html = "<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-image:url('" +
+            var html = "<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-color: white; background-image:url('" +
                 element.src +
                 "'); height: " +
                 height +
