@@ -114,7 +114,7 @@
 
         $(function () {
 
-            $(".main-content img").each(function () {
+            $(".main-content img, .post img").each(function () {
                 if (this.complete) {
                     generateImageDiv(this);
                 } else {
@@ -142,7 +142,7 @@
                             showXY = getShowXY(this, "right", x, y);
                         }
                     }
-                    root.style.setProperty("--zoom-image-x", showXY.x + "px");
+                    root.style.setProperty("--zoom-image-x", showXY.x + 250 + "px");
                     root.style.setProperty("--zoom-image-y", showXY.y + "px");
                 });
 

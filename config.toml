@@ -1,7 +1,7 @@
 baseurl = "https://blog.puckwang.com"
 title = "Puck's Blog"
 author = "Puck Wang"
-copyright = "Copyright © 2008–2018, Puck Wang; all rights reserved."
+copyright = "Copyright © 2017-2019, Puck Wang; all rights reserved."
 canonifyurls = true
 paginate = 10
 theme = "silhouette-hugo"
@@ -44,3 +44,7 @@ data_format = "2006-01-02 15:04:05"
 [[Params.menus]]
     name = "About"
     link = "/about"
+
+[[Params.menus]]
+    name = "Projects"
+    link = "/projects"
