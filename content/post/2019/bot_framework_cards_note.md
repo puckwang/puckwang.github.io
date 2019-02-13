@@ -10,7 +10,7 @@ categories:
     - bot framework
 tags:
     - bot framework
-    - bot
+    - chatbot
     - Card
 ---
 
