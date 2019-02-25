@@ -1,4 +1,4 @@
-baseurl = "https://blog.puckwang.com"
+baseurl = "https://blog.puckwang.com/"
 title = "Puck's Blog"
 author = "Puck Wang"
 copyright = "Copyright © 2017-2019, Puck Wang; all rights reserved."
@@ -48,3 +48,7 @@ data_format = "2006-01-02 15:04:05"
 [[Params.menus]]
     name = "Projects"
     link = "/projects"
+
+[[Params.menus]]
+    name = "Travels"
+    link = "/travels"
