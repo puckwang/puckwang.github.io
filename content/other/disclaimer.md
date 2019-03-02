@@ -3,9 +3,9 @@ title: "Disclaimer"
 date: 2018-12-28T12:40:10+08:00
 images:
     - "/images/og_image.png"
-noshare: true
-nocomments: true
 ---
+# Disclaimer
+
 Last updated: 2018-12-28
 
 The information contained on https://blog.puckwang.com/ website (the "Service") is for general information purposes only.

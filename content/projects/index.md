@@ -2,10 +2,9 @@
 title: "Projects"
 date: 2019-02-10T16:50:10+08:00
 images:
-    - /images/logo-200x200.png
-noshare: true
-nocomments: true
+    - /images/og_image.png
 ---
+# Projects
 
 這裡記錄了直到現在我所寫的 `Side-Project`，不管是有沒有繼續維護 :P
 
