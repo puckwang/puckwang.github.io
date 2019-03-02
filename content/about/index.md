@@ -4,8 +4,6 @@ date: 2017-09-01T22:31:10+08:00
 images:
     - /images/author.jpg
 ---
-
-# About Blog
 <img src="/images/logo.png" style="width: 20vh">
 
 是一種筆記型的部落格，主要內容為科技類筆記、問題紀錄等，但有另開旅遊等非科技類的子版來放相關的文章。
