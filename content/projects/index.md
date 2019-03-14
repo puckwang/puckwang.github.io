@@ -4,8 +4,6 @@ date: 2019-02-10T16:50:10+08:00
 images:
     - /images/og_image.png
 ---
-# Projects
-
 這裡記錄了直到現在我所寫的 `Side-Project`，不管是有沒有繼續維護 :P
 
 <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>

@@ -138,7 +138,7 @@ categories:
 {{< img src="https://i.imgur.com/Ru5sfsX.jpg" caption="街景" >}} 
 
 來到這裡一定要拍這個真氣鐘
-{{< img src="https://i.imgur.com/b9gVG7f.jpg" caption="真氣鐘" >}} 
+{{< img src="https://i.imgur.com/Qr7ykOO.jpg" caption="真氣鐘" >}} 
 
 回遊覽車的路上雪逐漸變大，果不其然一上車就知悉，因為高速公路封閉，下午的行程可能來不及了。
 {{< img src="https://i.imgur.com/SvKmcHv.jpg" caption="雪逐漸變大" >}} 
@@ -177,5 +177,8 @@ categories:
 {{< img src="https://i.imgur.com/WhsbeXH.jpg" caption="健康的可樂" >}} 
 
 第二天的趕路行程就到此，因為暴風雪的關係沒有玩到很多，但明天開始行程就會變比較多了！
+
+## 第三天
+
 
 (待續)

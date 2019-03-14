@@ -36,8 +36,12 @@ git add <pathspec>... #將一個或多個已變更的檔案新增至「待提交
 
 ### Remove
 ```bash
-git rm --cached <file>...  #將檔案從歷史紀錄中完整刪除 ps:多用於刪除機密檔案
+git rm  #刪除檔案並加入 Staged
 ```
+  * `--cached`: 移除已進入 Staged 的檔案，保留本地檔案
+  * `-f`: 移除已進入 Staged 的檔案，並移除本地檔案
+
+> 這邊移除並不會真正的從 Git 移除，只會讓他在接下來不會再被加入 Staged，如果要真正移除檔案，請看我之後會寫的文章。
 
 ### Commit
 ```bash
