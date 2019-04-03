@@ -200,6 +200,9 @@ GPG Suite 官網: [https://gpgtools.org/](https://gpgtools.org/)
 error: gpg failed to sign the data
 fatal: failed to write commit object
 ```
+請嘗試以下兩種解法
+
+### 解法一
 
 請執行 `echo "test" | gpg --clearsign` 檢查看看是 git 的問題還是 gpg 的問題。
 
@@ -211,5 +214,30 @@ gpg: [stdin]: clear-sign failed: Inappropriate ioctl for device
 
 請將 `export GPG_TTY=$(tty)` 加到你的 `.bashrc` 或 `.zshrc`，之後重啟終端機或執行重讀指令 `. ~/.zshrc` or `. ~/.bashrc`
 
-再試試看應該就可以使用了。
+再執行一次 `echo "test" | gpg --clearsign` 看看是成功執行。
+
+### 解法二
+
+安裝 pinentry-mac
+```
+brew install pinentry-mac
+```
+
+將以下設定新增至 `~/.gnupg/gpg.conf`
+```
+no-tty
+```
+
+以下設定新增至 `~/.gnupg/gpg-agent.conf`
+```
+pinentry-program /usr/local/bin/pinentry-mac
+```
+
+清除背景執行的 `gpg-agent`
+```
+killall gpg-agent
+```
+
+執行 `echo "test" | gpg --clearsign` 看看是成功執行。
+
 
