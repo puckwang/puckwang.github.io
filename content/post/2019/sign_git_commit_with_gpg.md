@@ -118,9 +118,6 @@ Short key ID:                                A4FF2279
 
 可見兩個不同長度的 ID 只是截取 Fingerprint 的部分方便辨識而已，當有碰撞時就會變長了。
 
-先把 Fingerprint 複製起來，接下來會用到。
-
-
 ## 提交公鑰到 Github / Gitlab / Bitbucket
 
 使用 `gpg --list-secret-keys` 去顯示出所有包含公要與私鑰的 GPG Keys。
@@ -196,3 +193,23 @@ git config --global commit.gpgsign true
 GPG Suite 官網: [https://gpgtools.org/](https://gpgtools.org/)
 
 {{< img src="https://gpgtools.org/images/screenshots/gka-key-list.1506349762.png" caption="官方提供的截圖" >}} 
+
+## 故障排除
+如果在下 `git commit` 後出現這個錯誤：
+```
+error: gpg failed to sign the data
+fatal: failed to write commit object
+```
+
+請執行 `echo "test" | gpg --clearsign` 檢查看看是 git 的問題還是 gpg 的問題。
+
+如果可以執行正常，請檢查 git 設定是否正確，否之如果出現這個錯誤：
+```
+gpg: 簽署時失敗: Inappropriate ioctl for device
+gpg: [stdin]: clear-sign failed: Inappropriate ioctl for device
+```
+
+請將 `export GPG_TTY=$(tty)` 加到你的 `.bashrc` 或 `.zshrc`，之後重啟終端機或執行重讀指令 `. ~/.zshrc` or `. ~/.bashrc`
+
+再試試看應該就可以使用了。
+
