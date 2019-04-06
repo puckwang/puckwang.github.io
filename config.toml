@@ -12,7 +12,7 @@ pygmentsCodeFencesGuessSyntax = true
 pygmentsStyle = "vs"
 
 disqusShortname = "puckwang"
-googleAnalytics = "UA-44442837-6"
+googleAnalytics = "UA-44442837-9"
 
 [Params]
 author = "Puck Wang"
