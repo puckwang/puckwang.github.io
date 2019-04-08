@@ -179,6 +179,105 @@ categories:
 第二天的趕路行程就到此，因為暴風雪的關係沒有玩到很多，但明天開始行程就會變比較多了！
 
 ## 第三天
+一早起來看外面的風景，才發現原來對面是座山啊！昨天晚上整片黑的都看不到...
+{{< img src="https://i.imgur.com/jGMWPcg.jpg" caption="晨間風景" >}} 
 
+今天的早餐是飯店自助餐，種類繁多。
+{{< img src="https://i.imgur.com/aVIbbAf.jpg" caption="第三天早餐" >}} 
+
+吃完早餐後，接下來流星&銀河瀑布，原本是昨天行程因故移到今天。
+{{< img src="https://i.imgur.com/iG8HMqO.jpg" caption="銀河瀑布" >}} 
+
+{{< img src="https://i.imgur.com/C0oYa75.jpg" caption="流星瀑布" >}} 
+
+離開流星銀河瀑布後，我們來到了男山酒造。
+{{< img src="https://i.imgur.com/CVFiHiV.jpg" caption="男山酒造り資料舘大門" >}} 
+
+{{< img src="https://i.imgur.com/UCMPHW7.jpg" caption="男山酒造戶外造景" >}} 
+
+{{< img src="https://i.imgur.com/eBNGqEu.jpg" caption="延命長壽水" >}} 
+
+內部有展示各式釀酒的器具，也可以隔著玻璃看工作人員作業。
+{{< img src="https://i.imgur.com/j4449Gp.jpg" caption="室內展示品" >}} 
+{{< img src="https://i.imgur.com/gUmHFRX.jpg" caption="室內展示品" >}} 
+{{< img src="https://i.imgur.com/Glcyyr2.png" caption="釀酒室" >}} 
+{{< img src="https://i.imgur.com/rbPsF6O.jpg" caption="釀酒室" >}} 
+{{< img src="https://i.imgur.com/Ri8lN0Q.jpg" caption="釀酒器材" >}} 
+{{< img src="https://i.imgur.com/DiFnf9e.jpg" caption="釀酒器材" >}} 
+{{< img src="https://i.imgur.com/urPKjKe.png" caption="喝酒容器展示" >}} 
+{{< img src="https://i.imgur.com/wewgTlR.jpg" caption="喝酒容器展示" >}} 
+
+結束了男山的行程後，我們到了旭川動物園來看企鵝遊行！
+
+{{< img src="https://i.imgur.com/OJaAhbc.jpg" caption="旭川動物園-東門" >}} 
+
+我們到的時候，企鵝遊行路線上已經擠滿了人，所以在隊伍尾端有找到很好空間可以拍攝影片
+{{< img src="https://i.imgur.com/ohrefdU.jpg" caption="人群" >}} 
+
+{{< img src="https://i.imgur.com/4Glf1nn.jpg" caption="企鵝遊行" >}} 
+{{< img src="https://i.imgur.com/Z1GYCur.jpg" caption="企鵝遊行" >}} 
+{{< img src="https://i.imgur.com/dlZ6XQ2.jpg" caption="企鵝遊行" >}} 
+{{< img src="https://i.imgur.com/OVwEJ0Z.jpg" caption="企鵝遊行" >}} 
+
+最後附上當時拍的影片
+{{< youtube rD5RjeKrk-A >}}
+
+看完企鵝遊行後，我們用了所剩不多的時間看了其他動物。
+
+首先是北極熊！
+{{< img src="https://i.imgur.com/nZp09Qy.jpg" caption="北極熊" >}} 
+
+小浣熊
+{{< img src="https://i.imgur.com/ajV8dT2.jpg" caption="小浣熊" >}} 
+
+某種鳥類
+{{< img src="https://i.imgur.com/TYfxAQW.jpg" caption="鳥類 (?" >}} 
+
+整批睡死的狼
+{{< img src="https://i.imgur.com/GDTmlCK.jpg" caption="睡覺中的狼" >}} 
+
+這看起來應該是鹿吧
+{{< img src="https://i.imgur.com/cu6YivB.jpg" caption="鹿 (?" >}} 
+
+又是鳥類，好像是北海道特有 (?
+{{< img src="https://i.imgur.com/OryHEVw.jpg" caption="鳥類" >}} 
+
+~~Firefox~~
+{{< img src="https://i.imgur.com/4tNzFaA.jpg" caption="狐狸" >}} 
+
+浣熊 剛剛不是出現過了嗎 (?
+{{< img src="https://i.imgur.com/S8v5IuE.jpg" caption="浣熊 (?" >}} 
+
+這我就完全不知道是什麼了，問 Google 大神好想是 [矇眼貂](https://zh.wikipedia.org/zh-tw/%E7%9F%87%E7%9C%BC%E8%B2%82)
+{{< img src="https://i.imgur.com/5nxVbAc.jpg" caption="矇眼貂 (?" >}} 
+
+最後是水豚君結尾！
+{{< img src="https://i.imgur.com/D0pj2e4.jpg" caption="水豚" >}} 
+
+這天天氣真好！接下來就要去吃午餐了。
+{{< img src="https://i.imgur.com/x9J0rmg.jpg" caption="旭川動物園風景" >}} 
+
+午餐還是自助餐！不過有草莓吃到飽，那個草莓吃起來真的很甜！
+{{< img src="https://i.imgur.com/2K8mu6e.jpg" caption="午餐" >}} 
+
+午餐吃完就前往『青池』
+{{< img src="https://i.imgur.com/08VQaKW.jpg" caption="青池" >}} 
+{{< img src="https://i.imgur.com/p8UeIP5.jpg" caption="青池" >}} 
+{{< img src="https://i.imgur.com/bTxDFgK.jpg" caption="青池" >}} 
+{{< img src="https://i.imgur.com/KdzMcTz.jpg" caption="青池" >}} 
+
+停休息站剛好看到很美的小木屋...
+{{< img src="https://i.imgur.com/rMPJRoo.jpg" caption="休息站小木屋" >}} 
+
+經過幾小時的車程，我們回到了雜晃。晚餐則是在 三井 OUTLET 裡面解決。
+{{< img src="https://i.imgur.com/zp4eFpV.jpg" caption="三井 OUTLET" >}} 
+
+晚餐吃完後就回到了飯店，雖然說是市區的飯店，但房間也蠻大的
+{{< img src="https://i.imgur.com/3eu2Loe.jpg" caption="飯店房間" >}} 
+
+今天最後的行程-夾娃娃店，因為飯店附近剛好有夾娃娃店，所以就去夾了兩隻卡比回來！
+{{< img src="https://i.imgur.com/574RXlw.jpg" caption="卡比" >}} 
+
+## 第四天
 
 (待續)

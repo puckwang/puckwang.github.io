@@ -40,8 +40,19 @@ Use HTML5 canvas draw QRCode
 一個免費的線上工具平台，提供各式線上工具。
  
  - 網站連結: https://tool.puckwang.com/
- - 技術: `Vue`, `HTML`, `CSS`
+ - 相關技術: `Vue`, `HTML`, `CSS`
  
+<br>
+ 
+### Dragalia Lost Calculator
+一個補助遊戲 失落的龍絆 (Dragalia Lost) 的計算機，用於計算角色屬性。
+
+ - Github: https://github.com/puckwang/dragalia-lost-calculator
+ - 網站連結: https://dragalia-lost.puckwang.com/
+ - 相關技術: `Vue`, `HTML`, `CSS`
+
+{{< img src="https://i.imgur.com/WCfXE7B.png" caption="網站截圖" >}} 
+
 <br>
 
 ### Equipment-management-system
@@ -52,9 +63,9 @@ Use HTML5 canvas draw QRCode
 一個物資管理的系統，當時是為了要管理 MOPCON 的物資才寫這個系統出來的。
  
  - Github: https://github.com/puckwang/Equipment-management-system
- - 技術: `Vue`, `HTML`, `CSS`, `Laravel`
+ - 相關技術: `Vue`, `HTML`, `CSS`, `Laravel`
  
-<img src="https://i.imgur.com/GgSiL2A.png" title="Imgur" width="400"/>
+{{< img src="https://i.imgur.com/GgSiL2A.png" caption="網站截圖" >}} 
 
 <br>
 ## Other
