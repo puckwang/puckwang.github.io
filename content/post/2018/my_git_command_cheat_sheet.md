@@ -48,9 +48,11 @@ git rm  #刪除檔案並加入 Staged
 git commit  #提交變更。
 ```
 
-  * `-m, --message <message>`: 加上 Commit Message，預設是開啟指定編輯器。
+- `-m, --message <message>`: 加上 Commit Message，預設是開啟指定編輯器。
 
-  * `--amend`: 修改上一筆的提交。
+- `--amend`: 修改上一筆的提交。
+
+- `-S`: 使用 GPG 簽署此 Commit。
 
 ### Status
 ```bash
@@ -62,6 +64,8 @@ git status  #查看目前檔案的狀態。
 git log  #查看提交歷史紀錄。
 
 ```
+
+- `--verify-signatures`: 顯示 GPG 簽署相關資訊。
 
 ### Reset
 ```bash
@@ -144,6 +148,12 @@ git submodule  #列出子模組清單
 git submodule add <repository> [<path>]  #新增某遠端倉庫為子模組，執行後會自動 clone
 git submodule init [<path>...]  #初始化子模組
 git submodule sync [<path>...]  #同步
+```
+
+### Verify GPG
+```bash
+git verify-commit <commit>  # 驗證 Commit 的 GPG 簽署。
+git verify-tag <commit>  # 驗證 Tag 的 GPG 簽署。
 ```
 
 # 遠端倉庫相關
