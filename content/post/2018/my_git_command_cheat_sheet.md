@@ -156,6 +156,11 @@ git verify-commit <commit>  # 驗證 Commit 的 GPG 簽署。
 git verify-tag <commit>  # 驗證 Tag 的 GPG 簽署。
 ```
 
+### Reflog
+```bash
+git reflog # 它會紀錄所有執行等指令，如果 Commit 不見，短時間內都還可以用它查。
+```
+
 # 遠端倉庫相關
 ### Remote
 ```bash
