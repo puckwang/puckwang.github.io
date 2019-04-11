@@ -1,6 +1,7 @@
 <figure class="figure">
   <img src='{{ .Get "src" }}' class="figure-img img-fluid rounded"
        {{ if or (.Get "alt") (.Get "caption") }}alt="{{ with .Get "alt"}}{{.}}{{else}}{{ .Get "caption" }}{{ end }}"{{ end }}
+       {{ with .Get "width"}} width="{{.}}"{{ end }}
   >
   {{ with .Get "caption"}} <figcaption class="figure-caption text-center">{{.}}</figcaption> {{ end }}
 </figure>

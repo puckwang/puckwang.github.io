@@ -7,10 +7,10 @@ images:
     - "/images/og_image.png"
 categories:
     - bot framework
+    - IIS
 tags:
     - bot framework v4
     - chatbot
-    - IIS
     - deploy
 ---
 

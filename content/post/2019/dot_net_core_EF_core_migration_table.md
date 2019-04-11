@@ -6,7 +6,7 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - .Net Core
+    - dotNet Core
 tags:
     - EntityFramework
     - ORM
