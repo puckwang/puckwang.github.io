@@ -65,7 +65,7 @@ git log  #查看提交歷史紀錄。
 
 ```
 
-- `--verify-signatures`: 顯示 GPG 簽署相關資訊。
+- `--show-signature`: 顯示 GPG 簽署相關資訊。
 
 ### Reset
 ```bash
