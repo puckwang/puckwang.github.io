@@ -1,5 +1,5 @@
 ---
-title: "Projects"
+title: "Side Projects"
 date: 2019-02-10T16:50:10+08:00
 images:
     - /images/og_image.png

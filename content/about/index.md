@@ -1,5 +1,5 @@
 ---
-title: "About"
+title: "關於我"
 date: 2017-09-01T22:31:10+08:00
 images:
     - /images/author.jpg

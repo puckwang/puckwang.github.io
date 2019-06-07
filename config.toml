@@ -42,13 +42,17 @@ data_format = "2006-01-02 15:04:05"
     link = "/"
 
 [[Params.menus]]
-    name = "About"
+    name = "關於我"
     link = "/about"
 
 [[Params.menus]]
-    name = "Projects"
+    name = "Side Projects"
     link = "/projects"
 
 [[Params.menus]]
-    name = "Travels"
+    name = "旅遊"
     link = "/travels"
+
+[[Params.menus]]
+    name = "攝影"
+    link = "/photography"
