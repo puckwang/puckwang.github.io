@@ -8,6 +8,8 @@
 #    exit 1;
 #fi
 
+set -e
+
 echo "# Deleting old publication"
 rm -rf public
 mkdir public
