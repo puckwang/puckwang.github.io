@@ -22,4 +22,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PUBLISH_BRANCH: master
-        PUBLISH_DIR: ./
+        PUBLISH_DIR: ./public
