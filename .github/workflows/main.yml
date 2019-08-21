@@ -12,6 +12,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@master
+    - uses: textbook/git-checkout-submodule-action@2.0.0
     - name: build
       uses: peaceiris/actions-hugo@v0.57.2
       with:
