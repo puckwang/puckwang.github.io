@@ -37,6 +37,10 @@ data_format = "2006-01-02 15:04:05"
     icon = "fab fa-linkedin"
     link = "//linkedin.com/in/joshua-hu-12290a43"
 
+[[Params.socials]]
+    icon = "fab fa-stack-overflow"
+    link = "//stackoverflow.com/users/7699156/puckwang?tab=profile"
+
 [[Params.menus]]
     name = "Home"
     link = "/"
