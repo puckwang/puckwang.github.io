@@ -192,6 +192,13 @@ git pull <repository>
 
   * `-r, --rebase[=<false|true|preserve|interactive>]`: 如果設為 true 時，當遠端與本地有差異，使用 rebase 而不使用 merge。
 
+### Submodule
+```bash
+git submodule update --init --recursive # 初次 Clone 下來的專案要先執行這個把 submodule 給 Clone 下來 
+
+git submodule update --recursive # 更新 submodule 
+```
+
 # 全域設定檔
 預設路徑: `~/.gitconfig`
 ```bash
