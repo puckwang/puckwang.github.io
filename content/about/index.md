@@ -13,9 +13,12 @@ images:
 <img src="/images/author.jpg" style="width: 20vh">
 
 ### Puck Wang
+##### Full Stack Web Engineer
 {{< sns-icon >}} 
 
-高雄人，樂於學習新技術，常因為熱衷於某事就忘了時間的存在。
+I'm a full stack web engineer, from Taiwan. I focus on web application, often using  php, .NET Core, Vue and React. My favorite framework right now is Laravel.
+
+I like to learn new things as well as technologies, and will spend a lot of time making the code better. so, when someone tries to destroy it, I will stop it.
 
 #### 技術領域
 * 前後端網站開發
