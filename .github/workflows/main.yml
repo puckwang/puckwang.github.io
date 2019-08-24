@@ -3,23 +3,23 @@ name: Deploy Blog
 on:
   push:
     branches:
-    - develop
+      - develop
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@master
-    - uses: textbook/git-checkout-submodule-action@2.0.0
-    - name: build
-      uses: peaceiris/actions-hugo@v0.57.2
-      with:
-        args: --gc --minify --cleanDestinationDir
-    - name: deploy
-      uses: peaceiris/actions-gh-pages@v1.1.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUBLISH_BRANCH: master
-        PUBLISH_DIR: ./public
+      - uses: actions/checkout@master
+      - uses: textbook/git-checkout-submodule-action@2.0.0
+      - name: build
+        uses: peaceiris/actions-hugo@v0.57.2
+        with:
+          args: --gc --minify --cleanDestinationDir
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: master
+          PUBLISH_DIR: ./public
