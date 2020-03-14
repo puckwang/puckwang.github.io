@@ -6,22 +6,25 @@ on:
       - develop
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  deploy:
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@master
-      - uses: textbook/git-checkout-submodule-action@2.0.0
-      - name: build
-        uses: peaceiris/actions-hugo@v2.4.7
+      - uses: actions/checkout@v1  # v2 does not have submodules option now
+        # with:
+        #   submodules: true
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.57.2'
           extended: true
-          args: --gc --minify --cleanDestinationDir
-      - name: deploy
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: master
-          PUBLISH_DIR: ./public
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: master
+          publish_dir: ./public
