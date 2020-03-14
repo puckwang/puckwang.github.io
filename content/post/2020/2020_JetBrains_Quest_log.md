@@ -11,9 +11,9 @@ tags:
     - 彩蛋
 ---
 
-就在台灣時間 2020/3/9 20:04，JetBrains 的官方 FB 粉絲團發了一篇[貼文](https://www.facebook.com/JetBrains/posts/2897998310223404)如下
+就在台灣時間 2020/3/9 20:04，JetBrains 的官方 Twitter 發了一篇推文如下
 
-{{< img src="/images/2020/jetBrains_quest_begins_post.png" caption="JetBrains Quest 貼文" width="500" >}} 
+{{< tweet 1236986174075482113 >}}
 
 而我看到這個，就馬上燃起我的解謎魂了！也就打一篇解題的過程來紀錄一下。
 
@@ -150,11 +150,14 @@ The JetBrains Quest team
 
 ## 第二個問題
 
+
+到了預告的時間，官方如期的貼出了第二個問題的提示，看起來是幾個前後顛倒的文字。
+
+{{< tweet 1237694815283879943 >}}
+
 ### 前後顛倒的文字
 
-{{< img src="/images/2020/jetBrains_quest_2.png" caption="Quest 2" width="500" >}}
-
-到了預告的時間，官方如期的貼出了第二個問題的提示，看起來是幾個前後顛倒的文字，反轉過來後如下：
+我們將他反轉過來後，得到結果如下：
 
 ```
 The product domain-specific languages are specified, is where the next of quest hides. The case where Dutch tax is processed, is a place you should show interest. Look hard as when text is white, sometimes it is out of sight. Cmd/Ctrl+A helps.
@@ -252,7 +255,7 @@ A little @jetbrains bird will deliver the next clue – so do some birdwatching,
 
 提示看起來是一個編碼 or 加密過的文字，常玩的人看到這種都先丟 Base64 試試看
 
-{{< img src="/images/2020/jetBrains_quest_3.png" caption="第三個問題" width="500" >}}
+{{< tweet 1238420744817782784 >}}
 
 ### 超常見的編碼方法
 
