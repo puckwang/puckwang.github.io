@@ -129,6 +129,7 @@ git rebase master
     * `f, fixup` = 類似 squash，差在會捨棄這個 commit 的訊息。
     * `x, exec` = 執行後面接的的 Shell
     * `d, drop` = 移除這個 commit
+  * `--committer-date-is-author-date`: 將新 Commit 的日期設為作者的日期（rebase 會產生新的 commit，不想改日期可以加上這個）
 
 > 如果使用 Vim 來編輯，`:wq` 存檔離開就可以完成 rebase
 
