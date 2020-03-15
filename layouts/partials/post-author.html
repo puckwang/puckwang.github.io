@@ -1,0 +1,20 @@
+<div>
+    <hr>
+    <div class="p-4 row justify-content-center" style="align-items: center">
+        <div class="col-2">
+            <img src="{{ .Site.Params.author_photo }}" alt="Puck Wang" class="img-fluid rounded-circle" width="150">
+        </div>
+        <div class="col-8" style="vertical-align: middle;">
+            <h4>
+                {{ .Site.Params.Author }}
+            </h4>
+            <p>
+                {{ .Site.Params.IntroDescription }}
+            </p>
+            <p>
+                更多關於我的訊息，可至關於<a href="/about" target="_blank">關於</a>頁面。
+            </p>
+            {{ partial "social-icons" . }}
+        </div>
+    </div>
+</div>

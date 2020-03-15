@@ -1,0 +1,32 @@
+<style type="text/css">
+    .feature-image {
+        background-image: linear-gradient(
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15)
+        ), url('{{ with .Param "featureImage"}}{{ . | absURL }}{{ else }}{{ "images/hero-main.jpg"| absURL }}{{ end }}');
+        height: 500px;
+    }
+
+    .feature-image-text {
+        margin-top: 20px;
+    }
+
+    @media (min-width: 1200px) {
+        .feature-image {
+            background-position: 0% 30%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .feature-image {
+            height: 250px;
+            background-position: 0% 0%;
+        }
+    }
+</style>
+
+<header class="feature-image">
+    <div class="feature-image-text">
+
+    </div>
+</header>

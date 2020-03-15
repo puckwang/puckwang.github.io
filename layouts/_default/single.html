@@ -1,5 +1,7 @@
 {{ define "head" }}
-
+{{ end }}
+{{ define "header" }}
+    {{ partial "feature-image" . }}
 {{ end }}
 {{ define "title" }}
   {{ .Title }} | {{ .Site.Title }}
@@ -9,6 +11,7 @@
     <h1>{{ .Title }}</h1>
 
     {{ .Content }}
+    <br>
 </article>
 {{ partial "sidebar" . }}
 {{ end }}

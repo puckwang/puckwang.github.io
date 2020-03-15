@@ -1,39 +1,11 @@
 {{ define "head" }}
     {{ partial "head-meta" . }}
-
-    {{ with .Param "featureImage" }}
-    <style type="text/css">
-        .feature-image {
-            background-image: url("{{ . | absURL | safeCSS}}");
-            height: 500px;
-        }
-
-        @media (max-width: 992px) {
-            .feature-image {
-                height: 350px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .feature-image {
-                height: 250px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .feature-image {
-                height: 200px;
-            }
-        }
-    </style>
-    {{ end }}
 {{ end }}
 {{ define "title" }}
   {{ .Title }} | {{ .Site.Title }}
 {{ end }}
 {{ define "header" }}
-<header class="feature-image d-print-none">
-</header>
+    {{ partial "feature-image" . }}
 {{ end }}
 {{ define "main" }}
 <div class="container mt-4 post">

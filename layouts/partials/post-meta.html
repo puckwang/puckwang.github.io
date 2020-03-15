@@ -12,8 +12,5 @@
         {{ if .Params.categories }}
         | <i class="fa fa-folder" title="Tags" aria-hidden="true"></i>&nbsp;分類: {{ range $i, $e := .Params.categories }}{{ if $i }}, {{ end }}<a href='/categories/{{ (replace $e "#" "%23") | urlize }}/'>{{ $e }}</a>{{ end }}
         {{ end }}
-        {{ if .Params.series }}
-        | <i class="fa fa-folder" title="Tags" aria-hidden="true"></i>&nbsp;系列: {{ range $i, $e := .Params.series }}{{ if $i }}, {{ end }}<a href='/series/{{ (replace $e "#" "%23") | urlize }}/'>{{ $e }}</a>{{ end }}
-        {{ end }}
     </small>
 </div>

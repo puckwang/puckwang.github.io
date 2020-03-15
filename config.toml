@@ -1,7 +1,7 @@
 baseurl = "https://blog.puckwang.com/"
 title = "Puck's Blog"
 author = "Puck Wang"
-copyright = "Copyright © 2017-2019, Puck Wang; all rights reserved."
+copyright = "Copyright © 2017-2020, Puck Wang; all rights reserved."
 canonifyurls = true
 paginate = 10
 theme = "silhouette-hugo"
@@ -16,12 +16,19 @@ googleAnalytics = "UA-44442837-9"
 
 enableGitInfo = true
 
+[blackfriday]
+   plainIDAnchors = true
+   hrefTargetBlank = true
+
 [Params]
 author = "Puck Wang"
+author_photo = "/images/author.jpg"
 images = ["/images/og_image.png"]
-introDescription = "真正全端開發者的知識庫分享平台"
+mainSections = ["post"]
+introDescription = "Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網網站開發者，常使用 PHP、.net Core、Vue 和 React 做開發，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。"
 contentSharing = "Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with."
 data_format = "2006-01-02 15:04"
+description = "這裡是一個筆記型的部落格，內容由 Puck Wang 撰寫 ，主題較常為程式類筆記、問題紀錄、套件介紹等，而有時也會出現活動紀錄、攝影、遊記等文章，歡迎訂閱關注。"
 
 [[Params.socials]]
     icon = "fab fa-facebook-square"
@@ -43,22 +50,33 @@ data_format = "2006-01-02 15:04"
     icon = "fab fa-stack-overflow"
     link = "//stackoverflow.com/users/7699156/puckwang?tab=profile"
 
+
 [[Params.menus]]
     name = "Home"
     link = "/"
+    icon = "fa fa-home"
 
 [[Params.menus]]
-    name = "關於我"
+    name = "About"
     link = "/about"
+    icon = "fa fa-user"
 
 [[Params.menus]]
     name = "Side Projects"
     link = "/projects"
+    icon = "fa fa-lightbulb"
 
 [[Params.menus]]
-    name = "旅遊"
+    name = "Travels"
     link = "/travels"
+    icon = "fa fa-plane"
 
 [[Params.menus]]
-    name = "攝影"
+    name = "Photos"
     link = "/photography"
+    icon = "fa fa-camera"
+
+[[Params.menus]]
+    name = "Toolbox"
+    link = "https://tool.puckwang.com/"
+    icon = "fa fa-toolbox"

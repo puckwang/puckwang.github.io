@@ -101,7 +101,7 @@ footer,
     flex-shrink: 0;
 }
 
-.sidebar .badge-secondary {
+.tag-color {
     color: #847b79;
     background-color: #eeedea;
 }
@@ -168,6 +168,7 @@ footer hr {
 
 .post .figure-img {
     box-shadow: #888888;
+    border-radius: 5px;
 }
 
 .post code {
