@@ -64,7 +64,7 @@ Use HTML5 canvas draw QRCode
  
 <br>
  
-### Dragalia Lost Calculator
+### Dragalia Lost Calculator `[Deprecated]`
 一個補助遊戲 失落的龍絆 (Dragalia Lost) 的計算機，用於計算角色屬性。
 
  - Github: https://github.com/puckwang/dragalia-lost-calculator
@@ -90,7 +90,7 @@ Use HTML5 canvas draw QRCode
 <br>
 ## Other
 
-### img2cloud-cli `Deprecated`
+### img2cloud-cli `[Deprecated]`
 
 ![license](https://img.shields.io/badge/license-MIT-green.svg)
 
