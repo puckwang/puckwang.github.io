@@ -10,10 +10,11 @@ tags:
     - Config
     - 設定
     - 指令
-    - featured
+    
 categories: 
     - Git
     - 筆記
+    - 精選
 ---
 
 使用 Git 也有一段時間了，除了常用的 commit, push 等常用基本指令外，還有許多很實用的指令，在這邊做一下紀錄。

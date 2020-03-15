@@ -7,11 +7,13 @@ images:
     - "/images/og_image.png"
 categories:
     - git
+    - 精選
 tags:
     - Github
     - Gitlab
     - GPG
     - Verified
+    
 ---
 
 GPG 全名為 GNU Privacy Guard 也可以簡稱為 GnuPG，他是一個加密軟體，但也可以用來驗證身份。

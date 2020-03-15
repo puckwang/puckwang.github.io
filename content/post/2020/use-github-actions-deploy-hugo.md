@@ -7,6 +7,7 @@ images:
     - "/images/og_image.png"
 categories:
     - CI/CD
+    - 精選
 tags:
     - Github Actions
     - Hugo
