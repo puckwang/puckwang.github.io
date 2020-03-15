@@ -114,7 +114,7 @@ Hugo 建置的部分，就依自己的需求寫了，基本上把平常手動建
  - `publish_dir`: 設定要發布的資料夾，預設為 `public`。
  - `publish_branch`: 設定目標分支，預設為 `gh-pages`。
  - `force_orphan`: 在目標分支，只保留最後一個提交，預設為 `false`。
- - `CNAME`: 同 Github Pages CName 的設定，如果已有設定的話，他會自動去抓已設定的值。
+ - `CNAME`: 設定 Github Pages Custom Domain 使用，其實也可以將 CNAME 新增在 hugo 的 static 就可以了。
  - `user_name` & `user_email`: 設定 Commit 的 name 與 email 資料。
  
  只有 `github_token` 是必填 (三個 token 擇一，詳洽 actions 文件)，都是選填。
