@@ -1,24 +1,36 @@
 ---
-title: "關於我"
+title: "About"
 date: 2017-09-01T22:31:10+08:00
 images:
     - /images/author.jpg
 ---
-<img src="/images/logo.png" style="width: 20vh">
+<img src="/images/logo.png" class="rounded" style="width: 20vh">
 
-是一種筆記型的部落格，主要內容為科技類筆記、問題紀錄等，但有另開旅遊等非科技類的子版來放相關的文章。
+{{< param "description" >}}
+<br />
+
+#### 相關資訊
+
+* 使用系統: [Hugo](https://gohugo.io/)
+* 使用樣式: [silhouette-hugo](https://github.com/mattbutton/silhouette-hugo)
+* 免責申明: [Disclaimer Link](/other/disclaimer/)
 
 # About Author
 
-<img src="/images/author.jpg" style="width: 20vh">
+<img src="{{< param "author_photo" >}}" class="rounded" style="width: 20vh">
 
 ### Puck Wang
-##### Full Stack Web Engineer
+##### 全端網站開發者 / Full Stack Web Developer [*](https://www.w3schools.com/whatis/whatis_fullstack.asp)
 {{< sns-icon >}} 
 
-I'm a full stack web engineer, from Taiwan. I focus on web application, often using  php, .NET Core, Vue and React. My favorite framework right now is Laravel.
+我來自台灣，是一位全端網站開發者。我擅長於 Web 領域，較常使用 `PHP`、`.Net Core`、`Vue` 與 `React`。而目前最喜歡的框架是 `Laravel`。
 
-I like to learn new things as well as technologies, and will spend a lot of time making the code better. so, when someone tries to destroy it, I will stop it.
+我喜歡學習新事物與新技術的開發者，對於 Code 品質有一定程度的要求，會花費很多時間在使一份 Code 更好。另外也喜歡寫 Side Project，常常早上上班 Coding，晚上回來繼續 Coding。
+
+
+I'm a full stack web developer, from Taiwan. I focus on web application, often using  `PHP`, `.NET Core`, `Vue` and `React`. My favorite framework right now is `Laravel`.
+
+I like to learn new things as well as technologies, and will spend a lot of time making the code better. so, when someone tries to destroy it, I will stop it. i also like to write Side Projects. I often work at Coding in the morning and return to Coding at night.
 
 #### 技術領域
 * 前後端網站開發
@@ -44,10 +56,10 @@ I like to learn new things as well as technologies, and will spend a lot of time
 #### 證照
 - CCNA R&S `已過期`
     - 效期：2015/09/05 - 2018/09/05
-    - 證照編號：422534170046HSBH
+    - 證照編號：`422534170046HSBH`
 
 #### 經歷
-- **2019 / 07 ~ ** 叡揚資訊 `程式設計師 (正職)`
+- **2019 / 07 ~** 叡揚資訊 `程式設計師 (正職)`
 - **2018 / 07 ~ 2019 / 06** 叡揚資訊 `實習生`
 - **2016 / 12 ~** 某公益團體平台 `研發人員`
 - **2018 / 02 ~ 2018 / 12** 第七屆 MOPCON 場務組 `組長`
@@ -86,10 +98,3 @@ see [Side-Project](/projects/)
 #### 聯絡資訊
 - [s9801077@gmail.com](mailto:s9801077@gmail.com)
 - [me@puckwang.com](mailto:me@puckwang.com)
-
-#### 本站資訊
-* 使用系統: [Hugo](https://gohugo.io/)
-* 使用樣式: [silhouette-hugo](https://github.com/mattbutton/silhouette-hugo)
-* 免責申明: [Disclaimer Link](/other/disclaimer/)
-
-<br>
