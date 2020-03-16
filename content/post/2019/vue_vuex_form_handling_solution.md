@@ -6,12 +6,16 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - Web
-    - 筆記
+    - 軟體開發
+    
 tags:
-    - Font-End
+    - Front-End
     - Vue
     - Vuex
+    - Web
+    - vuex-map-fields
+    - v-model
+    
 ---
 
 有在用 Vue 寫應用程式的人，一定也會接觸到 Vuex，它有很多優點但也有限制，

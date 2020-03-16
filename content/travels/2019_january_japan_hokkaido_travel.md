@@ -6,7 +6,12 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - 遊記
+    - 旅遊紀錄
+tags:
+    - 日本
+    - 北海道
+    - 札幌
+    - 旭川
 ---
 
 從很久以前就很想去日本玩，但一直沒有機會出現。這次剛好 Yuuna 同學有邀她一起去日本北海道畢旅，我也就這樣跟去了。

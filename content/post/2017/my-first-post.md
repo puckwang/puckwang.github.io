@@ -4,8 +4,10 @@ date: "2017-09-01T18:13:29+08:00"
 description: ""
 images:
     - "/images/og_image.png"
-tags: []
-categories: ["廢文"]
+tags: 
+    - 第一篇
+categories: 
+    - 廢文
 ---
 
 我在Ｈexo與Hugo這兩個平台抉擇了很久·在比較兩平台的人氣後最終選擇了Hugo。

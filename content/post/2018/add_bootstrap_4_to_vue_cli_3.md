@@ -5,8 +5,13 @@ draft: false
 description: "新增 Bootstrap 4 到用 vue-cli 3.x 建立的專案中"
 images:
     - "/images/og_image.png"
-tags: ["Font-End", "Vue"]
-categories: ["Web", "筆記"]
+tags: 
+    - Front-end
+    - Vue
+    - Web
+    - bootstrap
+categories: 
+    - 軟體開發
 ---
 
 在這邊紀錄一下怎麼將 Bootstrap 4 新增進 vue-cli 3.x 所建立的專案中。

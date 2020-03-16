@@ -4,8 +4,17 @@ date: "2017-09-05T22:21:26+08:00"
 description: ""
 images:
     - "/images/og_image.png"
-tags: ["Laravel", "phpstorm"]
-categories: ["問題解決"]
+tags: 
+    - Laravel
+    - Laravel-mix
+    - Phpstorm
+    - npm
+    - Lag
+    - IDE
+    
+categories:
+    - 問題解決紀錄
+    - 軟體開發
 ---
 
 最近開始在用laravel 5.5開發專案時發現的問題，只要用執行`npm run watch`後，

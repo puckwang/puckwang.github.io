@@ -6,11 +6,15 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - Web
-    - 筆記
+    - 軟體開發
+    
 tags:
-    - Font-End
+    - Front-End
     - Vue
+    - Web
+    - dynamic import
+    - Lazy
+    - Vue Router
 ---
 
 SPA 的網站會因為功能變多造成 build 出來的產物越來越大，雖然 Webpack 可以切 Chunk，但也會讓載入的時間變長，此時可以搭配 Vue 的

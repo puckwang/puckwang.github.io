@@ -6,11 +6,12 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - 問題解決
-    - C#
+    - 問題解決紀錄
+    - 軟體開發
 tags:
     - NHibernate
     - trigger
+    - Database
 ---
 
 最近有踩到這個雷，當使用 NHibernate 去存取資料庫時，你在變更的 Table 加上 Trigger，

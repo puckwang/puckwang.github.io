@@ -4,8 +4,15 @@ date: "2017-09-06T01:09:04+08:00"
 description: ""
 images:
     - "/images/og_image.png"
-tags: ["Laravel", "Vue"]
-categories: ["問題解決"]
+tags:
+    - Laravel
+    - vue
+    - vuex
+    - error
+    
+categories: 
+    - 問題解決紀錄
+    - 軟體開發
 ---
 
 在你把vuex的Actions與getters注入到components中時，可能會使用到展開運算子(...)，此時你可能會遇到語法錯誤的問題。

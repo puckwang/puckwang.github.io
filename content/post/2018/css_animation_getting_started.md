@@ -5,8 +5,12 @@ draft: false
 description: "快速學會怎麼使用 CSS 做出動畫效果"
 images:
     - "/images/og_image.png"
-tags: ["CSS3", "Font-End"]
-categories: ["筆記", "Web"]
+tags:
+    - CSS3
+    - Front-end
+    - Web
+categories:
+    - 軟體開發
 ---
 
 利用 CSS 動畫，可不必使用 Javascript 或是 Git，就能讓 HTML 的元素有動畫的效果。

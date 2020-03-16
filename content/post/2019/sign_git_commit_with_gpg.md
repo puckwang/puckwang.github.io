@@ -6,13 +6,16 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - git
     - 精選
+    - 軟體開發工具
+    
 tags:
     - Github
     - Gitlab
     - GPG
     - Verified
+    - git
+    - 身份識別
     
 ---
 

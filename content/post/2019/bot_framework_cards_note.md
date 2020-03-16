@@ -6,8 +6,8 @@ draft: false
 images:
     - "/images/2019/bot_framework_hero_card_demo.png"
 categories:
-    - 筆記
-    - bot framework
+    - 軟體開發
+    - CheatSheet
 tags:
     - bot framework
     - chatbot

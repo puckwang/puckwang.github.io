@@ -6,13 +6,17 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - CI/CD
+    - DevOps
     - 精選
 tags:
     - Github Actions
     - Hugo
     - 部署
-
+    - CI/CD
+    - 自動化
+    - 建置
+    - Workflows
+    
 ---
 {{<mermaid>}}
 graph LR;

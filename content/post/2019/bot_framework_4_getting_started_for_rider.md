@@ -6,13 +6,16 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - 筆記
-    - bot framework
+    - 軟體開發
+    - 軟體開發工具
 tags:
     - bot framework v4
     - chatbot
     - rider
     - macOS
+    - .net Core
+    - dotnet
+    - template
 ---
 
 Microsoft bot framework 4 在去年九月就發布了，直到最近我才有機會去學他，雖然有碰過 v3，但聽說架構改很大，

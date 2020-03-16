@@ -10,10 +10,11 @@ tags:
     - Config
     - 設定
     - 指令
+    - Git
     
 categories: 
-    - Git
-    - 筆記
+    - CheatSheet
+    - 軟體開發
     - 精選
 ---
 

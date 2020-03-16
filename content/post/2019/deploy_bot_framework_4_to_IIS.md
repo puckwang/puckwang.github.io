@@ -6,12 +6,14 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - bot framework
-    - IIS
+    - 軟體開發
+    - 伺服器維運
 tags:
     - bot framework v4
     - chatbot
-    - deploy
+    - 部署
+    - IIS
+    
 ---
 
 在使用 Bot Framework 開發時，一定會遇到要部署至 IIS 的狀況，但官方文件就只有寫部署到 Azure 的方法，

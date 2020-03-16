@@ -6,13 +6,13 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - 筆記
-    - bot framework
+    - 軟體開發
 tags:
     - bot framework v4
     - chatbot
     - state
     - SQL Server
+    - dotnet
 ---
 
 Bot Framework 4 官方內建的 Storage 並沒有 SQL Server，

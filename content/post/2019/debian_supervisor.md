@@ -6,11 +6,17 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - Debian
-    - Services
+    - 伺服器維運
+    
 tags:
     - Supervisor
     - Process Manager
+    - Debian
+    - Services
+    - Laravel
+    - Queue
+    - Linux
+    
 ---
 
 最近為了讓在伺服器上的 Laravel Queue Worker 更方便去管理，不用每次重啟伺服器都要上去重新執行，

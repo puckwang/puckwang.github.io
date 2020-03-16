@@ -6,11 +6,11 @@
         | <i class="far fa-calendar-alt"></i>&nbsp;更新於 {{ dateFormat .Site.Params.data_format .GitInfo.AuthorDate }}&nbsp;
         | <i class="fas fa-code-branch"></i>&nbsp;版本 {{ .GitInfo.AbbreviatedHash }}&nbsp;
         {{ end }}
-        {{ if .Params.tags }}
-        | <i class="fa fa-tags" title="Tags" aria-hidden="true"></i>&nbsp;標籤: {{ range $i, $e := .Params.tags }}{{ if $i }}, {{ end }}<a href='/tags/{{ (replace $e "#" "%23") | urlize }}/'>{{ $e }}</a>{{ end }}
-        {{ end }}
         {{ if .Params.categories }}
         | <i class="fa fa-folder" title="Tags" aria-hidden="true"></i>&nbsp;分類: {{ range $i, $e := .Params.categories }}{{ if $i }}, {{ end }}<a href='/categories/{{ (replace $e "#" "%23") | urlize }}/'>{{ $e }}</a>{{ end }}
+        {{ end }}
+        {{ if .Params.tags }}
+        | <i class="fa fa-tags" title="Tags" aria-hidden="true"></i>&nbsp;標籤: {{ range $i, $e := .Params.tags }}{{ if $i }}, {{ end }}<a href='/tags/{{ (replace $e "#" "%23") | urlize }}/'>{{ $e }}</a>{{ end }}
         {{ end }}
     </small>
 </div>

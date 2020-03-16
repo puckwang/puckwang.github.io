@@ -6,11 +6,14 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - dotNet Core
-    - IIS
+    - 伺服器維運
+    - 軟體開發
+    
 tags:
     - deploy
     - kestrel
+    - IIS
+    - .Net Core
 ---
 
 Kestrel 是 .Net core 隨附的跨平台網頁伺服器，可以自己獨立運行，也可以搭配其他網頁伺服器的反向 Proxy。

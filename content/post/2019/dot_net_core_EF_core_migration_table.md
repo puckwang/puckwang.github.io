@@ -6,10 +6,15 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - dotNet Core
+    - 軟體開發
+    
 tags:
     - EntityFramework
     - ORM
+    - DB Migrate
+    - Database
+    - .Net Core
+    - Code First
 ---
 
 EntityFramework 是一個實現 [ORM](https://zh.wikipedia.org/wiki/%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84) 的一個工具，而 EntityFrameworkCore 則是它的輕量版，簡單來說就是可以在專案中寫好需要的 Model 後，再用它產生對應的 Table，不用再自己執行 SQL。

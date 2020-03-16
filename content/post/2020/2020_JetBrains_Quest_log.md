@@ -6,9 +6,12 @@ draft: false
 images:
     - "/images/og_image.png"
 categories:
-    - 紀錄
+    - 活動紀錄
+    
 tags:
     - 彩蛋
+    - JetBrains
+    - Quest
 ---
 
 就在台灣時間 2020/3/9 20:04，JetBrains 的官方 Twitter 發了一篇推文如下
