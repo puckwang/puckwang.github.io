@@ -24,7 +24,7 @@ enableGitInfo = true
 author = "Puck Wang"
 author_photo = "/images/author.jpg"
 images = ["/images/og_image.png"]
-mainSections = ["post"]
+mainSections = ["post", "travels"]
 introDescription = "Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網網站開發者，常使用 PHP、.net Core、Vue 和 React 做開發，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。"
 contentSharing = "Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with."
 data_format = "2006-01-02 15:04"
@@ -62,11 +62,6 @@ description = "這裡是一個筆記型的部落格，內容由 Puck Wang 撰寫
     icon = "fa fa-user"
 
 [[Params.menus]]
-    name = "Side Projects"
-    link = "/projects"
-    icon = "fa fa-lightbulb"
-
-[[Params.menus]]
     name = "Travels"
     link = "/travels"
     icon = "fa fa-plane"
@@ -75,6 +70,11 @@ description = "這裡是一個筆記型的部落格，內容由 Puck Wang 撰寫
     name = "Photos"
     link = "/photography"
     icon = "fa fa-camera"
+
+[[Params.menus]]
+    name = "Side Projects"
+    link = "/projects"
+    icon = "fa fa-lightbulb"
 
 [[Params.menus]]
     name = "Toolbox"
