@@ -7,7 +7,7 @@ images:
     - "/images/og_image.png"
 categories:
     - 精選
-    - 軟體開發工具
+    - 版本控制
     
 tags:
     - Github
