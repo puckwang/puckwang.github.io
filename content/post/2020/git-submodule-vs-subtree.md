@@ -463,3 +463,10 @@ git subtree push --prefix <folder path> <repo url> <ref>
 在實際實用兩種方式後，我是比較喜歡 Submodule，因為他不佔空間，實際也就是另一個 Repository，而 Subtree 是整個併進來，就不太喜歡。
 
 但實際上要用那種方式，還是要視當下需求再決定。
+
+### 參考文章
+
+- https://stackoverflow.com/questions/17413493/create-a-submodule-repository-from-a-folder-and-keep-its-git-commit-history
+- http://yutin.logdown.com/posts/188306-git-subtree-total-addendum-library
+- https://codewinsarguments.co/2016/05/01/git-submodules-vs-git-subtrees/
+- https://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule/36593218#36593218
