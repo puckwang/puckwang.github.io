@@ -1,6 +1,6 @@
 ---
 title: "Git 進階應用 Submodule 與 Subtree，使用它們來拆分專案"
-description: "在開發過程中，專案隨著時間變得越來越肥，不時還生出子專案，此時就會遇到需要各專案共用一些 Code 的部分。本篇文將說明使用 Submodule 與 Subtree 實現匯入子專案的差異及它們的使用方法。"
+description: "在開發過程中，專案隨著時間變得越來越肥，不時還生出子專案，此時就會遇到需要各專案共用一些 Code 的部分。本篇文將說明使用 Git Submodule 與 Git Subtree 實現匯入子專案的差異及它們的使用方法。 Git Submodule 教學、 Git Subtree 教學"
 date: 2020-03-18T21:29:12+08:00
 draft: false
 featureImage: "/images/hero-main.jpg"
@@ -22,7 +22,7 @@ tags:
 
 在開發過程中，專案隨著時間變得越來越肥，不時還生出子專案，此時就會遇到需要各專案共用一些 Code 的部分，如果共用的部分是用 `複製貼上` 的方式去同步，那勢必一定會造成兩邊不同步，維護困難。
 
-本篇文將分享 Git 中 Submodule 與 Subtree 的差異及它們的使用方法。
+本篇文將分享 Git Submodule 與 Git Subtree 的差異及它們的使用方法。
 
 <!--more-->
 
