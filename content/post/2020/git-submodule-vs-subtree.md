@@ -101,13 +101,13 @@ graph LR
 ### 建立 Submodule
 要將一個 SubRepo 使用 Submodule 的方式加到 SuperRepo，流程清單如下：
 
-1. `git submoudle add <repo url> <folder>`
+1. `git submodule add <repo url> <folder>`
 2. `git commit`
 3. `git push`
 
 接下來我們看實際執行畫面：
 
-首先先執行 `git submoudle add` 去加入 SubRepo
+首先先執行 `git submodule add` 去加入 SubRepo
 ```sh
 $ git submodule add git@github.com:puckwang/SubRepo.git sub-repo
 Cloning into '~/sub-repo'...
