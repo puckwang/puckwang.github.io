@@ -44,7 +44,7 @@ description = "這裡是一個筆記型的部落格，內容由 Puck Wang 撰寫
 
 [[Params.socials]]
     icon = "fab fa-linkedin"
-    link = "//linkedin.com/in/joshua-hu-12290a43"
+    link = "//linkedin.com/in/puck-wang"
 
 [[Params.socials]]
     icon = "fab fa-stack-overflow"
