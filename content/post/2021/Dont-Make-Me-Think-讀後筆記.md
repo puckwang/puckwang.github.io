@@ -1,5 +1,5 @@
 ---
-title: "Dont Make Me Think：如何設計好網站 - 讀後筆記"
+title: "Don't Make Me Think：如何設計好網站 - 讀後筆記"
 description: ""
 date: 2021-02-22T18:08:07+08:00
 draft: false
