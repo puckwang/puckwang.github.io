@@ -3,7 +3,7 @@ title = "Puck's Blog"
 author = "Puck Wang"
 copyright = "Copyright © 2017-2020, Puck Wang; all rights reserved."
 canonifyurls = true
-paginate = 10
+paginate = 15
 theme = "silhouette-hugo"
 
 pygmentsUseClasses = false
@@ -15,6 +15,9 @@ disqusShortname = "puckwang"
 googleAnalytics = "UA-44442837-9"
 
 enableGitInfo = true
+
+[markup.goldmark.renderer]
+unsafe= true
 
 [blackfriday]
    plainIDAnchors = true
@@ -61,10 +64,10 @@ description = "這裡是一個筆記型的部落格，內容由 Puck Wang 撰寫
     link = "/about"
     icon = "fa fa-user"
 
-[[Params.menus]]
-    name = "Travels"
-    link = "/travels"
-    icon = "fa fa-plane"
+#[[Params.menus]]
+#    name = "Travels"
+#    link = "/travels"
+#    icon = "fa fa-plane"
 
 [[Params.menus]]
     name = "Photos"

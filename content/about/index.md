@@ -96,5 +96,4 @@ I like to learn new things as well as technologies, and will spend a lot of time
 see [Side-Project](/projects/)
 
 #### 聯絡資訊
-- [s9801077@gmail.com](mailto:s9801077@gmail.com)
-- [me@puckwang.com](mailto:me@puckwang.com)
+- [me@puckwang.com](mailto:me@puckwang.com) (這個信箱是別名，寄過去會自動轉給我)
