@@ -1,6 +1,6 @@
 ---
 title: "Don't Make Me Think：如何設計好網站 - 讀後筆記"
-description: ""
+description: "「Don't Make Me Think 如何設計好網站」的讀後筆記，內容大多來書中，少部分筆者自行猜測"
 date: 2021-02-22T18:08:07+08:00
 draft: false
 featureImage: "/images/hero-main.jpg"
