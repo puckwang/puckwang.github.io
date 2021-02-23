@@ -16,7 +16,7 @@ tags:
     - 前端
 ---
 
-{{< img src="/images/2021/DMMT-cover.png" caption="Dont Make Me Think 第三版封面" >}}
+{{< img src="/images/2021/DMMT-cover.png" caption="Don't Make Me Think 第三版封面" >}}
 
 近年一直想提升我的 UI / UX 技能，至少到用起來不會不適，而有人向我推薦這本入門的書，稍微查了一下目錄後，看起來內容滿不錯。也剛好遇到過年假期，就想說把它看完順便寫成重點筆記。
 
@@ -26,7 +26,7 @@ tags:
 
 **書籍資料**
 
-- **書名**: [Dont Make Me Think](https://sensible.com/dont-make-me-think/)
+- **書名**: [Don't Make Me Think](https://sensible.com/dont-make-me-think/)
 - **作者**: Steve Krug
 - **年份**: 2006 (第二版) (最新版是 2013 第三版)
 - **語言**: 原文英文，有中文翻譯本
