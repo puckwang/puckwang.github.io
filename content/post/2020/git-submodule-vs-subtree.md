@@ -68,21 +68,25 @@ Subtree 出現的時間我就更不確定了，在 [v1.5.2](https://github.com/g
 
 大概就是像這樣：
 
-{{<mermaid>}}
-graph LR 
-    subgraph SuperRepo
-    A[7542f2f] --> B
-    B[9db0cd9] --> C
-    C[506df19] --> D
-    D[Merge] --> F
-    F[5d43e32] --> E
-    E[d6cbc13]
-    end
+[![](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggTFIgXG4gICAgc3ViZ3JhcGggU3VwZXJSZXBvXG4gICAgICAgIEFbNzU0MmYyZl0gLS0-IEJcbiAgICAgICAgQls5ZGIwY2Q5XSAtLT4gQ1xuICAgICAgICBDWzUwNmRmMTldIC0tPiBEXG4gICAgICAgIERbTWVyZ2VdIC0tPiBGXG4gICAgICAgIEZbNWQ0M2UzMl0gLS0-IEVcbiAgICAgICAgRVtkNmNiYzEzXVxuICAgIGVuZFxuICAgIHN1YmdyYXBoIFN1YlJlcG9cbiAgICAgICAgQTFbYWJkNzQxN10gLS0-IEIxXG4gICAgICAgIEIxW2M2OTA3NDFdIC0tPiBDMVxuICAgICAgICBDMVtmZjM1OTIyXSAtLT4gRFxuICAgIGVuZCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZ3JhcGggTFIgXG4gICAgc3ViZ3JhcGggU3VwZXJSZXBvXG4gICAgICAgIEFbNzU0MmYyZl0gLS0-IEJcbiAgICAgICAgQls5ZGIwY2Q5XSAtLT4gQ1xuICAgICAgICBDWzUwNmRmMTldIC0tPiBEXG4gICAgICAgIERbTWVyZ2VdIC0tPiBGXG4gICAgICAgIEZbNWQ0M2UzMl0gLS0-IEVcbiAgICAgICAgRVtkNmNiYzEzXVxuICAgIGVuZFxuICAgIHN1YmdyYXBoIFN1YlJlcG9cbiAgICAgICAgQTFbYWJkNzQxN10gLS0-IEIxXG4gICAgICAgIEIxW2M2OTA3NDFdIC0tPiBDMVxuICAgICAgICBDMVtmZjM1OTIyXSAtLT4gRFxuICAgIGVuZCIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2V9)
+
+{{< mermaid >}}
+
+graph LR
     subgraph SubRepo
-    A1[abd7417] --> B1
-    B1[c690741] --> C1
-    C1[ff35922] --> D
+        A1[abd7417] --> B1
+        B1[c690741] --> C1
+        C1[ff35922] --> D
     end
+    subgraph SuperRepo
+        A[7542f2f] --> B
+        B[9db0cd9] --> C
+        C[506df19] --> D
+        D[Merge] --> F
+        F[5d43e32] --> E
+        E[d6cbc13]
+    end
+
 {{< /mermaid >}}
 
 ## 如何使用 Git Submodule ?

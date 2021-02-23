@@ -1,6 +1,6 @@
 @font-face {
-    font-family: JetBrainsMono;
-    src: url("https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/ttf/JetBrainsMono-Regular.ttf");
+    font-family: JetBrainsMono-Regular;
+    src: url("/fonts/JetBrainsMono-Regular.ttf");
 }
 
 body {
@@ -19,9 +19,11 @@ body {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: JetBrainsMono-Regular, 'Montserrat', sans-serif;
     font-weight: 700;
     word-wrap: break-word;
+    font-size: 13px;
+    line-height: 1.2;
 }
 
 h1, .h1 {
