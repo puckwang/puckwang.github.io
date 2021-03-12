@@ -79,6 +79,7 @@ git reset [<commit>]  #重置狀態。
   * `--hard`: 重置 `HEAD`、`Index`與工作目錄。
 
 ### Branch
+
 ```bash
 git branch  #查看目前分支清單
 git branch <name>  #建立新分支
@@ -93,14 +94,21 @@ git branch <name>  #建立新分支
   * `-M`: 更名分支，即使目標分支已存在。
 
 ### Checkout
+
 ```bash
 git checkout <branch>  #切換分支。
 git checkout [<branch>] <file>  #還原工作目錄的檔案。
 ```
 
-  * `-b <branch>`: 建立新分支並切換過去。
+* `-b <branch>`: 建立新分支並切換過去。
 
-  * `-B <branch>`: 建立新分支或重置已存在的分支並切換過去。
+* `-B <branch>`: 建立新分支或重置已存在的分支並切換過去。
+
+* `<branch>` 相關: [ref](https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt-ltbranchgt) 
+
+    * `-`: 代表上一個 Checkout 的分支或 Commit，例如：假設我在 develop 分支切換到 master 後 `git checkout - ` 就可以回到 develop。
+    
+    * `@{-N}`: 代表前 N 個 Checkout 的分支或 Commit，而 `-` 等同 `@{-1}`。
 
 ### Cherry-Pick
 ```bash
