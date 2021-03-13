@@ -54,7 +54,8 @@ stage(<Stage 名稱>) {
 }
 ```
 
-**注意事項**：
+**注意事項**
+
 1. 不能嵌套使用 (`parallel` 裡面不能再有 `parallel`)。
 2. 一個 `stage` 只能包含一個 `parallel`，且這個 `stage` 不能再存在 `steps`、`stages` 或 `matrix`。
 
@@ -192,7 +193,8 @@ matrix {
 }
 ```
 
-**注意事項**：
+**注意事項**
+
 1. 不能嵌套使用 (`matrix` 裡面不能再有 `matrix`)。
 2. 一個 `stage` 只能包含一個 `matrix`，且這個 `stage` 不能再存在 `steps`、`stages` 或 `parallel`。
 
