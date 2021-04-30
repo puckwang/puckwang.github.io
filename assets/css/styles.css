@@ -175,9 +175,7 @@ footer hr {
 
 .post code {
     font-family: "JetBrainsMono", monospace;
-    margin: 0 2px;
     background-color: #f5f5f5;
-    padding: 3px;
 }
 
 .recent-posts .post {
