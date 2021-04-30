@@ -26,6 +26,17 @@ tags:
 
 <!--more-->
 
+**目錄**
+
+- [TL;DR](#tldr)
+- [Git Bisect](#git-bisect)
+- [基本指令](#基本指令)
+- [範例](#範例)
+- [重播操作](#重播操作)
+- [使用腳本自動化執行](#使用腳本自動化執行)
+- [總結](#總結)
+- [參考資料](#參考資料)
+
 ## TL;DR
 
 不想看內文？執行步驟如下：
@@ -45,7 +56,9 @@ git bisect bad
 
 ## Git Bisect
 
-Git Bisect 是一個內建於 Git 的指令，它是利用二元搜尋的方式協助使用者找到錯誤的 Commit，首先要標記一個有問題的 Commit 及一個沒有問題的 Commit，接下來就照的它的指示標記正常或錯誤，就可以在 O(logn) 的時間複雜度下找到有問題的 Commit。
+Git Bisect 是一個內建於 Git 的指令，它是利用二元搜尋的方式協助使用者找到錯誤的 Commit。
+
+首先要標記一個有問題的 Commit 及一個沒有問題的 Commit，接下來就照的它的指示標記正常或錯誤，就可以在 O(logn) 的時間複雜度下找到有問題的 Commit。
 
 {{< img src="/images/2021/Git-Bisect-Demo.gif" width="700" caption="Git Bisect 執行範例 Gif" >}}
 
@@ -56,7 +69,7 @@ Git Bisect 是一個內建於 Git 的指令，它是利用二元搜尋的方式�
 2. 標記 Git 自動切換的 Commit 是好的或壞的。
 3. 成功找到第一個有問題的 Commit。
 
-## 指令語法
+## 基本指令
 
 這邊只列出基本的指令，更詳細可洽[官方文件](https://git-scm.com/docs/git-bisect)。
 
