@@ -1,6 +1,6 @@
 <div class="mb-3">
     <small>
-        <i class="fas fa-user-edit"></i> 作者<strong> {{ if .Params.Author }}{{ .Params.Author }}{{ else }}{{ .Site.Params.Author }}{{ end }}</strong>
+        <i class="fas fa-user-edit"></i>&nbsp;作者<strong> {{ if .Params.Author }}{{ .Params.Author }}{{ else }}{{ .Site.Params.Author }}{{ end }}</strong>
         | <i class="far fa-calendar-alt"></i>&nbsp;建立於 {{ .Date.Format .Site.Params.data_format }}&nbsp;
         {{ if .GitInfo }}
         | <i class="far fa-calendar-alt"></i>&nbsp;更新於 {{ dateFormat .Site.Params.data_format .GitInfo.AuthorDate }}&nbsp;

@@ -14,7 +14,7 @@ tags:
     
 ---
 
-{{< img src="/images/2021/git-bisect-demo.png" width="600" caption="範例 Git log" >}}
+{{< img src="/images/2021/git-log.png" width="600" caption="Git log" >}}
 
 現在專案很常使用 Git 作為版本控制系統，所以在遇到 Bug 找不到是哪裡出錯時，可以藉由找出第一次出錯的 Commit 來找到問題原因。
 
@@ -45,7 +45,9 @@ git bisect bad
 
 ## Git Bisect
 
-Git Bisect 是一個內建於 Git 的指令，它是利用二元搜尋的方式協助使用者找到錯誤的 Commit，首先先標記一個沒有問題的 Commit，接下來就照的它的指示標記正常或錯誤，就可以在 O(logn) 的時間複雜度下找到有問題的 Commit。
+Git Bisect 是一個內建於 Git 的指令，它是利用二元搜尋的方式協助使用者找到錯誤的 Commit，首先要標記一個有問題的 Commit 及一個沒有問題的 Commit，接下來就照的它的指示標記正常或錯誤，就可以在 O(logn) 的時間複雜度下找到有問題的 Commit。
+
+{{< img src="/images/2021/Git-Bisect-Demo.gif" width="700" caption="Git Bisect 執行範例 Gif" >}}
 
 **大略操作步驟**
 
@@ -107,7 +109,7 @@ b297615 2020-06-05 | Add feature 2 [Puck Wang]
 51dfd5c 2020-02-29 | Init Commit [Puck Wang]
 ```
 
-經測試發現，這個 Bug 是在 `3c7a4b7` (Add feature 1)，所以我們將 `2795664` (HEAD) 標記為壞的，`3c7a4b7` 標記為好的。
+經測試發現，這個 Bug 是在 `3c7a4b7` (Add feature 1) 是不存在的，所以我們將 `2795664` (HEAD) 標記為壞的，`3c7a4b7` 標記為好的。
 
 執行完就可以看到回應說剩幾個 Commit 及步驟。
 
