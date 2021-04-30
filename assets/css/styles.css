@@ -273,3 +273,14 @@ blockquote p {
     font-size: 1.1rem;
     color: #999;
 }
+
+.mermaid {
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+}
