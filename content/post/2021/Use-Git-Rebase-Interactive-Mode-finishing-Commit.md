@@ -55,11 +55,11 @@ git rebase -i <起始 Commit>
 下半部有註解的部分，是一些指令的簡介及縮寫，使用時就可以直接參考不用去特別記它的指令及用法。
 
 ```shell
-pick d34548f Add featrue 1
-pick 98fb1b9 Add featrue 2
-pick cbf941f Add featrue 3
-pick 1499a17 Add featrue 4
-pick 3e14876 Add featrue 5
+pick d34548f Add feature 1
+pick 98fb1b9 Add feature 2
+pick cbf941f Add feature 3
+pick 1499a17 Add feature 4
+pick 3e14876 Add feature 5
 
 # 重定基底 bda1985..1499a17 到 bda1985（6 個提交）
 #
@@ -106,22 +106,22 @@ pick 3e14876 Add featrue 5
 原始的 Commit 如下：
 
 ```shell
-* c5300e9 2021-07-19 | Add featrue 6 (HEAD -> master)
-* 68e1e4c 2021-07-19 | Add featrue 5-1
-* 082a95c 2021-07-19 | Add featrue 4
-* 2ebbe30 2021-07-19 | Add featrue 5
-* e419862 2021-07-19 | Add featrue 3
-* 1d1773d 2021-07-19 | Fix featrue 2 bug
-* cfe6102 2021-07-19 | Add featrue 2
-* d34548f 2021-07-19 | Add featrue 1
-* bda1985 2021-07-19 | Init Commit [Puck Wang]
+* 655082e 2021-07-19 | Add feature 6 (HEAD)
+* 69a3e14 2021-07-19 | Add feature 5-1
+* b99b647 2021-07-19 | Add feature 4
+* b2e9250 2021-07-19 | Add feature 5
+* 8ad13c6 2021-07-19 | Add feature 3
+* c3e8936 2021-07-19 | Fix feature 2 bug
+* e4e3c6f 2021-07-19 | Add feature 2
+* 9fa7ff7 2021-07-19 | Add feature 1
+* bda1985 2021-07-19 | Init Commit
 ```
 
 需求：
 
-1. 交換 `Add featrue 4` 及 `Add featrue 5` 的順序。
-2. 合併 `Add featrue 2` 及 `Fix featrue 2 bug` (不留訊息)。
-3. 刪除 `Add featrue 5-1`
+1. 交換 `Add feature 4` 及 `Add feature 5` 的順序。
+2. 合併 `Add feature 2` 及 `Fix feature 2 bug` (不留訊息)。
+3. 刪除 `Add feature 5-1`
 
 
 #### Step 1. 執行 git rebase
@@ -135,67 +135,67 @@ git rebase -i bda1985
 執行後，將顯示以下資訊
 
 ```shell
-pick d34548f Add featrue 1
-pick cfe6102 Add feature 2
-pick 1d1773d Fix feature 2 bug
-pick e419862 Add featrue 3
-pick 2ebbe30 Add featrue 5
-pick 082a95c Add featrue 4
-pick 68e1e4c Add feature 5-1
-pick c5300e9 Add feature 6
+pick 9fa7ff7 Add feature 1
+pick e4e3c6f Add feature 2
+pick c3e8936 Fix feature 2 bug
+pick 8ad13c6 Add feature 3
+pick b2e9250 Add feature 5
+pick b99b647 Add feature 4
+pick 69a3e14 Add feature 5-1
+pick 655082e Add feature 6
 
-# 重定基底 bda1985..c5300e9 到 bda1985（8 個提交）
+# 重定基底 bda1985..655082e 到 bda1985（8 個提交）
 # ...
 ```
 
-#### Step 2. 交換 `Add featrue 4` 及 `Add featrue 5` 的順序
+#### Step 2. 交換 `Add feature 4` 及 `Add feature 5` 的順序
 
-直接將 `Add featrue 4` 及 `Add featrue 5` 兩行交換順序。
-
-```shell
-pick d34548f Add featrue 1
-pick cfe6102 Add feature 2
-pick 1d1773d Fix feature 2 bug
-pick e419862 Add featrue 3
-pick 082a95c Add featrue 4
-pick 2ebbe30 Add featrue 5
-pick 68e1e4c Add feature 5-1
-pick c5300e9 Add feature 6
-
-# 重定基底 bda1985..c5300e9 到 bda1985（8 個提交）
-```
-
-#### Step 3. 合併 `Add featrue 2` 及 `Fix featrue 2 bug`
-
-為了將 `Fix featrue 2 bug` 合併至 `Add featrue 2`，更改 `Fix featrue 2 bug` 的指令為 `fixup` (與上一個合併但不保留訊息)。
+直接將 `Add feature 4` 及 `Add feature 5` 兩行交換順序。
 
 ```shell
-pick d34548f Add featrue 1
-pick cfe6102 Add feature 2
-fixup 1d1773d Fix feature 2 bug
-pick e419862 Add featrue 3
-pick 082a95c Add featrue 4
-pick 2ebbe30 Add featrue 5
-pick 68e1e4c Add feature 5-1
-pick c5300e9 Add feature 6
+pick 9fa7ff7 Add feature 1
+pick e4e3c6f Add feature 2
+pick c3e8936 Fix feature 2 bug
+pick 8ad13c6 Add feature 3
+pick b99b647 Add feature 4
+pick b2e9250 Add feature 5
+pick 69a3e14 Add feature 5-1
+pick 655082e Add feature 6
 
-# 重定基底 bda1985..c5300e9 到 bda1985（8 個提交）
+# 重定基底 bda1985..655082e 到 bda1985（8 個提交）
 ```
 
-#### Step 4. 刪除 `Add featrue 5-1`
+#### Step 3. 合併 `Add feature 2` 及 `Fix feature 2 bug`
+
+為了將 `Fix feature 2 bug` 合併至 `Add feature 2`，更改 `Fix feature 2 bug` 的指令為 `fixup` (與上一個合併但不保留訊息)。
+
+```shell
+pick 9fa7ff7 Add feature 1
+pick e4e3c6f Add feature 2
+fixup c3e8936 Fix feature 2 bug
+pick 8ad13c6 Add feature 3
+pick b99b647 Add feature 4
+pick b2e9250 Add feature 5
+pick 69a3e14 Add feature 5-1
+pick 655082e Add feature 6
+
+# 重定基底 bda1985..655082e 到 bda1985（8 個提交）
+```
+
+#### Step 4. 刪除 `Add feature 5-1`
 
 因為要刪除 `Add feature 5-1` 這個 Commit，所以將這一行直接移除。
 
 ```shell
-pick d34548f Add featrue 1
-pick cfe6102 Add feature 2
-fixup 1d1773d Fix feature 2 bug
-pick e419862 Add featrue 3
-pick 082a95c Add featrue 4
-pick 2ebbe30 Add featrue 5
-pick c5300e9 Add feature 6
+pick 9fa7ff7 Add feature 1
+pick e4e3c6f Add feature 2
+fixup c3e8936 Fix feature 2 bug
+pick 8ad13c6 Add feature 3
+pick b99b647 Add feature 4
+pick b2e9250 Add feature 5
+pick 655082e Add feature 6
 
-# 重定基底 bda1985..c5300e9 到 bda1985（8 個提交）
+# 重定基底 bda1985..655082e 到 bda1985（8 個提交）
 ```
 
 #### Step 5. 套用 Rebase 指令
@@ -205,12 +205,12 @@ pick c5300e9 Add feature 6
 執行結果如下，可以看到已完成上面列的需求。
 
 ```shell
-* 29e3dbe 2021-07-19 | Add feature 6 (HEAD -> master)
-* cafd7d8 2021-07-19 | Add featrue 5
-* 52498d2 2021-07-19 | Add featrue 4
-* 8d5330e 2021-07-19 | Add featrue 3
-* 348cd4c 2021-07-19 | Add feature 2
-* d34548f 2021-07-19 | Add featrue 1
+* 31d6978 2021-07-19 | Add feature 6 (HEAD -> master)
+* 5e4f588 2021-07-19 | Add feature 5
+* 04b8a95 2021-07-19 | Add feature 4
+* 17fc05f 2021-07-19 | Add feature 3
+* a30783f 2021-07-19 | Add feature 2
+* 9fa7ff7 2021-07-19 | Add feature 1
 * bda1985 2021-07-19 | Init Commit
 ```
 
