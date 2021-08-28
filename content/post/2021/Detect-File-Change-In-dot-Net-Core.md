@@ -99,7 +99,7 @@ var configuration = new ConfigurationBuilder()
     .Build();
 ```
 
-如果你也想要另外執行一些動作，那方法就跟 [偵測 `appsettings.json` 變化](#偵測-appsettingsjson-變化)，範例如下：
+如果你也想要另外執行一些動作，那方法就跟 [偵測 `appsettings.json` 變化](#偵測-appsettings-json-變化)，範例如下：
 
 ```csharp
 var configuration = new ConfigurationBuilder()
