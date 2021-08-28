@@ -23,22 +23,27 @@ images:
 ##### 全端網站開發者 / Full Stack Web Developer [*](https://www.w3schools.com/whatis/whatis_fullstack.asp)
 {{< sns-icon >}} 
 
-我來自台灣，是一位全端網站開發者。我擅長於 Web 領域，較常使用 `PHP`、`.Net Core`、`Vue` 與 `React`。而目前最喜歡的框架是 `Laravel`。
+我來自台灣，是一位全端網站開發者。我擅長於 Web 領域，較常使用 `.Net Core` 與 `React` 也曾接觸過 `PHP`、`AngularJs`、`Vue`。而目前最喜歡的框架是 `.NET Core`。
 
 我喜歡學習新事物與新技術的開發者，對於 Code 品質有一定程度的要求，會花費很多時間在使一份 Code 更好。另外也喜歡寫 Side Project，常常早上上班 Coding，晚上回來繼續 Coding。
 
 
-I'm a full stack web developer, from Taiwan. I focus on web application, often using  `PHP`, `.NET Core`, `Vue` and `React`. My favorite framework right now is `Laravel`.
+I'm a full stack web developer, from Taiwan. I focus on web application, often using  `.NET Core` and `React`, Also had contact with `PHP`, `AngularJs`, `Vue`. My favorite framework right now is `.NET Core`.
 
 I like to learn new things as well as technologies, and will spend a lot of time making the code better. so, when someone tries to destroy it, I will stop it. i also like to write Side Projects. I often work at Coding in the morning and return to Coding at night.
 
 #### 技術領域
+
+* 系統設計
 * 前後端網站開發
 * 程式設計
 * 網路設備維護
 * Linux 伺服器維護
 
 #### 涉略的技術
+
+* .Net Core
+* React
 * Laravel
 * PHP
 * C/C++
@@ -48,9 +53,7 @@ I like to learn new things as well as technologies, and will spend a lot of time
 * Java
 * vue 2
 * AngularJS
-* React
 * React Native
-* .net MVC
 * Microsoft Bot Framework
 
 #### 證照
@@ -59,38 +62,16 @@ I like to learn new things as well as technologies, and will spend a lot of time
     - 證照編號：`422534170046HSBH`
 
 #### 經歷
-- **2019 / 07 ~** 叡揚資訊 `程式設計師 (正職)`
+
+- **2021 / 02 ~** 叡揚資訊 `程式分析師`
+- **2019 / 07 ~ 2021 / 02** 叡揚資訊 `程式設計師`
 - **2018 / 07 ~ 2019 / 06** 叡揚資訊 `實習生`
-- **2016 / 12 ~** 某公益團體平台 `研發人員`
+- **2016 / 12 ~ 2020 / 08** HITCON ZeroDay `研發人員`
 - **2018 / 02 ~ 2018 / 12** 第七屆 MOPCON 場務組 `組長`
 - **2017 / 04 ~ 2017 / 12** 第六屆 MOPCON 場務組 `組員`
 - **2017 / 03 ~ 2017 / 05** 第一屆 高雄前端開發者大會 場務組 `組員`
 - **2016 / 07 ~ 2016 / 10** 第五屆 MOPCON 場務組 `組員`
 
-#### 曾獲獎項
-
-- **2018**
-   - 全國大專校院軟體創作競賽(雲端網際服務與其他應用組) `銅牌`
-   - 全國大專電腦軟體設計競賽(應用軟體設計組) `第二名`
-   - 第23屆大專校院資訊應用服務創新競賽(智慧零售組) `第二名`
-- **2017**
-   - 全國大專電腦軟體設計競賽(應用軟體設計組) `第三名`
-   - 第一屆全國科技大專校院程式競賽 `佳作`
-- **2016**
-   - 第五屆全國大專 ITSA 盃程式設計桂冠挑戰大賽(闖關組) `第一名`
-   - 全國大專電腦軟體設計競賽(應用軟體設計組) `第三名`
-   - 2016 全國大專電腦軟體設計競賽(程式設計組) `佳作`
-   - 第一屆全國科技大專校院程式競賽 `第一名`
-- **2015**
-    - 第11屆華佗杯 CISCO 網路解疑大賽混合組 `第一名`
-    - 全國大專電腦軟體設計競賽(應用軟體設計組) `佳作`
-- **2014**
-    - 第44屆全國技能競賽 `銀牌`
-    - 第44屆全國技能競賽南區分區賽 `金牌`
-    - 第10屆華佗杯 CISCO 網路解疑大賽高中組 `第三名`
-- **2013**
-    - 第43屆全國技能競賽南區分區賽 `銀牌`
-    
 #### Side-Project
 
 see [Side-Project](/projects/)
