@@ -1,4 +1,5 @@
 ---
+id: "61ad91fcf43445f5c2b9f17ddb3863b5460a055c"
 title: "專案有使用 NHibernate 時，為 Table 加上 Trigger 出現錯誤"
 description: "專案有使用 NHibernate 時，為 Table 加上 'Trigger 出現 Batch update returned unexpected row count from update; actual row count: 2; expected: 1' 的錯誤"
 date: 2019-03-15T23:29:28+08:00

@@ -1,4 +1,5 @@
 ---
+id: "b33f6cb3c300a56144f5c9d040c9cb7009159eec"
 title: "Git 常用指令與設定筆記"
 date: 2018-12-24T12:59:13+08:00
 draft: false

@@ -1,4 +1,5 @@
 ---
+id: "3bbb758f0271c88ede7523a8571a550c064b610f"
 title: ".Net Core 安裝 Entity Framework Core 並使用 Migration 來建立 Table"
 description: "EntityFramework 是一個實現 ORM 的一個工具，而 EntityFrameworkCore 則是它的輕量版，簡單來說就是可以在專案中寫好需要的 Model 後，再用它產生對應的 Table，不用再自己執行 SQL。"
 date: 2019-02-24T08:52:55+08:00

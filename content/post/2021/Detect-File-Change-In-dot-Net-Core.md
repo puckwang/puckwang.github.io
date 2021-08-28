@@ -1,4 +1,5 @@
 ---
+id: "4fb997c89db4db7c8c53e9a2dcd27ee5b985e6fd"
 title: ".Net Core 偵測指定檔案或目錄變化時自動執行某些動作"
 description: "本文將分享在 .Net Core 當指定檔案或目錄變化時，自動重新載入或執行某些動作。"
 date: 2021-08-28T21:18:35+08:00

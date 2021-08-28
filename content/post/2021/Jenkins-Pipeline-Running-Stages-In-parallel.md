@@ -1,4 +1,5 @@
 ---
+id: "eb480e5189d4fcb85a146b02e67c67b2ce362996"
 title: "Jenkins Pipeline Stages 平行處理的寫法"
 description: "Jenkins pipeline 在執行 Stage 時，某些情況使用平行處理可以節省很多執行所需時間，本篇將會介紹幾種平行處理的方法。"
 date: 2021-03-13T11:47:08+08:00

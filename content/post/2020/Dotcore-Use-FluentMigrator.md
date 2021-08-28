@@ -1,4 +1,5 @@
 ---
+id: "f2b984395b579a6dc48d60146dab472716762c45"
 title: ".Net Core 使用 FluentMigrator 遷移資料庫"
 description: "Fluent Migrator 是一個 .Net 的資料庫遷移 (Migration) 框架套件，提供 Code-First 的方式去管理資料庫結構，並可將其納入專案的版控中。"
 date: 2020-06-30T17:59:32+08:00

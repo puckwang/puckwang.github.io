@@ -1,4 +1,5 @@
 ---
+id: "3eb1eeeb1dc04e90ae6d9cade4362b2ca09f41d8"
 title: "Deploy Bot Framework 4 to IIS"
 description: "在使用 Bot Framework 開發時，一定會遇到要部署至 IIS 的狀況，但官方文件就只有寫部署到 Azure 的方法，雖然方法與部署 .Net Core 差不多，但沒注意到細節踩雷也會很煩。內文為部署 Bot Framework 4 至 IIS 的方法。"
 date: 2019-02-13T19:00:47+08:00

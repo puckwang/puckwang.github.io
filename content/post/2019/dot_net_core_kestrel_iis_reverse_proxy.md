@@ -1,4 +1,5 @@
 ---
+id: "efeef2fb0319d438830a5f9e532ce42824c39107"
 title: ".Net core 應用程式使用 Kestrel 部署並搭配 IIS 來反向 Proxy"
 description: "Kestrel 是 .Net core 隨附的跨平台網頁伺服器，可以自己獨立運行，也可以搭配其他網頁伺服器的反向 Proxy。"
 date: 2019-04-11T20:00:48+08:00

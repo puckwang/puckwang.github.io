@@ -1,4 +1,5 @@
 ---
+id: "745804413fb73a691e632edf27da1a0e30f6ed47"
 title: "使用 Github Actions 來自動化部署 Hugo 到 Github Pages"
 description: "利用 Github Actions 在將 Commit 推上 Github 後，自動化執行 Hugo 建置並部署結果到 Github Pages"
 date: 2020-03-14T21:22:30+08:00

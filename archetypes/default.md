@@ -1,4 +1,5 @@
 ---
+id: "{{ sha1 .Name }}"
 title: "{{ replace .Name "-" " " | title }}"
 description: ""
 date: {{ .Date }}

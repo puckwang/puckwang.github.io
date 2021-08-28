@@ -1,4 +1,5 @@
 ---
+id: "fe76417f8cf478d210f4278e2e79e8db6fef3d4a"
 title: "使用 Git Rebase Interactive 模式整理 Commit"
 description: "利用 git rebase 的互動模式，可以讓你簡單的去調整 Commit 的順序；或是拆分過大的 Commit；也可以刪除不必要的 Commit"
 date: 2021-07-19T21:09:02+08:00

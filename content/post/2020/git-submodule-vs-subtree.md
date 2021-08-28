@@ -1,4 +1,5 @@
 ---
+id: "1833f4bd719597a2f907cd5ac87f8906bb75709d"
 title: "Git 進階應用 Submodule 與 Subtree，使用它們來拆分專案"
 description: "在開發過程中，專案隨著時間變得越來越肥，不時還生出子專案，此時就會遇到需要各專案共用一些 Code 的部分。本篇文將說明使用 Git Submodule 與 Git Subtree 實現匯入子專案的差異及它們的使用方法。 Git Submodule 教學、 Git Subtree 教學"
 date: 2020-03-18T21:29:12+08:00

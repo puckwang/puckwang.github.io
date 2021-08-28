@@ -1,4 +1,5 @@
 ---
+id: "2a716f532886cf7371d9f9f776adcc5a7bff312e"
 title: "使用 vuex-map-fields 讓 Vuex state 也可使用 v-model 綁定"
 description: "有在用 Vue 寫應用程式的人，一定也會接觸到 Vuex，它有很多優點但也有限制，其中一項就是不能在 Mutation 以外的地方修改 State ，所以也就不能直接使用 v-model 去綁定，雖然官方有提供一段替代的寫法，但還是比原本直接用 v-model 來的麻煩很多，特別是大量的時候。"
 date: 2019-05-16T21:17:40+08:00

@@ -1,4 +1,5 @@
 ---
+id: "f5fe3bd8df3bcd7bd56a54eb486ec4171f9086ec"
 title: "2020 JetBrains Quest 官方解謎全記錄"
 description: "這是一篇解謎的紀錄文章，對這種解謎有興趣的可以進來看看"
 date: 2020-03-09T23:23:00+08:00

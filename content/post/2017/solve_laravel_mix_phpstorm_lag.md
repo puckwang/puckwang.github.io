@@ -1,4 +1,5 @@
 ---
+id: "35612a51870ef588f3180c8ec8512c8b0b294046"
 title: "解決使用 Laravel-mix 時 Phpstorm 會 lag 的問題"
 date: "2017-09-05T22:21:26+08:00"
 description: ""

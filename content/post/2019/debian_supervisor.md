@@ -1,4 +1,5 @@
 ---
+id: "611308f248a37d8004cbc7c07cdb985a9cbda9bf"
 title: "Debian 安裝與配置 Supervisor"
 description: "利用 Supervisor 去管理程序，支援自動重啟與多程序"
 date: 2019-05-08T11:44:21+08:00

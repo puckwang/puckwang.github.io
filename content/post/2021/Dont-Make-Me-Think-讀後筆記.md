@@ -1,4 +1,5 @@
 ---
+id: "5eeac6e08ea668d46fb3ff44c851962b532431ec"
 title: "Don't Make Me Think：如何設計好網站 - 讀後筆記"
 description: "「Don't Make Me Think 如何設計好網站」的讀後筆記，內容大多來書中，少部分筆者自行猜測"
 date: 2021-02-22T18:08:07+08:00

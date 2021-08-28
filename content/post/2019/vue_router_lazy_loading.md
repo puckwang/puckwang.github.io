@@ -1,4 +1,5 @@
 ---
+id: "783737326a6a298c206876b9faa15bcb9245f061"
 title: "Vue Router Lazy Loading"
 description: "SPA 的網站會因為功能變多造成 build 出來的產物越來越大，雖然 Webpack 可以切 Chunk，但也會讓載入的時間變長，此時可以搭配 Vue 的 Components Dynamic Async 的功能，讓 Component 只在使用到的時候才去載入，不會一次就全部載完。"
 date: 2019-04-14T12:23:35+08:00

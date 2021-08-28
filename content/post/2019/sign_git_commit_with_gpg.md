@@ -1,4 +1,5 @@
 ---
+id: "f817530ba30930024b066e8771dd27f3da080f6f"
 title: "利用 GPG 簽署 git commit"
 description: "利用 GPG 簽署 git commit，讓 Github 顯示綠色小勾勾"
 date: 2019-04-03T16:04:42+08:00

@@ -1,4 +1,5 @@
 ---
+id: "9b72ae445a913b319e753b83e62dec15a362bc4d"
 title: "Bot Framework 4 入門筆記 for MacOS and Jetbrains Rider"
 description: "Microsoft bot framework 4 在去年九月就發布了，直到最近我才有機會去學他，雖然有碰過 v3，但聽說架構改很大，底層也改用 .Net Core 了，現在趕緊把它補上。雖然官方是推薦用 VS ，但身為一個 Jetbrains IDE 的愛好者，當然是使用它來當作開發工具，現在就讓我們從建立專案開始吧。 "
 date: 2019-01-29T18:01:42+08:00

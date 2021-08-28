@@ -1,4 +1,5 @@
 ---
+id: "06f2b810960ff302feca626e7ecb1870829c37e4"
 title: "Bind Shell 與 Reverse Shell"
 description: ""
 date: 2021-01-10T21:00:59+08:00

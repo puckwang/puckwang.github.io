@@ -1,4 +1,5 @@
 ---
+id: "864b374aba2cec43d28102d29538eb2703eb18d5"
 title: "解決 vuex 在 Laravel-mix 中使用展開運算子(...)出現語法錯誤的問題"
 date: "2017-09-06T01:09:04+08:00"
 description: ""

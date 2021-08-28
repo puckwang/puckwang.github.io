@@ -1,4 +1,5 @@
 ---
+id: "d585ab632dbffd266343d697206343914f3550d1"
 title: "改用 SQL Server 或其他 Database 來儲存 Bot State"
 description: "Bot Framework 4 官方內建的 Storage 並沒有 SQL Server，僅支援開發用的 MemoryStorage 和 Azure 上的 CosmosDb 與 Blob。"
 date: 2019-03-15T23:52:21+08:00
