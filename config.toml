@@ -1,7 +1,7 @@
 baseurl = "https://blog.puckwang.com/"
 title = "Puck's Blog"
 author = "Puck Wang"
-copyright = "Copyright © 2017-2020, Puck Wang; all rights reserved."
+copyright = "Copyright © 2017-2021, Puck Wang; all rights reserved."
 canonifyurls = true
 paginate = 15
 theme = "silhouette-hugo"

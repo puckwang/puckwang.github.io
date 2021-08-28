@@ -152,6 +152,15 @@ footer hr {
 
 .post h1,
 .post h2,
+.post h3,
+.post h4,
+.post h5,
+.post h6 {
+    scroll-margin-top: calc(65px);
+}
+
+.post h1,
+.post h2,
 .recent-posts h4,
 .sidebar h2 {
     padding-bottom: 10px;
