@@ -32,7 +32,7 @@ I'm a full stack web developer, from Taiwan. I focus on web application, often u
 
 I like to learn new things as well as technologies, and will spend a lot of time making the code better. so, when someone tries to destroy it, I will stop it. i also like to write Side Projects. I often work at Coding in the morning and return to Coding at night.
 
-#### 技術領域
+#### 領域
 
 * 系統設計
 * 前後端網站開發
@@ -40,7 +40,7 @@ I like to learn new things as well as technologies, and will spend a lot of time
 * 網路設備維護
 * Linux 伺服器維護
 
-#### 涉略的技術
+#### 技能
 
 * .Net Core
 * React
@@ -64,14 +64,14 @@ I like to learn new things as well as technologies, and will spend a lot of time
 
 #### 經歷
 
-- **2021 / 02 ~** 叡揚資訊 `程式分析師`
-- **2019 / 07 ~ 2021 / 02** 叡揚資訊 `程式設計師`
-- **2018 / 07 ~ 2019 / 06** 叡揚資訊 `實習生`
-- **2016 / 12 ~ 2020 / 08** HITCON ZeroDay `研發人員`
-- **2018 / 02 ~ 2018 / 12** 第七屆 MOPCON 場務組 `組長`
-- **2017 / 04 ~ 2017 / 12** 第六屆 MOPCON 場務組 `組員`
-- **2017 / 03 ~ 2017 / 05** 第一屆 高雄前端開發者大會 場務組 `組員`
-- **2016 / 07 ~ 2016 / 10** 第五屆 MOPCON 場務組 `組員`
+- **2021 / 02 ~** 叡揚資訊 Program Analyst
+- **2019 / 07 ~ 2021 / 02** 叡揚資訊 Software Programmer
+- **2018 / 07 ~ 2019 / 06** 叡揚資訊 Associate Programmer (實習生)
+- **2016 / 12 ~ 2020 / 08** HITCON ZeroDay 研發人員
+- **2018 / 02 ~ 2018 / 12** 第七屆 MOPCON 場務組 組長
+- **2017 / 04 ~ 2017 / 12** 第六屆 MOPCON 場務組 組員
+- **2017 / 03 ~ 2017 / 05** 第一屆 高雄前端開發者大會 場務組 組員
+- **2016 / 07 ~ 2016 / 10** 第五屆 MOPCON 場務組 組員
 
 #### Side-Project
 
