@@ -58,20 +58,24 @@ I like to learn new things as well as technologies, and will spend a lot of time
 
 #### 證照
 
-<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="0b22f871-cbe7-4337-b366-964a32c34bad" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+<div style="display: flex; gap: 8px;">
 
-<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="3e0b9696-4999-423c-86b2-11cbb684523f" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+<div data-iframe-width="400" data-iframe-height="270" data-share-badge-id="0b22f871-cbe7-4337-b366-964a32c34bad" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+
+<div data-iframe-width="400" data-iframe-height="270" data-share-badge-id="3e0b9696-4999-423c-86b2-11cbb684523f" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+
+</div>
 
 #### 經歷
 
-- **2021 / 02 ~** 叡揚資訊 Program Analyst
-- **2019 / 07 ~ 2021 / 02** 叡揚資訊 Software Programmer
-- **2018 / 07 ~ 2019 / 06** 叡揚資訊 Associate Programmer (實習生)
-- **2016 / 12 ~ 2020 / 08** HITCON ZeroDay 研發人員
-- **2018 / 02 ~ 2018 / 12** 第七屆 MOPCON 場務組 組長
-- **2017 / 04 ~ 2017 / 12** 第六屆 MOPCON 場務組 組員
-- **2017 / 03 ~ 2017 / 05** 第一屆 高雄前端開發者大會 場務組 組員
-- **2016 / 07 ~ 2016 / 10** 第五屆 MOPCON 場務組 組員
+- **2021 / 02 ~** 叡揚資訊 **Program Analyst**
+- **2019 / 07 ~ 2021 / 02** 叡揚資訊 **Software Programmer**
+- **2018 / 07 ~ 2019 / 06** 叡揚資訊 **Associate Programmer** (實習生)
+- **2016 / 12 ~ 2020 / 08** HITCON ZeroDay **研發人員**
+- **2018 / 02 ~ 2018 / 12** 第七屆 MOPCON 場務組 **組長**
+- **2017 / 04 ~ 2017 / 12** 第六屆 MOPCON 場務組 **組員**
+- **2017 / 03 ~ 2017 / 05** 第一屆 高雄前端開發者大會 場務組 **組員**
+- **2016 / 07 ~ 2016 / 10** 第五屆 MOPCON 場務組 **組員**
 
 #### Side-Project
 
