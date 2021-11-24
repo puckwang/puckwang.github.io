@@ -53,6 +53,9 @@ description = "這裡是一個筆記型的部落格，內容由 Puck Wang 撰寫
     icon = "fab fa-stack-overflow"
     link = "//stackoverflow.com/users/7699156/puckwang?tab=profile"
 
+[[Params.socials]]
+icon = "fab fa-google"
+link = "//g.dev/puckwang"
 
 [[Params.menus]]
     name = "Home"
@@ -69,10 +72,10 @@ description = "這裡是一個筆記型的部落格，內容由 Puck Wang 撰寫
 #    link = "/travels"
 #    icon = "fa fa-plane"
 
-[[Params.menus]]
-    name = "Photos"
-    link = "/photography"
-    icon = "fa fa-camera"
+#[[Params.menus]]
+#    name = "Photos"
+#    link = "/photography"
+#    icon = "fa fa-camera"
 
 [[Params.menus]]
     name = "Side Projects"

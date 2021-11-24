@@ -2,7 +2,7 @@
 title: "GSC 黏土人攝影集"
 description: "這裡放了我拍攝的所有收藏的 GSC 黏土人的相簿，純非專業人士及非專業器材拍攝出來的，歡迎留言指教。"
 date: 2019-06-08T02:54:48+08:00
-draft: false
+draft: true
 images:
     - "/images/others/GSC_Q_Doll_OG_Img.JPG"
 ---
