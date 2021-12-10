@@ -4,9 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         {{ if .IsHome }}
+        <meta name="description" content="{{ .Site.Params.IntroDescription }}">
         {{ range first 6 $.Site.Params.images }}
         <meta property="og:image" content="{{ . | absURL }}" />
         {{ end }}
+        {{ else }}
+        {{ with .Description }}
+            <meta name="description" content="{{- . -}}">
+        {{ else }}
+            <meta name="description" content="{{ .Site.Params.IntroDescription }}">
+        {{ end }}
+
         {{ end }}
         {{ template "_internal/opengraph.html" . }}
         {{ template "_internal/twitter_cards.html" . }}
