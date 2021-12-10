@@ -47,14 +47,14 @@ public class CreateUserTable : Migration
 ### 使用 Migration 框架與使用 SQL 的比較
 
 {{< table >}}
-|     | 使用 Migration 框架 | 使用 SQL |
+|     | 使用 Migration 框架 | 使用 SQL |
 | --- | --- | --- |
 | 支援不同的資料庫 | 套件有支援的都可以使用，寫一份就可以通用，且較不易出錯 | 要為每個資料庫個別去寫 SQL，需寫很多份，還要一個個去驗證執行是否正確 |
 | 自動化執行 | 支援與 App 一同執行或使用 CLI 的方式 | 需自己處理 |
 | 執行順序 | 可自訂每個 Migration 的版本，會照版本依序執行 | 無   |
 | 紀錄  | 執行的紀錄將紀錄在 DB 某個 Table 中 | 無   |
 | Rollback | 可 Rollback 到任意版本 | 需自己另外寫一份 SQL |
-{{< table />}}
+{{< /table >}}
 
 ## 安裝 Fluent Migrator
 

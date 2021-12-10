@@ -26,7 +26,7 @@ Microsoft bot framework 4 在去年九月就發布了，直到最近我才有機
 
 <!--more-->
 
-# 安裝專案 Template
+## 安裝專案 Template
 
 新的東西連 VS 預設都不會有 Template，更不用說是 Rider了。
 
@@ -43,7 +43,7 @@ dotnet new --install "Ltwlf.BotBuilderV4.Basic"
 
 <img src="/images/2019/bot_framework_4_rider_template.png" width="400">
 
-# 新增專案
+## 新增專案
 
 使用 Rider 新增專案後，如果 `Microsoft.Bot.Builder` 版本是 `4.0.6`，會發生抓不到 Package 的[問題](https://github.com/Microsoft/botbuilder-dotnet/issues/1002)，把它相關的 Package 都升到最新版就可以了。
 
@@ -52,7 +52,7 @@ dotnet new --install "Ltwlf.BotBuilderV4.Basic"
 
 <img src="/images/2019/bot_framework_4_emulator.png" width="500">
 
-# 專案架構
+## 專案架構
 
 整個專案的基本架構是 .Net Core，而已開始建好專案就有幾個重要的檔案：
 

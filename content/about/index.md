@@ -20,15 +20,16 @@ images:
 <img src="{{< param "author_photo" >}}" class="rounded" style="width: 20vh">
 
 ### Puck Wang
+
 ##### 全端網站開發者 / Full Stack Web Developer [*](https://www.w3schools.com/whatis/whatis_fullstack.asp)
+
 {{< sns-icon >}} 
 
-我來自台灣，是一位全端網站開發者。我擅長於 Web 領域，較常使用 `.Net Core` 與 `React` 也曾接觸過 `PHP`、`AngularJs`、`Vue`。而目前最喜歡的框架是 `.NET Core`。
+我來自台灣，是一位全端網站開發者。我擅長於 Web 領域，較常使用 `.Net Core` 與 `React` 也曾接觸過 `PHP`、`AngularJs`、`Vue`。
 
 我喜歡學習新事物與新技術的開發者，對於 Code 品質有一定程度的要求，會花費很多時間在使一份 Code 更好。另外也喜歡寫 Side Project，常常早上上班 Coding，晚上回來繼續 Coding。
 
-
-I'm a full stack web developer, from Taiwan. I focus on web application, often using  `.NET Core` and `React`, Also had contact with `PHP`, `AngularJs`, `Vue`. My favorite framework right now is `.NET Core`.
+I'm a full stack web developer, from Taiwan. I focus on web application, often using  `.NET Core` and `React`, Also had contact with `PHP`, `AngularJs`, `Vue`.
 
 I like to learn new things as well as technologies, and will spend a lot of time making the code better. so, when someone tries to destroy it, I will stop it. i also like to write Side Projects. I often work at Coding in the morning and return to Coding at night.
 

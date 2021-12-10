@@ -20,7 +20,7 @@ categories:
 
 <!--more-->
 
-# @keyframes
+## @keyframes
 
 藉由 CSS 動畫可以自動改變樣式，而 `@keyframes` 就是在定義樣式該怎麼變化。
 
@@ -49,7 +49,7 @@ categories:
 > 不是全部的 CSS 屬性都是可動畫化的，可以到這邊查看有哪些可以用。
 https://www.w3schools.com/cssref/css_animatable.asp
 
-# animation 語法
+## animation 語法
 
 定義完 `@keyframes` 後就可以使用 `animation` 套用動畫囉！
 
@@ -87,7 +87,7 @@ animation: name duration timing-function delay iteration-count direction fill-mo
 
 可以先用這個工具試過各種動畫，在作微調。
 
-# Demo 
+## Demo 
 
 用簡單的 CSS 動畫語法，就可以做出不錯的 Loading 圖示。
 

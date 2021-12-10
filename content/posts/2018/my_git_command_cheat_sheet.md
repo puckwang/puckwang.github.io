@@ -23,7 +23,7 @@ categories:
 
 <!--more-->
 
-# 本地相關
+## 本地相關
 ### Init
 ```bash
 git init  #初始化 Git 專案。
@@ -173,7 +173,7 @@ git verify-tag <commit>  # 驗證 Tag 的 GPG 簽署。
 git reflog # 它會紀錄所有執行等指令，如果 Commit 不見，短時間內都還可以用它查。
 ```
 
-# 遠端倉庫相關
+## 遠端倉庫相關
 ### Remote
 ```bash
 git remote  #列出遠端倉庫清單
@@ -211,7 +211,7 @@ git submodule update --init --recursive # 初次 Clone 下來的專案要先執�
 git submodule update --recursive # 更新 submodule 
 ```
 
-# 全域設定檔
+## 全域設定檔
 預設路徑: `~/.gitconfig`
 ```bash
 [user]

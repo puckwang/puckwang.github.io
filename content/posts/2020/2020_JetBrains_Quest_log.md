@@ -17,7 +17,7 @@ tags:
 
 就在台灣時間 2020/3/9 20:04，JetBrains 的官方 Twitter 發了一篇推文如下
 
-{{< tweet 1236986174075482113 >}}
+{{< tweet jetbrains 1236986174075482113 >}}
 
 而我看到這個，就馬上燃起我的解謎魂了！也就打一篇解題的過程來紀錄一下。
 
@@ -157,7 +157,7 @@ The JetBrains Quest team
 
 到了預告的時間，官方如期的貼出了第二個問題的提示，看起來是幾個前後顛倒的文字。
 
-{{< tweet 1237694815283879943 >}}
+{{< tweet jetbrains 1237694815283879943 >}}
 
 ### 前後顛倒的文字
 
@@ -259,7 +259,7 @@ A little @jetbrains bird will deliver the next clue – so do some birdwatching,
 
 提示看起來是一個編碼 or 加密過的文字，常玩的人看到這種都先丟 Base64 試試看
 
-{{< tweet 1238420744817782784 >}}
+{{< tweet jetbrains 1238420744817782784 >}}
 
 ### 超常見的編碼方法
 

@@ -1,6 +1,8 @@
+{{- $current_page_url:= .Permalink }}
 {{ range $.Site.Params.menus }}
 <li class="nav-item">
-    <a class="nav-link active" href="{{ .link | absURL }}">
+    {{- $page_url:= (cond (strings.HasSuffix .link "/") .link (printf "%s/" .link) ) | absURL }}
+    <a class="nav-link {{- if eq $page_url $current_page_url }} active {{- end }}" href="{{ $page_url }}">
         {{ with .icon }}
             <i class="{{ . }} ml-2 mr-1"></i>
         {{ end }}

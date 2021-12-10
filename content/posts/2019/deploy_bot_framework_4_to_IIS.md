@@ -22,22 +22,7 @@ tags:
 
 <!--more-->
 
-# 目錄
-- [環境設置](#env-set)
-    - [1. 安裝 Windows Server Hosting Bundle](#env-set-1)
-    - [2. 建立新的 IIS 應用程式集區](#env-set-2)
-    - [3. 建立新的 IIS 網站](#env-set-3)
-- [部署](#deploy)
-    - [1. 新增 Production 環境資料](#deploy-1)
-    - [2. 發布 Bot 專案](#deploy-2)
-    - [3. 複製至 IIS 網站根目錄](#deploy-3)
-    - [4. 檢查 AspNetCoreModule 載入是否正常](#deploy-4)
-- [驗證](#test)
-    - [於瀏覽器中測試](#test-1)
-    - [於 Bot Framework Emulator 4 中測試](#test-2)
-- [Troubleshooting](#troubleshooting)
-
-# 環境設置 {#env-set}
+## 環境設置 {#env-set}
 ### 1. 安裝 Windows Server Hosting Bundle {#env-set-1}
 IIS 需要另外安裝 `.NET Core Windows Server Hosting Bundle` ，請至官方下載點選擇適當的版本後，下載 `Runtime & Hosting Bundle` 並執行安裝。
 
@@ -59,7 +44,7 @@ IIS 需要另外安裝 `.NET Core Windows Server Hosting Bundle` ，請至官方
 <img src="/images/2019/bot_framework_4_IIS_create_website.png" width="400">
 <br>
 
-# 部署 {#deploy}
+## 部署 {#deploy}
 ### 1. 新增 Production 環境資料 {#deploy-1}
 `Startup.cs` 會依照環境不同去讀 `BotConfiguration.bot` 中的設定，平常開發時是讀 `development` ，而發行後是讀 `Production` ，但預設是沒有資料的，所以要自己手動新增。
 
@@ -121,7 +106,7 @@ IIS 需要另外安裝 `.NET Core Windows Server Hosting Bundle` ，請至官方
 
 注意：在連線前記得要將 Bot Framework Emulator 4 設定好 [ngrok](https://ngrok.com/)，否則會沒辦法建立連線。
 
-# Troubleshooting {#troubleshooting}
+## Troubleshooting {#troubleshooting}
 
 ### IIS 4xx / 5xx
 如果在網站看到的是 IIS 的錯誤，請檢查權限、根目錄、應用程式集區等設定有沒有設定正確。

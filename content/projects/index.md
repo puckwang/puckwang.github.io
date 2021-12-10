@@ -1,68 +1,19 @@
 ---
 title: "Side Projects"
 date: 2019-02-10T16:50:10+08:00
+layout: projects
 images:
     - /images/og_image.png
 ---
 這裡記錄了直到現在我所寫的 `Side-Project`，不管是有沒有繼續維護 :P
 
-<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
-
-<link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css"/>
-
-<div class="calendar">
-    Loading the data just for you.
-</div>
-
-<script>
-    GitHubCalendar(".calendar", "puckwang");
-</script>
-
-<br>
-
-## NPM Package
-
-### Vue-SlotMachine
-
-{{< img src="https://github.com/puckwang/vue-slot-machine/blob/master/screenshots/banner.png?raw=true" caption="" width="600">}} 
-
-[![npm](https://img.shields.io/npm/v/@puckwang/vue-slot-machine.svg?style=flat)](https://www.npmjs.com/package/@puckwang/vue-slot-machine)
-[![npm](https://img.shields.io/npm/l/@puckwang/vue-slot-machine.svg?style=flat)](https://github.com/puckwang/vue-slot-machine/blob/master/LICENSE)
-[![npm](https://img.shields.io/npm/dt/@puckwang/vue-slot-machine.svg?style=flat)](https://www.npmjs.com/package/@puckwang/vue-slot-machine)
-
-一個用 HTML5 Canvas 寫的拉霸機，已經包成 Vue Component，安裝即可使用，支援自訂選項、RWD。
-
-A Vue component of a slot machine, made with an HTML5 canvas, RWD.
-
- - Github: https://github.com/puckwang/vue-slot-machine
- - NPM: https://www.npmjs.com/package/@puckwang/vue-slot-machine
- - 技術: `Vue`、`Canvas`
-
-<br> 
-### QR-Code
-
-[![npm](https://img.shields.io/npm/v/@puckwang/qr-code.svg?style=flat)](https://www.npmjs.com/package/@puckwang/qr-code)
-[![npm](https://img.shields.io/npm/l/@puckwang/qr-code.svg?style=flat)](https://github.com/puckwang/qr-code/blob/master/LICENSE)
-[![npm](https://img.shields.io/npm/dt/@puckwang/qr-code.svg?style=flat)](https://www.npmjs.com/package/@puckwang/qr-code)
-
-用 HTML5 Canvas 寫的 QRCode 產生器，支援多種點得圖案。
-
-Use HTML5 canvas draw QRCode
-
- - Github: https://github.com/puckwang/qr-code
- - NPM: https://www.npmjs.com/package/@puckwang/qr-code
- - 技術: `nodeJS`、`Canvas`
- 
-<br> 
-## Web
+## Web 相關
 
 ### Puck Toolbox
 一個免費的線上工具平台，提供各式線上工具。
  
  - 網站連結: https://tool.puckwang.com/
  - 相關技術: `Vue`, `HTML`, `CSS`
- 
-<br>
  
 ### Dragalia Lost Calculator `[Deprecated]`
 一個補助遊戲 失落的龍絆 (Dragalia Lost) 的計算機，用於計算角色屬性。
@@ -72,8 +23,6 @@ Use HTML5 canvas draw QRCode
  - 相關技術: `Vue`, `HTML`, `CSS`
 
 {{< img src="https://i.imgur.com/WCfXE7B.png" caption="網站截圖" >}} 
-
-<br>
 
 ### Equipment-management-system
 
@@ -87,8 +36,40 @@ Use HTML5 canvas draw QRCode
  
 {{< img src="https://i.imgur.com/GgSiL2A.png" caption="網站截圖" >}} 
 
-<br>
-## Other
+## NPM 套件相關
+
+### Vue-SlotMachine
+
+{{< img src="https://github.com/puckwang/vue-slot-machine/blob/master/screenshots/banner.png?raw=true" caption="" width="600">}}
+
+[![npm](https://img.shields.io/npm/v/@puckwang/vue-slot-machine.svg?style=flat)](https://www.npmjs.com/package/@puckwang/vue-slot-machine)
+[![npm](https://img.shields.io/npm/l/@puckwang/vue-slot-machine.svg?style=flat)](https://github.com/puckwang/vue-slot-machine/blob/master/LICENSE)
+[![npm](https://img.shields.io/npm/dt/@puckwang/vue-slot-machine.svg?style=flat)](https://www.npmjs.com/package/@puckwang/vue-slot-machine)
+
+一個用 HTML5 Canvas 寫的拉霸機，已經包成 Vue Component，安裝即可使用，支援自訂選項、RWD。
+
+A Vue component of a slot machine, made with an HTML5 canvas, RWD.
+
+- Github: https://github.com/puckwang/vue-slot-machine
+- NPM: https://www.npmjs.com/package/@puckwang/vue-slot-machine
+- 技術: `Vue`、`Canvas`
+
+### QR-Code
+
+[![npm](https://img.shields.io/npm/v/@puckwang/qr-code.svg?style=flat)](https://www.npmjs.com/package/@puckwang/qr-code)
+[![npm](https://img.shields.io/npm/l/@puckwang/qr-code.svg?style=flat)](https://github.com/puckwang/qr-code/blob/master/LICENSE)
+[![npm](https://img.shields.io/npm/dt/@puckwang/qr-code.svg?style=flat)](https://www.npmjs.com/package/@puckwang/qr-code)
+
+用 HTML5 Canvas 寫的 QRCode 產生器，支援多種點得圖案。
+
+Use HTML5 canvas draw QRCode
+
+- Github: https://github.com/puckwang/qr-code
+- NPM: https://www.npmjs.com/package/@puckwang/qr-code
+- 技術: `nodeJS`、`Canvas`
+
+
+## 其他
 
 ### img2cloud-cli `[Deprecated]`
 
@@ -99,8 +80,4 @@ Use HTML5 canvas draw QRCode
  - Github: https://github.com/puckwang/img2cloud-cli
  - 技術: `php`
  
-> 之後有時間應該會把它改寫成 go 版本的繼續維護下去。
-
-<img src="https://i.imgur.com/YMHZ7Ch.png" title="Imgur" width="400"/>
-
-<br>
+{{< img src="https://i.imgur.com/YMHZ7Ch.png" caption="" width="600">}}

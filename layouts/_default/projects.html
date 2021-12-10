@@ -16,15 +16,19 @@
         {{ partial "share-icons" . }}
     </div>
 
-    <div class="mt-4 mb-4 main-content">
+    <div class="mt-4 mb-5 main-content">
         {{ .Content }}
+
+        {{ partial "post-footer" . }}
 
         <div class="share-icons d-flex justify-content-center d-print-none">
             {{ partial "share-icons" . }}
         </div>
+
+        {{ partial "post-author" . }}
     </div>
 
-    {{ template "_internal/disqus.html" . }}
+<!--    {{ partial "disqus.html" . }}-->
 </div>
-{{ partial "sidebar" . }}
+{{ partial "toc" . }}
 {{ end }}

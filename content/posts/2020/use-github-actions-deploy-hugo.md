@@ -38,7 +38,7 @@ graph LR;
 - [peaceiris/actions-hugo](https://github.com/peaceiris/actions-hugo): 負責設定 Hugo 與建置專案。
 - [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages): 負責將建置結果部署到 Github Pages。
 
-### 建立第一個 Workflows
+## 建立第一個 Workflows
 
 可以到 Github 專案中，選擇 Actions 頁籤，再點 `Set up a workflow yourself`，就會進到建立檔案的畫面，路徑為 `.github/workflows/main.yml`，
 就算不從這邊，用建立檔案的方式也會到達同一個畫面，詳細可以去看 ["Configuring workflows"](https://help.github.com/en/actions/configuring-and-managing-workflows/configuring-and-managing-workflow-files-and-runs)。
@@ -59,7 +59,7 @@ on:
       - develop
 ```
 
-### 撰寫第一個 Job
+## 撰寫第一個 Job
 
 接下來建立第一個 Job，我這裡將這個 Job 命名為 `deploy`，並再 `runs-on` 選項設定這個 Job 要跑在 `ubuntu-18.04`上。
 
@@ -139,7 +139,7 @@ Hugo 建置的部分，就依自己的需求寫了，基本上把平常手動建
 
 到這裡就完成設定了，儲存檔案後在目標分支推送 Commit，就可以 Actions 看到在執行了，也可以在 Commit 上看到執行狀態。
 
-### 完整 Workflows 設定檔
+## 完整 Workflows 設定檔
 
 ```yaml
 name: Github-Pages
@@ -174,7 +174,7 @@ jobs:
           force_orphan: true
 ```
 
-### 結語
+## 結語
 
 利用 Github Actions 將以往要手動執行建置的步驟改為自動去執行，雖然節省的時間不多，但可以減少手動執行時出錯的機會，也讓自己可以專注於寫作。
 

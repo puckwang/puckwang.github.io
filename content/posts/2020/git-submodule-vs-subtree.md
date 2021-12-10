@@ -36,7 +36,9 @@ Submodule 與 Subtree 兩個都是可以將 `SubRepo` 加入 `SuperRepo` 的解�
 簡單來說 Submodule 是用像指標的方式，將 SubRepo 的 HASH 紀錄在 SuperRepo 中，而 Subtree 則是以副本的方式把 SubRepo 某版複製一份到 SuperRepo。
 
 用表格看可能就更清楚了：
+
 {{< table >}}
+
 |                 | Submodule                                | SubTree                                   |
 |-----------------|------------------------------------------|-------------------------------------------|
 | Cost            | 僅佔用 .gitmodule                        | 佔用等同 SubRepo 的大小的空間             |
@@ -44,7 +46,8 @@ Submodule 與 Subtree 兩個都是可以將 `SubRepo` 加入 `SuperRepo` 的解�
 | Push to SubRepo | **容易**，視為兩個獨立的 Repo，可以直接 push |  **不容易**，因為不知道 SubRepo log，還要比對 |
 | pull to SubRepo | **不容易**，需執行另外執行指令                   | **容易**，因為就只是 Pull SuperRepo           |
 | 簡單形容          | 一個 Repo 中的另一個 Repo                | 跟原本 Repo 合併，視為一個子目錄           |
-{{< table />}}
+
+{{< /table >}}
 
 另外也可以用一句話的方式描述：
 
@@ -471,7 +474,7 @@ git subtree push --prefix <folder path> <repo url> <ref>
 
 但實際上要用那種方式，還是要視當下需求再決定。
 
-### 參考文章
+## 參考文章
 
 - https://stackoverflow.com/questions/17413493/create-a-submodule-repository-from-a-folder-and-keep-its-git-commit-history
 - http://yutin.logdown.com/posts/188306-git-subtree-total-addendum-library

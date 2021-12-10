@@ -244,7 +244,7 @@ footer hr {
 .sidebar {
     background-color: #F8F8F8;
     border-left: 1px dotted #BBB;
-    padding: 1.5rem 50px 20px 50px;
+    padding: 1.5rem 32px 20px 32px;
     flex: 0 0 30rem;
 }
 
@@ -290,4 +290,17 @@ blockquote p {
 .image {
     display: flex;
     justify-content: center;
+}
+
+#toc {
+    top: 65px;
+    position: sticky;
+}
+
+#toc > #TableOfContents > ul {
+    /*padding-left: 0;*/
+}
+
+#toc ul, li {
+    /*list-style: none;*/
 }

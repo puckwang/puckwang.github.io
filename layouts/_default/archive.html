@@ -1,0 +1,45 @@
+{{ define "head" }}
+{{ end }}
+{{ define "header" }}
+{{ partial "feature-image" . }}
+{{ end }}
+{{ define "title" }}
+{{ .Title }} | {{ .Site.Title }}
+{{ end }}
+{{ define "main" }}
+<div class="container mt-4 post">
+    <h1>{{ .Title }}</h1>
+
+    {{ $.Scratch.Set "count" 1 }}
+
+    {{ range (.Site.RegularPages.GroupByDate "2006") }}
+    {{ if and (gt .Key 1) (gt (where .Pages "Type" "in" site.Params.mainSections) 0) }}
+
+    {{ range (where .Pages "Type" "in" site.Params.mainSections) }}
+    {{ if (eq ($.Scratch.Get "count") 1) }}
+    {{ $.Scratch.Set "count" 0 }}
+    <h3 class="title is-4 has-text-weight-normal">{{ .Date.Format "2006" }}</h3>
+    {{ end }}
+    {{ end }}
+
+    {{ $.Scratch.Set "count" 1 }}
+
+    <ul>
+        {{ range (where .Pages "Type" "in" site.Params.mainSections) }}
+        {{ if (ne .Params.hidden true) }}
+        <li>
+            <span class="has-text-grey-dark">{{ .Date.Format "2006-02-01" }}</span> -
+            <a class="is-block" href="{{ .RelPermalink }}">
+                {{ .Title }}
+            </a>
+        </li>
+        {{ end }}
+        {{ end }}
+    </ul>
+
+    {{ end }}
+    {{ end }}
+    <br>
+</div>
+{{ partial "sidebar" . }}
+{{ end }}
