@@ -14,7 +14,8 @@ tags:
     - chatbot
     - 部署
     - IIS
-    
+aliases:
+    - /post/2019/deploy_bot_framework_4_to_iis/
 ---
 
 在使用 Bot Framework 開發時，一定會遇到要部署至 IIS 的狀況，但官方文件就只有寫部署到 Azure 的方法，

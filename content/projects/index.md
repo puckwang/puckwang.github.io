@@ -1,5 +1,5 @@
 ---
-title: "Side Projects"
+title: "My Projects"
 date: 2019-02-10T16:50:10+08:00
 layout: projects
 images:

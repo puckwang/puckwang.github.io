@@ -16,6 +16,8 @@ tags:
 categories:
     - 問題解決紀錄
     - 軟體開發
+aliases:
+    - /post/2017/solve_laravel_mix_phpstorm_lag/
 ---
 
 最近開始在用laravel 5.5開發專案時發現的問題，只要用執行`npm run watch`後，

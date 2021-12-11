@@ -13,6 +13,8 @@ tags:
     - NHibernate
     - trigger
     - Database
+aliases:
+    - /post/2019/nhibernate_trigger_actual_row_count_error/
 ---
 
 最近有踩到這個雷，當使用 NHibernate 去存取資料庫時，你在變更的 Table 加上 Trigger，

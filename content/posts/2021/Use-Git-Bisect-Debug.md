@@ -12,7 +12,8 @@ categories:
 - Debug
 tags:
 - Git
-    
+aliases:
+  - /post/2021/use-git-bisect-debug/
 ---
 
 {{< img src="/images/2021/git-log.png" width="600" caption="Git log" >}}

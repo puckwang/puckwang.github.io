@@ -13,6 +13,8 @@ tags:
     - 彩蛋
     - JetBrains
     - Quest
+aliases:
+    - /post/2020/git-submodule-vs-subtree/
 ---
 
 就在台灣時間 2020/3/9 20:04，JetBrains 的官方 Twitter 發了一篇推文如下

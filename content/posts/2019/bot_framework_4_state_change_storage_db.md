@@ -14,6 +14,8 @@ tags:
     - state
     - SQL Server
     - dotnet
+aliases:
+    - /post/2019/bot_framework_4_state_change_storage_db/
 ---
 
 Bot Framework 4 官方內建的 Storage 並沒有 SQL Server，

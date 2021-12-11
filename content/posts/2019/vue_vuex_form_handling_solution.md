@@ -16,7 +16,8 @@ tags:
     - Web
     - vuex-map-fields
     - v-model
-    
+aliases:
+    - /post/2019/vue_vuex_form_handling_solution/  
 ---
 
 有在用 Vue 寫應用程式的人，一定也會接觸到 Vuex，它有很多優點但也有限制，

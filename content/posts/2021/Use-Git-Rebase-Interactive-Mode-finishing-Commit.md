@@ -11,6 +11,8 @@ categories:
     - 版本控制
 tags:
     - Git
+aliases:
+    - /post/2021/use-git-rebase-interactive-mode-finishing-commit/
 ---
 
 {{< img src="/images/2021/git-rebase.png" width="600" caption="Git Rebase" >}}

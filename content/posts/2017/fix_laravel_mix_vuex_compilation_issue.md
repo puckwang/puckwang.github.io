@@ -14,6 +14,8 @@ tags:
 categories: 
     - 問題解決紀錄
     - 軟體開發
+aliases:
+    - /post/2017/fix_laravel_mix_vuex_compilation_issue/
 ---
 
 在你把vuex的Actions與getters注入到components中時，可能會使用到展開運算子(...)，此時你可能會遇到語法錯誤的問題。

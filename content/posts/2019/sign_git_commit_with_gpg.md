@@ -17,7 +17,8 @@ tags:
     - Verified
     - git
     - 身份識別
-    
+aliases:
+   - /post/2019/sign_git_commit_with_gpg/
 ---
 
 GPG 全名為 GNU Privacy Guard 也可以簡稱為 GnuPG，他是一個加密軟體，但也可以用來驗證身份。

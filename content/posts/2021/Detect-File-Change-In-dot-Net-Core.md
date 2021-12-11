@@ -10,8 +10,10 @@ images:
 categories:
 - 軟體開發
 tags:
-- dotnet
-- .net-core
+  - dotnet
+  - .net-core
+aliases:
+  - /post/2021/detect-file-change-in-dot-net-core/
 ---
 
 本文將分享在 .Net Core 當指定檔案或目錄變化時，自動重新載入或執行某些動作。

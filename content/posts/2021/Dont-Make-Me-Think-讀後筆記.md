@@ -15,6 +15,8 @@ tags:
     - Web
     - Front-end
     - 前端
+aliases:
+    - /post/2021/dont-make-me-think-讀後筆記/
 ---
 
 {{< img src="/images/2021/DMMT-cover.png" caption="Don't Make Me Think 第三版封面" >}}

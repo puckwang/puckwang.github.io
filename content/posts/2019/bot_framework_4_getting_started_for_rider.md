@@ -17,6 +17,8 @@ tags:
     - .net Core
     - dotnet
     - template
+aliases:
+    - /post/2019/bot_framework_cards_note/
 ---
 
 Microsoft bot framework 4 在去年九月就發布了，直到最近我才有機會去學他，雖然有碰過 v3，但聽說架構改很大，

@@ -13,6 +13,8 @@ tags:
 categories: 
     - CheatSheet
     - 軟體開發
+aliases:
+    - /post/2017/ansi_escape_code_color/
 ---
 
 藉由`ANSI escape code`可以更改Console上字的顏色、背景顏色、粗體、下畫線等..

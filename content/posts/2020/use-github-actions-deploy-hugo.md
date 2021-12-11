@@ -17,7 +17,8 @@ tags:
     - 自動化
     - 建置
     - Workflows
-    
+aliases:
+    - /post/2020/use-github-actions-deploy-hugo/
 ---
 {{<mermaid>}}
 graph LR;

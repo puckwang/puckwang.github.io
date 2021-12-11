@@ -28,7 +28,7 @@
         {{ range (where .Pages "Type" "in" site.Params.mainSections) }}
         {{ if (ne .Params.hidden true) }}
         <li>
-            <span class="has-text-grey-dark">{{ .Date.Format "2006-02-01" }}</span> -
+            <span class="has-text-grey-dark">{{ .Date.Format "2006-01-02" }}</span> -
             <a class="is-block" href="{{ .RelPermalink }}">
                 {{ .Title }}
             </a>

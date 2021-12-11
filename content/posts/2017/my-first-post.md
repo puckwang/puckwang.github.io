@@ -9,9 +9,11 @@ tags:
     - 第一篇
 categories: 
     - 廢文
+aliases:
+    - /post/2017/my-first-post/
 ---
 
-我在Ｈexo與Hugo這兩個平台抉擇了很久·在比較兩平台的人氣後最終選擇了Hugo。
+我在 Hexo 與 Hugo 這兩個平台抉擇了很久，在比較兩平台的人氣後最終選擇了 Hugo。
 
 <!--more-->
 

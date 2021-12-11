@@ -13,6 +13,8 @@ tags:
     - bot framework
     - chatbot
     - Card
+aliases:
+    - /post/2019/bot_framework_cards_note/
 ---
 
 在開發聊天機器人時，現今給使用者的資料呈現方式除了一般的字串形式外，另外一種較常出現的就是以卡片形式呈現，

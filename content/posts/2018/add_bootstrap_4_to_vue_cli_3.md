@@ -13,6 +13,8 @@ tags:
     - bootstrap
 categories: 
     - 軟體開發
+aliases:
+    - /post/2018/add_bootstrap_4_to_vue_cli_3/
 ---
 
 在這邊紀錄一下怎麼將 Bootstrap 4 新增進 vue-cli 3.x 所建立的專案中。

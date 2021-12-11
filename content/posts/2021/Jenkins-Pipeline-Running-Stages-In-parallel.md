@@ -14,7 +14,8 @@ tags:
     - Pipeline
     - Parallel
     - 平行處理
-    
+aliases:
+    - /post/2021/jenkins-pipeline-running-stages-in-parallel/
 ---
 
 {{< img src="/images/2021/Jenkins-Pipeline-Parallel.png" caption="Jenkins Pipeline Parallel Example" >}}

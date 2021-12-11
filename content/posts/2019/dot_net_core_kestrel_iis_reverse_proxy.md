@@ -15,6 +15,8 @@ tags:
     - kestrel
     - IIS
     - .Net Core
+aliases:
+    - /post/2019/dot_net_core_kestrel_iis_reverse_proxy/
 ---
 
 Kestrel 是 .Net core 隨附的跨平台網頁伺服器，可以自己獨立運行，也可以搭配其他網頁伺服器的反向 Proxy。

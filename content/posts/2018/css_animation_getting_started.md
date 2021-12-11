@@ -12,6 +12,8 @@ tags:
     - Web
 categories:
     - 軟體開發
+aliases:
+    - /post/2018/css_animation_getting_started/
 ---
 
 利用 CSS 動畫，可不必使用 Javascript 或是 Git，就能讓 HTML 的元素有動畫的效果。

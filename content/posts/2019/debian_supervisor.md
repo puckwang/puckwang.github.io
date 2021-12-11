@@ -17,7 +17,8 @@ tags:
     - Laravel
     - Queue
     - Linux
-    
+aliases:
+    - /post/2019/debian_supervisor/
 ---
 
 最近為了讓在伺服器上的 Laravel Queue Worker 更方便去管理，不用每次重啟伺服器都要上去重新執行，

@@ -14,6 +14,8 @@ tags:
     - .net-core
     - 套件
     - database
+aliases:
+    - /post/2020/dotcore-use-fluentmigrator/
 ---
 
 Fluent Migrator 是一個 `.Net` 的資料庫遷移 (Migration) 框架套件，其他如 `Laravel` 及 `Ruby on Rails` 也有類似的套件。遷移就像是資料庫的版本控制一樣，提供 `Code-First` 的方式去管理資料庫結構，並可將其納入專案的版控中。

@@ -13,6 +13,8 @@ tags:
     - 攻擊手法
     - Netcat
     - 遠端執行指令攻擊
+aliases:
+    - /post/2021/bind_shell_and-reverse_shell_with_netcat/
 ---
 
 Bind Shell 與 Reverse Shell 是兩種常見的遠端執行指令的技術，讓攻擊者可以向目標主機發送並執行指令，常與檔案上傳漏洞 (File Upload Vulnerabilities) 搭配使用。
