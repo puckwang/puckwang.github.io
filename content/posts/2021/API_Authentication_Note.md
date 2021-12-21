@@ -90,13 +90,42 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlB1Y2s
 
 ## HMAC Signature (簽章驗證)
 
-在這個方式中，API 提供者一樣會隨機產生一個 API Key 給呼叫者，但在呼叫 API 時並不是直接帶 API Key，而是利用 API Key 並使用 HMAC 演算法計算後產生的 Signature，在 API 提供者收到請求後也用同樣的方式去產生 Signature，如果兩者相同就算是通過驗證。
+雜湊訊息鑑別碼 (Hash-based message authentication code，縮寫為 HMAC)，是使用密碼雜湊函式及一個金鑰來保證資料的完整性。
 
-計算 Signature 時的訊息格式可以自己訂，驗證時用同樣格式就可以。而 HMAC 演算法部分就要看原生語言支援了，大部分應該都有 MD5、SHA1、SHA256、SHA384...，建議用 SHA256 以後的可能比較安全，因為 MD5 和 SHA-1 已經不安全了。
+{{<mermaid>}}
+
+flowchart LR
+subgraph 發送者
+direction TB
+Message1[Message]-->Alg1[HMAC Algorithm]
+Alg1-->MAC1[MAC]
+end
+
+    Message1-->Data
+    MAC1-->Data
+
+    Data[Mesage & MAC]
+
+    subgraph 接收者
+        direction LR
+        Message2[Message]-->Alg2[HMAC Algorithm]
+        Alg2-->MAC2[MAC]-->eq
+        MAC-->eq
+        eq{=?}
+        eq -- "==" --> Success[Message 未被竄改]
+        eq -- != --> Failure[Message 已被竄改]
+    end
+    Data-->MAC
+    Data-->Message2[Message]
+
+
+{{</mermaid>}}
+
+在這個驗證方式中，呼叫 API 時並不是直接帶 API Key 在 Request 中，而是使用 HMAC 的演算法並將 API Key 作為計算時的金鑰，將指定的訊息計算後產生出 Signature，再把 Signature 帶在 Request 中。而 API 提供者收到 Request 後也用同樣的方式去產生 Signature，如果兩者相同就算是通過驗證。
+
+訊息格式會由 API 提供者去制定，而 HMAC 的演算法選擇部分就要看原生語言支援了，大部分應該都有 MD5、SHA1、SHA256、SHA384...，建議用 SHA256 以後的可能比較安全，因為 MD5 和 SHA-1 已經不安全了。另外是有些是會支援多個演算法給呼叫者選擇，而呼叫者就可以選擇一個比較方便使用的，並在後續紀錄於 Header 中讓 API 提供者知道是哪個演算法。
 
 為了避免被彩虹表攻擊及防止重送攻擊 (replay attack)，通常會在訊息裡面包含時間的資訊，而 API 提供者驗證時，就會規定這個時間必須在 XX 時間以內，以此限制這個簽章有效時間。但這樣沒有完全防止重送攻擊，只是縮短可能的時間而已，所以除了加入時間資訊外，還會加入其他資訊來達到更完善的防護。
-
-在 HMAC 演算法 方面，有些 API 提供者會支援多個演算法讓呼叫者選擇，而呼叫者就可以選擇一個比較方便產生的，並在後續紀錄於 Header 中讓 API 提供者知道是哪個演算法。
 
 ### 放置位置
 
@@ -158,7 +187,7 @@ Nonce 及 Timestamp 的時間限制是相同的，且大部分為 5 ~ 15 分鐘�
 
 這個方法雖然已大幅度降低重送攻擊的風險，比較麻煩的地方就是必須用 Memory Cache 或 Redis 去紀錄 Nonce 一定的時間來用於檢查有沒有重複，這就增加了一些執行成本。
 
-### 加入更多資料驗證來防止重送攻擊
+### 加入更多資料來防止重送攻擊
 
 除了使用 Nonce 以外，你也可以將 Query String、Body 甚至 Header 也都加入訊息作為驗證依據，讓攻擊者就算拿到 Signature 也只能執行相同的操作不能拿去執行其他操作，藉此縮小風險。
 
@@ -183,9 +212,9 @@ x-Signature: HMACSHA256("<ClientId><Method><URL><QueryString><Body><Timestamp><N
 
 在 **API 提供者** 部分，只要檢查以下有任意一個不通過，就代表不通過驗證：
 
-1. `Timestamp` 已超過指定時間範圍。
-2. `Nonce` 已重複。
-3. `Signature` 不相等。
+1. `Timestamp` 是否已超過指定時間範圍？
+2. `Nonce` 是否重複？
+3. `Signature` 是否相等？
 
 ### 相關實例
 
@@ -199,4 +228,6 @@ x-Signature: HMACSHA256("<ClientId><Method><URL><QueryString><Body><Timestamp><N
 ## 參考資料
 
 - https://jwt.io/introduction
+- https://zh.wikipedia.org/wiki/HMAC
 - https://security.stackexchange.com/questions/248212/rest-api-is-protected-by-hmac-based-authentication-what-does-including-url-path
+- https://dotnettutorials.net/lesson/hmac-authentication-web-api/
