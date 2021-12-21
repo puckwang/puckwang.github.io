@@ -178,7 +178,7 @@ Nonce 及 Timestamp 的時間限制是相同的，且大部分為 5 ~ 15 分鐘�
 x-ClientId: <ClientId>
 x-Timestamp: <Timestamp>
 x-Nonce: <Nonce>
-x-Signature: HMACSHA256("<ClientId><Timestamp><Nonce>", <ApiKey>) 
+x-Signature: HMACSHA256("<ClientId><Method><URL><QueryString><Body><Timestamp><Nonce>", <ApiKey>) 
 ```
 
 在 **API 提供者** 部分，只要檢查以下有任意一個不通過，就代表不通過驗證：
