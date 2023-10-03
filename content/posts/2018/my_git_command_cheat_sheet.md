@@ -252,7 +252,11 @@ git submodule update --recursive # 更新 submodule
 
 [core]
     #設定套用全域忽略的設定檔
-	excludesfile = /Users/xxxxxx/.gitignore_global  
+	excludesfile = /Users/xxxxxx/.gitignore_global
+
+[submodule]
+  # 執行 git pull 時，自動遞迴處理 Submodule
+  recurse = true
 ```
 
 `.gitignore_global`
