@@ -1,7 +1,7 @@
 ---
 id: "ed0bf4eb4e0e23eb47c116d0a9fd65d8c26cd7c4"
 title: "關於編碼 (Encoding)、加密 (Encryption)與雜湊 (Hashing)"
-description: "很常見到會把「編碼 (Encoding)」、「加密 (Encryption)」以及「雜湊 (Hashing)」這三個搞混的人。身為一個軟體開發者，這些基本的資料處理技術的定義應該要很清楚，否則開發出來的軟體就很常遇到資安問題。"
+description: "常有人會把「編碼 (Encoding)」、「加密 (Encryption)」以及「雜湊 (Hashing)」這三者混淆，甚至是誤用。作為軟體開發者，應該對這些基本的資料處理技術有簡單的理解，否則開發出來的軟體很容易出現資安問題。"
 date: 2024-05-19T12:14:49+08:00
 draft: false
 featureImage: "/images/hero-main.jpg"
@@ -15,7 +15,7 @@ tags:
   - Hashing
 ---
 
-常見有人會把「編碼 (Encoding)」、「加密 (Encryption)」以及「雜湊 (Hashing)」這三者混淆，或者是誤用。
+常有人會把「編碼 (Encoding)」、「加密 (Encryption)」以及「雜湊 (Hashing)」這三者混淆，甚至是誤用。
 
 作為軟體開發者，應該對這些基本的資料處理技術有簡單的理解，否則開發出來的軟體很容易出現資安問題。
 
