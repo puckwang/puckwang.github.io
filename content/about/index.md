@@ -35,11 +35,12 @@ I like to learn new things as well as technologies, and will spend a lot of time
 
 #### 領域
 
-* 系統設計
-* 前後端網站開發
+* 系統規劃設計
+* 全端網站
 * 程式設計
-* 網路設備維護
-* Linux 伺服器維護
+* 網路技術
+* Linux
+* Azure 雲端管理
 
 #### 技能
 
@@ -56,6 +57,11 @@ I like to learn new things as well as technologies, and will spend a lot of time
 * AngularJS
 * React Native
 * Microsoft Bot Framework
+* Jenkins
+* Git
+* Docker
+* Azure
+* Cisco Router & Switch
 
 #### 證照
 
@@ -69,18 +75,20 @@ I like to learn new things as well as technologies, and will spend a lot of time
 
 #### 經歷
 
-- **2021 / 02 ~** 叡揚資訊 **Program Analyst**
-- **2019 / 07 ~ 2021 / 02** 叡揚資訊 **Software Programmer**
-- **2018 / 07 ~ 2019 / 06** 叡揚資訊 **Associate Programmer** (實習生)
+- **2019 / 07 ~** 叡揚資訊
+- **2018 / 07 ~ 2019 / 06** 叡揚資訊 (實習生)
 - **2016 / 12 ~ 2020 / 08** HITCON ZeroDay **研發人員**
 - **2018 / 02 ~ 2018 / 12** 第七屆 MOPCON 場務組 **組長**
 - **2017 / 04 ~ 2017 / 12** 第六屆 MOPCON 場務組 **組員**
 - **2017 / 03 ~ 2017 / 05** 第一屆 高雄前端開發者大會 場務組 **組員**
 - **2016 / 07 ~ 2016 / 10** 第五屆 MOPCON 場務組 **組員**
+- **2014 / 09** 第 44 屆全國技能競賽 資訊與網路技術 **銀牌**
+- 國立高雄科技大學 電腦與網路通訊工程系
+- 高雄市立海青工商 資訊科
 
 #### Side-Project
 
 see [Side-Project](/projects/)
 
 #### 聯絡資訊
-- [me@puckwang.com](mailto:me@puckwang.com) (這個信箱是別名，寄過去會自動轉給我)
+- [me@puckwang.com](mailto:me@puckwang.com)
