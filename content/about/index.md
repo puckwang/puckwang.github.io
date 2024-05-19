@@ -83,7 +83,7 @@ I like to learn new things as well as technologies, and will spend a lot of time
 - **2017 / 03 ~ 2017 / 05** 第一屆 高雄前端開發者大會 場務組 **組員**
 - **2016 / 07 ~ 2016 / 10** 第五屆 MOPCON 場務組 **組員**
 - **2014 / 09** 第 44 屆全國技能競賽 資訊與網路技術 **銀牌**
-- 國立高雄科技大學 電腦與網路通訊工程系
+- 國立高雄科技大學 電腦與通訊工程系
 - 高雄市立海青工商 資訊科
 
 #### Side-Project
