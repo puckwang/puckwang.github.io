@@ -3,7 +3,7 @@ title = "Puck's Blog"
 author = "Puck Wang"
 copyright = "Copyright © 2017-2021, Puck Wang; all rights reserved."
 canonifyurls = true
-paginate = 15
+paginate = 10
 theme = "silhouette-hugo"
 
 pygmentsUseClasses = false
