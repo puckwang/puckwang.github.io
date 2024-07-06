@@ -5,6 +5,7 @@ copyright = "Copyright © 2017-2021, Puck Wang; all rights reserved."
 canonifyurls = true
 paginate = 10
 theme = "silhouette-hugo"
+enableRobotsTXT = true
 
 pygmentsUseClasses = false
 pygmentsCodeFences = true
