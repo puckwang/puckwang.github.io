@@ -4,5 +4,4 @@ Allow: /posts/
 Allow: /about/
 Allow: /projects/
 Disallow: /
-Noindex: /
 Sitemap: {{ .Site.BaseURL }}sitemap.xml
