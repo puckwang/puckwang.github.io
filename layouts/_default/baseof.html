@@ -9,11 +9,6 @@
         <meta property="og:image" content="{{ . | absURL }}" />
         {{ end }}
         {{ else }}
-        {{ with .Description }}
-            <meta name="description" content="{{- . -}}">
-        {{ else }}
-            <meta name="description" content="{{ .Site.Params.IntroDescription }}">
-        {{ end }}
 
         {{ end }}
         {{ template "_internal/opengraph.html" . }}
