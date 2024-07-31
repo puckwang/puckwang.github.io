@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Github Actions on Puck's Blog</title><link>https://blog.puckwang.com/tags/github-actions/</link><description>Recent content in Github Actions on Puck's Blog</description><generator>Hugo -- gohugo.io</generator><copyright>Copyright © 2017-2024, Puck Wang; all rights reserved.</copyright><lastBuildDate>Sat, 14 Mar 2020 21:22:30 +0800</lastBuildDate><atom:link href="https://blog.puckwang.com/tags/github-actions/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Github Actions 來自動化部署 Hugo 到 Github Pages</title><link>https://blog.puckwang.com/posts/2020/use-github-actions-deploy-hugo/</link><pubDate>Sat, 14 Mar 2020 21:22:30 +0800</pubDate><guid>https://blog.puckwang.com/posts/2020/use-github-actions-deploy-hugo/</guid><description>&lt;div class="mermaid" style="margin: 2rem 0">
+graph LR;
+A[Self] -->|Commit| B
+B[Github] --> C
+C[Github Actions] -->|Build/Deploy| D
+D[Github Pages]
+&lt;/div>
+&lt;p>本文說明如何利用 Github Actions 在將 Commit 推上 Github 後，自動化執行 Hugo 建置並部署結果到 Github Pages。&lt;/p></description></item></channel></rss>
