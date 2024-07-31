@@ -164,5 +164,17 @@ AlDente 能夠限制 MacBook 電池的充電上限，竟量不要讓電池被充
 
 - 官方網站：[https://apphousekitchen.com/](https://apphousekitchen.com/)
 - 安裝方式：使用 DMG 檔安裝
-- 
+
 {{< img src="/images/2024/AlDente.webp" width="500" caption="AlDente 畫面截圖" >}}
+
+# Ice - 功能列管理工具
+
+Ice 是一個專為 macOS 設計的工具，用於管理螢幕上方的功能列。
+
+它主要用於隱藏和顯示功能項目，以防止因為項目過多而被系統隱藏。
+
+- 官方網站：[https://icemenubar.app/](https://icemenubar.app/)
+- 安裝方式：使用 DMG 檔安裝
+
+{{< img src="/images/2024/ice.webp" width="700" caption="ice 官網範例圖" >}}
+
