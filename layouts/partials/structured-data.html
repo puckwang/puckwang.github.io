@@ -27,7 +27,7 @@
       "name": "{{ .Title | safeJS }}",
       "headline": "{{ .Title | safeJS }}",
       "alternativeHeadline": "{{ .Params.subtitle }}",
-      "description": "{{if .IsPage}}{{ .Summary | markdownify }}{{ else }}{{ if .Description }}{{ .Description | safeJS }}{{ end }}{{ end }}",
+      "description": "{{ .Description | safeJS }}",
       "inLanguage": "zh-TW",
       "isFamilyFriendly": "true",
       "mainEntityOfPage": {

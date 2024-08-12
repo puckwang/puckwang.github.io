@@ -11,6 +11,18 @@ categories:
   - 推薦
 tags:
   - MacOS
+  - JetBrains IDE
+  - iTerm2
+  - Joplin
+  - Postgres
+  - Keka
+  - ResponsivelyApp
+  - FileZilla
+  - Postman
+  - draw.io
+  - Raycast
+  - iStat Menus
+  - AlDente
 ---
 
 自 2017 年開始使用 macOS 至今已有一段時間，由於本人喜歡尋找工具來提高使用效率，因此可以推薦一些好用的 macOS 應用程式。
