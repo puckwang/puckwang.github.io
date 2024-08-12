@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>平行處理 on Puck's Blog</title><link>https://blog.puckwang.com/tags/%E5%B9%B3%E8%A1%8C%E8%99%95%E7%90%86/</link><description>Recent content in 平行處理 on Puck's Blog</description><generator>Hugo -- gohugo.io</generator><copyright>Copyright © 2017-2024, Puck Wang; all rights reserved.</copyright><lastBuildDate>Sat, 13 Mar 2021 11:47:08 +0800</lastBuildDate><atom:link href="https://blog.puckwang.com/tags/%E5%B9%B3%E8%A1%8C%E8%99%95%E7%90%86/index.xml" rel="self" type="application/rss+xml"/><item><title>Jenkins Pipeline Stages 平行處理的寫法</title><link>https://blog.puckwang.com/posts/2021/jenkins-pipeline-running-stages-in-parallel/</link><pubDate>Sat, 13 Mar 2021 11:47:08 +0800</pubDate><guid>https://blog.puckwang.com/posts/2021/jenkins-pipeline-running-stages-in-parallel/</guid><description>&lt;div class="image">
+&lt;figure class="figure">
+&lt;img src='https://blog.puckwang.com/images/2021/Jenkins-Pipeline-Parallel.png' class="figure-img img-fluid rounded"
+alt="Jenkins Pipeline Parallel Example"
+>
+&lt;figcaption class="figure-caption text-center">Jenkins Pipeline Parallel Example&lt;/figcaption>
+&lt;/figure>
+&lt;/div>
+&lt;p>Jenkins Pipeline 在執行 Stage 時，某些情況使用平行處理可以節省很多執行所需時間，本文將會介紹幾種平行處理的方法。&lt;/p>
+&lt;p>你可以在官方文件中看到 &lt;a href="https://www.jenkins.io/doc/book/pipeline/syntax/#parallel">Parallel&lt;/a> 及 &lt;a href="https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-matrix">Matrix&lt;/a> 兩種實現平行處理的方法，而我除了這兩個外還會在多介紹一個利用 &lt;code>Parallel&lt;/code> 去實現動態 Stage 的方法，這也是很常在網路上看到的問題，可以更靈活地去運用 Parallel。&lt;/p></description></item></channel></rss>

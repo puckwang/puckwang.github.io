@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Debug on Puck's Blog</title><link>https://blog.puckwang.com/categories/debug/</link><description>Recent content in Debug on Puck's Blog</description><generator>Hugo -- gohugo.io</generator><copyright>Copyright © 2017-2024, Puck Wang; all rights reserved.</copyright><lastBuildDate>Mon, 19 Apr 2021 03:34:36 +0800</lastBuildDate><atom:link href="https://blog.puckwang.com/categories/debug/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 Git Bisect 快速找到第一個有問題的 Commit</title><link>https://blog.puckwang.com/posts/2021/use-git-bisect-debug/</link><pubDate>Mon, 19 Apr 2021 03:34:36 +0800</pubDate><guid>https://blog.puckwang.com/posts/2021/use-git-bisect-debug/</guid><description>&lt;div class="image">
+&lt;figure class="figure">
+&lt;img src='https://blog.puckwang.com/images/2021/git-log.png' class="figure-img img-fluid rounded"
+alt="Git log"
+width="600"
+>
+&lt;figcaption class="figure-caption text-center">Git log&lt;/figcaption>
+&lt;/figure>
+&lt;/div>
+&lt;p>現在專案很常使用 Git 作為版本控制系統，所以在遇到 Bug 找不到是哪裡出錯時，可以藉由找出第一次出錯的 Commit 來找到問題原因。&lt;/p>
+&lt;p>但在大型專案中，全部 Commit 可能達上千筆，如果遇到很久沒發現的 Bug，就可能會發比較久的時間去找是哪個 Commit 出問題。&lt;/p>
+&lt;p>常見的可能會看 Commit 訊息來反推可能有問題的 Commit，或是用最笨的方法一個個往回找，這樣效率都不太好。&lt;/p>
+&lt;p>利用 Git 內建的 &lt;strong>Git Bisect&lt;/strong> 來使用二元搜尋的方式來找有問題的 Commit，就可以大大提升效率。&lt;/p></description></item></channel></rss>
