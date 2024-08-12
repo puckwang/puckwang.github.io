@@ -1,0 +1,77 @@
+{{ if or ( .IsHome ) ( not .Description ) -}}
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "{{ .Site.Title }}",
+    "url": "{{ .Site.BaseURL }}",
+    "description": "{{ .Site.Params.description }}",
+    "inLanguage": "zh-TW",
+    "thumbnailUrl": "{{ "images/favicon-128x128.png" | absURL }}",
+    "image": {
+      "@type": "ImageObject",
+      "@id": "{{ with .Param "featureImage"}}{{ . | absURL }}{{ else }}{{ "images/hero-main.jpg"| absURL }}{{ end }}",
+      "url": "{{ with .Param "featureImage"}}{{ . | absURL }}{{ else }}{{ "images/hero-main.jpg"| absURL }}{{ end }}",
+      "height": "429",
+      "width": "1267"
+    }
+  }
+  </script>
+{{ else if .IsPage }}
+  {{ if eq .Section "posts" }}
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "BlogPosting",
+      "articleSection": "{{ .Section }}",
+      "name": "{{ .Title | safeJS }}",
+      "headline": "{{ .Title | safeJS }}",
+      "alternativeHeadline": "{{ .Params.subtitle }}",
+      "description": "{{if .IsPage}}{{ .Summary | markdownify }}{{ else }}{{ if .Description }}{{ .Description | safeJS }}{{ end }}{{ end }}",
+      "inLanguage": "zh-TW",
+      "isFamilyFriendly": "true",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ .Permalink }}"
+      },
+      "author" : {
+        "@type": "Person",
+        "name": "{{ .Site.Params.Author }}",
+        "url": "{{ "about/" | absURL }}"
+      },
+      "creator" : {
+        "@type": "Person",
+        "name": "{{ .Site.Params.Author }}"
+      },
+      "accountablePerson" : {
+        "@type": "Person",
+        "name": "{{ .Site.Params.Author }}"
+      },
+      "copyrightHolder": "{{ .Site.Title }}",
+      "copyrightYear": "{{ .Date.Format "2006" }}",
+      "dateCreated": "{{ .Date.Format "2006-01-02T15:04:05.00Z" | safeHTML }}",
+      "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05.00Z" | safeHTML }}",
+      "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05.00Z" | safeHTML }}",
+      "publisher":{
+        "@type":"Organization",
+        "name": "{{ .Site.Title }}",
+        "url": "{{ .Site.BaseURL }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ "images/favicon-128x128.png" | absURL }}",
+          "width": "128",
+          "height": "128"
+        }
+      },
+    "image": {
+        "@type": "ImageObject",
+        "@id": "{{ with .Param "featureImage"}}{{ . | absURL }}{{ else }}{{ "images/hero-main.jpg"| absURL }}{{ end }}",
+        "url": "{{ with .Param "featureImage"}}{{ . | absURL }}{{ else }}{{ "images/hero-main.jpg"| absURL }}{{ end }}"
+    },
+    "url": "{{ .Permalink }}",
+    "wordCount": "{{ .WordCount }}",
+    "genre": [ {{ range $index, $tag := .Params.tags }}{{ if $index }}, {{ end }}"{{ $tag }}" {{ end }}]
+    }
+    </script>
+  {{ end }}
+{{ end }}
