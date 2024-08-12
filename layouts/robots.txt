@@ -1,6 +1,5 @@
 User-agent: *
-Allow: /posts/
-Allow: /about/
-Allow: /projects/
-Disallow: /
+Disallow: /tags/
+Disallow: /categories/
+Allow: /
 Sitemap: {{ .Site.BaseURL }}sitemap.xml
