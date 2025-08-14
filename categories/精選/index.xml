@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>精選 on Puck's Blog</title><link>https://blog.puckwang.com/categories/%E7%B2%BE%E9%81%B8/</link><description>Recent content in 精選 on Puck's Blog</description><generator>Hugo -- gohugo.io</generator><copyright>Copyright © 2017-2024, Puck Wang; all rights reserved.</copyright><lastBuildDate>Mon, 22 Feb 2021 18:08:07 +0800</lastBuildDate><atom:link href="https://blog.puckwang.com/categories/%E7%B2%BE%E9%81%B8/index.xml" rel="self" type="application/rss+xml"/><item><title>Don't Make Me Think：如何設計好網站 - 讀後筆記</title><link>https://blog.puckwang.com/posts/2021/dont-make-me-think-%E8%AE%80%E5%BE%8C%E7%AD%86%E8%A8%98/</link><pubDate>Mon, 22 Feb 2021 18:08:07 +0800</pubDate><guid>https://blog.puckwang.com/posts/2021/dont-make-me-think-%E8%AE%80%E5%BE%8C%E7%AD%86%E8%A8%98/</guid><description>&lt;div class="image">
+&lt;figure class="figure">
+&lt;img src='https://blog.puckwang.com/images/2021/DMMT-cover.png' class="figure-img img-fluid rounded"
+alt="Don&amp;#39;t Make Me Think 第三版封面"
+>
+&lt;figcaption class="figure-caption text-center">Don&amp;#39;t Make Me Think 第三版封面&lt;/figcaption>
+&lt;/figure>
+&lt;/div>
+&lt;p>近年一直想提升我的 UI / UX 技能，至少到用起來不會不適，而有人向我推薦這本入門的書，稍微查了一下目錄後，看起來內容滿不錯。也剛好遇到過年假期，就想說把它看完順便寫成重點筆記。&lt;/p>
+&lt;p>原本是想在網路買二手，但發現市立圖書館剛好有這本書 (第二版)，所以就改去圖書館借了，而上次到圖書館借書是五年前了。&lt;/p></description></item><item><title>使用 Github Actions 來自動化部署 Hugo 到 Github Pages</title><link>https://blog.puckwang.com/posts/2020/use-github-actions-deploy-hugo/</link><pubDate>Sat, 14 Mar 2020 21:22:30 +0800</pubDate><guid>https://blog.puckwang.com/posts/2020/use-github-actions-deploy-hugo/</guid><description>&lt;div class="mermaid" style="margin: 2rem 0">
+graph LR;
+A[Self] -->|Commit| B
+B[Github] --> C
+C[Github Actions] -->|Build/Deploy| D
+D[Github Pages]
+&lt;/div>
+&lt;p>本文說明如何利用 Github Actions 在將 Commit 推上 Github 後，自動化執行 Hugo 建置並部署結果到 Github Pages。&lt;/p></description></item><item><title>利用 GPG 簽署 git commit</title><link>https://blog.puckwang.com/posts/2019/sign_git_commit_with_gpg/</link><pubDate>Wed, 03 Apr 2019 16:04:42 +0800</pubDate><guid>https://blog.puckwang.com/posts/2019/sign_git_commit_with_gpg/</guid><description>&lt;p>GPG 全名為 GNU Privacy Guard 也可以簡稱為 GnuPG，他是一個加密軟體，但也可以用來驗證身份。&lt;/p>
+&lt;p>今天就要來將我們 git commit 加上 GPG 簽署，讓它 Push 到 Github 等代管平台後，別人可以確定這份 Commit 是你提交的。&lt;/p></description></item><item><title>Git 常用指令與設定筆記</title><link>https://blog.puckwang.com/posts/2018/my_git_command_cheat_sheet/</link><pubDate>Mon, 24 Dec 2018 12:59:13 +0800</pubDate><guid>https://blog.puckwang.com/posts/2018/my_git_command_cheat_sheet/</guid><description>&lt;p>使用 Git 也有一段時間了，除了常用的 commit, push 等常用基本指令外，還有許多很實用的指令，在這邊做一下紀錄。&lt;/p></description></item></channel></rss>
