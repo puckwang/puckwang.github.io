@@ -52,8 +52,8 @@ Submodule 與 Subtree 兩個都是可以將 `SubRepo` 加入 `SuperRepo` 的解�
 
 另外也可以用一句話的方式描述：
 
-- **Submodule**: 較易 push，較不易 pull，不佔空間，因為它只紀錄 HASH。
-- **Subtree**: 較不易 push，較易 pull，不佔空間，因為是副本。
+- **Submodule**: 較易 push，較不易 pull，只紀錄 HASH 所以不佔 remote 空間，使用者須注意額外指令。
+- **Subtree**: 較不易 push，較易 pull，副本存在於 remote 所以會佔空間，但使用者只需 clone SuperRepo 即可。
 
 <br>
 
@@ -323,9 +323,6 @@ git push
 git subtree push --prefix <folder path> <repo url> <ref>
 ```
 
-> 小技巧，可以將遠端倉庫 Url 設別名，就像 origin 那樣，就不用每次都要輸入那麼長。
-
-
 實際執行會是這樣
 ```bash
 $ git subtree add --prefix subtree git@github.com:puckwang/SubRepo.git c9c4974e887f2362cc9f7f9d4c90b19891969d67
@@ -342,6 +339,12 @@ From github.com:puckwang/SubRepo
 Added dir 'subtree'
 ```
 
+> 小技巧：可以將遠端倉庫 Url 設別名，就像 origin 那樣，就不用每次都要輸入那麼長。
+>
+> 在 SuperRepo 中：`git remote add -f subrepo <repo url>`
+>
+> 然後：`git subtree add --prefix <folder path> subrepo <ref>`
+
 使用 `git status` 後，會發現自動發了一個 Merge commit。
 ```bash
 $ git status
@@ -357,7 +360,7 @@ $ git status
 * 12b9412 2020-03-18 | Initial commit [Puck Wang]
 ```
 
-然後，就沒有了... 記得 `push`。
+然後，就沒有了... 記得 `push` SuperRepo。
 ```bash
 git push
 ```
@@ -473,11 +476,10 @@ git subtree push --prefix <folder path> <repo url> <ref>
 ## 結論
 在實際實用兩種方式後，我是比較喜歡 Submodule，因為他不佔空間，實際也就是另一個 Repository，而 Subtree 是整個併進來，就不太喜歡。
 
-但實際上要用那種方式，還是要視當下需求再決定。
+但實際上要用那種方式，還是要視當下需求再決定，例如為了方便使用者，Subtree 可能更好，但會苦了維護人員／貢獻者。
 
 ## 參考文章
 
 - https://stackoverflow.com/questions/17413493/create-a-submodule-repository-from-a-folder-and-keep-its-git-commit-history
-- http://yutin.logdown.com/posts/188306-git-subtree-total-addendum-library
-- https://codewinsarguments.co/2016/05/01/git-submodules-vs-git-subtrees/
 - https://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule/36593218#36593218
+- https://www.atlassian.com/git/tutorials/git-subtree
