@@ -1,0 +1,383 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta property="og:title" content="CSS Animation 入門筆記">
+<meta property="og:description" content="快速學會怎麼使用 CSS 做出動畫效果">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.puckwang.com/posts/2018/css_animation_getting_started/"><meta property="og:image" content="https://blog.puckwang.com/images/og_image.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2018-12-03T12:00:00+08:00">
+<meta property="article:modified_time" content="2021-12-12T06:36:48+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://blog.puckwang.com/images/og_image.png">
+<meta name=twitter:title content="CSS Animation 入門筆記">
+<meta name=twitter:description content="快速學會怎麼使用 CSS 做出動畫效果">
+<script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-4827510547436807",enable_page_level_ads:!0})</script>
+<title>
+CSS Animation 入門筆記 | Puck's Blog
+</title>
+<link rel=icon type=image/png href=https://blog.puckwang.com/images/favicon-128x128.png sizes="16x16 32x32 64x64 128x128">
+<link rel=canonical href=https://blog.puckwang.com/posts/2018/css_animation_getting_started/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Oswald:400" rel=stylesheet>
+<link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
+<link rel=stylesheet href=https://blog.puckwang.com/css/bundle.min.5d5448d1820d6ff5f132cb3fde480cdf60aecc3c374bacdc000c3e1bb275845c.css integrity="sha256-XVRI0YINb/XxMss/3kgM32CuzDw3S6zcAAw+G7J1hFw=">
+<link rel=me type=text/html href=//www.facebook.com/puckwang14>
+<link rel=me type=text/html href=//twitter.com/puckwang14>
+<link rel=me type=text/html href=//github.com/puckwang>
+<link rel=me type=text/html href=//linkedin.com/in/puckwang>
+<link rel=me type=text/html href="//stackoverflow.com/users/7699156/puckwang?tab=profile">
+<link rel=me type=text/html href=//g.dev/puckwang>
+<link rel=alternate type=application/rss+xml href=https://blog.puckwang.com/index.xml>
+<meta charset=utf-8>
+<meta name=author content="Puck Wang">
+<meta name=copyright content="Copyright © 2017-2024, Puck Wang; all rights reserved.">
+<meta name=description content="快速學會怎麼使用 CSS 做出動畫效果">
+<script>(function(b,d,e,a,g){b[a]=b[a]||[],b[a].push({'gtm.start':(new Date).getTime(),event:'gtm.js'});var f=d.getElementsByTagName(e)[0],c=d.createElement(e),h=a!='dataLayer'?'&l='+a:'';c.async=!0,c.src='https://www.googletagmanager.com/gtm.js?id='+g+h,f.parentNode.insertBefore(c,f)})(window,document,'script','dataLayer','GTM-T7955DN')</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","articleSection":"posts","name":"CSS Animation 入門筆記","headline":"CSS Animation 入門筆記","alternativeHeadline":"","description":"快速學會怎麼使用 CSS 做出動畫效果","inLanguage":"zh-TW","isFamilyFriendly":"true","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.puckwang.com\/posts\/2018\/css_animation_getting_started\/"},"author":{"@type":"Person","name":"Puck Wang","url":"https:\/\/blog.puckwang.com\/about\/"},"creator":{"@type":"Person","name":"Puck Wang"},"accountablePerson":{"@type":"Person","name":"Puck Wang"},"copyrightHolder":"Puck\u0027s Blog","copyrightYear":"2018","dateCreated":"2018-12-03T12:00:00.00Z","datePublished":"2018-12-03T12:00:00.00Z","dateModified":"2021-12-12T06:36:48.00Z","publisher":{"@type":"Organization","name":"Puck\u0027s Blog","url":"https:\/\/blog.puckwang.com\/","logo":{"@type":"ImageObject","url":"https:\/\/blog.puckwang.com\/images\/favicon-128x128.png","width":"128","height":"128"}},"image":{"@type":"ImageObject","@id":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg","url":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg"},"url":"https:\/\/blog.puckwang.com\/posts\/2018\/css_animation_getting_started\/","wordCount":"298","genre":["CSS3","Front-end","Web"]}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7955DN" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript>
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark py-1 top-nav">
+<div class=container>
+<a class="navbar-brand pr-2" href=https://blog.puckwang.com/>
+<img src=https://blog.puckwang.com/images/logo.png width=40 height=40 alt>
+PUCK'S BLOG
+</a>
+<button class="navbar-toggler collapsed" type=button data-toggle=collapse data-target=#navbarCollapse aria-controls=navbarCollapse aria-expanded=false aria-label="Toggle navigation">
+<i class="fas fa-bars"></i>
+</button>
+<div class="navbar-collapse collapse" id=navbarCollapse>
+<ul class="navbar-nav mr-auto">
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/archives/>
+Archives
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/categories/>
+Categories
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/tags/>
+Tags
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/projects/>
+MyProjects
+</a>
+</li>
+</ul>
+<div class=social-icons>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</nav>
+<style type=text/css>.feature-image{background-image:linear-gradient( rgba(0,0,0,.15),rgba(0,0,0,.15) ),url(https://blog.puckwang.com/images/hero-main.jpg);height:500px}.feature-image-text{margin-top:20px}@media(min-width:1200px){.feature-image{background-position:0 30%}}@media(max-width:768px){.feature-image{height:250px;background-position:0 0}}</style>
+<header class=feature-image>
+<div class=feature-image-text>
+</div>
+</header>
+<div class=main>
+<div class="container mt-4 post">
+<h1>CSS Animation 入門筆記</h1>
+<div class=mb-3>
+<small>
+<i class="fas fa-user-edit"></i>&nbsp;作者<strong> Puck Wang</strong>
+| <i class="far fa-calendar-alt"></i>&nbsp;建立於 2018-12-03 12:00&nbsp;
+| <i class="far fa-calendar-alt"></i>&nbsp;更新於 2021-12-12 06:36&nbsp;
+| <i class="fas fa-code-branch"></i>&nbsp;版本 bfd595b&nbsp;
+| <i class="fa fa-folder" title=Tags aria-hidden=true></i>&nbsp;分類: <a href=https://blog.puckwang.com/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC/>軟體開發</a>
+| <i class="fa fa-tags" title=Tags aria-hidden=true></i>&nbsp;標籤: <a href=https://blog.puckwang.com/tags/css3/>CSS3</a>, <a href=https://blog.puckwang.com/tags/front-end/>Front-end</a>, <a href=https://blog.puckwang.com/tags/web/>Web</a>
+</small>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2018%2fcss_animation_getting_started%2f&text=CSS%20Animation%20%e5%85%a5%e9%96%80%e7%ad%86%e8%a8%98&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2018%2fcss_animation_getting_started%2f&t=CSS%20Animation%20%e5%85%a5%e9%96%80%e7%ad%86%e8%a8%98" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2018%2fcss_animation_getting_started%2f&title=CSS%20Animation%20%e5%85%a5%e9%96%80%e7%ad%86%e8%a8%98&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div class="mt-4 mb-5 main-content">
+<p>利用 CSS 動畫，可不必使用 Javascript 或是 Git，就能讓 HTML 的元素有動畫的效果。</p>
+<p>這此是為了製作 Loading 的圖示，才會來研究 CSS 動畫。</p>
+<h2 id=keyframes>@keyframes</h2>
+<p>藉由 CSS 動畫可以自動改變樣式，而 <code>@keyframes</code> 就是在定義樣式該怎麼變化。</p>
+<p>下面這個範例是讓 <code>background-color</code> 從紅色變黃色最後再回到紅色，且這個過程會是連續的
+，也就是所看到顏色的變化會是紅 -> 橘 -> 黃 -> 紅。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-css data-lang=css>@<span style=color:#00f>keyframes</span> example {
+    from {<span style=color:#00f>background-color</span>: <span style=color:#00f>red</span>;}
+    to {<span style=color:#00f>background-color</span>: <span style=color:#00f>yellow</span>;}
+}
+</code></pre></div><p><a href="https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation1">W3Schools Demo</a></p>
+<p>另一種形式的 <code>@keyframes</code>，可以使用百分比來表示。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-css data-lang=css>@<span style=color:#00f>keyframes</span> example {
+    0%   {<span style=color:#00f>background-color</span>: <span style=color:#00f>red</span>;}
+    25%  {<span style=color:#00f>background-color</span>: <span style=color:#00f>yellow</span>;}
+    50%  {<span style=color:#00f>background-color</span>: <span style=color:#00f>blue</span>;}
+    100% {<span style=color:#00f>background-color</span>: <span style=color:#00f>green</span>;}
+}
+</code></pre></div><p><a href="https://www.w3schools.com/css/tryit.asp?filename=trycss3_animation2">W3Schools Demo</a></p>
+<blockquote>
+<p>不是全部的 CSS 屬性都是可動畫化的，可以到這邊查看有哪些可以用。
+<a href=https://www.w3schools.com/cssref/css_animatable.asp>https://www.w3schools.com/cssref/css_animatable.asp</a></p>
+</blockquote>
+<h2 id=animation-語法>animation 語法</h2>
+<p>定義完 <code>@keyframes</code> 後就可以使用 <code>animation</code> 套用動畫囉！</p>
+<p>語法：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>animation: name duration timing-function delay iteration-count direction fill-mode play-state;
+</code></pre></div><p><code>animation</code> 其實是一堆屬性的縮寫，其代表如下：</p>
+<ul>
+<li><strong>animation-name</strong>: 指定 <code>@keyframes</code> 的名稱。</li>
+<li><strong>animation-duration</strong>: 指定一次循環的週期，可以是秒(s)，或毫秒(ms)。</li>
+<li><strong>animation-timing-function</strong>: 指定動畫的速度，選項有以下幾個。<a href="https://www.w3schools.com/cssref/playit.asp?filename=playcss_animation-timing-function&preval=linear">W3Schools Demo</a>
+<ul>
+<li>linear - 開始至結束速度都一樣</li>
+<li>ease - 一般 -> 快 -> 慢</li>
+<li>ease-in - 慢 -> 快</li>
+<li>ease-out - 快 -> 慢</li>
+<li>ease-in-out - 慢 -> 快 -> 慢</li>
+<li>cubic-bezier - 使用貝茲曲線去定義 (<a href=http://cubic-bezier.com/#.09,.87,1,.58>工具</a>)</li>
+</ul>
+</li>
+<li><strong>animation-delay</strong>: 指定動畫開始前要延遲的時間，可以是秒(s)，或毫秒(ms)。</li>
+<li><strong>animation-iteration-count</strong>: 指定動畫的執行次數，可填入數字(預設1)或infinite(無窮)</li>
+<li><strong>animation-direction</strong>: 指定動畫的方向，選項有以下幾個。<a href="https://www.w3schools.com/cssref/playit.asp?filename=playcss_animation-direction&preval=normal">W3Schools Demo</a>
+<ul>
+<li>normal: 預設值，正常方向</li>
+<li>reverse: 反方向</li>
+<li>alternate: 正向 -> 反向</li>
+<li>alternate-reverse: 反向 -> 正向</li>
+</ul>
+</li>
+<li><strong>animation-fill-mode</strong>: 指定動畫開始前與結束後的樣式，選項有以下幾個。
+<ul>
+<li>none: 預設值，無。</li>
+<li>forwards: 元素將保留最後一個 <code>@keyframes</code> 的樣式，其最後一個取決於 <code>animation-iteration-count</code> 與 <code>animation-direction</code></li>
+<li>backwards: 元素將取得第一個 <code>@keyframes</code> 的樣式，延遲期間也會套用，其第一個取決於 <code>animation-direction</code></li>
+<li>both: 套用上述兩個規則</li>
+</ul>
+</li>
+<li><strong>animation-play-state</strong>: 指定動畫當下的播放狀態，可以是 paused 或 running。</li>
+</ul>
+<p>推薦工具：http://animista.net/play/basic/scale-up</p>
+<p>可以先用這個工具試過各種動畫，在作微調。</p>
+<h2 id=demo>Demo</h2>
+<p>用簡單的 CSS 動畫語法，就可以做出不錯的 Loading 圖示。</p>
+<style>.rotate-scale-down{animation:rotate-scale-down 1.5s infinite linear both;background-color:#19dcea;color:#fff;font-size:50px;line-height:150px;text-align:center;width:150px;height:150px;border-radius:15px}@keyframes rotate-scale-down{0%{transform:scale(1)rotateZ(0)}25%{transform:scale(.5)rotateZ(80deg)}50%{transform:scale(1)rotateZ(160deg)}75%{transform:scale(1)rotateZ(0)}100%{transform:scale(1)rotateZ(0)}}</style>
+<div class=rotate-scale-down>Puck</div>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html>&lt;style&gt;
+.<span style=color:#2b91af>rotate-scale-down</span> {
+	<span style=color:#00f>animation</span>: rotate-scale-down 1.5<span style=color:#2b91af>s</span> <span style=color:#00f>infinite</span> <span style=color:#00f>linear</span> <span style=color:#00f>both</span>;
+	<span style=color:#00f>background-color</span>: #19dcea;
+	<span style=color:#00f>color</span>: #FFF;
+    <span style=color:#00f>font-size</span>: 50<span style=color:#2b91af>px</span>;
+    <span style=color:#00f>line-height</span>: 150<span style=color:#2b91af>px</span>;
+    <span style=color:#00f>text-align</span>: <span style=color:#00f>center</span>;
+    <span style=color:#00f>width</span>: 150<span style=color:#2b91af>px</span>;
+    <span style=color:#00f>height</span>: 150<span style=color:#2b91af>px</span>;
+    <span style=color:#00f>border-radius</span>: 15<span style=color:#2b91af>px</span>;
+}
+@<span style=color:#00f>keyframes</span> rotate-scale-down {
+    0% {
+        <span style=color:#00f>transform</span>: scale(1) rotateZ(0);
+      }
+    25% {
+        <span style=color:#00f>transform</span>: scale(0.5) rotateZ(80<span style=color:#2b91af>deg</span>);
+    }
+    50% {
+        <span style=color:#00f>transform</span>: scale(1) rotateZ(160<span style=color:#2b91af>deg</span>);
+    }
+    75% {
+        <span style=color:#00f>transform</span>: scale(1) rotateZ(0);
+    }
+    100% {
+        <span style=color:#00f>transform</span>: scale(1) rotateZ(0);
+    }
+}
+&lt;/style&gt;
+
+&lt;div class=<span style=color:#a31515>&#34;rotate-scale-down&#34;</span>&gt;Puck&lt;/div&gt;
+</code></pre></div><p>參考文件：https://www.w3schools.com/cssref/css3_pr_animation.asp</p>
+<div>
+<br>
+<h3>
+感謝閱讀！
+</h3>
+<div>
+喜歡這篇文章或是有幫助到你嗎？ 歡迎分享給你的朋友！
+</div>
+<br>
+<div>
+有任何問題、回饋或您認為我會感興趣的任何東西嗎？ 請在下面發表評論，或者是<a href=https://blog.puckwang.com/about target=_blank>直接聯絡我</a>。
+</div>
+<br>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2018%2fcss_animation_getting_started%2f&text=CSS%20Animation%20%e5%85%a5%e9%96%80%e7%ad%86%e8%a8%98&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2018%2fcss_animation_getting_started%2f&t=CSS%20Animation%20%e5%85%a5%e9%96%80%e7%ad%86%e8%a8%98" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2018%2fcss_animation_getting_started%2f&title=CSS%20Animation%20%e5%85%a5%e9%96%80%e7%ad%86%e8%a8%98&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div>
+<hr>
+<div class="p-4 row justify-content-center" style=align-items:center>
+<div class=col-2>
+<img src=https://blog.puckwang.com/images/logo.png alt="Puck Wang" class="img-fluid rounded-circle" width=150>
+</div>
+<div class=col-8 style=vertical-align:middle>
+<h4>
+Puck Wang
+</h4>
+<p>
+Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網站開發者，常使用 .Net 和 React 進行開發，專注於架構研究，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。
+</p>
+<p>
+更多關於我的訊息，可至關於<a href=https://blog.puckwang.com/about target=_blank>關於</a>頁面。
+</p>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar d-print-none d-none d-xl-block">
+<div id=toc>
+<h2>目錄</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#keyframes>@keyframes</a></li>
+<li><a href=#animation-語法>animation 語法</a></li>
+<li><a href=#demo>Demo</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<footer class="mt-auto footer d-print-none">
+<div class=container-fluid>
+<div class="row justify-content-center">
+<div class="col-md-4 col-xl-3">
+<h5>Copyright © 2017-2024, Puck Wang; all rights reserved.</h5>
+Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with.
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>Disclaimer</h5>
+See <a href=https://blog.puckwang.com/other/disclaimer/>disclaimer</a> of <a href=https://blog.puckwang.com>https://blog.puckwang.com/</a>
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>About This Site</h5>
+This blog was created using the <a href=https://gohugo.io/>Hugo</a> static site generator, using
+<a href=https://getbootstrap.com/>Bootstrap</a>, using the Silhouette Hugo theme, created by
+<a href=https://www.mattbutton.com>Matt Button</a>
+</div>
+</div>
+<hr>
+<div class="d-flex justify-content-center icons">
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</footer>
+<script src=https://code.jquery.com/jquery-3.3.1.slim.min.js integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script>
+<script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script>
+<script src=https://unpkg.com/mermaid@8.13.5/dist/mermaid.min.js></script>
+</body>
+<style>.zoom-in-thumbnail{visibility:hidden;position:fixed;z-index:100000;box-sizing:border-box;border:5px solid #fff;border-radius:3px;box-shadow:0 0 2px rgba(0,0,0,.8);opacity:0;pointer-events:none;transition-duration:.3s;transition-delay:.1s;transition-property:opacity}.zoom-in-thumbnail-img{background-repeat:no-repeat;background-size:contain}</style>
+<script>const root=document.documentElement;$(function(){mermaid.initialize({startOnLoad:!0}),$(".main-content img, .post img").each(function(){this.complete?generateImageDiv(this):$(this).on("load",function(){generateImageDiv(this)}),this.style.cursor="pointer",$(this).on("mousemove",function(d){let b=d.clientX,c=d.clientY,a;$(this).next().width()>=$(this).next().height()?innerHeight-c<=$(this).next().height()+50?a=getShowXY(this,"top",b,c):a=getShowXY(this,"bottom",b,c):innerWidth-b<=$(this).next().width()+50?a=getShowXY(this,"left",b,c):a=getShowXY(this,"right",b,c),root.style.setProperty("--zoom-image-x",a.x+250+"px"),root.style.setProperty("--zoom-image-y",a.y+"px")}),$(this).on("click",function(a){window.open(this.src)})})});function getShowXY(d,e,a,b){let c=$(d).next();switch(e){case'top':a-=c.width()/2,b-=c.height(),b-=25;break;case'bottom':a-=c.width()/2,b+=25;break;case'right':b-=c.height()/2,a+=25;break;case'left':a-=c.width(),b-=c.height()/2,a-=25;break}return{x:a,y:b}}function generateImageDiv(c){var e=screen.width*.6,f=screen.height*.5,d=0,a=c.naturalHeight,b=c.naturalWidth,g;b>e&&(d=e/b,b=e,a=a*d),a>f&&(d=f/a,a=f,b=b*d),g="<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-color: white; background-image:url('"+c.src+"'); height: "+a+"px; width: "+b+'px;"></div></div>',$(c).after(g)}</script>
+</html>

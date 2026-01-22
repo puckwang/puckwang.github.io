@@ -1,0 +1,456 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta property="og:title" content="Web Api 驗證方式筆記">
+<meta property="og:description" content="這是一篇紀錄關於 API 驗證的筆記，內容為我有碰過的 API 驗證方式。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.puckwang.com/posts/2021/api_authentication_note/"><meta property="og:image" content="https://blog.puckwang.com/images/og_image.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-12-19T21:40:58+08:00">
+<meta property="article:modified_time" content="2021-12-21T13:04:26+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://blog.puckwang.com/images/og_image.png">
+<meta name=twitter:title content="Web Api 驗證方式筆記">
+<meta name=twitter:description content="這是一篇紀錄關於 API 驗證的筆記，內容為我有碰過的 API 驗證方式。">
+<script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-4827510547436807",enable_page_level_ads:!0})</script>
+<title>
+Web Api 驗證方式筆記 | Puck's Blog
+</title>
+<link rel=icon type=image/png href=https://blog.puckwang.com/images/favicon-128x128.png sizes="16x16 32x32 64x64 128x128">
+<link rel=canonical href=https://blog.puckwang.com/posts/2021/api_authentication_note/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Oswald:400" rel=stylesheet>
+<link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
+<link rel=stylesheet href=https://blog.puckwang.com/css/bundle.min.5d5448d1820d6ff5f132cb3fde480cdf60aecc3c374bacdc000c3e1bb275845c.css integrity="sha256-XVRI0YINb/XxMss/3kgM32CuzDw3S6zcAAw+G7J1hFw=">
+<link rel=me type=text/html href=//www.facebook.com/puckwang14>
+<link rel=me type=text/html href=//twitter.com/puckwang14>
+<link rel=me type=text/html href=//github.com/puckwang>
+<link rel=me type=text/html href=//linkedin.com/in/puckwang>
+<link rel=me type=text/html href="//stackoverflow.com/users/7699156/puckwang?tab=profile">
+<link rel=me type=text/html href=//g.dev/puckwang>
+<link rel=alternate type=application/rss+xml href=https://blog.puckwang.com/index.xml>
+<meta charset=utf-8>
+<meta name=author content="Puck Wang">
+<meta name=copyright content="Copyright © 2017-2024, Puck Wang; all rights reserved.">
+<meta name=description content="這是一篇紀錄關於 API 驗證的筆記，內容為我有碰過的 API 驗證方式。">
+<script>(function(b,d,e,a,g){b[a]=b[a]||[],b[a].push({'gtm.start':(new Date).getTime(),event:'gtm.js'});var f=d.getElementsByTagName(e)[0],c=d.createElement(e),h=a!='dataLayer'?'&l='+a:'';c.async=!0,c.src='https://www.googletagmanager.com/gtm.js?id='+g+h,f.parentNode.insertBefore(c,f)})(window,document,'script','dataLayer','GTM-T7955DN')</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","articleSection":"posts","name":"Web Api 驗證方式筆記","headline":"Web Api 驗證方式筆記","alternativeHeadline":"","description":"這是一篇紀錄關於 API 驗證的筆記，內容為我有碰過的 API 驗證方式。","inLanguage":"zh-TW","isFamilyFriendly":"true","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.puckwang.com\/posts\/2021\/api_authentication_note\/"},"author":{"@type":"Person","name":"Puck Wang","url":"https:\/\/blog.puckwang.com\/about\/"},"creator":{"@type":"Person","name":"Puck Wang"},"accountablePerson":{"@type":"Person","name":"Puck Wang"},"copyrightHolder":"Puck\u0027s Blog","copyrightYear":"2021","dateCreated":"2021-12-19T21:40:58.00Z","datePublished":"2021-12-19T21:40:58.00Z","dateModified":"2021-12-21T13:04:26.00Z","publisher":{"@type":"Organization","name":"Puck\u0027s Blog","url":"https:\/\/blog.puckwang.com\/","logo":{"@type":"ImageObject","url":"https:\/\/blog.puckwang.com\/images\/favicon-128x128.png","width":"128","height":"128"}},"image":{"@type":"ImageObject","@id":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg","url":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg"},"url":"https:\/\/blog.puckwang.com\/posts\/2021\/api_authentication_note\/","wordCount":"525","genre":["Api"]}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7955DN" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript>
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark py-1 top-nav">
+<div class=container>
+<a class="navbar-brand pr-2" href=https://blog.puckwang.com/>
+<img src=https://blog.puckwang.com/images/logo.png width=40 height=40 alt>
+PUCK'S BLOG
+</a>
+<button class="navbar-toggler collapsed" type=button data-toggle=collapse data-target=#navbarCollapse aria-controls=navbarCollapse aria-expanded=false aria-label="Toggle navigation">
+<i class="fas fa-bars"></i>
+</button>
+<div class="navbar-collapse collapse" id=navbarCollapse>
+<ul class="navbar-nav mr-auto">
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/archives/>
+Archives
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/categories/>
+Categories
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/tags/>
+Tags
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/projects/>
+MyProjects
+</a>
+</li>
+</ul>
+<div class=social-icons>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</nav>
+<style type=text/css>.feature-image{background-image:linear-gradient( rgba(0,0,0,.15),rgba(0,0,0,.15) ),url(https://blog.puckwang.com/images/hero-main.jpg);height:500px}.feature-image-text{margin-top:20px}@media(min-width:1200px){.feature-image{background-position:0 30%}}@media(max-width:768px){.feature-image{height:250px;background-position:0 0}}</style>
+<header class=feature-image>
+<div class=feature-image-text>
+</div>
+</header>
+<div class=main>
+<div class="container mt-4 post">
+<h1>Web Api 驗證方式筆記</h1>
+<div class=mb-3>
+<small>
+<i class="fas fa-user-edit"></i>&nbsp;作者<strong> Puck Wang</strong>
+| <i class="far fa-calendar-alt"></i>&nbsp;建立於 2021-12-19 21:40&nbsp;
+| <i class="far fa-calendar-alt"></i>&nbsp;更新於 2021-12-21 13:04&nbsp;
+| <i class="fas fa-code-branch"></i>&nbsp;版本 bdb5b98&nbsp;
+| <i class="fa fa-folder" title=Tags aria-hidden=true></i>&nbsp;分類: <a href=https://blog.puckwang.com/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC/>軟體開發</a>, <a href=https://blog.puckwang.com/categories/%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8/>資訊安全</a>
+| <i class="fa fa-tags" title=Tags aria-hidden=true></i>&nbsp;標籤: <a href=https://blog.puckwang.com/tags/api/>Api</a>
+</small>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fapi_authentication_note%2f&text=Web%20Api%20%e9%a9%97%e8%ad%89%e6%96%b9%e5%bc%8f%e7%ad%86%e8%a8%98&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fapi_authentication_note%2f&t=Web%20Api%20%e9%a9%97%e8%ad%89%e6%96%b9%e5%bc%8f%e7%ad%86%e8%a8%98" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fapi_authentication_note%2f&title=Web%20Api%20%e9%a9%97%e8%ad%89%e6%96%b9%e5%bc%8f%e7%ad%86%e8%a8%98&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div class="mt-4 mb-5 main-content">
+<p>非公開的 Web API 一定會進行驗證來確保呼叫者是允許使用的，在這篇文章中將紀錄我遇過的幾種驗證方式。</p>
+<h2 id=api-key>API Key</h2>
+<p>這是最簡單也最最方便的一種方式，它是由 API 提供者隨機產生一個字串給呼叫者，而呼叫者送出的 Request 必須包含這個隨機字串讓 API 提供者可以驗證其身份，而這個用於驗證的隨機字串就叫做 API Key。</p>
+<p>雖然可以只使用 Key 就知道是哪個呼叫者呼叫的，但也有些 API 提供者也會要求也要多帶 Client Id 進行驗證。</p>
+<h3 id=放置位置>放置位置</h3>
+<p>呼叫時要如何帶給 API 提供者，一般是由 API 提供者去指定一個位置，有些會放在 Header 或 Query String 中，也有少部分直接放在 Body 裡面。</p>
+<ul>
+<li><strong>放在 Header 中</strong>：最常見的一種方式，有的會直接用標準的 Header 名稱 (如 <code>Authorization</code>)，或是自己指定一個名稱 (如 <code>X-Api-Key</code>)。</li>
+<li><strong>放在 Query String 中</strong>：此種方式就是直接將 Key 帶在 Url 的 Query String 中，如 <code>?key=&lt;API_KEY></code>，但 Web Server 那邊 Log 可能要調整避免儲存到 Key。</li>
+<li><strong>放在 Body 中</strong>：這一種我比較少看過，就是直接把 Key 包含在 Body 裡面。</li>
+</ul>
+<p>相關實例：</p>
+<ul>
+<li><a href=https://apidocs.imgur.com/#authorization-and-oauth>Imgur</a>：使用公共資料相關的 API，只需將 ClientId 帶在 Header 的 <code>Authorization</code> 中即可。</li>
+<li><a href="https://cloud.google.com/docs/authentication/api-keys?hl=zh-tw#using_an_api_key">Google Cloud APIs</a>：部分允許使用 API Key 的 API 只需將 Key 帶在 Query String 中即可，如 <code>?key=&lt;API_KEY></code>。</li>
+</ul>
+<h3 id=在-server-端只儲存-hash-結果>在 Server 端只儲存 Hash 結果</h3>
+<p>API Key 就跟我們一般使用者密碼一樣是用於驗證身份，那我們同樣也可以把儲存密碼的方式拿來儲存 API Key。</p>
+<p>你可以只儲存經過 Hash 的值，然後在驗證時用 Hash 的值來比對而非原始的值。如果需要提示呼叫者目前的 Key，則可以只儲存前幾個字元供識別即可。</p>
+<p>當然這不是一個一定要做的事，因為就算 API Key 外洩也只能在同一個 API 提供者使用，不像密碼可能會出現多個網站共用的情性。</p>
+<h2 id=api-token>API Token</h2>
+<p>API Token 與 API Key 相似，跟 Key 的差別在 Token 可能是經過編碼或加密產生的，格式可能是公開的格式 (JWT) 或是只有他們自己知道的格式。我們可以把它視為一個由 API 提供者所發的身份證，呼叫者呼叫 API 時或附上它，而 API 提供者可直接透過它知道呼叫者的身份及權限等資訊。</p>
+<p>通常在 OAuth 通過驗證取得 access token 時，這個 token 就是以 JWT 的方式產生。</p>
+<h3 id=json-web-tokens-jwt>JSON Web Tokens (JWT)</h3>
+<p>JWT 是由 Header、Payload 及 Signature 三個部分組成，彼此間使用 <code>.</code> 連結：</p>
+<ul>
+<li><strong>Header</strong>：JWT 第一個部分，用來標示類型為 JWT 及紀錄簽章演算法的類型 (SHA256, RSA&mldr;)，是使用 Base64 編碼的 JSON 格式。</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+  &#34;alg&#34;: <span style=color:#a31515>&#34;HS256&#34;</span>,
+  &#34;typ&#34;: <span style=color:#a31515>&#34;JWT&#34;</span>
+}
+</code></pre></div><ul>
+<li><strong>Payload</strong>：JWT 第二個部分，用來存放資料的地方，可以 Claim 名稱可以用<a href=https://www.iana.org/assignments/jwt/jwt.xhtml>標準</a>的也可以自訂，一樣也是使用 Base64 編碼的 JSON 格式。</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+    &#34;sub&#34;: <span style=color:#a31515>&#34;1234567890&#34;</span>,
+    &#34;name&#34;: <span style=color:#a31515>&#34;Puck Wang&#34;</span>,
+    &#34;admin&#34;: <span style=color:#00f>true</span>
+}
+</code></pre></div><ul>
+<li><strong>Signature</strong>：JWT 第三個部分，是一個訊息的簽章，用於檢查前兩部分是否有被修改。</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>HMACSHA256(
+  base64UrlEncode(header) + <span style=color:#a31515>&#34;.&#34;</span> + base64UrlEncode(payload),
+  secret
+)
+</code></pre></div><p>將三個部分組合起來後就會像這樣</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlB1Y2sgV2FuZyIsImFkbWluIjp0cnVlfQ.KcGicYB-emFBnUrXIViwDzCML6FB8W8QfD1lttRV0t4
+</code></pre></div><h2 id=hmac-signature-簽章驗證>HMAC Signature (簽章驗證)</h2>
+<p>雜湊訊息鑑別碼 (Hash-based message authentication code，縮寫為 HMAC)，是使用密碼雜湊函式及一個金鑰來保證資料的完整性。</p>
+<div class=mermaid style="margin:2rem 0">
+flowchart LR
+subgraph 發送者
+direction TB
+Message1[Message]-->Alg1[HMAC Algorithm]
+Alg1-->MAC1[MAC]
+end
+Message1-->Data
+MAC1-->Data
+Data[Mesage & MAC]
+
+    subgraph 接收者
+    direction LR
+Message2[Message]-->Alg2[HMAC Algorithm]
+Alg2-->MAC2[MAC]-->eq
+MAC-->eq
+eq{=?}
+eq -- "==" --> Success[Message 未被竄改]
+eq -- != --> Failure[Message 已被竄改]
+end
+Data-->MAC
+Data-->Message2[Message]
+</div>
+<p>在這個驗證方式中，呼叫 API 時並不是直接帶 API Key 在 Request 中，而是使用 HMAC 的演算法並將 API Key 作為計算時的金鑰，將指定的訊息計算後產生出 Signature，再把 Signature 帶在 Request 中。而 API 提供者收到 Request 後也用同樣的方式去產生 Signature，如果兩者相同就算是通過驗證。</p>
+<p>訊息格式會由 API 提供者去制定，而 HMAC 的演算法選擇部分就要看原生語言支援了，大部分應該都有 MD5、SHA1、SHA256、SHA384&mldr;，建議用 SHA256 以後的可能比較安全，因為 MD5 和 SHA-1 已經不安全了。另外是有些是會支援多個演算法給呼叫者選擇，而呼叫者就可以選擇一個比較方便使用的，並在後續紀錄於 Header 中讓 API 提供者知道是哪個演算法。</p>
+<p>為了避免被彩虹表攻擊及防止重送攻擊 (replay attack)，通常會在訊息裡面包含時間的資訊，而 API 提供者驗證時，就會規定這個時間必須在 XX 時間以內，以此限制這個簽章有效時間。但這樣沒有完全防止重送攻擊，只是縮短可能的時間而已，所以除了加入時間資訊外，還會加入其他資訊來達到更完善的防護。</p>
+<h3 id=放置位置-1>放置位置</h3>
+<p>比較常見的做法是放在 Header 中，但有些會直接放在 <code>Authorization</code>，有些會用自訂 Header 來放。</p>
+<ul>
+<li>使用 <code>Authorization</code> 的範例</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>Authorization: HMAC-SHA256 ClientId=&lt;ClientId&gt;&amp;Timestamp=&lt;Timestamp&gt;&amp;Signature=&lt;Signature&gt;
+</code></pre></div><ul>
+<li>使用自訂 Header 的範例</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>x-ClientId: &lt;ClientId&gt;
+x-Timestamp: &lt;Timestamp&gt;
+x-Signature: &lt;Signature&gt;
+</code></pre></div><h3 id=最簡單的一個範例>最簡單的一個範例</h3>
+<p>在這個範例中，會需要用到的資料：</p>
+<ul>
+<li><code>ClientId</code>：識別呼叫者身份。</li>
+<li><code>Timestamp</code>：發送 Request 當下時間搓 (Unix timestamp)，不可與伺服器時間相差 XX 時間。</li>
+</ul>
+<p>首先將它們依照指定格式組成一個字串後，接下來拿 <code>API Key</code> 作為 Key 使用 HMAC-SHA256 算出 <code>Signature</code>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>HMACSHA256(&#34;&lt;ClientId&gt;&lt;Timestamp&gt;&#34;, &lt;ApiKey&gt;) 
+</code></pre></div><p>最後把 <code>ClientId</code>、<code>Signature</code> 及 <code>Timestamp</code> 三個值包含在 Request 裡面，那 API 提供者就可以用同樣的方式去算出 <code>Signature</code>，如果兩者相等且 <code>Timestamp</code> 也在指定時間以內，就代表通過驗證。</p>
+<p>這個範例還是可能會有被重送攻擊的風險，接下來將在訊息中加入更多資訊以更完整的防止重送攻擊。</p>
+<h3 id=利用-timestamp-及-nonce-來防止重送攻擊>利用 Timestamp 及 Nonce 來防止重送攻擊</h3>
+<p>這個方法中，每個 Request 都必須包含一個隨機值 <code>Nonce</code>，而 API 提供者則會檢查在一段時間內不允出現重複的 <code>Nonce</code> 來達到防止重送攻擊。</p>
+<p>在<strong>呼叫者</strong> 部分，需要準備的資料：</p>
+<ul>
+<li><code>ClientId</code>: 識別呼叫者身份。</li>
+<li><code>Timestamp</code>：發送 Request 當下時間搓 (Unix timestamp)，不可與伺服器時間相差 XX 時間。</li>
+<li><code>Nonce</code>：隨機值，可以直接使用 UUID 或時間 (ms)，指定時間內不可重複。</li>
+</ul>
+<p>首先將它們依照指定格式組成字串後，接下來拿 <code>API Key</code> 作為 Key 使用 HMAC-SHA256 計算出 <code>Signature</code>，再把 <code>ClientId</code>、 <code>Nonce</code>、<code>Timestamp</code> 及 <code>Signature</code> 四個值包含在 Request 裡面，範例 Header 如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>x-ClientId: &lt;ClientId&gt;
+x-Timestamp: &lt;Timestamp&gt;
+x-Nonce: &lt;Nonce&gt;
+x-Signature: HMACSHA256(&#34;&lt;ClientId&gt;&lt;Timestamp&gt;&lt;Nonce&gt;&#34;, &lt;ApiKey&gt;) 
+</code></pre></div><p>在 <strong>API 提供者</strong> 部分，除了需要檢查 Signature 是否相同及 Timestamp 是否過期外，還要多檢查在 XX 時間內 Nonce 有沒有重複，如果重複就要視為不通過驗證。</p>
+<p>Nonce 及 Timestamp 的時間限制是相同的，且大部分為 5 ~ 15 分鐘，而 Nonce 長度不限，只要在時間內不容易碰撞即可。</p>
+<p>這個方法雖然已大幅度降低重送攻擊的風險，比較麻煩的地方就是必須用 Memory Cache 或 Redis 去紀錄 Nonce 一定的時間來用於檢查有沒有重複，這就增加了一些執行成本。</p>
+<h3 id=加入更多資料來防止重送攻擊>加入更多資料來防止重送攻擊</h3>
+<p>除了使用 Nonce 以外，你也可以將 Query String、Body 甚至 Header 也都加入訊息作為驗證依據，讓攻擊者就算拿到 Signature 也只能執行相同的操作不能拿去執行其他操作，藉此縮小風險。</p>
+<p>在<strong>呼叫者</strong> 部分，需要準備的資料：</p>
+<ul>
+<li><code>ClientId</code>: 識別呼叫者身份。</li>
+<li><code>Timestamp</code>：發送 Request 當下時間搓 (Unix timestamp)，不可與伺服器時間相差 XX 時間。</li>
+<li><code>Nonce</code>：隨機值，可以直接使用 UUID 或時間 (ms)，指定時間內不可重複。</li>
+<li><code>QueryString</code>：Query String。</li>
+<li><code>Body</code>：Body 經過 Hash 計算後的值。</li>
+<li><code>URL</code>：Request URL。</li>
+<li><code>Method</code>：Request Method。</li>
+</ul>
+<p>首先將它們依照指定格式組成字串後，接下來拿 <code>API Key</code> 作為 Key 使用 HMAC-SHA256 計算出 <code>Signature</code>，再把 <code>ClientId</code>、 <code>Nonce</code>、<code>Timestamp</code> 及 <code>Signature</code> 帶在 Request 的 Header 裡面：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>x-ClientId: &lt;ClientId&gt;
+x-Timestamp: &lt;Timestamp&gt;
+x-Nonce: &lt;Nonce&gt;
+x-Signature: HMACSHA256(&#34;&lt;ClientId&gt;&lt;Method&gt;&lt;URL&gt;&lt;QueryString&gt;&lt;Body&gt;&lt;Timestamp&gt;&lt;Nonce&gt;&#34;, &lt;ApiKey&gt;) 
+</code></pre></div><p>在 <strong>API 提供者</strong> 部分，只要檢查以下有任意一個不通過，就代表不通過驗證：</p>
+<ol>
+<li><code>Timestamp</code> 是否已超過指定時間範圍？</li>
+<li><code>Nonce</code> 是否重複？</li>
+<li><code>Signature</code> 是否相等？</li>
+</ol>
+<h3 id=相關實例>相關實例</h3>
+<ul>
+<li><a href=https://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html>Amazon Signature Version 4</a></li>
+<li><a href="https://pay.line.me/jp/developers/apis/onlineApis?locale=zh_TW">Line Pay Api</a></li>
+</ul>
+<h2 id=oauth>OAuth</h2>
+<blockquote>
+<p>待補</p>
+</blockquote>
+<h2 id=參考資料>參考資料</h2>
+<ul>
+<li><a href=https://jwt.io/introduction>https://jwt.io/introduction</a></li>
+<li><a href=https://zh.wikipedia.org/wiki/HMAC>https://zh.wikipedia.org/wiki/HMAC</a></li>
+<li><a href=https://security.stackexchange.com/questions/248212/rest-api-is-protected-by-hmac-based-authentication-what-does-including-url-path>https://security.stackexchange.com/questions/248212/rest-api-is-protected-by-hmac-based-authentication-what-does-including-url-path</a></li>
+<li><a href=https://dotnettutorials.net/lesson/hmac-authentication-web-api/>https://dotnettutorials.net/lesson/hmac-authentication-web-api/</a></li>
+</ul>
+<div>
+<br>
+<h3>
+感謝閱讀！
+</h3>
+<div>
+喜歡這篇文章或是有幫助到你嗎？ 歡迎分享給你的朋友！
+</div>
+<br>
+<div>
+有任何問題、回饋或您認為我會感興趣的任何東西嗎？ 請在下面發表評論，或者是<a href=https://blog.puckwang.com/about target=_blank>直接聯絡我</a>。
+</div>
+<br>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fapi_authentication_note%2f&text=Web%20Api%20%e9%a9%97%e8%ad%89%e6%96%b9%e5%bc%8f%e7%ad%86%e8%a8%98&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fapi_authentication_note%2f&t=Web%20Api%20%e9%a9%97%e8%ad%89%e6%96%b9%e5%bc%8f%e7%ad%86%e8%a8%98" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fapi_authentication_note%2f&title=Web%20Api%20%e9%a9%97%e8%ad%89%e6%96%b9%e5%bc%8f%e7%ad%86%e8%a8%98&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div>
+<hr>
+<div class="p-4 row justify-content-center" style=align-items:center>
+<div class=col-2>
+<img src=https://blog.puckwang.com/images/logo.png alt="Puck Wang" class="img-fluid rounded-circle" width=150>
+</div>
+<div class=col-8 style=vertical-align:middle>
+<h4>
+Puck Wang
+</h4>
+<p>
+Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網站開發者，常使用 .Net 和 React 進行開發，專注於架構研究，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。
+</p>
+<p>
+更多關於我的訊息，可至關於<a href=https://blog.puckwang.com/about target=_blank>關於</a>頁面。
+</p>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar d-print-none d-none d-xl-block">
+<div id=toc>
+<h2>目錄</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#api-key>API Key</a>
+<ul>
+<li><a href=#放置位置>放置位置</a></li>
+<li><a href=#在-server-端只儲存-hash-結果>在 Server 端只儲存 Hash 結果</a></li>
+</ul>
+</li>
+<li><a href=#api-token>API Token</a>
+<ul>
+<li><a href=#json-web-tokens-jwt>JSON Web Tokens (JWT)</a></li>
+</ul>
+</li>
+<li><a href=#hmac-signature-簽章驗證>HMAC Signature (簽章驗證)</a>
+<ul>
+<li><a href=#放置位置-1>放置位置</a></li>
+<li><a href=#最簡單的一個範例>最簡單的一個範例</a></li>
+<li><a href=#利用-timestamp-及-nonce-來防止重送攻擊>利用 Timestamp 及 Nonce 來防止重送攻擊</a></li>
+<li><a href=#加入更多資料來防止重送攻擊>加入更多資料來防止重送攻擊</a></li>
+<li><a href=#相關實例>相關實例</a></li>
+</ul>
+</li>
+<li><a href=#oauth>OAuth</a></li>
+<li><a href=#參考資料>參考資料</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<footer class="mt-auto footer d-print-none">
+<div class=container-fluid>
+<div class="row justify-content-center">
+<div class="col-md-4 col-xl-3">
+<h5>Copyright © 2017-2024, Puck Wang; all rights reserved.</h5>
+Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with.
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>Disclaimer</h5>
+See <a href=https://blog.puckwang.com/other/disclaimer/>disclaimer</a> of <a href=https://blog.puckwang.com>https://blog.puckwang.com/</a>
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>About This Site</h5>
+This blog was created using the <a href=https://gohugo.io/>Hugo</a> static site generator, using
+<a href=https://getbootstrap.com/>Bootstrap</a>, using the Silhouette Hugo theme, created by
+<a href=https://www.mattbutton.com>Matt Button</a>
+</div>
+</div>
+<hr>
+<div class="d-flex justify-content-center icons">
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</footer>
+<script src=https://code.jquery.com/jquery-3.3.1.slim.min.js integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script>
+<script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script>
+<script src=https://unpkg.com/mermaid@8.13.5/dist/mermaid.min.js></script>
+</body>
+<style>.zoom-in-thumbnail{visibility:hidden;position:fixed;z-index:100000;box-sizing:border-box;border:5px solid #fff;border-radius:3px;box-shadow:0 0 2px rgba(0,0,0,.8);opacity:0;pointer-events:none;transition-duration:.3s;transition-delay:.1s;transition-property:opacity}.zoom-in-thumbnail-img{background-repeat:no-repeat;background-size:contain}</style>
+<script>const root=document.documentElement;$(function(){mermaid.initialize({startOnLoad:!0}),$(".main-content img, .post img").each(function(){this.complete?generateImageDiv(this):$(this).on("load",function(){generateImageDiv(this)}),this.style.cursor="pointer",$(this).on("mousemove",function(d){let b=d.clientX,c=d.clientY,a;$(this).next().width()>=$(this).next().height()?innerHeight-c<=$(this).next().height()+50?a=getShowXY(this,"top",b,c):a=getShowXY(this,"bottom",b,c):innerWidth-b<=$(this).next().width()+50?a=getShowXY(this,"left",b,c):a=getShowXY(this,"right",b,c),root.style.setProperty("--zoom-image-x",a.x+250+"px"),root.style.setProperty("--zoom-image-y",a.y+"px")}),$(this).on("click",function(a){window.open(this.src)})})});function getShowXY(d,e,a,b){let c=$(d).next();switch(e){case'top':a-=c.width()/2,b-=c.height(),b-=25;break;case'bottom':a-=c.width()/2,b+=25;break;case'right':b-=c.height()/2,a+=25;break;case'left':a-=c.width(),b-=c.height()/2,a-=25;break}return{x:a,y:b}}function generateImageDiv(c){var e=screen.width*.6,f=screen.height*.5,d=0,a=c.naturalHeight,b=c.naturalWidth,g;b>e&&(d=e/b,b=e,a=a*d),a>f&&(d=f/a,a=f,b=b*d),g="<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-color: white; background-image:url('"+c.src+"'); height: "+a+"px; width: "+b+'px;"></div></div>',$(c).after(g)}</script>
+</html>

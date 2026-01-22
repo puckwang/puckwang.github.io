@@ -1,0 +1,403 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta property="og:title" content="使用 Docker 建立 LDAP 伺服器及管理介面">
+<meta property="og:description" content="在開發專案時，很常會需要使用 LDAP 伺服器來處理帳號與密碼的驗證，此時就可以使用 Docker 來為開發環境架設一個 LDAP 伺服器。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.puckwang.com/posts/2022/use-docker-run-ldap-server/"><meta property="og:image" content="https://blog.puckwang.com/images/og_image.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-05-16T04:17:10+08:00">
+<meta property="article:modified_time" content="2022-05-16T07:05:10+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://blog.puckwang.com/images/og_image.png">
+<meta name=twitter:title content="使用 Docker 建立 LDAP 伺服器及管理介面">
+<meta name=twitter:description content="在開發專案時，很常會需要使用 LDAP 伺服器來處理帳號與密碼的驗證，此時就可以使用 Docker 來為開發環境架設一個 LDAP 伺服器。">
+<script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-4827510547436807",enable_page_level_ads:!0})</script>
+<title>
+使用 Docker 建立 LDAP 伺服器及管理介面 | Puck's Blog
+</title>
+<link rel=icon type=image/png href=https://blog.puckwang.com/images/favicon-128x128.png sizes="16x16 32x32 64x64 128x128">
+<link rel=canonical href=https://blog.puckwang.com/posts/2022/use-docker-run-ldap-server/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Oswald:400" rel=stylesheet>
+<link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
+<link rel=stylesheet href=https://blog.puckwang.com/css/bundle.min.5d5448d1820d6ff5f132cb3fde480cdf60aecc3c374bacdc000c3e1bb275845c.css integrity="sha256-XVRI0YINb/XxMss/3kgM32CuzDw3S6zcAAw+G7J1hFw=">
+<link rel=me type=text/html href=//www.facebook.com/puckwang14>
+<link rel=me type=text/html href=//twitter.com/puckwang14>
+<link rel=me type=text/html href=//github.com/puckwang>
+<link rel=me type=text/html href=//linkedin.com/in/puckwang>
+<link rel=me type=text/html href="//stackoverflow.com/users/7699156/puckwang?tab=profile">
+<link rel=me type=text/html href=//g.dev/puckwang>
+<link rel=alternate type=application/rss+xml href=https://blog.puckwang.com/index.xml>
+<meta charset=utf-8>
+<meta name=author content="Puck Wang">
+<meta name=copyright content="Copyright © 2017-2024, Puck Wang; all rights reserved.">
+<meta name=description content="在開發專案時，很常會需要使用 LDAP 伺服器來處理帳號與密碼的驗證，此時就可以使用 Docker 來為開發環境架設一個 LDAP 伺服器。">
+<script>(function(b,d,e,a,g){b[a]=b[a]||[],b[a].push({'gtm.start':(new Date).getTime(),event:'gtm.js'});var f=d.getElementsByTagName(e)[0],c=d.createElement(e),h=a!='dataLayer'?'&l='+a:'';c.async=!0,c.src='https://www.googletagmanager.com/gtm.js?id='+g+h,f.parentNode.insertBefore(c,f)})(window,document,'script','dataLayer','GTM-T7955DN')</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","articleSection":"posts","name":"使用 Docker 建立 LDAP 伺服器及管理介面","headline":"使用 Docker 建立 LDAP 伺服器及管理介面","alternativeHeadline":"","description":"在開發專案時，很常會需要使用 LDAP 伺服器來處理帳號與密碼的驗證，此時就可以使用 Docker 來為開發環境架設一個 LDAP 伺服器。","inLanguage":"zh-TW","isFamilyFriendly":"true","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.puckwang.com\/posts\/2022\/use-docker-run-ldap-server\/"},"author":{"@type":"Person","name":"Puck Wang","url":"https:\/\/blog.puckwang.com\/about\/"},"creator":{"@type":"Person","name":"Puck Wang"},"accountablePerson":{"@type":"Person","name":"Puck Wang"},"copyrightHolder":"Puck\u0027s Blog","copyrightYear":"2022","dateCreated":"2022-05-16T04:17:10.00Z","datePublished":"2022-05-16T04:17:10.00Z","dateModified":"2022-05-16T07:05:10.00Z","publisher":{"@type":"Organization","name":"Puck\u0027s Blog","url":"https:\/\/blog.puckwang.com\/","logo":{"@type":"ImageObject","url":"https:\/\/blog.puckwang.com\/images\/favicon-128x128.png","width":"128","height":"128"}},"image":{"@type":"ImageObject","@id":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg","url":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg"},"url":"https:\/\/blog.puckwang.com\/posts\/2022\/use-docker-run-ldap-server\/","wordCount":"312","genre":["LDAP"]}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7955DN" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript>
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark py-1 top-nav">
+<div class=container>
+<a class="navbar-brand pr-2" href=https://blog.puckwang.com/>
+<img src=https://blog.puckwang.com/images/logo.png width=40 height=40 alt>
+PUCK'S BLOG
+</a>
+<button class="navbar-toggler collapsed" type=button data-toggle=collapse data-target=#navbarCollapse aria-controls=navbarCollapse aria-expanded=false aria-label="Toggle navigation">
+<i class="fas fa-bars"></i>
+</button>
+<div class="navbar-collapse collapse" id=navbarCollapse>
+<ul class="navbar-nav mr-auto">
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/archives/>
+Archives
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/categories/>
+Categories
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/tags/>
+Tags
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/projects/>
+MyProjects
+</a>
+</li>
+</ul>
+<div class=social-icons>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</nav>
+<style type=text/css>.feature-image{background-image:linear-gradient( rgba(0,0,0,.15),rgba(0,0,0,.15) ),url(https://blog.puckwang.com/images/hero-main.jpg);height:500px}.feature-image-text{margin-top:20px}@media(min-width:1200px){.feature-image{background-position:0 30%}}@media(max-width:768px){.feature-image{height:250px;background-position:0 0}}</style>
+<header class=feature-image>
+<div class=feature-image-text>
+</div>
+</header>
+<div class=main>
+<div class="container mt-4 post">
+<h1>使用 Docker 建立 LDAP 伺服器及管理介面</h1>
+<div class=mb-3>
+<small>
+<i class="fas fa-user-edit"></i>&nbsp;作者<strong> Puck Wang</strong>
+| <i class="far fa-calendar-alt"></i>&nbsp;建立於 2022-05-16 04:17&nbsp;
+| <i class="far fa-calendar-alt"></i>&nbsp;更新於 2022-05-16 07:05&nbsp;
+| <i class="fas fa-code-branch"></i>&nbsp;版本 23ac170&nbsp;
+| <i class="fa fa-folder" title=Tags aria-hidden=true></i>&nbsp;分類: <a href=https://blog.puckwang.com/categories/docker/>Docker</a>
+| <i class="fa fa-tags" title=Tags aria-hidden=true></i>&nbsp;標籤: <a href=https://blog.puckwang.com/tags/ldap/>LDAP</a>
+</small>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2022%2fuse-docker-run-ldap-server%2f&text=%e4%bd%bf%e7%94%a8%20Docker%20%e5%bb%ba%e7%ab%8b%20LDAP%20%e4%bc%ba%e6%9c%8d%e5%99%a8%e5%8f%8a%e7%ae%a1%e7%90%86%e4%bb%8b%e9%9d%a2&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2022%2fuse-docker-run-ldap-server%2f&t=%e4%bd%bf%e7%94%a8%20Docker%20%e5%bb%ba%e7%ab%8b%20LDAP%20%e4%bc%ba%e6%9c%8d%e5%99%a8%e5%8f%8a%e7%ae%a1%e7%90%86%e4%bb%8b%e9%9d%a2" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2022%2fuse-docker-run-ldap-server%2f&title=%e4%bd%bf%e7%94%a8%20Docker%20%e5%bb%ba%e7%ab%8b%20LDAP%20%e4%bc%ba%e6%9c%8d%e5%99%a8%e5%8f%8a%e7%ae%a1%e7%90%86%e4%bb%8b%e9%9d%a2&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div class="mt-4 mb-5 main-content">
+<p>在開發專案時，很常會需要使用 LDAP 伺服器來處理帳號與密碼的驗證，此時就可以使用 Docker 來為開發環境架設一個 LDAP 伺服器。</p>
+<p>本文會使用到 Docker，如果未安裝的人，請至 <a href=https://www.docker.com/get-started/>Docker 官網</a> 下載安裝檔並安裝，這邊就不贅述了。</p>
+<p>後續會使用 <a href=https://github.com/osixia/docker-openldap>osixia/openldap</a> 這個 Docker Image 來建立 LDAP Server，另外還會使用
+<a href=https://github.com/osixia/docker-phpLDAPadmin>osixia/phpldapadmin</a> 這個 Docker Image 來建立 LDAP 管理介面 (phpLDAPadmin)。</p>
+<h2 id=tldr>TL;DR</h2>
+<p>以下指令可建立一個 LDAP Server 及 phpLDAPadmin，所有設定為預設值。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker run --name ldap-server <span style=color:#a31515>\
+</span><span style=color:#a31515></span>        --hostname ldap-server <span style=color:#a31515>\
+</span><span style=color:#a31515></span>		-p 389:389 -p 636:636 <span style=color:#a31515>\
+</span><span style=color:#a31515></span>		--detach <span style=color:#a31515>\
+</span><span style=color:#a31515></span>		osixia/openldap:latest
+		
+docker run --name ldap-admin <span style=color:#a31515>\
+</span><span style=color:#a31515></span>    -p 6443:443 <span style=color:#a31515>\
+</span><span style=color:#a31515></span>    --link ldap-server:ldap-host <span style=color:#a31515>\
+</span><span style=color:#a31515></span>    --env PHPLDAPADMIN_LDAP_HOSTS=ldap-host <span style=color:#a31515>\
+</span><span style=color:#a31515></span>    --detach <span style=color:#a31515>\
+</span><span style=color:#a31515></span>    osixia/phpldapadmin:latest
+</code></pre></div><p><strong>預設的連線資訊：</strong></p>
+<ul>
+<li>Base DN: <code>dc=example,dc=org</code></li>
+<li>Port: 389 / 636 (TLS)</li>
+<li>管理介面：<a href=https://localhost:6443/ target=_blank>https://localhost:6443/</a></li>
+<li>Admin DN: <code>cn=admin,dc=example,dc=org</code></li>
+<li>Admin Password: <code>admin</code></li>
+</ul>
+<h2 id=建立-ldap-server>建立 LDAP Server</h2>
+<p>執行以下指令就可以建立一個最基本的 LDAP Server：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker run --name ldap-server <span style=color:#a31515>\
+</span><span style=color:#a31515></span>        --hostname ldap-server <span style=color:#a31515>\
+</span><span style=color:#a31515></span>		-p 389:389 -p 636:636 <span style=color:#a31515>\
+</span><span style=color:#a31515></span>		--detach <span style=color:#a31515>\
+</span><span style=color:#a31515></span>		osixia/openldap:latest
+</code></pre></div><p><strong>參數說明</strong></p>
+<ul>
+<li><code>--name &lt;name></code>：設定 Docker 容器的名稱，在上面的指令中是設為 <code>ldap-server</code>。</li>
+<li><code>--hostname &lt;name></code>：設定 Docker 容器的主機名稱，這個為了下面要新增管理介面使用，在上面的指令中是設為 <code>ldap-server</code>。</li>
+<li><code>-p &lt;Local Port>:&lt;Container Port></code>：設定要綁定到本機的通訊埠，在上面的指令中是設為 389 與 636。</li>
+<li><code>--env LDAP_TLS_VERIFY_CLIENT="try"</code>：設定 LDAP Server 的驗證客戶端憑證的類型為 <code>try</code>，這是為了開發時方便而設定，不需要再匯入客戶端憑證，目前沒有加到指令中，有需要的人請自行新增。</li>
+</ul>
+<p><strong>預設的連線資訊：</strong></p>
+<ul>
+<li>Port: 389 / 636 (TLS)</li>
+<li>Admin DN: <code>cn=admin,dc=example,dc=org</code></li>
+<li>Admin Password: <code>admin</code></li>
+</ul>
+<h3 id=解決-ldap-client-不信任憑證>解決 LDAP Client 不信任憑證</h3>
+<p>因為這個 Image 預設是使用自簽憑證，使用 TLS 方式連線時會出現遠端憑證無效的錯誤。</p>
+<p>如果您有使用自己的憑證也讓客戶端信任這個憑證，就不需做這個步驟。</p>
+<ol>
+<li>執行 <code>docker cp ldap-server:/container/service/slapd/assets/certs/ldap.crt .</code> 將自動產生的自簽憑證複製到本機的當前目錄中。</li>
+<li>安裝 ldap.crt 憑證到本機中，並設定為信任憑證 (或單獨設定信任 X509 初級規則)。</li>
+</ol>
+<h3 id=使用自訂的憑證>使用自訂的憑證</h3>
+<p>如果不想使用容器自動產生的自簽憑證，可以自己建立憑證或去申請免費憑證，再掛到 LDAP-Server 裡面即可。</p>
+<ul>
+<li>CA 憑證檔案路徑：<code>/container/service/slapd/assets/certs/ca.crt</code></li>
+<li>LDAP 憑證檔案路徑：<code>/container/service/slapd/assets/certs/ldap.crt</code></li>
+<li>LDAP 憑證 Key 檔案路徑：<code>/container/service/slapd/assets/certs/ldap.key</code></li>
+</ul>
+<p>您可以使用 <code>--volume /path/ssl:/container/service/slapd/assets/certs</code> 的方式映射本機目錄到容器中，以此來更改憑證。</p>
+<h3 id=其他自訂設定>其他自訂設定</h3>
+<p>可以透過環境變數來自訂一些 LDAP 的設定，可以透過 <code>--env &lt;name>="&lt;value>"</code> 的指令來設定環境變數。</p>
+<ul>
+<li><code>LDAP_ORGANISATION</code>：設定 LDAP 的組織名稱，預設為 <code>Example Inc.</code>。</li>
+<li><code>LDAP_DOMAIN</code>：設定 LDAP 的組織域名，預設為 <code>example.org</code>。</li>
+<li><code>LDAP_ADMIN_PASSWORD</code>：設定 LDAP 的管理員密碼，預設為 <code>admin</code>。</li>
+<li><code>LDAP_TLS_VERIFY_CLIENT</code>：設定 LDAP 是否驗證客戶端憑證，如想關掉可以設為 <code>try</code>，預設為 <code>demand</code>。</li>
+<li><code>LDAP_TLS_CRT_FILENAME</code>：LDAP SSL 憑證檔案名稱，預設為 <code>ldap.crt</code>。</li>
+<li><code>LDAP_TLS_KEY_FILENAME</code>：LDAP SSL 憑證 Key 檔案名稱，預設為 <code>ldap.key</code>。</li>
+<li><code>LDAP_TLS_CA_CRT_FILENAME</code>：CA 憑證檔案名稱，預設為 <code>ca.crt</code>。</li>
+</ul>
+<p>這邊只列出幾個常用的，更詳細可洽<a href=https://github.com/osixia/docker-openldap#defaultstartupyaml>原始文件</a>。</p>
+<h3 id=故障排除>故障排除</h3>
+<p><strong>無法使用 TLS (636) 連線，但使用 389 Port 時可正常連線</strong></p>
+<ol>
+<li>請檢查 636 Port 是否有通 (可使用 telnet 檢查)。</li>
+<li>預設會需求驗證客戶端憑證，如需關閉，請在執行指令時加上 <code>--env LDAP_TLS_VERIFY_CLIENT="try"</code> 來調整為可選驗證。</li>
+</ol>
+<p><strong>使用 TLS (636) 連線時，出現遠端憑證無效的錯誤</strong></p>
+<ul>
+<li>請檢查憑證是否已在受信任，也可參考 <a href=#%E8%A7%A3%E6%B1%BA-ldap-client-%E4%B8%8D%E4%BF%A1%E4%BB%BB%E6%86%91%E8%AD%89>解決 LDAP Client 不信任憑證</a>。</li>
+</ul>
+<h2 id=建立-ldap-管理介面>建立 LDAP 管理介面</h2>
+<p>這裡所使用的管理介面是 phpLDAPadmin，如果有自己的工具，這裡就可以直接跳過了。</p>
+<p>執行以下指令來建立 phpLDAPadmin：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker run --name ldap-admin <span style=color:#a31515>\
+</span><span style=color:#a31515></span>		-p 6443:443 <span style=color:#a31515>\
+</span><span style=color:#a31515></span>		--link ldap-server:ldap-host <span style=color:#a31515>\
+</span><span style=color:#a31515></span>        --env PHPLDAPADMIN_LDAP_HOSTS=ldap-host <span style=color:#a31515>\
+</span><span style=color:#a31515></span>        --detach <span style=color:#a31515>\
+</span><span style=color:#a31515></span>		osixia/phpldapadmin:latest
+</code></pre></div><p><strong>參數說明</strong></p>
+<ul>
+<li><code>--name &lt;name></code>：設定 Docker 容器的名稱，在上面的指令中是設為 <code>ldap-admin</code>。</li>
+<li><code>--link &lt;name>:&lt;alias></code>：連結到其他 Docker 容器，在上面的指令中是設為 <code>ldap-server:ldap-host</code> 來連結到本文中建立的 LDAP Server。</li>
+<li><code>--env PHPLDAPADMIN_LDAP_HOSTS</code>：設定 LDAP Server 的主機名稱，在上面的指令中是設為 <code>ldap-host</code>。</li>
+<li><code>-p &lt;Local Port>:&lt;Container Port></code>：設定要綁定到本機的通訊埠。</li>
+</ul>
+<p>執行完成後，就可以在 <a href=https://localhost:6443/ target=_blank>https://localhost:6443/</a> 的網址上看到管理介面，輸入 Admin 的 DN 及 Password 即可登入使用。</p>
+<p>憑證無效的問題可以直接忽略，或是參考「<a href=#%E8%A7%A3%E6%B1%BA-ldap-client-%E4%B8%8D%E4%BF%A1%E4%BB%BB%E6%86%91%E8%AD%89>解決 LDAP Client 不信任憑證</a>」的方式來解決。</p>
+<div class=image>
+<figure class=figure>
+<img src=https://blog.puckwang.com/images/2022/phpLDAPadmin.webp class="figure-img img-fluid rounded" alt="phpLDAPadmin 登入畫面">
+<figcaption class="figure-caption text-center">phpLDAPadmin 登入畫面</figcaption>
+</figure>
+</div>
+<h2 id=參考資料>參考資料</h2>
+<ul>
+<li><a href=https://github.com/osixia/docker-openldap>https://github.com/osixia/docker-openldap</a></li>
+<li><a href=https://github.com/osixia/docker-phpLDAPadmin>https://github.com/osixia/docker-phpLDAPadmin</a></li>
+</ul>
+<div>
+<br>
+<h3>
+感謝閱讀！
+</h3>
+<div>
+喜歡這篇文章或是有幫助到你嗎？ 歡迎分享給你的朋友！
+</div>
+<br>
+<div>
+有任何問題、回饋或您認為我會感興趣的任何東西嗎？ 請在下面發表評論，或者是<a href=https://blog.puckwang.com/about target=_blank>直接聯絡我</a>。
+</div>
+<br>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2022%2fuse-docker-run-ldap-server%2f&text=%e4%bd%bf%e7%94%a8%20Docker%20%e5%bb%ba%e7%ab%8b%20LDAP%20%e4%bc%ba%e6%9c%8d%e5%99%a8%e5%8f%8a%e7%ae%a1%e7%90%86%e4%bb%8b%e9%9d%a2&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2022%2fuse-docker-run-ldap-server%2f&t=%e4%bd%bf%e7%94%a8%20Docker%20%e5%bb%ba%e7%ab%8b%20LDAP%20%e4%bc%ba%e6%9c%8d%e5%99%a8%e5%8f%8a%e7%ae%a1%e7%90%86%e4%bb%8b%e9%9d%a2" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2022%2fuse-docker-run-ldap-server%2f&title=%e4%bd%bf%e7%94%a8%20Docker%20%e5%bb%ba%e7%ab%8b%20LDAP%20%e4%bc%ba%e6%9c%8d%e5%99%a8%e5%8f%8a%e7%ae%a1%e7%90%86%e4%bb%8b%e9%9d%a2&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div>
+<hr>
+<div class="p-4 row justify-content-center" style=align-items:center>
+<div class=col-2>
+<img src=https://blog.puckwang.com/images/logo.png alt="Puck Wang" class="img-fluid rounded-circle" width=150>
+</div>
+<div class=col-8 style=vertical-align:middle>
+<h4>
+Puck Wang
+</h4>
+<p>
+Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網站開發者，常使用 .Net 和 React 進行開發，專注於架構研究，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。
+</p>
+<p>
+更多關於我的訊息，可至關於<a href=https://blog.puckwang.com/about target=_blank>關於</a>頁面。
+</p>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar d-print-none d-none d-xl-block">
+<div id=toc>
+<h2>目錄</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#tldr>TL;DR</a></li>
+<li><a href=#建立-ldap-server>建立 LDAP Server</a>
+<ul>
+<li><a href=#解決-ldap-client-不信任憑證>解決 LDAP Client 不信任憑證</a></li>
+<li><a href=#使用自訂的憑證>使用自訂的憑證</a></li>
+<li><a href=#其他自訂設定>其他自訂設定</a></li>
+<li><a href=#故障排除>故障排除</a></li>
+</ul>
+</li>
+<li><a href=#建立-ldap-管理介面>建立 LDAP 管理介面</a></li>
+<li><a href=#參考資料>參考資料</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<footer class="mt-auto footer d-print-none">
+<div class=container-fluid>
+<div class="row justify-content-center">
+<div class="col-md-4 col-xl-3">
+<h5>Copyright © 2017-2024, Puck Wang; all rights reserved.</h5>
+Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with.
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>Disclaimer</h5>
+See <a href=https://blog.puckwang.com/other/disclaimer/>disclaimer</a> of <a href=https://blog.puckwang.com>https://blog.puckwang.com/</a>
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>About This Site</h5>
+This blog was created using the <a href=https://gohugo.io/>Hugo</a> static site generator, using
+<a href=https://getbootstrap.com/>Bootstrap</a>, using the Silhouette Hugo theme, created by
+<a href=https://www.mattbutton.com>Matt Button</a>
+</div>
+</div>
+<hr>
+<div class="d-flex justify-content-center icons">
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</footer>
+<script src=https://code.jquery.com/jquery-3.3.1.slim.min.js integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script>
+<script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script>
+<script src=https://unpkg.com/mermaid@8.13.5/dist/mermaid.min.js></script>
+</body>
+<style>.zoom-in-thumbnail{visibility:hidden;position:fixed;z-index:100000;box-sizing:border-box;border:5px solid #fff;border-radius:3px;box-shadow:0 0 2px rgba(0,0,0,.8);opacity:0;pointer-events:none;transition-duration:.3s;transition-delay:.1s;transition-property:opacity}.zoom-in-thumbnail-img{background-repeat:no-repeat;background-size:contain}</style>
+<script>const root=document.documentElement;$(function(){mermaid.initialize({startOnLoad:!0}),$(".main-content img, .post img").each(function(){this.complete?generateImageDiv(this):$(this).on("load",function(){generateImageDiv(this)}),this.style.cursor="pointer",$(this).on("mousemove",function(d){let b=d.clientX,c=d.clientY,a;$(this).next().width()>=$(this).next().height()?innerHeight-c<=$(this).next().height()+50?a=getShowXY(this,"top",b,c):a=getShowXY(this,"bottom",b,c):innerWidth-b<=$(this).next().width()+50?a=getShowXY(this,"left",b,c):a=getShowXY(this,"right",b,c),root.style.setProperty("--zoom-image-x",a.x+250+"px"),root.style.setProperty("--zoom-image-y",a.y+"px")}),$(this).on("click",function(a){window.open(this.src)})})});function getShowXY(d,e,a,b){let c=$(d).next();switch(e){case'top':a-=c.width()/2,b-=c.height(),b-=25;break;case'bottom':a-=c.width()/2,b+=25;break;case'right':b-=c.height()/2,a+=25;break;case'left':a-=c.width(),b-=c.height()/2,a-=25;break}return{x:a,y:b}}function generateImageDiv(c){var e=screen.width*.6,f=screen.height*.5,d=0,a=c.naturalHeight,b=c.naturalWidth,g;b>e&&(d=e/b,b=e,a=a*d),a>f&&(d=f/a,a=f,b=b*d),g="<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-color: white; background-image:url('"+c.src+"'); height: "+a+"px; width: "+b+'px;"></div></div>',$(c).after(g)}</script>
+</html>

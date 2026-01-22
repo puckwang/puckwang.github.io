@@ -1,0 +1,520 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta property="og:title" content="Git 常用指令與設定筆記">
+<meta property="og:description" content="使用 Git 也有一段時間了，除了常用的 commit 等常用基本指令外，還有許多很實用的指令，在這邊做一下紀錄。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.puckwang.com/posts/2018/my_git_command_cheat_sheet/"><meta property="og:image" content="https://blog.puckwang.com/images/og_image.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2018-12-24T12:59:13+08:00">
+<meta property="article:modified_time" content="2023-10-02T20:45:02-05:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://blog.puckwang.com/images/og_image.png">
+<meta name=twitter:title content="Git 常用指令與設定筆記">
+<meta name=twitter:description content="使用 Git 也有一段時間了，除了常用的 commit 等常用基本指令外，還有許多很實用的指令，在這邊做一下紀錄。">
+<script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-4827510547436807",enable_page_level_ads:!0})</script>
+<title>
+Git 常用指令與設定筆記 | Puck's Blog
+</title>
+<link rel=icon type=image/png href=https://blog.puckwang.com/images/favicon-128x128.png sizes="16x16 32x32 64x64 128x128">
+<link rel=canonical href=https://blog.puckwang.com/posts/2018/my_git_command_cheat_sheet/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Oswald:400" rel=stylesheet>
+<link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
+<link rel=stylesheet href=https://blog.puckwang.com/css/bundle.min.5d5448d1820d6ff5f132cb3fde480cdf60aecc3c374bacdc000c3e1bb275845c.css integrity="sha256-XVRI0YINb/XxMss/3kgM32CuzDw3S6zcAAw+G7J1hFw=">
+<link rel=me type=text/html href=//www.facebook.com/puckwang14>
+<link rel=me type=text/html href=//twitter.com/puckwang14>
+<link rel=me type=text/html href=//github.com/puckwang>
+<link rel=me type=text/html href=//linkedin.com/in/puckwang>
+<link rel=me type=text/html href="//stackoverflow.com/users/7699156/puckwang?tab=profile">
+<link rel=me type=text/html href=//g.dev/puckwang>
+<link rel=alternate type=application/rss+xml href=https://blog.puckwang.com/index.xml>
+<meta charset=utf-8>
+<meta name=author content="Puck Wang">
+<meta name=copyright content="Copyright © 2017-2024, Puck Wang; all rights reserved.">
+<meta name=description content="使用 Git 也有一段時間了，除了常用的 commit 等常用基本指令外，還有許多很實用的指令，在這邊做一下紀錄。">
+<script>(function(b,d,e,a,g){b[a]=b[a]||[],b[a].push({'gtm.start':(new Date).getTime(),event:'gtm.js'});var f=d.getElementsByTagName(e)[0],c=d.createElement(e),h=a!='dataLayer'?'&l='+a:'';c.async=!0,c.src='https://www.googletagmanager.com/gtm.js?id='+g+h,f.parentNode.insertBefore(c,f)})(window,document,'script','dataLayer','GTM-T7955DN')</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","articleSection":"posts","name":"Git 常用指令與設定筆記","headline":"Git 常用指令與設定筆記","alternativeHeadline":"","description":"使用 Git 也有一段時間了，除了常用的 commit 等常用基本指令外，還有許多很實用的指令，在這邊做一下紀錄。","inLanguage":"zh-TW","isFamilyFriendly":"true","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.puckwang.com\/posts\/2018\/my_git_command_cheat_sheet\/"},"author":{"@type":"Person","name":"Puck Wang","url":"https:\/\/blog.puckwang.com\/about\/"},"creator":{"@type":"Person","name":"Puck Wang"},"accountablePerson":{"@type":"Person","name":"Puck Wang"},"copyrightHolder":"Puck\u0027s Blog","copyrightYear":"2018","dateCreated":"2018-12-24T12:59:13.00Z","datePublished":"2018-12-24T12:59:13.00Z","dateModified":"2023-10-02T20:45:02.00Z","publisher":{"@type":"Organization","name":"Puck\u0027s Blog","url":"https:\/\/blog.puckwang.com\/","logo":{"@type":"ImageObject","url":"https:\/\/blog.puckwang.com\/images\/favicon-128x128.png","width":"128","height":"128"}},"image":{"@type":"ImageObject","@id":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg","url":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg"},"url":"https:\/\/blog.puckwang.com\/posts\/2018\/my_git_command_cheat_sheet\/","wordCount":"536","genre":["Command","Config","設定","指令","Git"]}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7955DN" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript>
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark py-1 top-nav">
+<div class=container>
+<a class="navbar-brand pr-2" href=https://blog.puckwang.com/>
+<img src=https://blog.puckwang.com/images/logo.png width=40 height=40 alt>
+PUCK'S BLOG
+</a>
+<button class="navbar-toggler collapsed" type=button data-toggle=collapse data-target=#navbarCollapse aria-controls=navbarCollapse aria-expanded=false aria-label="Toggle navigation">
+<i class="fas fa-bars"></i>
+</button>
+<div class="navbar-collapse collapse" id=navbarCollapse>
+<ul class="navbar-nav mr-auto">
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/archives/>
+Archives
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/categories/>
+Categories
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/tags/>
+Tags
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/projects/>
+MyProjects
+</a>
+</li>
+</ul>
+<div class=social-icons>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</nav>
+<style type=text/css>.feature-image{background-image:linear-gradient( rgba(0,0,0,.15),rgba(0,0,0,.15) ),url(https://blog.puckwang.com/images/hero-main.jpg);height:500px}.feature-image-text{margin-top:20px}@media(min-width:1200px){.feature-image{background-position:0 30%}}@media(max-width:768px){.feature-image{height:250px;background-position:0 0}}</style>
+<header class=feature-image>
+<div class=feature-image-text>
+</div>
+</header>
+<div class=main>
+<div class="container mt-4 post">
+<h1>Git 常用指令與設定筆記</h1>
+<div class=mb-3>
+<small>
+<i class="fas fa-user-edit"></i>&nbsp;作者<strong> Puck Wang</strong>
+| <i class="far fa-calendar-alt"></i>&nbsp;建立於 2018-12-24 12:59&nbsp;
+| <i class="far fa-calendar-alt"></i>&nbsp;更新於 2023-10-02 20:45&nbsp;
+| <i class="fas fa-code-branch"></i>&nbsp;版本 8f20e58&nbsp;
+| <i class="fa fa-folder" title=Tags aria-hidden=true></i>&nbsp;分類: <a href=https://blog.puckwang.com/categories/cheatsheet/>CheatSheet</a>, <a href=https://blog.puckwang.com/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/>版本控制</a>, <a href=https://blog.puckwang.com/categories/%E7%B2%BE%E9%81%B8/>精選</a>
+| <i class="fa fa-tags" title=Tags aria-hidden=true></i>&nbsp;標籤: <a href=https://blog.puckwang.com/tags/command/>Command</a>, <a href=https://blog.puckwang.com/tags/config/>Config</a>, <a href=https://blog.puckwang.com/tags/%E8%A8%AD%E5%AE%9A/>設定</a>, <a href=https://blog.puckwang.com/tags/%E6%8C%87%E4%BB%A4/>指令</a>, <a href=https://blog.puckwang.com/tags/git/>Git</a>
+</small>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2018%2fmy_git_command_cheat_sheet%2f&text=Git%20%e5%b8%b8%e7%94%a8%e6%8c%87%e4%bb%a4%e8%88%87%e8%a8%ad%e5%ae%9a%e7%ad%86%e8%a8%98&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2018%2fmy_git_command_cheat_sheet%2f&t=Git%20%e5%b8%b8%e7%94%a8%e6%8c%87%e4%bb%a4%e8%88%87%e8%a8%ad%e5%ae%9a%e7%ad%86%e8%a8%98" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2018%2fmy_git_command_cheat_sheet%2f&title=Git%20%e5%b8%b8%e7%94%a8%e6%8c%87%e4%bb%a4%e8%88%87%e8%a8%ad%e5%ae%9a%e7%ad%86%e8%a8%98&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div class="mt-4 mb-5 main-content">
+<p>使用 Git 也有一段時間了，除了常用的 commit, push 等常用基本指令外，還有許多很實用的指令，在這邊做一下紀錄。</p>
+<h2 id=本地相關>本地相關</h2>
+<h3 id=init>Init</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git init  <span style=color:green>#初始化 Git 專案。</span>
+</code></pre></div><h3 id=add>Add</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git add &lt;pathspec&gt;... <span style=color:green>#將一個或多個已變更的檔案新增至「待提交」</span>
+</code></pre></div><ul>
+<li>
+<p><code>-A, --all</code>: 全部檔案。</p>
+</li>
+<li>
+<p><code>-f, --force</code>: 允許新增已經被忽略的檔案。</p>
+</li>
+</ul>
+<h3 id=remove>Remove</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git rm  <span style=color:green>#刪除檔案並加入 Staged</span>
+</code></pre></div><ul>
+<li><code>--cached</code>: 移除已進入 Staged 的檔案，保留本地檔案</li>
+<li><code>-f</code>: 移除已進入 Staged 的檔案，並移除本地檔案</li>
+</ul>
+<blockquote>
+<p>這邊移除並不會真正的從 Git 移除，只會讓他在接下來不會再被加入 Staged，如果要真正移除檔案，請看我之後會寫的文章。</p>
+</blockquote>
+<h3 id=commit>Commit</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git commit  <span style=color:green>#提交變更。</span>
+</code></pre></div><ul>
+<li>
+<p><code>-m, --message &lt;message></code>: 加上 Commit Message，預設是開啟指定編輯器。</p>
+</li>
+<li>
+<p><code>--amend</code>: 修改上一筆的提交。</p>
+</li>
+<li>
+<p><code>-S</code>: 使用 GPG 簽署此 Commit。</p>
+</li>
+</ul>
+<h3 id=status>Status</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git status  <span style=color:green>#查看目前檔案的狀態。</span>
+</code></pre></div><h3 id=log>Log</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git log  <span style=color:green>#查看提交歷史紀錄。</span>
+
+</code></pre></div><ul>
+<li><code>--show-signature</code>: 顯示 GPG 簽署相關資訊。</li>
+</ul>
+<h3 id=reset>Reset</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git reset [&lt;commit&gt;]  <span style=color:green>#重置狀態。</span>
+</code></pre></div><ul>
+<li>
+<p><code>--soft</code>: 僅重置 <code>HEAD</code> 與 <code>Index</code>，工作目錄檔案的變更不會被重置。</p>
+</li>
+<li>
+<p><code>--hard</code>: 重置 <code>HEAD</code>、<code>Index</code>與工作目錄。</p>
+</li>
+</ul>
+<h3 id=branch>Branch</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git branch  <span style=color:green>#查看目前分支清單</span>
+git branch &lt;name&gt;  <span style=color:green>#建立新分支</span>
+</code></pre></div><ul>
+<li>
+<p><code>-d, --delete</code>: 刪除已合併的分支。</p>
+</li>
+<li>
+<p><code>-D</code>: 刪除分支，即使他未合併。</p>
+</li>
+<li>
+<p><code>-m, --move</code>: 更名分支。</p>
+</li>
+<li>
+<p><code>-M</code>: 更名分支，即使目標分支已存在。</p>
+</li>
+</ul>
+<h3 id=checkout>Checkout</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git checkout &lt;branch&gt;  <span style=color:green>#切換分支。</span>
+git checkout [&lt;branch&gt;] &lt;file&gt;  <span style=color:green>#還原工作目錄的檔案。</span>
+</code></pre></div><ul>
+<li>
+<p><code>-b &lt;branch></code>: 建立新分支並切換過去。</p>
+</li>
+<li>
+<p><code>-B &lt;branch></code>: 建立新分支或重置已存在的分支並切換過去。</p>
+</li>
+<li>
+<p><code>&lt;branch></code> 相關: <a href=https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt-ltbranchgt>ref</a></p>
+<ul>
+<li>
+<p><code>-</code>: 代表上一個 Checkout 的分支或 Commit，例如：假設我在 develop 分支切換到 master 後 <code>git checkout - </code> 就可以回到 develop。</p>
+</li>
+<li>
+<p><code>@{-N}</code>: 代表前 N 個 Checkout 的分支或 Commit，而 <code>-</code> 等同 <code>@{-1}</code>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id=cherry-pick>Cherry-Pick</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git cherry-pick &lt;commit&gt;...  <span style=color:green>#取得 Commit 到目前分支</span>
+</code></pre></div><h3 id=stash>Stash</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git stash  <span style=color:green>#將未提交的檔案暫時放置臨時區</span>
+git stash list  <span style=color:green>#查看 Stash 放了哪些東西</span>
+git stash pop   <span style=color:green>#將最上層的一筆資料返回工作目錄</span>
+</code></pre></div><h3 id=rebase>Rebase</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git rebase [&lt;branch&gt;]  <span style=color:green>#將該分支接到目標分支最上層</span>
+
+<span style=color:green># 範例:</span>
+<span style=color:green>#此時就會將目前所在分支的 commit 接到 master 最前面，也就是讓目前所在分支保持最新狀態</span>
+git rebase master
+</code></pre></div><ul>
+<li><code>-i</code>: 可以自訂對每個 Commit 的操作及調整其順序，而操作命令及縮寫如下 (可以打第一個縮寫代替)。
+<ul>
+<li><code>p, pick</code> = 使用這個 commit。 (default)</li>
+<li><code>r, reword</code> = 使用這個 commit，但編輯 commit 訊息。</li>
+<li><code>e, edit</code> = 使用這個 commit，但暫停 rebase 來編輯這個 commit。</li>
+<li><code>s, squash</code> = 使用這個 Commit，但與前一個 commit 合併。</li>
+<li><code>f, fixup</code> = 類似 squash，差在會捨棄這個 commit 的訊息。</li>
+<li><code>x, exec</code> = 執行後面接的的 Shell</li>
+<li><code>d, drop</code> = 移除這個 commit</li>
+</ul>
+</li>
+<li><code>--committer-date-is-author-date</code>: 將新 Commit 的日期設為作者的日期（rebase 會產生新的 commit，不想改日期可以加上這個）</li>
+</ul>
+<blockquote>
+<p>如果使用 Vim 來編輯，<code>:wq</code> 存檔離開就可以完成 rebase</p>
+</blockquote>
+<h3 id=merge>Merge</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git merge &lt;commit&gt;...  <span style=color:green>#將指定 Commit 合併到目前所在分支</span>
+</code></pre></div><h3 id=show>Show</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git show &lt;object&gt;...  <span style=color:green>#顯示詳細資訊</span>
+</code></pre></div><h3 id=submodule>Submodule</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git submodule  <span style=color:green>#列出子模組清單</span>
+git submodule add &lt;repository&gt; [&lt;path&gt;]  <span style=color:green>#新增某遠端倉庫為子模組，執行後會自動 clone</span>
+git submodule init [&lt;path&gt;...]  <span style=color:green>#初始化子模組</span>
+git submodule sync [&lt;path&gt;...]  <span style=color:green>#同步</span>
+</code></pre></div><h3 id=verify-gpg>Verify GPG</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git verify-commit &lt;commit&gt;  <span style=color:green># 驗證 Commit 的 GPG 簽署。</span>
+git verify-tag &lt;commit&gt;  <span style=color:green># 驗證 Tag 的 GPG 簽署。</span>
+</code></pre></div><h3 id=reflog>Reflog</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git reflog <span style=color:green># 它會紀錄所有執行等指令，如果 Commit 不見，短時間內都還可以用它查。</span>
+</code></pre></div><h2 id=遠端倉庫相關>遠端倉庫相關</h2>
+<h3 id=remote>Remote</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git remote  <span style=color:green>#列出遠端倉庫清單</span>
+git remote add &lt;name&gt; &lt;repository&gt;  <span style=color:green>#新增一筆遠端倉庫</span>
+git remote get-url &lt;name&gt;  <span style=color:green>#取得某筆遠端倉庫的 URL</span>
+git remote set-url &lt;name&gt; &lt;newurl&gt;  <span style=color:green>#設定某比遠端倉庫的 URL</span>
+</code></pre></div><h3 id=clone>Clone</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone &lt;url&gt;  <span style=color:green>#下載遠端倉庫，預設遠端倉庫名稱為 origin</span>
+</code></pre></div><h3 id=push>Push</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git push  <span style=color:green>#將本地的提交推到到預設的遠端倉庫</span>
+git push &lt;repository&gt;
+</code></pre></div><ul>
+<li><code>-f, --force</code>: 強制推送，也就是強制覆蓋遠端的 commit (例如如果已經將 commit 推上去了，但又修改它，就必須要加上這個才推得上去)。</li>
+<li><code>--force-with-leas</code>: 跟 <code>-f</code> 同功能但比它安全，它會去檢查遠端有沒有其他人的新提交，如果有就會不能推，才不會發生蓋掉別人的紀錄的事情發生。</li>
+</ul>
+<h3 id=pull>Pull</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git pull  <span style=color:green>#將預設的遠端倉庫同步下來</span>
+git pull &lt;repository&gt;
+</code></pre></div><ul>
+<li><code>-r, --rebase[=&lt;false|true|preserve|interactive>]</code>: 如果設為 true 時，當遠端與本地有差異，使用 rebase 而不使用 merge。</li>
+</ul>
+<h3 id=submodule-1>Submodule</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git submodule update --init --recursive <span style=color:green># 初次 Clone 下來的專案要先執行這個把 submodule 給 Clone 下來 </span>
+
+git submodule update --recursive <span style=color:green># 更新 submodule </span>
+</code></pre></div><h2 id=全域設定檔>全域設定檔</h2>
+<p>預設路徑: <code>~/.gitconfig</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>[user]
+	name = Puck Wang
+    email = s9801077@gmail.com
+[pull]
+    <span style=color:green>#這個設定了之後，pull 時就可以不用加參數</span>
+	rebase = true  
+[alias]  
+    <span style=color:green>#一大堆的別名，讓打指令更快速</span>
+	ff = flow feature start
+	fh = flow hotfix start
+	pl = pull
+	ps = push
+	psf = push --force-with-lease
+	br = branch
+	co = checkout
+	cb = checkout -b
+	cd = checkout develop
+	cm = commit
+	st = status
+	sh = stash
+	mr = merge
+	sh = show
+	rb = rebase
+	rbc = rebase --continue
+	a = add
+	aa = add *
+	l = log
+
+	<span style=color:green>#以下是網路上找來的 log 指定，但用蠻久了，來源不清楚</span>
+	ll = log --pretty=format:<span style=color:#a31515>&#39;%h %ad | %s%d [%Cgreen%an%Creset]&#39;</span> --graph --date=short
+	lo = log --oneline
+	lg = log --graph --pretty=format:<span style=color:#a31515>&#39;%Cred%h%Creset %ad |%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset&#39;</span> --abbrev-commit --date=short
+	lgg = log --graph --abbrev-commit --decorate --format=format:<span style=color:#a31515>&#39;%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n&#39;&#39;          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)&#39;</span> --all
+
+[core]
+    <span style=color:green>#設定套用全域忽略的設定檔</span>
+	excludesfile = /Users/xxxxxx/.gitignore_global
+
+[submodule]
+  <span style=color:green># 執行 git pull 時，自動遞迴處理 Submodule</span>
+  recurse = true
+</code></pre></div><p><code>.gitignore_global</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>.DS_Store
+.idea
+.vs
+</code></pre></div>
+<div>
+<br>
+<h3>
+感謝閱讀！
+</h3>
+<div>
+喜歡這篇文章或是有幫助到你嗎？ 歡迎分享給你的朋友！
+</div>
+<br>
+<div>
+有任何問題、回饋或您認為我會感興趣的任何東西嗎？ 請在下面發表評論，或者是<a href=https://blog.puckwang.com/about target=_blank>直接聯絡我</a>。
+</div>
+<br>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2018%2fmy_git_command_cheat_sheet%2f&text=Git%20%e5%b8%b8%e7%94%a8%e6%8c%87%e4%bb%a4%e8%88%87%e8%a8%ad%e5%ae%9a%e7%ad%86%e8%a8%98&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2018%2fmy_git_command_cheat_sheet%2f&t=Git%20%e5%b8%b8%e7%94%a8%e6%8c%87%e4%bb%a4%e8%88%87%e8%a8%ad%e5%ae%9a%e7%ad%86%e8%a8%98" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2018%2fmy_git_command_cheat_sheet%2f&title=Git%20%e5%b8%b8%e7%94%a8%e6%8c%87%e4%bb%a4%e8%88%87%e8%a8%ad%e5%ae%9a%e7%ad%86%e8%a8%98&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div>
+<hr>
+<div class="p-4 row justify-content-center" style=align-items:center>
+<div class=col-2>
+<img src=https://blog.puckwang.com/images/logo.png alt="Puck Wang" class="img-fluid rounded-circle" width=150>
+</div>
+<div class=col-8 style=vertical-align:middle>
+<h4>
+Puck Wang
+</h4>
+<p>
+Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網站開發者，常使用 .Net 和 React 進行開發，專注於架構研究，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。
+</p>
+<p>
+更多關於我的訊息，可至關於<a href=https://blog.puckwang.com/about target=_blank>關於</a>頁面。
+</p>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar d-print-none d-none d-xl-block">
+<div id=toc>
+<h2>目錄</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#本地相關>本地相關</a>
+<ul>
+<li><a href=#init>Init</a></li>
+<li><a href=#add>Add</a></li>
+<li><a href=#remove>Remove</a></li>
+<li><a href=#commit>Commit</a></li>
+<li><a href=#status>Status</a></li>
+<li><a href=#log>Log</a></li>
+<li><a href=#reset>Reset</a></li>
+<li><a href=#branch>Branch</a></li>
+<li><a href=#checkout>Checkout</a></li>
+<li><a href=#cherry-pick>Cherry-Pick</a></li>
+<li><a href=#stash>Stash</a></li>
+<li><a href=#rebase>Rebase</a></li>
+<li><a href=#merge>Merge</a></li>
+<li><a href=#show>Show</a></li>
+<li><a href=#submodule>Submodule</a></li>
+<li><a href=#verify-gpg>Verify GPG</a></li>
+<li><a href=#reflog>Reflog</a></li>
+</ul>
+</li>
+<li><a href=#遠端倉庫相關>遠端倉庫相關</a>
+<ul>
+<li><a href=#remote>Remote</a></li>
+<li><a href=#clone>Clone</a></li>
+<li><a href=#push>Push</a></li>
+<li><a href=#pull>Pull</a></li>
+<li><a href=#submodule-1>Submodule</a></li>
+</ul>
+</li>
+<li><a href=#全域設定檔>全域設定檔</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<footer class="mt-auto footer d-print-none">
+<div class=container-fluid>
+<div class="row justify-content-center">
+<div class="col-md-4 col-xl-3">
+<h5>Copyright © 2017-2024, Puck Wang; all rights reserved.</h5>
+Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with.
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>Disclaimer</h5>
+See <a href=https://blog.puckwang.com/other/disclaimer/>disclaimer</a> of <a href=https://blog.puckwang.com>https://blog.puckwang.com/</a>
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>About This Site</h5>
+This blog was created using the <a href=https://gohugo.io/>Hugo</a> static site generator, using
+<a href=https://getbootstrap.com/>Bootstrap</a>, using the Silhouette Hugo theme, created by
+<a href=https://www.mattbutton.com>Matt Button</a>
+</div>
+</div>
+<hr>
+<div class="d-flex justify-content-center icons">
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</footer>
+<script src=https://code.jquery.com/jquery-3.3.1.slim.min.js integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script>
+<script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script>
+<script src=https://unpkg.com/mermaid@8.13.5/dist/mermaid.min.js></script>
+</body>
+<style>.zoom-in-thumbnail{visibility:hidden;position:fixed;z-index:100000;box-sizing:border-box;border:5px solid #fff;border-radius:3px;box-shadow:0 0 2px rgba(0,0,0,.8);opacity:0;pointer-events:none;transition-duration:.3s;transition-delay:.1s;transition-property:opacity}.zoom-in-thumbnail-img{background-repeat:no-repeat;background-size:contain}</style>
+<script>const root=document.documentElement;$(function(){mermaid.initialize({startOnLoad:!0}),$(".main-content img, .post img").each(function(){this.complete?generateImageDiv(this):$(this).on("load",function(){generateImageDiv(this)}),this.style.cursor="pointer",$(this).on("mousemove",function(d){let b=d.clientX,c=d.clientY,a;$(this).next().width()>=$(this).next().height()?innerHeight-c<=$(this).next().height()+50?a=getShowXY(this,"top",b,c):a=getShowXY(this,"bottom",b,c):innerWidth-b<=$(this).next().width()+50?a=getShowXY(this,"left",b,c):a=getShowXY(this,"right",b,c),root.style.setProperty("--zoom-image-x",a.x+250+"px"),root.style.setProperty("--zoom-image-y",a.y+"px")}),$(this).on("click",function(a){window.open(this.src)})})});function getShowXY(d,e,a,b){let c=$(d).next();switch(e){case'top':a-=c.width()/2,b-=c.height(),b-=25;break;case'bottom':a-=c.width()/2,b+=25;break;case'right':b-=c.height()/2,a+=25;break;case'left':a-=c.width(),b-=c.height()/2,a-=25;break}return{x:a,y:b}}function generateImageDiv(c){var e=screen.width*.6,f=screen.height*.5,d=0,a=c.naturalHeight,b=c.naturalWidth,g;b>e&&(d=e/b,b=e,a=a*d),a>f&&(d=f/a,a=f,b=b*d),g="<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-color: white; background-image:url('"+c.src+"'); height: "+a+"px; width: "+b+'px;"></div></div>',$(c).after(g)}</script>
+</html>

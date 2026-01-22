@@ -1,0 +1,323 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta property="og:title" content="JavaScript 避免輸入法選字觸發 Enter 事件的方法">
+<meta property="og:description" content="在寫前端時，有時候會遇到需要在 Input 上偵測 Enter 事件來提供特殊功能，像是搜尋的 Input 可以增加 Enter 執行搜尋。在使用 `event.key` 去判斷是否為 `enter` 時，應該會遇到輸入法選字也會誤判的問題。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.puckwang.com/posts/2024/prevent-key-event-during-ime-selection/"><meta property="og:image" content="https://blog.puckwang.com/images/og_image.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2024-05-26T22:52:26+08:00">
+<meta property="article:modified_time" content="2024-05-26T23:28:51+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://blog.puckwang.com/images/og_image.png">
+<meta name=twitter:title content="JavaScript 避免輸入法選字觸發 Enter 事件的方法">
+<meta name=twitter:description content="在寫前端時，有時候會遇到需要在 Input 上偵測 Enter 事件來提供特殊功能，像是搜尋的 Input 可以增加 Enter 執行搜尋。在使用 `event.key` 去判斷是否為 `enter` 時，應該會遇到輸入法選字也會誤判的問題。">
+<script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-4827510547436807",enable_page_level_ads:!0})</script>
+<title>
+JavaScript 避免輸入法選字觸發 Enter 事件的方法 | Puck's Blog
+</title>
+<link rel=icon type=image/png href=https://blog.puckwang.com/images/favicon-128x128.png sizes="16x16 32x32 64x64 128x128">
+<link rel=canonical href=https://blog.puckwang.com/posts/2024/prevent-key-event-during-ime-selection/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Oswald:400" rel=stylesheet>
+<link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
+<link rel=stylesheet href=https://blog.puckwang.com/css/bundle.min.5d5448d1820d6ff5f132cb3fde480cdf60aecc3c374bacdc000c3e1bb275845c.css integrity="sha256-XVRI0YINb/XxMss/3kgM32CuzDw3S6zcAAw+G7J1hFw=">
+<link rel=me type=text/html href=//www.facebook.com/puckwang14>
+<link rel=me type=text/html href=//twitter.com/puckwang14>
+<link rel=me type=text/html href=//github.com/puckwang>
+<link rel=me type=text/html href=//linkedin.com/in/puckwang>
+<link rel=me type=text/html href="//stackoverflow.com/users/7699156/puckwang?tab=profile">
+<link rel=me type=text/html href=//g.dev/puckwang>
+<link rel=alternate type=application/rss+xml href=https://blog.puckwang.com/index.xml>
+<meta charset=utf-8>
+<meta name=author content="Puck Wang">
+<meta name=copyright content="Copyright © 2017-2024, Puck Wang; all rights reserved.">
+<meta name=description content="在寫前端時，有時候會遇到需要在 Input 上偵測 Enter 事件來提供特殊功能，像是搜尋的 Input 可以增加 Enter 執行搜尋。在使用 `event.key` 去判斷是否為 `enter` 時，應該會遇到輸入法選字也會誤判的問題。">
+<script>(function(b,d,e,a,g){b[a]=b[a]||[],b[a].push({'gtm.start':(new Date).getTime(),event:'gtm.js'});var f=d.getElementsByTagName(e)[0],c=d.createElement(e),h=a!='dataLayer'?'&l='+a:'';c.async=!0,c.src='https://www.googletagmanager.com/gtm.js?id='+g+h,f.parentNode.insertBefore(c,f)})(window,document,'script','dataLayer','GTM-T7955DN')</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","articleSection":"posts","name":"JavaScript 避免輸入法選字觸發 Enter 事件的方法","headline":"JavaScript 避免輸入法選字觸發 Enter 事件的方法","alternativeHeadline":"","description":"在寫前端時，有時候會遇到需要在 Input 上偵測 Enter 事件來提供特殊功能，像是搜尋的 Input 可以增加 Enter 執行搜尋。在使用 `event.key` 去判斷是否為 `enter` 時，應該會遇到輸入法選字也會誤判的問題。","inLanguage":"zh-TW","isFamilyFriendly":"true","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.puckwang.com\/posts\/2024\/prevent-key-event-during-ime-selection\/"},"author":{"@type":"Person","name":"Puck Wang","url":"https:\/\/blog.puckwang.com\/about\/"},"creator":{"@type":"Person","name":"Puck Wang"},"accountablePerson":{"@type":"Person","name":"Puck Wang"},"copyrightHolder":"Puck\u0027s Blog","copyrightYear":"2024","dateCreated":"2024-05-26T22:52:26.00Z","datePublished":"2024-05-26T22:52:26.00Z","dateModified":"2024-05-26T23:28:51.00Z","publisher":{"@type":"Organization","name":"Puck\u0027s Blog","url":"https:\/\/blog.puckwang.com\/","logo":{"@type":"ImageObject","url":"https:\/\/blog.puckwang.com\/images\/favicon-128x128.png","width":"128","height":"128"}},"image":{"@type":"ImageObject","@id":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg","url":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg"},"url":"https:\/\/blog.puckwang.com\/posts\/2024\/prevent-key-event-during-ime-selection\/","wordCount":"155","genre":["NodeJs","JavaScript","TypeScript","HTML"]}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7955DN" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript>
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark py-1 top-nav">
+<div class=container>
+<a class="navbar-brand pr-2" href=https://blog.puckwang.com/>
+<img src=https://blog.puckwang.com/images/logo.png width=40 height=40 alt>
+PUCK'S BLOG
+</a>
+<button class="navbar-toggler collapsed" type=button data-toggle=collapse data-target=#navbarCollapse aria-controls=navbarCollapse aria-expanded=false aria-label="Toggle navigation">
+<i class="fas fa-bars"></i>
+</button>
+<div class="navbar-collapse collapse" id=navbarCollapse>
+<ul class="navbar-nav mr-auto">
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/archives/>
+Archives
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/categories/>
+Categories
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/tags/>
+Tags
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/projects/>
+MyProjects
+</a>
+</li>
+</ul>
+<div class=social-icons>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</nav>
+<style type=text/css>.feature-image{background-image:linear-gradient( rgba(0,0,0,.15),rgba(0,0,0,.15) ),url(https://blog.puckwang.com/images/hero-main.jpg);height:500px}.feature-image-text{margin-top:20px}@media(min-width:1200px){.feature-image{background-position:0 30%}}@media(max-width:768px){.feature-image{height:250px;background-position:0 0}}</style>
+<header class=feature-image>
+<div class=feature-image-text>
+</div>
+</header>
+<div class=main>
+<div class="container mt-4 post">
+<h1>JavaScript 避免輸入法選字觸發 Enter 事件的方法</h1>
+<div class=mb-3>
+<small>
+<i class="fas fa-user-edit"></i>&nbsp;作者<strong> Puck Wang</strong>
+| <i class="far fa-calendar-alt"></i>&nbsp;建立於 2024-05-26 22:52&nbsp;
+| <i class="far fa-calendar-alt"></i>&nbsp;更新於 2024-05-26 23:28&nbsp;
+| <i class="fas fa-code-branch"></i>&nbsp;版本 c3a77a1&nbsp;
+| <i class="fa fa-folder" title=Tags aria-hidden=true></i>&nbsp;分類: <a href=https://blog.puckwang.com/categories/%E5%95%8F%E9%A1%8C%E8%A7%A3%E6%B1%BA/>問題解決</a>
+| <i class="fa fa-tags" title=Tags aria-hidden=true></i>&nbsp;標籤: <a href=https://blog.puckwang.com/tags/nodejs/>NodeJs</a>, <a href=https://blog.puckwang.com/tags/javascript/>JavaScript</a>, <a href=https://blog.puckwang.com/tags/typescript/>TypeScript</a>, <a href=https://blog.puckwang.com/tags/html/>HTML</a>
+</small>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2024%2fprevent-key-event-during-ime-selection%2f&text=JavaScript%20%e9%81%bf%e5%85%8d%e8%bc%b8%e5%85%a5%e6%b3%95%e9%81%b8%e5%ad%97%e8%a7%b8%e7%99%bc%20Enter%20%e4%ba%8b%e4%bb%b6%e7%9a%84%e6%96%b9%e6%b3%95&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2024%2fprevent-key-event-during-ime-selection%2f&t=JavaScript%20%e9%81%bf%e5%85%8d%e8%bc%b8%e5%85%a5%e6%b3%95%e9%81%b8%e5%ad%97%e8%a7%b8%e7%99%bc%20Enter%20%e4%ba%8b%e4%bb%b6%e7%9a%84%e6%96%b9%e6%b3%95" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2024%2fprevent-key-event-during-ime-selection%2f&title=JavaScript%20%e9%81%bf%e5%85%8d%e8%bc%b8%e5%85%a5%e6%b3%95%e9%81%b8%e5%ad%97%e8%a7%b8%e7%99%bc%20Enter%20%e4%ba%8b%e4%bb%b6%e7%9a%84%e6%96%b9%e6%b3%95&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div class="mt-4 mb-5 main-content">
+<p>在寫前端時，有時候會遇到需要在 Input 上偵測 Enter 事件來提供特殊功能，像是搜尋的 Input 可以增加 Enter 執行搜尋。</p>
+<p>在使用 <code>event.key</code> 去判斷是否為 <code>enter</code> 時，應該會遇到輸入法選字也會誤判的問題。</p>
+<p>本文記錄一下解法：</p>
+<p>提供測試的 Input: <input id=test-input></p>
+<blockquote>
+<p>可以開啟 Browser 的 Debug Tool，在 Console 中觀察。</p>
+</blockquote>
+<h2 id=舊版解法>舊版解法</h2>
+<p>除了判斷 <code>key</code> 以外再增加判斷 <code>keyCode</code>，如果是在輸入法的操作，那 <code>keyCode</code> 就會是 229。
+但新版的 JS 已將 <code>keyCode</code> 棄用，雖然大部分瀏覽器都還會提供這個屬性，不過我還是推薦直接使用<a href=#%E6%96%B0%E7%89%88%E8%A7%A3%E6%B3%95>新版解法</a>比較保險。</p>
+<p><strong>Vanilla JS</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js>document.getElementById(<span style=color:#a31515>&#39;test-input&#39;</span>).addEventListener(<span style=color:#a31515>&#39;keydown&#39;</span>, event =&gt; {
+    <span style=color:#00f>if</span> (event.key === <span style=color:#a31515>&#39;Enter&#39;</span> &amp;&amp; event.keyCode !== 229) {
+        event.preventDefault();
+        console.log(<span style=color:#a31515>&#34;按下了 Enter&#34;</span>);
+    }
+});
+</code></pre></div><h2 id=新版解法>新版解法</h2>
+<p>除了判斷 <code>key</code> 以外再增加判斷 <code>isComposing</code>，如果是在輸入法的操作，那 <code>isComposing</code> 就會是 <code>true</code>。</p>
+<p><strong>Vanilla JS</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js>document.getElementById(<span style=color:#a31515>&#39;test-input&#39;</span>).addEventListener(<span style=color:#a31515>&#39;keyDown&#39;</span>, e =&gt; {
+    <span style=color:#00f>if</span> (event.key === <span style=color:#a31515>&#39;Enter&#39;</span> &amp;&amp; !event.isComposing) {
+        event.preventDefault(); <span style=color:green>// 防止換行
+</span><span style=color:green></span>        <span style=color:green>// Do some...
+</span><span style=color:green></span>    }
+})
+</code></pre></div><p><strong>React</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-tsx data-lang=tsx><span style=color:#00f>const</span> handleKeyDown = (event: <span style=color:#2b91af>React.KeyboardEvent</span>&lt;HTMLTextAreaElement&gt;) =&gt; {
+	<span style=color:green>// 限制只在單獨按下 Enter 且非中文選字時才執行送出
+</span><span style=color:green></span>	<span style=color:#00f>if</span> (event.key === <span style=color:#a31515>&#39;Enter&#39;</span> &amp;&amp; !event.nativeEvent.isComposing) {
+		event.preventDefault(); <span style=color:green>// 防止換行
+</span><span style=color:green></span>		<span style=color:green>// Do some...
+</span><span style=color:green></span>	}
+};
+</code></pre></div><script>document.getElementById('test-input').addEventListener('keydown',a=>{console.log(`key = ${a.key}; keyCode = ${a.keyCode}; isComposing = ${a.isComposing}`),a.key==='Enter'&&!a.isComposing&&(a.preventDefault(),console.log("按下了 Enter (新版解法)")),a.key==='Enter'&&a.keyCode!==229&&(a.preventDefault(),console.log("按下了 Enter (舊版解法)"))})</script>
+<h2 id=參考資料>參考資料</h2>
+<ul>
+<li><a href=https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/isComposing>https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/isComposing</a></li>
+<li></li>
+</ul>
+<div>
+<br>
+<h3>
+感謝閱讀！
+</h3>
+<div>
+喜歡這篇文章或是有幫助到你嗎？ 歡迎分享給你的朋友！
+</div>
+<br>
+<div>
+有任何問題、回饋或您認為我會感興趣的任何東西嗎？ 請在下面發表評論，或者是<a href=https://blog.puckwang.com/about target=_blank>直接聯絡我</a>。
+</div>
+<br>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2024%2fprevent-key-event-during-ime-selection%2f&text=JavaScript%20%e9%81%bf%e5%85%8d%e8%bc%b8%e5%85%a5%e6%b3%95%e9%81%b8%e5%ad%97%e8%a7%b8%e7%99%bc%20Enter%20%e4%ba%8b%e4%bb%b6%e7%9a%84%e6%96%b9%e6%b3%95&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2024%2fprevent-key-event-during-ime-selection%2f&t=JavaScript%20%e9%81%bf%e5%85%8d%e8%bc%b8%e5%85%a5%e6%b3%95%e9%81%b8%e5%ad%97%e8%a7%b8%e7%99%bc%20Enter%20%e4%ba%8b%e4%bb%b6%e7%9a%84%e6%96%b9%e6%b3%95" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2024%2fprevent-key-event-during-ime-selection%2f&title=JavaScript%20%e9%81%bf%e5%85%8d%e8%bc%b8%e5%85%a5%e6%b3%95%e9%81%b8%e5%ad%97%e8%a7%b8%e7%99%bc%20Enter%20%e4%ba%8b%e4%bb%b6%e7%9a%84%e6%96%b9%e6%b3%95&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div>
+<hr>
+<div class="p-4 row justify-content-center" style=align-items:center>
+<div class=col-2>
+<img src=https://blog.puckwang.com/images/logo.png alt="Puck Wang" class="img-fluid rounded-circle" width=150>
+</div>
+<div class=col-8 style=vertical-align:middle>
+<h4>
+Puck Wang
+</h4>
+<p>
+Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網站開發者，常使用 .Net 和 React 進行開發，專注於架構研究，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。
+</p>
+<p>
+更多關於我的訊息，可至關於<a href=https://blog.puckwang.com/about target=_blank>關於</a>頁面。
+</p>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar d-print-none d-none d-xl-block">
+<div id=toc>
+<h2>目錄</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#舊版解法>舊版解法</a></li>
+<li><a href=#新版解法>新版解法</a></li>
+<li><a href=#參考資料>參考資料</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<footer class="mt-auto footer d-print-none">
+<div class=container-fluid>
+<div class="row justify-content-center">
+<div class="col-md-4 col-xl-3">
+<h5>Copyright © 2017-2024, Puck Wang; all rights reserved.</h5>
+Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with.
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>Disclaimer</h5>
+See <a href=https://blog.puckwang.com/other/disclaimer/>disclaimer</a> of <a href=https://blog.puckwang.com>https://blog.puckwang.com/</a>
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>About This Site</h5>
+This blog was created using the <a href=https://gohugo.io/>Hugo</a> static site generator, using
+<a href=https://getbootstrap.com/>Bootstrap</a>, using the Silhouette Hugo theme, created by
+<a href=https://www.mattbutton.com>Matt Button</a>
+</div>
+</div>
+<hr>
+<div class="d-flex justify-content-center icons">
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</footer>
+<script src=https://code.jquery.com/jquery-3.3.1.slim.min.js integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script>
+<script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script>
+<script src=https://unpkg.com/mermaid@8.13.5/dist/mermaid.min.js></script>
+</body>
+<style>.zoom-in-thumbnail{visibility:hidden;position:fixed;z-index:100000;box-sizing:border-box;border:5px solid #fff;border-radius:3px;box-shadow:0 0 2px rgba(0,0,0,.8);opacity:0;pointer-events:none;transition-duration:.3s;transition-delay:.1s;transition-property:opacity}.zoom-in-thumbnail-img{background-repeat:no-repeat;background-size:contain}</style>
+<script>const root=document.documentElement;$(function(){mermaid.initialize({startOnLoad:!0}),$(".main-content img, .post img").each(function(){this.complete?generateImageDiv(this):$(this).on("load",function(){generateImageDiv(this)}),this.style.cursor="pointer",$(this).on("mousemove",function(d){let b=d.clientX,c=d.clientY,a;$(this).next().width()>=$(this).next().height()?innerHeight-c<=$(this).next().height()+50?a=getShowXY(this,"top",b,c):a=getShowXY(this,"bottom",b,c):innerWidth-b<=$(this).next().width()+50?a=getShowXY(this,"left",b,c):a=getShowXY(this,"right",b,c),root.style.setProperty("--zoom-image-x",a.x+250+"px"),root.style.setProperty("--zoom-image-y",a.y+"px")}),$(this).on("click",function(a){window.open(this.src)})})});function getShowXY(d,e,a,b){let c=$(d).next();switch(e){case'top':a-=c.width()/2,b-=c.height(),b-=25;break;case'bottom':a-=c.width()/2,b+=25;break;case'right':b-=c.height()/2,a+=25;break;case'left':a-=c.width(),b-=c.height()/2,a-=25;break}return{x:a,y:b}}function generateImageDiv(c){var e=screen.width*.6,f=screen.height*.5,d=0,a=c.naturalHeight,b=c.naturalWidth,g;b>e&&(d=e/b,b=e,a=a*d),a>f&&(d=f/a,a=f,b=b*d),g="<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-color: white; background-image:url('"+c.src+"'); height: "+a+"px; width: "+b+'px;"></div></div>',$(c).after(g)}</script>
+</html>

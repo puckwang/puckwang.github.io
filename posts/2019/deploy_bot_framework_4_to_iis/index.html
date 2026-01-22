@@ -1,0 +1,388 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta property="og:title" content="Deploy Bot Framework 4 to IIS">
+<meta property="og:description" content="在使用 Bot Framework 開發時，一定會遇到要部署至 IIS 的狀況，但官方文件就只有寫部署到 Azure 的方法，雖然方法與部署 .Net Core 差不多，但沒注意到細節踩雷也會很煩。內文為部署 Bot Framework 4 至 IIS 的方法。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.puckwang.com/posts/2019/deploy_bot_framework_4_to_iis/"><meta property="og:image" content="https://blog.puckwang.com/images/og_image.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2019-02-13T19:00:47+08:00">
+<meta property="article:modified_time" content="2021-12-12T06:36:48+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://blog.puckwang.com/images/og_image.png">
+<meta name=twitter:title content="Deploy Bot Framework 4 to IIS">
+<meta name=twitter:description content="在使用 Bot Framework 開發時，一定會遇到要部署至 IIS 的狀況，但官方文件就只有寫部署到 Azure 的方法，雖然方法與部署 .Net Core 差不多，但沒注意到細節踩雷也會很煩。內文為部署 Bot Framework 4 至 IIS 的方法。">
+<script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-4827510547436807",enable_page_level_ads:!0})</script>
+<title>
+Deploy Bot Framework 4 to IIS | Puck's Blog
+</title>
+<link rel=icon type=image/png href=https://blog.puckwang.com/images/favicon-128x128.png sizes="16x16 32x32 64x64 128x128">
+<link rel=canonical href=https://blog.puckwang.com/posts/2019/deploy_bot_framework_4_to_iis/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Oswald:400" rel=stylesheet>
+<link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
+<link rel=stylesheet href=https://blog.puckwang.com/css/bundle.min.5d5448d1820d6ff5f132cb3fde480cdf60aecc3c374bacdc000c3e1bb275845c.css integrity="sha256-XVRI0YINb/XxMss/3kgM32CuzDw3S6zcAAw+G7J1hFw=">
+<link rel=me type=text/html href=//www.facebook.com/puckwang14>
+<link rel=me type=text/html href=//twitter.com/puckwang14>
+<link rel=me type=text/html href=//github.com/puckwang>
+<link rel=me type=text/html href=//linkedin.com/in/puckwang>
+<link rel=me type=text/html href="//stackoverflow.com/users/7699156/puckwang?tab=profile">
+<link rel=me type=text/html href=//g.dev/puckwang>
+<link rel=alternate type=application/rss+xml href=https://blog.puckwang.com/index.xml>
+<meta charset=utf-8>
+<meta name=author content="Puck Wang">
+<meta name=copyright content="Copyright © 2017-2024, Puck Wang; all rights reserved.">
+<meta name=description content="在使用 Bot Framework 開發時，一定會遇到要部署至 IIS 的狀況，但官方文件就只有寫部署到 Azure 的方法，雖然方法與部署 .Net Core 差不多，但沒注意到細節踩雷也會很煩。內文為部署 Bot Framework 4 至 IIS 的方法。">
+<script>(function(b,d,e,a,g){b[a]=b[a]||[],b[a].push({'gtm.start':(new Date).getTime(),event:'gtm.js'});var f=d.getElementsByTagName(e)[0],c=d.createElement(e),h=a!='dataLayer'?'&l='+a:'';c.async=!0,c.src='https://www.googletagmanager.com/gtm.js?id='+g+h,f.parentNode.insertBefore(c,f)})(window,document,'script','dataLayer','GTM-T7955DN')</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","articleSection":"posts","name":"Deploy Bot Framework 4 to IIS","headline":"Deploy Bot Framework 4 to IIS","alternativeHeadline":"","description":"在使用 Bot Framework 開發時，一定會遇到要部署至 IIS 的狀況，但官方文件就只有寫部署到 Azure 的方法，雖然方法與部署 .Net Core 差不多，但沒注意到細節踩雷也會很煩。內文為部署 Bot Framework 4 至 IIS 的方法。","inLanguage":"zh-TW","isFamilyFriendly":"true","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.puckwang.com\/posts\/2019\/deploy_bot_framework_4_to_iis\/"},"author":{"@type":"Person","name":"Puck Wang","url":"https:\/\/blog.puckwang.com\/about\/"},"creator":{"@type":"Person","name":"Puck Wang"},"accountablePerson":{"@type":"Person","name":"Puck Wang"},"copyrightHolder":"Puck\u0027s Blog","copyrightYear":"2019","dateCreated":"2019-02-13T19:00:47.00Z","datePublished":"2019-02-13T19:00:47.00Z","dateModified":"2021-12-12T06:36:48.00Z","publisher":{"@type":"Organization","name":"Puck\u0027s Blog","url":"https:\/\/blog.puckwang.com\/","logo":{"@type":"ImageObject","url":"https:\/\/blog.puckwang.com\/images\/favicon-128x128.png","width":"128","height":"128"}},"image":{"@type":"ImageObject","@id":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg","url":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg"},"url":"https:\/\/blog.puckwang.com\/posts\/2019\/deploy_bot_framework_4_to_iis\/","wordCount":"252","genre":["bot framework v4","chatbot","部署","IIS"]}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7955DN" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript>
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark py-1 top-nav">
+<div class=container>
+<a class="navbar-brand pr-2" href=https://blog.puckwang.com/>
+<img src=https://blog.puckwang.com/images/logo.png width=40 height=40 alt>
+PUCK'S BLOG
+</a>
+<button class="navbar-toggler collapsed" type=button data-toggle=collapse data-target=#navbarCollapse aria-controls=navbarCollapse aria-expanded=false aria-label="Toggle navigation">
+<i class="fas fa-bars"></i>
+</button>
+<div class="navbar-collapse collapse" id=navbarCollapse>
+<ul class="navbar-nav mr-auto">
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/archives/>
+Archives
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/categories/>
+Categories
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/tags/>
+Tags
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/projects/>
+MyProjects
+</a>
+</li>
+</ul>
+<div class=social-icons>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</nav>
+<style type=text/css>.feature-image{background-image:linear-gradient( rgba(0,0,0,.15),rgba(0,0,0,.15) ),url(https://blog.puckwang.com/images/hero-main.jpg);height:500px}.feature-image-text{margin-top:20px}@media(min-width:1200px){.feature-image{background-position:0 30%}}@media(max-width:768px){.feature-image{height:250px;background-position:0 0}}</style>
+<header class=feature-image>
+<div class=feature-image-text>
+</div>
+</header>
+<div class=main>
+<div class="container mt-4 post">
+<h1>Deploy Bot Framework 4 to IIS</h1>
+<div class=mb-3>
+<small>
+<i class="fas fa-user-edit"></i>&nbsp;作者<strong> Puck Wang</strong>
+| <i class="far fa-calendar-alt"></i>&nbsp;建立於 2019-02-13 19:00&nbsp;
+| <i class="far fa-calendar-alt"></i>&nbsp;更新於 2021-12-12 06:36&nbsp;
+| <i class="fas fa-code-branch"></i>&nbsp;版本 bfd595b&nbsp;
+| <i class="fa fa-folder" title=Tags aria-hidden=true></i>&nbsp;分類: <a href=https://blog.puckwang.com/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC/>軟體開發</a>, <a href=https://blog.puckwang.com/categories/%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%B6%AD%E9%81%8B/>伺服器維運</a>
+| <i class="fa fa-tags" title=Tags aria-hidden=true></i>&nbsp;標籤: <a href=https://blog.puckwang.com/tags/bot-framework-v4/>bot framework v4</a>, <a href=https://blog.puckwang.com/tags/chatbot/>chatbot</a>, <a href=https://blog.puckwang.com/tags/%E9%83%A8%E7%BD%B2/>部署</a>, <a href=https://blog.puckwang.com/tags/iis/>IIS</a>
+</small>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2019%2fdeploy_bot_framework_4_to_iis%2f&text=Deploy%20Bot%20Framework%204%20to%20IIS&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2019%2fdeploy_bot_framework_4_to_iis%2f&t=Deploy%20Bot%20Framework%204%20to%20IIS" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2019%2fdeploy_bot_framework_4_to_iis%2f&title=Deploy%20Bot%20Framework%204%20to%20IIS&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div class="mt-4 mb-5 main-content">
+<p>在使用 Bot Framework 開發時，一定會遇到要部署至 IIS 的狀況，但官方文件就只有寫部署到 Azure 的方法，
+雖然部署 Bot Framework 4 的方法與部署 .Net Core 差不多，但沒注意到細節踩雷也會很煩。</p>
+<h2 id=env-set>環境設置</h2>
+<h3 id=env-set-1>1. 安裝 Windows Server Hosting Bundle</h3>
+<p>IIS 需要另外安裝 <code>.NET Core Windows Server Hosting Bundle</code> ，請至官方下載點選擇適當的版本後，下載 <code>Runtime & Hosting Bundle</code> 並執行安裝。</p>
+<p>連結：https://dotnet.microsoft.com/download/archives</p>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_4_ws_hosting_boundle_index.png width=400>
+<br>
+<h3 id=env-set-2>2. 建立新的 IIS 應用程式集區</h3>
+<p>建立一個新的 <code>應用程式集區</code> 其中設定的部分， .NET CLR 版本務必要改成 <code>沒有 Mamnged 程式碼</code> 。</p>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_4_IIS_app_pool_create.png width=300>
+<br>
+<h3 id=env-set-3>3. 建立新的 IIS 網站</h3>
+<p>新建一個網站或是在一個已存在網站中建立虛擬目錄，不管是哪種方式，都要將 <code>應用程式集區</code> 設定成在上一步所建立的那個應用程式集區。另外其他的設定如 <code>實體目錄</code> 、 <code>繫結</code> 就請自行判斷設定。</p>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_4_IIS_create_website.png width=400>
+<br>
+<h2 id=deploy>部署</h2>
+<h3 id=deploy-1>1. 新增 Production 環境資料</h3>
+<p><code>Startup.cs</code> 會依照環境不同去讀 <code>BotConfiguration.bot</code> 中的設定，平常開發時是讀 <code>development</code> ，而發行後是讀 <code>Production</code> ，但預設是沒有資料的，所以要自己手動新增。</p>
+<p><code>BotConfiguration.bot</code> 範例如下，原本在 <code>services</code> 中只會有 <code>development</code> 一個設定，請依照自己的需求新增 <code>production</code> 版本的設定：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>{
+  &#34;name&#34;: &#34;PuckBot&#34;,
+  &#34;services&#34;: [
+    {
+      &#34;type&#34;: &#34;endpoint&#34;,
+      &#34;name&#34;: &#34;development&#34;,
+      &#34;endpoint&#34;: &#34;http://localhost:3978/api/messages&#34;,
+      &#34;appId&#34;: &#34;&#34;,
+      &#34;appPassword&#34;: &#34;&#34;,
+      &#34;id&#34;: &#34;1&#34;
+    },
+    {
+      &#34;type&#34;: &#34;endpoint&#34;,
+      &#34;name&#34;: &#34;production&#34;,
+      &#34;endpoint&#34;: &#34;http://&lt;Your_server_ip&gt;/api/messages&#34;,
+      &#34;appId&#34;: &#34;&#34;,
+      &#34;appPassword&#34;: &#34;&#34;,
+      &#34;id&#34;: &#34;1&#34;
+    }
+  ],
+  &#34;padlock&#34;: &#34;&#34;,
+  &#34;version&#34;: &#34;2.0&#34;
+}
+</code></pre></div><blockquote>
+<p>這裡可以直接用 Bot Framework Emulator 4 設定，也可以用 IDE 開起來改。</p>
+</blockquote>
+<h3 id=deploy-2>2. 發布 Bot 專案</h3>
+<p>在 Visual Studio 上方選擇 <code>建置</code> -> <code>發行 xxx</code> ，接下來請選擇發布目標為 <code>資料夾</code> ，並確定好其他如 <code>.net core 版本</code> 等設定皆無誤，之後就可以執行發行的動作了。</p>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_4_vs_publish.png width=400>
+<br>
+<p>等它執行完後，預設會輸出到這個路徑 <code>./bin/Release/netcoreapp2.1/</code> (版本號會依照剛剛設定有所不同)。</p>
+<h3 id=deploy-3>3. 複製至 IIS 網站根目錄</h3>
+<p>接下來請將 <code>./bin/Release/netcoreapp2.1/publish/</code> 全部的檔案複製到之前新增的 IIS 網站的根目錄中，記得重啟網站。</p>
+<h3 id=deploy-4>4. 檢查 AspNetCoreModule 載入是否正常</h3>
+<p>到 IIS 網站中，選擇 <code>模組</code> ，之後檢查一下有沒有一個叫 <code>AspNetCoreModule</code> 的模組，如果沒有，請檢查 <code>.NET Core Windows Server Hosting Bundle</code> 是否正確安裝。</p>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_4_IIS_check_model.png width=400>
+<br>
+<h1 id=test>驗證</h1>
+<h3 id=test-1>於瀏覽器中測試</h3>
+<p>部署完後可於瀏覽器中查看網站是否功能正常，如果看到 <code>Your bot is ready!</code> 的字樣就可以了。</p>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_4_successful.png width=400>
+<br>
+<h3 id=test-1>於 Bot Framework Emulator 4 中測試</h3>
+<p>執行 Bot Framework Emulator 4 ，並開啟之前所設定的 <code>BotConfiguration.bot</code> 檔案，它就會讀到 Production 的設定了，並可以直接使用它來建立連線。</p>
+<p>注意：在連線前記得要將 Bot Framework Emulator 4 設定好 <a href=https://ngrok.com/>ngrok</a>，否則會沒辦法建立連線。</p>
+<h2 id=troubleshooting>Troubleshooting</h2>
+<h3 id=iis-4xx--5xx>IIS 4xx / 5xx</h3>
+<p>如果在網站看到的是 IIS 的錯誤，請檢查權限、根目錄、應用程式集區等設定有沒有設定正確。</p>
+<h3 id=runtime-error>Runtime Error</h3>
+<p>如果是看到 <code>An error occurred while starting the application.</code> 這個錯誤，請至 <code>web.config</code> 中將 <code>stdoutLogEnabled</code> 設為 <code>true</code> 去看 log 檢查是為什麼錯。</p>
+<blockquote>
+<p>預設 log 路徑為 <code>.\logs\stdout</code> ，如果 logs 不存在，它就不會自己連結，請務必要自己建立 logs 資料夾，他才會自己產生 log 檔。</p>
+</blockquote>
+<hr>
+<p><strong>參考資料</strong></p>
+<ul>
+<li><a href=https://stackify.com/how-to-deploy-asp-net-core-to-iis/>https://stackify.com/how-to-deploy-asp-net-core-to-iis/</a></li>
+<li><a href=https://poychang.github.io/troubleshoot-an-error-occurred-in-asp-dot-net-core-on-iis/>https://poychang.github.io/troubleshoot-an-error-occurred-in-asp-dot-net-core-on-iis/</a></li>
+</ul>
+<div>
+<br>
+<h3>
+感謝閱讀！
+</h3>
+<div>
+喜歡這篇文章或是有幫助到你嗎？ 歡迎分享給你的朋友！
+</div>
+<br>
+<div>
+有任何問題、回饋或您認為我會感興趣的任何東西嗎？ 請在下面發表評論，或者是<a href=https://blog.puckwang.com/about target=_blank>直接聯絡我</a>。
+</div>
+<br>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2019%2fdeploy_bot_framework_4_to_iis%2f&text=Deploy%20Bot%20Framework%204%20to%20IIS&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2019%2fdeploy_bot_framework_4_to_iis%2f&t=Deploy%20Bot%20Framework%204%20to%20IIS" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2019%2fdeploy_bot_framework_4_to_iis%2f&title=Deploy%20Bot%20Framework%204%20to%20IIS&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div>
+<hr>
+<div class="p-4 row justify-content-center" style=align-items:center>
+<div class=col-2>
+<img src=https://blog.puckwang.com/images/logo.png alt="Puck Wang" class="img-fluid rounded-circle" width=150>
+</div>
+<div class=col-8 style=vertical-align:middle>
+<h4>
+Puck Wang
+</h4>
+<p>
+Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網站開發者，常使用 .Net 和 React 進行開發，專注於架構研究，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。
+</p>
+<p>
+更多關於我的訊息，可至關於<a href=https://blog.puckwang.com/about target=_blank>關於</a>頁面。
+</p>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar d-print-none d-none d-xl-block">
+<div id=toc>
+<h2>目錄</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#env-set>環境設置</a>
+<ul>
+<li><a href=#env-set-1>1. 安裝 Windows Server Hosting Bundle</a></li>
+<li><a href=#env-set-2>2. 建立新的 IIS 應用程式集區</a></li>
+<li><a href=#env-set-3>3. 建立新的 IIS 網站</a></li>
+</ul>
+</li>
+<li><a href=#deploy>部署</a>
+<ul>
+<li><a href=#deploy-1>1. 新增 Production 環境資料</a></li>
+<li><a href=#deploy-2>2. 發布 Bot 專案</a></li>
+<li><a href=#deploy-3>3. 複製至 IIS 網站根目錄</a></li>
+<li><a href=#deploy-4>4. 檢查 AspNetCoreModule 載入是否正常</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<ul>
+<li><a href=#test-1>於瀏覽器中測試</a></li>
+<li><a href=#test-1>於 Bot Framework Emulator 4 中測試</a></li>
+</ul>
+</li>
+<li><a href=#troubleshooting>Troubleshooting</a>
+<ul>
+<li><a href=#iis-4xx--5xx>IIS 4xx / 5xx</a></li>
+<li><a href=#runtime-error>Runtime Error</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<footer class="mt-auto footer d-print-none">
+<div class=container-fluid>
+<div class="row justify-content-center">
+<div class="col-md-4 col-xl-3">
+<h5>Copyright © 2017-2024, Puck Wang; all rights reserved.</h5>
+Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with.
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>Disclaimer</h5>
+See <a href=https://blog.puckwang.com/other/disclaimer/>disclaimer</a> of <a href=https://blog.puckwang.com>https://blog.puckwang.com/</a>
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>About This Site</h5>
+This blog was created using the <a href=https://gohugo.io/>Hugo</a> static site generator, using
+<a href=https://getbootstrap.com/>Bootstrap</a>, using the Silhouette Hugo theme, created by
+<a href=https://www.mattbutton.com>Matt Button</a>
+</div>
+</div>
+<hr>
+<div class="d-flex justify-content-center icons">
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</footer>
+<script src=https://code.jquery.com/jquery-3.3.1.slim.min.js integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script>
+<script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script>
+<script src=https://unpkg.com/mermaid@8.13.5/dist/mermaid.min.js></script>
+</body>
+<style>.zoom-in-thumbnail{visibility:hidden;position:fixed;z-index:100000;box-sizing:border-box;border:5px solid #fff;border-radius:3px;box-shadow:0 0 2px rgba(0,0,0,.8);opacity:0;pointer-events:none;transition-duration:.3s;transition-delay:.1s;transition-property:opacity}.zoom-in-thumbnail-img{background-repeat:no-repeat;background-size:contain}</style>
+<script>const root=document.documentElement;$(function(){mermaid.initialize({startOnLoad:!0}),$(".main-content img, .post img").each(function(){this.complete?generateImageDiv(this):$(this).on("load",function(){generateImageDiv(this)}),this.style.cursor="pointer",$(this).on("mousemove",function(d){let b=d.clientX,c=d.clientY,a;$(this).next().width()>=$(this).next().height()?innerHeight-c<=$(this).next().height()+50?a=getShowXY(this,"top",b,c):a=getShowXY(this,"bottom",b,c):innerWidth-b<=$(this).next().width()+50?a=getShowXY(this,"left",b,c):a=getShowXY(this,"right",b,c),root.style.setProperty("--zoom-image-x",a.x+250+"px"),root.style.setProperty("--zoom-image-y",a.y+"px")}),$(this).on("click",function(a){window.open(this.src)})})});function getShowXY(d,e,a,b){let c=$(d).next();switch(e){case'top':a-=c.width()/2,b-=c.height(),b-=25;break;case'bottom':a-=c.width()/2,b+=25;break;case'right':b-=c.height()/2,a+=25;break;case'left':a-=c.width(),b-=c.height()/2,a-=25;break}return{x:a,y:b}}function generateImageDiv(c){var e=screen.width*.6,f=screen.height*.5,d=0,a=c.naturalHeight,b=c.naturalWidth,g;b>e&&(d=e/b,b=e,a=a*d),a>f&&(d=f/a,a=f,b=b*d),g="<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-color: white; background-image:url('"+c.src+"'); height: "+a+"px; width: "+b+'px;"></div></div>',$(c).after(g)}</script>
+</html>

@@ -1,0 +1,703 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta property="og:title" content="Jenkins Pipeline Stages 平行處理的寫法">
+<meta property="og:description" content="Jenkins pipeline 在執行 Stage 時，某些情況使用平行處理可以節省很多執行所需時間，本篇將會介紹幾種平行處理的方法。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.puckwang.com/posts/2021/jenkins-pipeline-running-stages-in-parallel/"><meta property="og:image" content="https://blog.puckwang.com/images/og_image.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-03-13T11:47:08+08:00">
+<meta property="article:modified_time" content="2021-12-12T06:36:48+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://blog.puckwang.com/images/og_image.png">
+<meta name=twitter:title content="Jenkins Pipeline Stages 平行處理的寫法">
+<meta name=twitter:description content="Jenkins pipeline 在執行 Stage 時，某些情況使用平行處理可以節省很多執行所需時間，本篇將會介紹幾種平行處理的方法。">
+<script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-4827510547436807",enable_page_level_ads:!0})</script>
+<title>
+Jenkins Pipeline Stages 平行處理的寫法 | Puck's Blog
+</title>
+<link rel=icon type=image/png href=https://blog.puckwang.com/images/favicon-128x128.png sizes="16x16 32x32 64x64 128x128">
+<link rel=canonical href=https://blog.puckwang.com/posts/2021/jenkins-pipeline-running-stages-in-parallel/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Oswald:400" rel=stylesheet>
+<link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
+<link rel=stylesheet href=https://blog.puckwang.com/css/bundle.min.5d5448d1820d6ff5f132cb3fde480cdf60aecc3c374bacdc000c3e1bb275845c.css integrity="sha256-XVRI0YINb/XxMss/3kgM32CuzDw3S6zcAAw+G7J1hFw=">
+<link rel=me type=text/html href=//www.facebook.com/puckwang14>
+<link rel=me type=text/html href=//twitter.com/puckwang14>
+<link rel=me type=text/html href=//github.com/puckwang>
+<link rel=me type=text/html href=//linkedin.com/in/puckwang>
+<link rel=me type=text/html href="//stackoverflow.com/users/7699156/puckwang?tab=profile">
+<link rel=me type=text/html href=//g.dev/puckwang>
+<link rel=alternate type=application/rss+xml href=https://blog.puckwang.com/index.xml>
+<meta charset=utf-8>
+<meta name=author content="Puck Wang">
+<meta name=copyright content="Copyright © 2017-2024, Puck Wang; all rights reserved.">
+<meta name=description content="Jenkins pipeline 在執行 Stage 時，某些情況使用平行處理可以節省很多執行所需時間，本篇將會介紹幾種平行處理的方法。">
+<script>(function(b,d,e,a,g){b[a]=b[a]||[],b[a].push({'gtm.start':(new Date).getTime(),event:'gtm.js'});var f=d.getElementsByTagName(e)[0],c=d.createElement(e),h=a!='dataLayer'?'&l='+a:'';c.async=!0,c.src='https://www.googletagmanager.com/gtm.js?id='+g+h,f.parentNode.insertBefore(c,f)})(window,document,'script','dataLayer','GTM-T7955DN')</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","articleSection":"posts","name":"Jenkins Pipeline Stages 平行處理的寫法","headline":"Jenkins Pipeline Stages 平行處理的寫法","alternativeHeadline":"","description":"Jenkins pipeline 在執行 Stage 時，某些情況使用平行處理可以節省很多執行所需時間，本篇將會介紹幾種平行處理的方法。","inLanguage":"zh-TW","isFamilyFriendly":"true","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.puckwang.com\/posts\/2021\/jenkins-pipeline-running-stages-in-parallel\/"},"author":{"@type":"Person","name":"Puck Wang","url":"https:\/\/blog.puckwang.com\/about\/"},"creator":{"@type":"Person","name":"Puck Wang"},"accountablePerson":{"@type":"Person","name":"Puck Wang"},"copyrightHolder":"Puck\u0027s Blog","copyrightYear":"2021","dateCreated":"2021-03-13T11:47:08.00Z","datePublished":"2021-03-13T11:47:08.00Z","dateModified":"2021-12-12T06:36:48.00Z","publisher":{"@type":"Organization","name":"Puck\u0027s Blog","url":"https:\/\/blog.puckwang.com\/","logo":{"@type":"ImageObject","url":"https:\/\/blog.puckwang.com\/images\/favicon-128x128.png","width":"128","height":"128"}},"image":{"@type":"ImageObject","@id":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg","url":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg"},"url":"https:\/\/blog.puckwang.com\/posts\/2021\/jenkins-pipeline-running-stages-in-parallel\/","wordCount":"862","genre":["Jenkins","Pipeline","Parallel","平行處理"]}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7955DN" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript>
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark py-1 top-nav">
+<div class=container>
+<a class="navbar-brand pr-2" href=https://blog.puckwang.com/>
+<img src=https://blog.puckwang.com/images/logo.png width=40 height=40 alt>
+PUCK'S BLOG
+</a>
+<button class="navbar-toggler collapsed" type=button data-toggle=collapse data-target=#navbarCollapse aria-controls=navbarCollapse aria-expanded=false aria-label="Toggle navigation">
+<i class="fas fa-bars"></i>
+</button>
+<div class="navbar-collapse collapse" id=navbarCollapse>
+<ul class="navbar-nav mr-auto">
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/archives/>
+Archives
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/categories/>
+Categories
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/tags/>
+Tags
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/projects/>
+MyProjects
+</a>
+</li>
+</ul>
+<div class=social-icons>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</nav>
+<style type=text/css>.feature-image{background-image:linear-gradient( rgba(0,0,0,.15),rgba(0,0,0,.15) ),url(https://blog.puckwang.com/images/hero-main.jpg);height:500px}.feature-image-text{margin-top:20px}@media(min-width:1200px){.feature-image{background-position:0 30%}}@media(max-width:768px){.feature-image{height:250px;background-position:0 0}}</style>
+<header class=feature-image>
+<div class=feature-image-text>
+</div>
+</header>
+<div class=main>
+<div class="container mt-4 post">
+<h1>Jenkins Pipeline Stages 平行處理的寫法</h1>
+<div class=mb-3>
+<small>
+<i class="fas fa-user-edit"></i>&nbsp;作者<strong> Puck Wang</strong>
+| <i class="far fa-calendar-alt"></i>&nbsp;建立於 2021-03-13 11:47&nbsp;
+| <i class="far fa-calendar-alt"></i>&nbsp;更新於 2021-12-12 06:36&nbsp;
+| <i class="fas fa-code-branch"></i>&nbsp;版本 bfd595b&nbsp;
+| <i class="fa fa-folder" title=Tags aria-hidden=true></i>&nbsp;分類: <a href=https://blog.puckwang.com/categories/ci/cd/>CI/CD</a>
+| <i class="fa fa-tags" title=Tags aria-hidden=true></i>&nbsp;標籤: <a href=https://blog.puckwang.com/tags/jenkins/>Jenkins</a>, <a href=https://blog.puckwang.com/tags/pipeline/>Pipeline</a>, <a href=https://blog.puckwang.com/tags/parallel/>Parallel</a>, <a href=https://blog.puckwang.com/tags/%E5%B9%B3%E8%A1%8C%E8%99%95%E7%90%86/>平行處理</a>
+</small>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fjenkins-pipeline-running-stages-in-parallel%2f&text=Jenkins%20Pipeline%20Stages%20%e5%b9%b3%e8%a1%8c%e8%99%95%e7%90%86%e7%9a%84%e5%af%ab%e6%b3%95&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fjenkins-pipeline-running-stages-in-parallel%2f&t=Jenkins%20Pipeline%20Stages%20%e5%b9%b3%e8%a1%8c%e8%99%95%e7%90%86%e7%9a%84%e5%af%ab%e6%b3%95" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fjenkins-pipeline-running-stages-in-parallel%2f&title=Jenkins%20Pipeline%20Stages%20%e5%b9%b3%e8%a1%8c%e8%99%95%e7%90%86%e7%9a%84%e5%af%ab%e6%b3%95&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div class="mt-4 mb-5 main-content">
+<div class=image>
+<figure class=figure>
+<img src=https://blog.puckwang.com/images/2021/Jenkins-Pipeline-Parallel.png class="figure-img img-fluid rounded" alt="Jenkins Pipeline Parallel Example">
+<figcaption class="figure-caption text-center">Jenkins Pipeline Parallel Example</figcaption>
+</figure>
+</div>
+<p>Jenkins Pipeline 在執行 Stage 時，某些情況使用平行處理可以節省很多執行所需時間，本文將會介紹幾種平行處理的方法。</p>
+<p>你可以在官方文件中看到 <a href=https://www.jenkins.io/doc/book/pipeline/syntax/#parallel>Parallel</a> 及 <a href=https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-matrix>Matrix</a> 兩種實現平行處理的方法，而我除了這兩個外還會在多介紹一個利用 <code>Parallel</code> 去實現動態 Stage 的方法，這也是很常在網路上看到的問題，可以更靈活地去運用 Parallel。</p>
+<p>在開始之前先說明幾點，以下只討論 Declarative Pipeline，並在所有範例中使用 <code>sleep(&lt;sec>)</code> 去模擬實際執行的時間。</p>
+<h2 id=parallel>Parallel</h2>
+<p>使用方法很簡單，只要利用 <code>parallel</code> 將要平行處理的 <code>stage</code> 包起來，並將其放置於一個 <code>stage</code> 中，而被包起來的 <code>stage</code> 就會以平行的方式執行。</p>
+<p><strong>語法範例</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy>stage(&lt;Stage <span>名稱</span>&gt;) {
+    parallel {
+        stage(&lt;<span>名稱</span>&gt;) {
+            <span style=color:green>// ...
+</span><span style=color:green></span>        }
+        stage(&lt;<span>名稱</span>&gt;) {
+            <span style=color:green>// ...
+</span><span style=color:green></span>        }
+        stage(&lt;<span>名稱</span>&gt;) {
+            <span style=color:green>// ...
+</span><span style=color:green></span>        }
+    }
+}
+</code></pre></div><p><strong>注意事項</strong></p>
+<ol>
+<li>不能嵌套使用 (<code>parallel</code> 裡面不能再有 <code>parallel</code>)。</li>
+<li>一個 <code>stage</code> 只能包含一個 <code>parallel</code>，且這個 <code>stage</code> 不能再存在 <code>steps</code>、<code>stages</code> 或 <code>matrix</code>。</li>
+</ol>
+<h3 id=基本使用範例>基本使用範例</h3>
+<p>以下是執行結果與它的 Pipeline Script，可以看到被 <code>parallel</code> 包住的 <code>stage</code> 都有平行處理，且不一定只能有一個步驟。</p>
+<div class=image>
+<figure class=figure>
+<img src=https://blog.puckwang.com/images/2021/Jenkins-Pipeline-Parallel-Example-1.png class="figure-img img-fluid rounded" width=500>
+</figure>
+</div>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy>pipeline {
+    agent any
+    stages {
+        stage(<span style=color:#a31515>&#39;Puck Blog 範例&#39;</span>) {
+<span style=display:block;width:100%;background-color:#e5e5e5>            parallel {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                stage(<span style=color:#a31515>&#39;Stage 1&#39;</span>) {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    steps {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        echo <span style=color:#a31515>&#34;In Stage 1&#34;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        sleep(10)
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                stage(<span style=color:#a31515>&#39;Stage 2&#39;</span>) {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    stages {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        stage(<span style=color:#a31515>&#39;Stage 2-1&#39;</span>) {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            steps {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                                echo <span style=color:#a31515>&#34;In Stage 2-1&#34;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                                sleep(5)
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        stage(<span style=color:#a31515>&#39;Stage 2-2&#39;</span>) {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            steps {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                                echo <span style=color:#a31515>&#34;In Stage 2-2&#34;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                                sleep(5)
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        }
+</span>                    }
+                }
+            }
+        }
+    }
+}</code></pre></div>
+<h3 id=發生錯誤時強制中斷>發生錯誤時強制中斷</h3>
+<p>預設在 <code>parallel</code> 中有任意分支出現 <code>stage</code> 執行失敗時，只會中斷該分支執行，其他分支是不受影響。</p>
+<p>所以如果想要在當有任意 <code>stage</code> 執行失敗時，強制中斷整個 <code>parallel</code> 的執行，可以加入 <code>failFast</code> 的設定來達到這個需求。</p>
+<p>當 <code>failFast</code> 設為 <code>true</code> 時，只要有任意分支出現失敗，就會中斷整個 <code>parallel</code> 的執行，反之 (<code>false</code>) 則不會。</p>
+<blockquote>
+<p>就算是已經在執行中的 <code>stage</code> 也會被強制中斷！</p>
+</blockquote>
+<div class=image>
+<figure class=figure>
+<img src=https://blog.puckwang.com/images/2021/Jenkins-Pipeline-Parallel-failFast.png class="figure-img img-fluid rounded">
+</figure>
+</div>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy>pipeline {
+    agent any
+    stages {
+        stage(<span style=color:#a31515>&#39;Puck Blog 範例&#39;</span>) {
+<span style=display:block;width:100%;background-color:#e5e5e5>            failFast <span style=color:#00f>true</span>
+</span>            parallel {
+                stage(<span style=color:#a31515>&#39;Stage 1&#39;</span>) {
+                    steps {
+                        echo <span style=color:#a31515>&#34;In Stage 1&#34;</span>
+                        sleep(10)
+                    }
+                }
+                stage(<span style=color:#a31515>&#39;Stage 2&#39;</span>) {
+                    stages {
+                        stage(<span style=color:#a31515>&#39;Stage 2-1&#39;</span>) {
+                            steps {
+                                echo <span style=color:#a31515>&#34;In Stage 2-1&#34;</span>
+                                sh <span style=color:#a31515>&#39;exit 1&#39;</span> <span style=color:green>// 模擬發生了錯誤
+</span><span style=color:green></span>                                sleep(5)
+                            }
+                        }
+                        stage(<span style=color:#a31515>&#39;Stage 2-2&#39;</span>) {
+                            steps {
+                                echo <span style=color:#a31515>&#34;In Stage 2-2&#34;</span>
+                                sleep(5)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}</code></pre></div>
+<p>如果有很多個 <code>parallel</code> 不想每個都去單獨設定，可以在 Pipeline 的 <code>options</code> 加入 <code>parallelsAlwaysFailFast()</code> 即可。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy>pipeline {
+    agent any
+    options {
+<span style=display:block;width:100%;background-color:#e5e5e5>        parallelsAlwaysFailFast()
+</span>    }
+    stages {
+    
+    }
+}</code></pre></div>
+<h2 id=matrix>Matrix</h2>
+<p>跟 <code>parallel</code> 一樣式用於平行處理，不過 <code>matrix</code> 可以動態產生執行分支，相較一般的 (不寫 Script) <code>parallel</code> 方便許多。</p>
+<p>如下語法所示，會有 <code>matrix</code> 來包住所有 Matrix 相關指令。其中 <code>axes</code> 是設定動態產生的資料，可以設定一個以上，執行時會列舉所有可能的組合來產生分支，並執行 <code>stages</code> 所設定的 <code>stage</code>，執行時也可透過設定的變數名稱取得對應的值。</p>
+<p>例如我在 <code>axes</code> 中設定了 X=[A, B, C] 及 Y=[1, 2, 3] 那執行時變數列舉就會是 <code>X=A, Y=1</code>、<code>X=A, Y=2</code>&mldr; 共 3 * 3 次。更高維度的設定也是如此。</p>
+<p><strong>語法範例</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy>matrix {
+    axes {
+        axis {
+            name &lt;<span>軸變數名稱</span>&gt;<span>&#39;</span>
+            values &lt;<span>值</span>&gt;
+        }
+    }
+    stages {
+        stage(&lt;<span>名稱</span>&gt;) {
+            <span style=color:green>// ...
+</span><span style=color:green></span>        }
+        stage(&lt;<span>名稱</span>&gt;) {
+            <span style=color:green>// ...
+</span><span style=color:green></span>        }
+        stage(&lt;<span>名稱</span>&gt;) {
+            <span style=color:green>// ...
+</span><span style=color:green></span>        }
+    }
+}
+</code></pre></div><p><strong>注意事項</strong></p>
+<ol>
+<li>不能嵌套使用 (<code>matrix</code> 裡面不能再有 <code>matrix</code>)。</li>
+<li>一個 <code>stage</code> 只能包含一個 <code>matrix</code>，且這個 <code>stage</code> 不能再存在 <code>steps</code>、<code>stages</code> 或 <code>parallel</code>。</li>
+</ol>
+<h3 id=基本使用範例-1>基本使用範例</h3>
+<p>以下是執行結果與它的 Pipeline Script，因為我在 <code>axes</code> 中有設定兩維的軸，所以會分四個分支，並可以看到在 <code>stage</code> 中可以取得該分支所對應的變數。</p>
+<div class=image>
+<figure class=figure>
+<img src=https://blog.puckwang.com/images/2021/Jenkins-Pipeline-Matrix-Example-1.png class="figure-img img-fluid rounded" width=500>
+</figure>
+</div>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy>pipeline {
+    agent any
+    stages {
+        stage(<span style=color:#a31515>&#39;Puck Blog 範例&#39;</span>) {
+<span style=display:block;width:100%;background-color:#e5e5e5>            matrix {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                axes {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    axis {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        name <span style=color:#a31515>&#39;PLATFORM&#39;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        values <span style=color:#a31515>&#39;mac&#39;</span>, <span style=color:#a31515>&#39;windows&#39;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    axis {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        name <span style=color:#a31515>&#39;BROWSER&#39;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        values <span style=color:#a31515>&#39;chrome&#39;</span>, <span style=color:#a31515>&#39;firefox&#39;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                stages {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    stage(<span style=color:#a31515>&#39;Build&#39;</span>) {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        steps {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            echo <span style=color:#a31515>&#34;Do Build for ${PLATFORM} - ${BROWSER}&#34;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            sleep(5)
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    stage(<span style=color:#a31515>&#39;Test&#39;</span>) {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        steps {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            echo <span style=color:#a31515>&#34;Do Test for ${PLATFORM} - ${BROWSER}&#34;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            sleep(5)
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    stage(<span style=color:#a31515>&#39;Publish&#39;</span>) {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        steps {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            echo <span style=color:#a31515>&#34;Do Test for ${PLATFORM} - ${BROWSER}&#34;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            sleep(5)
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>            }
+</span>        }
+    }
+}</code></pre></div>
+<h3 id=排除某些組合>排除某些組合</h3>
+<p>可以透過 <code>excludes</code> 來排除到某些組合不執行，下面這個例子就是將 <strong>safari</strong> / <strong>windows</strong> 的組合排除不執行，在執行時就可以看到只有五個分支而非六個。</p>
+<div class=image>
+<figure class=figure>
+<img src=https://blog.puckwang.com/images/2021/Jenkins-Pipeline-Matrix-Excludes.png class="figure-img img-fluid rounded" width=500>
+</figure>
+</div>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy>pipeline {
+    agent any
+    stages {
+        stage(<span style=color:#a31515>&#39;Puck Blog 範例&#39;</span>) {
+            matrix {
+                axes {
+                    axis {
+                        name <span style=color:#a31515>&#39;PLATFORM&#39;</span>
+                        values <span style=color:#a31515>&#39;mac&#39;</span>, <span style=color:#a31515>&#39;windows&#39;</span>
+                    }
+                    axis {
+                        name <span style=color:#a31515>&#39;BROWSER&#39;</span>
+                        values <span style=color:#a31515>&#39;chrome&#39;</span>, <span style=color:#a31515>&#39;firefox&#39;</span>, <span style=color:#a31515>&#39;safari&#39;</span>
+                    }
+                }
+<span style=display:block;width:100%;background-color:#e5e5e5>                excludes {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    exclude {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        axis {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            name <span style=color:#a31515>&#39;PLATFORM&#39;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            values <span style=color:#a31515>&#39;windows&#39;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        axis {
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            name <span style=color:#a31515>&#39;BROWSER&#39;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                            values <span style=color:#a31515>&#39;safari&#39;</span>
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                        }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                    }
+</span><span style=display:block;width:100%;background-color:#e5e5e5>                }
+</span>                stages {
+                    stage(<span style=color:#a31515>&#39;Build&#39;</span>) {
+                        steps {
+                            echo <span style=color:#a31515>&#34;Do Build for ${PLATFORM} - ${BROWSER}&#34;</span>
+                            sleep(5)
+                        }
+                    }
+                    stage(<span style=color:#a31515>&#39;Test&#39;</span>) {
+                        steps {
+                            echo <span style=color:#a31515>&#34;Do Test for ${PLATFORM} - ${BROWSER}&#34;</span>
+                            sleep(5)
+                        }
+                    }
+                    stage(<span style=color:#a31515>&#39;Publish&#39;</span>) {
+                        steps {
+                            echo <span style=color:#a31515>&#34;Do Test for ${PLATFORM} - ${BROWSER}&#34;</span>
+                            sleep(5)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}</code></pre></div>
+<h3 id=發生錯誤時強制中斷-1>發生錯誤時強制中斷</h3>
+<p>跟 <code>parallel</code> 一樣可以使用 <code>failFast</code> 去設定是否要強制中斷。</p>
+<div class=image>
+<figure class=figure>
+<img src=https://blog.puckwang.com/images/2021/Jenkins-Pipeline-Matrix-failFast.png class="figure-img img-fluid rounded">
+</figure>
+</div>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy>pipeline {
+    agent any
+    stages {
+        stage(<span style=color:#a31515>&#39;Puck Blog 範例&#39;</span>) {
+<span style=display:block;width:100%;background-color:#e5e5e5>            failFast <span style=color:#00f>true</span>
+</span>            matrix {
+                axes {
+                    axis {
+                        name <span style=color:#a31515>&#39;PLATFORM&#39;</span>
+                        values <span style=color:#a31515>&#39;mac&#39;</span>, <span style=color:#a31515>&#39;windows&#39;</span>
+                    }
+                    axis {
+                        name <span style=color:#a31515>&#39;BROWSER&#39;</span>
+                        values <span style=color:#a31515>&#39;chrome&#39;</span>, <span style=color:#a31515>&#39;firefox&#39;</span>
+                    }
+                }
+                stages {
+                    stage(<span style=color:#a31515>&#39;Build&#39;</span>) {
+                        steps {
+                            echo <span style=color:#a31515>&#34;Do Build for ${PLATFORM} - ${BROWSER}&#34;</span>
+                            sleep(5)
+                        }
+                    }
+                    stage(<span style=color:#a31515>&#39;Test&#39;</span>) {
+                        steps {
+                            echo <span style=color:#a31515>&#34;Do Test for ${PLATFORM} - ${BROWSER}&#34;</span>
+                            script {
+                                <span style=color:#00f>if</span> (PLATFORM == <span style=color:#a31515>&#39;windows&#39;</span> &amp;&amp; BROWSER == <span style=color:#a31515>&#39;firefox&#39;</span>) {
+                                    sh <span style=color:#a31515>&#39;exit 1&#39;</span> <span style=color:green>// 模擬發生了錯誤
+</span><span style=color:green></span>                                }
+                            }
+                            sleep(5)
+                        }
+                    }
+                    stage(<span style=color:#a31515>&#39;Publish&#39;</span>) {
+                        steps {
+                            echo <span style=color:#a31515>&#34;Do Test for ${PLATFORM} - ${BROWSER}&#34;</span>
+                            sleep(5)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}</code></pre></div>
+<h2 id=dynamic-parallel-stages>Dynamic Parallel Stages</h2>
+<p>我們可以利用 <code>for-loop</code> 來動態建立 <strong>Parallel Stages</strong>，可以增加執行的變化。</p>
+<p>以下是一個簡單的例子。</p>
+<div class=image>
+<figure class=figure>
+<img src=https://blog.puckwang.com/images/2021/Jenkins-Pipeline-Dynamic-Parallel.png class="figure-img img-fluid rounded" width=600>
+</figure>
+</div>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy><span style=color:#2b91af>def</span> browsers = [<span style=color:#a31515>&#39;Chrome&#39;</span>, <span style=color:#a31515>&#39;Edge&#39;</span>, <span style=color:#a31515>&#39;Firefox&#39;</span>, <span style=color:#a31515>&#39;Safari&#39;</span>]
+
+pipeline {
+    agent any
+    stages {
+        stage(<span style=color:#a31515>&#39;Puck Blog 範例&#39;</span>) {
+            steps {
+                script {
+                    <span style=color:#2b91af>def</span> jobs = [:]
+                    <span style=color:#00f>for</span> (<span style=color:#2b91af>int</span> i = 0; i &lt; browsers.size(); i++) {
+                        <span style=color:green>// 這裡必需放到一個變數裡，否則 i 在執行時就不見了
+</span><span style=color:green></span>                        <span style=color:#2b91af>def</span> browser = browsers[i]
+
+                        <span style=color:green>// 以 browser 為分支名稱建立 stage
+</span><span style=color:green></span>                        jobs[browser] = {
+                            stage(browser) {
+                                stage(<span style=color:#a31515>&#39;Build macOS&#39;</span>) {
+                                    echo <span style=color:#a31515>&#34;Build ${browser} for macOS&#34;</span>
+                                    sleep(5)
+                                }
+                                <span style=color:#00f>if</span> (browser == <span style=color:#a31515>&#39;Chrome&#39;</span> || browser == <span style=color:#a31515>&#39;Firefox&#39;</span>) {
+                                    stage(<span style=color:#a31515>&#39;Build Linux&#39;</span>) {
+                                        echo <span style=color:#a31515>&#34;Build ${browser} for Linux&#34;</span>
+                                        sleep(5)
+                                    }
+                                }
+                                <span style=color:#00f>if</span> (browser != <span style=color:#a31515>&#39;Safari&#39;</span>) {
+                                    stage(<span style=color:#a31515>&#39;Build Windows&#39;</span>) {
+                                        echo <span style=color:#a31515>&#34;Build ${browser} for Windows&#34;</span>
+                                        sleep(5)
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+
+                    parallel jobs
+                }
+            }
+        }
+    }
+}</code></pre></div>
+<h2 id=該使用哪一種方式>該使用哪一種方式？</h2>
+<p>我自己是偏向使用 <code>parallel</code>，因為他自由度比較高，也可以透過變數去動態產生，而 <code>matrix</code> 就沒辦法帶變數。</p>
+<p>遇到需要比較複雜的設定時，我使用變數來儲存設定，並透過變數去動態產生 <code>stage</code>，將來要改設定時也比較方便且直觀。</p>
+<p>如下範例：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-groovy data-lang=groovy><span style=display:block;width:100%;background-color:#e5e5e5><span style=color:#2b91af>def</span> data = [
+</span><span style=display:block;width:100%;background-color:#e5e5e5>    [
+</span><span style=display:block;width:100%;background-color:#e5e5e5>       enable: <span style=color:#00f>true</span>,
+</span><span style=display:block;width:100%;background-color:#e5e5e5>       name: <span style=color:#a31515>&#39;xxxx&#39;</span>,
+</span><span style=display:block;width:100%;background-color:#e5e5e5>       <span style=color:green>// ...
+</span></span><span style=display:block;width:100%;background-color:#e5e5e5><span style=color:green></span>    ],
+</span><span style=display:block;width:100%;background-color:#e5e5e5>    [
+</span><span style=display:block;width:100%;background-color:#e5e5e5>       enable: <span style=color:#00f>true</span>,
+</span><span style=display:block;width:100%;background-color:#e5e5e5>       name: <span style=color:#a31515>&#39;xxxx&#39;</span>,
+</span><span style=display:block;width:100%;background-color:#e5e5e5>       <span style=color:green>// ...
+</span></span><span style=display:block;width:100%;background-color:#e5e5e5><span style=color:green></span>    ]
+</span><span style=display:block;width:100%;background-color:#e5e5e5>]
+</span>
+pipeline {
+    agent any
+    stages {
+        stage(<span style=color:#a31515>&#39;Puck Blog 範例&#39;</span>) {
+            steps {
+                script {
+                    <span style=color:#2b91af>def</span> jobs = [:]
+                    <span style=color:#00f>for</span> (<span style=color:#2b91af>int</span> i = 0; i &lt; data.size(); i++) {
+                        <span style=color:#2b91af>def</span> item = data[i]
+
+                        jobs[item.name] = {
+                            stage(item.name) {
+                                <span style=color:green>// ...
+</span><span style=color:green></span>                            }
+                        }
+                        
+                    }
+
+                    parallel jobs
+                }
+            }
+        }
+    }
+}</code></pre></div>
+<p>另外是使用 <code>parallel</code> 可以自訂分支名稱，在 Blue Ocean 中跟 <code>matrix</code> 比起來比較清楚，從前面 <code>parallel</code> 與 <code>matrix</code> 例子中就可以看到一個分支名稱是可以自訂的，而另一個是固定的不能改。</p>
+<p>不過還是要看使用情況，但主要還是以 <code>parallel</code> 為首選。</p>
+<h2 id=參考資料>參考資料</h2>
+<ul>
+<li><a href=https://www.jenkins.io/doc/book/pipeline/syntax/#parallel>Jenkins Pipeline Syntax</a></li>
+<li><a href=https://stackoverflow.com/questions/42837066/can-i-create-dynamically-stages-in-a-jenkins-pipeline>Can I create dynamically stages in a Jenkins pipeline?</a></li>
+</ul>
+<div>
+<br>
+<h3>
+感謝閱讀！
+</h3>
+<div>
+喜歡這篇文章或是有幫助到你嗎？ 歡迎分享給你的朋友！
+</div>
+<br>
+<div>
+有任何問題、回饋或您認為我會感興趣的任何東西嗎？ 請在下面發表評論，或者是<a href=https://blog.puckwang.com/about target=_blank>直接聯絡我</a>。
+</div>
+<br>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fjenkins-pipeline-running-stages-in-parallel%2f&text=Jenkins%20Pipeline%20Stages%20%e5%b9%b3%e8%a1%8c%e8%99%95%e7%90%86%e7%9a%84%e5%af%ab%e6%b3%95&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fjenkins-pipeline-running-stages-in-parallel%2f&t=Jenkins%20Pipeline%20Stages%20%e5%b9%b3%e8%a1%8c%e8%99%95%e7%90%86%e7%9a%84%e5%af%ab%e6%b3%95" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fjenkins-pipeline-running-stages-in-parallel%2f&title=Jenkins%20Pipeline%20Stages%20%e5%b9%b3%e8%a1%8c%e8%99%95%e7%90%86%e7%9a%84%e5%af%ab%e6%b3%95&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div>
+<hr>
+<div class="p-4 row justify-content-center" style=align-items:center>
+<div class=col-2>
+<img src=https://blog.puckwang.com/images/logo.png alt="Puck Wang" class="img-fluid rounded-circle" width=150>
+</div>
+<div class=col-8 style=vertical-align:middle>
+<h4>
+Puck Wang
+</h4>
+<p>
+Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網站開發者，常使用 .Net 和 React 進行開發，專注於架構研究，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。
+</p>
+<p>
+更多關於我的訊息，可至關於<a href=https://blog.puckwang.com/about target=_blank>關於</a>頁面。
+</p>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar d-print-none d-none d-xl-block">
+<div id=toc>
+<h2>目錄</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#parallel>Parallel</a>
+<ul>
+<li><a href=#基本使用範例>基本使用範例</a></li>
+<li><a href=#發生錯誤時強制中斷>發生錯誤時強制中斷</a></li>
+</ul>
+</li>
+<li><a href=#matrix>Matrix</a>
+<ul>
+<li><a href=#基本使用範例-1>基本使用範例</a></li>
+<li><a href=#排除某些組合>排除某些組合</a></li>
+<li><a href=#發生錯誤時強制中斷-1>發生錯誤時強制中斷</a></li>
+</ul>
+</li>
+<li><a href=#dynamic-parallel-stages>Dynamic Parallel Stages</a></li>
+<li><a href=#該使用哪一種方式>該使用哪一種方式？</a></li>
+<li><a href=#參考資料>參考資料</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<footer class="mt-auto footer d-print-none">
+<div class=container-fluid>
+<div class="row justify-content-center">
+<div class="col-md-4 col-xl-3">
+<h5>Copyright © 2017-2024, Puck Wang; all rights reserved.</h5>
+Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with.
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>Disclaimer</h5>
+See <a href=https://blog.puckwang.com/other/disclaimer/>disclaimer</a> of <a href=https://blog.puckwang.com>https://blog.puckwang.com/</a>
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>About This Site</h5>
+This blog was created using the <a href=https://gohugo.io/>Hugo</a> static site generator, using
+<a href=https://getbootstrap.com/>Bootstrap</a>, using the Silhouette Hugo theme, created by
+<a href=https://www.mattbutton.com>Matt Button</a>
+</div>
+</div>
+<hr>
+<div class="d-flex justify-content-center icons">
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</footer>
+<script src=https://code.jquery.com/jquery-3.3.1.slim.min.js integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script>
+<script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script>
+<script src=https://unpkg.com/mermaid@8.13.5/dist/mermaid.min.js></script>
+</body>
+<style>.zoom-in-thumbnail{visibility:hidden;position:fixed;z-index:100000;box-sizing:border-box;border:5px solid #fff;border-radius:3px;box-shadow:0 0 2px rgba(0,0,0,.8);opacity:0;pointer-events:none;transition-duration:.3s;transition-delay:.1s;transition-property:opacity}.zoom-in-thumbnail-img{background-repeat:no-repeat;background-size:contain}</style>
+<script>const root=document.documentElement;$(function(){mermaid.initialize({startOnLoad:!0}),$(".main-content img, .post img").each(function(){this.complete?generateImageDiv(this):$(this).on("load",function(){generateImageDiv(this)}),this.style.cursor="pointer",$(this).on("mousemove",function(d){let b=d.clientX,c=d.clientY,a;$(this).next().width()>=$(this).next().height()?innerHeight-c<=$(this).next().height()+50?a=getShowXY(this,"top",b,c):a=getShowXY(this,"bottom",b,c):innerWidth-b<=$(this).next().width()+50?a=getShowXY(this,"left",b,c):a=getShowXY(this,"right",b,c),root.style.setProperty("--zoom-image-x",a.x+250+"px"),root.style.setProperty("--zoom-image-y",a.y+"px")}),$(this).on("click",function(a){window.open(this.src)})})});function getShowXY(d,e,a,b){let c=$(d).next();switch(e){case'top':a-=c.width()/2,b-=c.height(),b-=25;break;case'bottom':a-=c.width()/2,b+=25;break;case'right':b-=c.height()/2,a+=25;break;case'left':a-=c.width(),b-=c.height()/2,a-=25;break}return{x:a,y:b}}function generateImageDiv(c){var e=screen.width*.6,f=screen.height*.5,d=0,a=c.naturalHeight,b=c.naturalWidth,g;b>e&&(d=e/b,b=e,a=a*d),a>f&&(d=f/a,a=f,b=b*d),g="<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-color: white; background-image:url('"+c.src+"'); height: "+a+"px; width: "+b+'px;"></div></div>',$(c).after(g)}</script>
+</html>

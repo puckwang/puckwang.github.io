@@ -1,0 +1,470 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta property="og:title" content="使用 Git Bisect 快速找到第一個有問題的 Commit">
+<meta property="og:description" content="現在專案很常使用 Git 作為版本控制系統，所以在遇到 Bug 找不到是哪裡出錯時，可以藉由找出第一次出錯的 Commit 來找到問題原因。在大型專案中，全部 Commit 可能達上千筆，如果遇到很久沒發現的 Bug，就可能會發比較久的時間去找是哪個 Commit 出問題。 常見的可能會看 Commit 訊息來反推可能有問題的 Commit，或是用最笨的方法一個個往回找，這樣效率都不太好。 利用 Git 內建的 Git Bisect 來使用二元搜尋的方式來找有問題的 Commit，就可以大大提升效率。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.puckwang.com/posts/2021/use-git-bisect-debug/"><meta property="og:image" content="https://blog.puckwang.com/images/og_image.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-04-19T03:34:36+08:00">
+<meta property="article:modified_time" content="2021-12-12T06:36:48+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://blog.puckwang.com/images/og_image.png">
+<meta name=twitter:title content="使用 Git Bisect 快速找到第一個有問題的 Commit">
+<meta name=twitter:description content="現在專案很常使用 Git 作為版本控制系統，所以在遇到 Bug 找不到是哪裡出錯時，可以藉由找出第一次出錯的 Commit 來找到問題原因。在大型專案中，全部 Commit 可能達上千筆，如果遇到很久沒發現的 Bug，就可能會發比較久的時間去找是哪個 Commit 出問題。 常見的可能會看 Commit 訊息來反推可能有問題的 Commit，或是用最笨的方法一個個往回找，這樣效率都不太好。 利用 Git 內建的 Git Bisect 來使用二元搜尋的方式來找有問題的 Commit，就可以大大提升效率。">
+<script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-4827510547436807",enable_page_level_ads:!0})</script>
+<title>
+使用 Git Bisect 快速找到第一個有問題的 Commit | Puck's Blog
+</title>
+<link rel=icon type=image/png href=https://blog.puckwang.com/images/favicon-128x128.png sizes="16x16 32x32 64x64 128x128">
+<link rel=canonical href=https://blog.puckwang.com/posts/2021/use-git-bisect-debug/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Oswald:400" rel=stylesheet>
+<link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
+<link rel=stylesheet href=https://blog.puckwang.com/css/bundle.min.5d5448d1820d6ff5f132cb3fde480cdf60aecc3c374bacdc000c3e1bb275845c.css integrity="sha256-XVRI0YINb/XxMss/3kgM32CuzDw3S6zcAAw+G7J1hFw=">
+<link rel=me type=text/html href=//www.facebook.com/puckwang14>
+<link rel=me type=text/html href=//twitter.com/puckwang14>
+<link rel=me type=text/html href=//github.com/puckwang>
+<link rel=me type=text/html href=//linkedin.com/in/puckwang>
+<link rel=me type=text/html href="//stackoverflow.com/users/7699156/puckwang?tab=profile">
+<link rel=me type=text/html href=//g.dev/puckwang>
+<link rel=alternate type=application/rss+xml href=https://blog.puckwang.com/index.xml>
+<meta charset=utf-8>
+<meta name=author content="Puck Wang">
+<meta name=copyright content="Copyright © 2017-2024, Puck Wang; all rights reserved.">
+<meta name=description content="現在專案很常使用 Git 作為版本控制系統，所以在遇到 Bug 找不到是哪裡出錯時，可以藉由找出第一次出錯的 Commit 來找到問題原因。在大型專案中，全部 Commit 可能達上千筆，如果遇到很久沒發現的 Bug，就可能會發比較久的時間去找是哪個 Commit 出問題。 常見的可能會看 Commit 訊息來反推可能有問題的 Commit，或是用最笨的方法一個個往回找，這樣效率都不太好。 利用 Git 內建的 Git Bisect 來使用二元搜尋的方式來找有問題的 Commit，就可以大大提升效率。">
+<script>(function(b,d,e,a,g){b[a]=b[a]||[],b[a].push({'gtm.start':(new Date).getTime(),event:'gtm.js'});var f=d.getElementsByTagName(e)[0],c=d.createElement(e),h=a!='dataLayer'?'&l='+a:'';c.async=!0,c.src='https://www.googletagmanager.com/gtm.js?id='+g+h,f.parentNode.insertBefore(c,f)})(window,document,'script','dataLayer','GTM-T7955DN')</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","articleSection":"posts","name":"使用 Git Bisect 快速找到第一個有問題的 Commit","headline":"使用 Git Bisect 快速找到第一個有問題的 Commit","alternativeHeadline":"","description":"現在專案很常使用 Git 作為版本控制系統，所以在遇到 Bug 找不到是哪裡出錯時，可以藉由找出第一次出錯的 Commit 來找到問題原因。在大型專案中，全部 Commit 可能達上千筆，如果遇到很久沒發現的 Bug，就可能會發比較久的時間去找是哪個 Commit 出問題。 常見的可能會看 Commit 訊息來反推可能有問題的 Commit，或是用最笨的方法一個個往回找，這樣效率都不太好。 利用 Git 內建的 Git Bisect 來使用二元搜尋的方式來找有問題的 Commit，就可以大大提升效率。","inLanguage":"zh-TW","isFamilyFriendly":"true","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.puckwang.com\/posts\/2021\/use-git-bisect-debug\/"},"author":{"@type":"Person","name":"Puck Wang","url":"https:\/\/blog.puckwang.com\/about\/"},"creator":{"@type":"Person","name":"Puck Wang"},"accountablePerson":{"@type":"Person","name":"Puck Wang"},"copyrightHolder":"Puck\u0027s Blog","copyrightYear":"2021","dateCreated":"2021-04-19T03:34:36.00Z","datePublished":"2021-04-19T03:34:36.00Z","dateModified":"2021-12-12T06:36:48.00Z","publisher":{"@type":"Organization","name":"Puck\u0027s Blog","url":"https:\/\/blog.puckwang.com\/","logo":{"@type":"ImageObject","url":"https:\/\/blog.puckwang.com\/images\/favicon-128x128.png","width":"128","height":"128"}},"image":{"@type":"ImageObject","@id":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg","url":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg"},"url":"https:\/\/blog.puckwang.com\/posts\/2021\/use-git-bisect-debug\/","wordCount":"632","genre":["Git"]}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7955DN" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript>
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark py-1 top-nav">
+<div class=container>
+<a class="navbar-brand pr-2" href=https://blog.puckwang.com/>
+<img src=https://blog.puckwang.com/images/logo.png width=40 height=40 alt>
+PUCK'S BLOG
+</a>
+<button class="navbar-toggler collapsed" type=button data-toggle=collapse data-target=#navbarCollapse aria-controls=navbarCollapse aria-expanded=false aria-label="Toggle navigation">
+<i class="fas fa-bars"></i>
+</button>
+<div class="navbar-collapse collapse" id=navbarCollapse>
+<ul class="navbar-nav mr-auto">
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/archives/>
+Archives
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/categories/>
+Categories
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/tags/>
+Tags
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/projects/>
+MyProjects
+</a>
+</li>
+</ul>
+<div class=social-icons>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</nav>
+<style type=text/css>.feature-image{background-image:linear-gradient( rgba(0,0,0,.15),rgba(0,0,0,.15) ),url(https://blog.puckwang.com/images/hero-main.jpg);height:500px}.feature-image-text{margin-top:20px}@media(min-width:1200px){.feature-image{background-position:0 30%}}@media(max-width:768px){.feature-image{height:250px;background-position:0 0}}</style>
+<header class=feature-image>
+<div class=feature-image-text>
+</div>
+</header>
+<div class=main>
+<div class="container mt-4 post">
+<h1>使用 Git Bisect 快速找到第一個有問題的 Commit</h1>
+<div class=mb-3>
+<small>
+<i class="fas fa-user-edit"></i>&nbsp;作者<strong> Puck Wang</strong>
+| <i class="far fa-calendar-alt"></i>&nbsp;建立於 2021-04-19 03:34&nbsp;
+| <i class="far fa-calendar-alt"></i>&nbsp;更新於 2021-12-12 06:36&nbsp;
+| <i class="fas fa-code-branch"></i>&nbsp;版本 bfd595b&nbsp;
+| <i class="fa fa-folder" title=Tags aria-hidden=true></i>&nbsp;分類: <a href=https://blog.puckwang.com/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/>版本控制</a>, <a href=https://blog.puckwang.com/categories/debug/>Debug</a>
+| <i class="fa fa-tags" title=Tags aria-hidden=true></i>&nbsp;標籤: <a href=https://blog.puckwang.com/tags/git/>Git</a>
+</small>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fuse-git-bisect-debug%2f&text=%e4%bd%bf%e7%94%a8%20Git%20Bisect%20%e5%bf%ab%e9%80%9f%e6%89%be%e5%88%b0%e7%ac%ac%e4%b8%80%e5%80%8b%e6%9c%89%e5%95%8f%e9%a1%8c%e7%9a%84%20Commit&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fuse-git-bisect-debug%2f&t=%e4%bd%bf%e7%94%a8%20Git%20Bisect%20%e5%bf%ab%e9%80%9f%e6%89%be%e5%88%b0%e7%ac%ac%e4%b8%80%e5%80%8b%e6%9c%89%e5%95%8f%e9%a1%8c%e7%9a%84%20Commit" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fuse-git-bisect-debug%2f&title=%e4%bd%bf%e7%94%a8%20Git%20Bisect%20%e5%bf%ab%e9%80%9f%e6%89%be%e5%88%b0%e7%ac%ac%e4%b8%80%e5%80%8b%e6%9c%89%e5%95%8f%e9%a1%8c%e7%9a%84%20Commit&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div class="mt-4 mb-5 main-content">
+<div class=image>
+<figure class=figure>
+<img src=https://blog.puckwang.com/images/2021/git-log.png class="figure-img img-fluid rounded" alt="Git log" width=600>
+<figcaption class="figure-caption text-center">Git log</figcaption>
+</figure>
+</div>
+<p>現在專案很常使用 Git 作為版本控制系統，所以在遇到 Bug 找不到是哪裡出錯時，可以藉由找出第一次出錯的 Commit 來找到問題原因。</p>
+<p>但在大型專案中，全部 Commit 可能達上千筆，如果遇到很久沒發現的 Bug，就可能會發比較久的時間去找是哪個 Commit 出問題。</p>
+<p>常見的可能會看 Commit 訊息來反推可能有問題的 Commit，或是用最笨的方法一個個往回找，這樣效率都不太好。</p>
+<p>利用 Git 內建的 <strong>Git Bisect</strong> 來使用二元搜尋的方式來找有問題的 Commit，就可以大大提升效率。</p>
+<p><strong>目錄</strong></p>
+<ul>
+<li><a href=#tldr>TL;DR</a></li>
+<li><a href=#git-bisect>Git Bisect</a></li>
+<li><a href=#%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4>基本指令</a></li>
+<li><a href=#%E7%AF%84%E4%BE%8B>範例</a></li>
+<li><a href=#%E9%87%8D%E6%92%AD%E6%93%8D%E4%BD%9C>重播操作</a></li>
+<li><a href=#%E4%BD%BF%E7%94%A8%E8%85%B3%E6%9C%AC%E8%87%AA%E5%8B%95%E5%8C%96%E5%9F%B7%E8%A1%8C>使用腳本自動化執行</a></li>
+<li><a href=#%E7%B8%BD%E7%B5%90>總結</a></li>
+<li><a href=#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99>參考資料</a></li>
+</ul>
+<h2 id=tldr>TL;DR</h2>
+<p>不想看內文？執行步驟如下：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:green># 開始搜尋並標記好與壞的 Commit</span>
+git bisect start &lt;壞的 Commit&gt; &lt;好的 Commit&gt; 
+
+<span style=color:green># 開始後將自動 Checkout 到要檢查的 Commit。</span>
+<span style=color:green># 請執行以下指令標記正常或錯誤</span>
+git bisect good
+git bisect bad
+
+<span style=color:green># 看到以下文字，代表找到第一個有問題的 Commit。</span>
+0675162a1b00bf8d2cdd535d4fc80e3a31196a8e is the first bad commit
+</code></pre></div><h2 id=git-bisect>Git Bisect</h2>
+<p>Git Bisect 是一個內建於 Git 的指令，它是利用二元搜尋的方式協助使用者找到錯誤的 Commit。</p>
+<p>首先要標記一個有問題的 Commit 及一個沒有問題的 Commit，接下來就照的它的指示標記正常或錯誤，就可以在 O(logn) 的時間複雜度下找到有問題的 Commit。</p>
+<div class=image>
+<figure class=figure>
+<img src=https://blog.puckwang.com/images/2021/Git-Bisect-Demo.gif class="figure-img img-fluid rounded" alt="Git Bisect 執行範例 Gif" width=700>
+<figcaption class="figure-caption text-center">Git Bisect 執行範例 Gif</figcaption>
+</figure>
+</div>
+<p><strong>大略操作步驟</strong></p>
+<ol>
+<li>執行開始。</li>
+<li>標記一個好的 Commit 與一個壞的 Commit。</li>
+<li>標記 Git 自動切換的 Commit 是好的或壞的。</li>
+<li>成功找到第一個有問題的 Commit。</li>
+</ol>
+<h2 id=基本指令>基本指令</h2>
+<p>這邊只列出基本的指令，更詳細可洽<a href=https://git-scm.com/docs/git-bisect>官方文件</a>。</p>
+<p><strong>開始與停止</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>git bisect start <span style=color:green># 開始搜尋</span>
+git bisect start HEAD 51dfd5c <span style=color:green># 開始搜尋，並標記 HEAD 為壞的，51dfd5c 為好的。</span>
+
+git bisect reset <span style=color:green># 停止搜尋</span>
+</code></pre></div><p><strong>標記 Commit</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>git bisect bad <span style=color:green># 標記目前版本為壞的</span>
+git bisect bad a15fd5c <span style=color:green># 標記 a15fd5c 為壞的</span>
+
+git bisect good <span style=color:green># 標記目前版本為壞的</span>
+git bisect good a15fd5c <span style=color:green># 標記 a15fd5c 為好的</span>
+
+git bisect skip <span style=color:green># 跳過目前版本</span>
+
+git bisect reset a15fd5c <span style=color:green># 重置 a15fd5c 標記</span>
+</code></pre></div><p><strong>查看與重播紀錄</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>git bisect log <span style=color:green># 查看操作記錄</span>
+git bisect replay &lt;file-path&gt; <span style=color:green># 自動執行 git bisect log 所記錄的內容</span>
+
+git bisect visualize <span style=color:green># 視覺化檢視</span>
+</code></pre></div><h2 id=範例>範例</h2>
+<p>現在我們有一個專案，完整的 Git log 如下，假設在最新的 Commit <code>2795664</code> (Add feature 7) 發現了一個 Bug，想找到首次出現這個 Bug 的 Commit。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>2795664 2021-04-31 | Add feature 7 (HEAD -&gt; master) [Puck Wang]
+aef2888 2021-03-15 | Add feature 6 [Puck Wang]
+6eb2847 2021-02-29 | Add feature 5 [Puck Wang]
+0675162 2021-01-04 | Add feature 4 [Puck Wang]
+1fd2362 2020-12-24 | Fix bug [Puck Wang]
+93a6c55 2020-11-31 | Update README.md [Puck Wang]
+5de573a 2020-09-22 | Add feature 3 [Puck Wang]
+b297615 2020-06-05 | Add feature 2 [Puck Wang]
+3c7a4b7 2020-04-31 | Add feature 1 [Puck Wang]
+51dfd5c 2020-02-29 | Init Commit [Puck Wang]
+</code></pre></div><p>經測試發現，這個 Bug 是在 <code>3c7a4b7</code> (Add feature 1) 是不存在的，所以我們將 <code>2795664</code> (HEAD) 標記為壞的，<code>3c7a4b7</code> 標記為好的。</p>
+<p>執行完就可以看到回應說剩幾個 Commit 及步驟。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ git bisect start HEAD 3c7a4b7
+
+Bisecting: 3 revisions left to test after this (roughly 2 steps)
+[1fd23627446a40e6a4899168967236d7e7ff44b5] Fix bug
+</code></pre></div><p>此時 Git 也自動 Checkout 到 <code>1fd2362</code> 了，接下來就重複測試有無 Bug，並標記正常或錯誤即可。</p>
+<p>經測試後發現 <code>1fd2362</code> 是正常的，所以標記正常。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>Puck@Puck-MBPR:git-bisect-test &lt;1fd2362&gt;
+$ git bisect good
+
+Bisecting: 1 revision left to test after this (roughly 1 step)
+[6eb2847db93f3a059ade76a41ca42b533a03c854] Add feature 5
+</code></pre></div><p>經測試後發現 <code>6eb2847</code> 是有問題的，所以標記錯誤。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>Puck@Puck-MBPR:git-bisect-test &lt;6eb2847&gt;
+$ git bisect bad
+
+Bisecting: 0 revisions left to test after this (roughly 0 steps)
+[0675162a1b00bf8d2cdd535d4fc80e3a31196a8e] Add feature 4
+</code></pre></div><p>重複幾次後，就可以看到回應找到第一個有問題的 Commit 了 (<code>&lt;xxxxx> is the first bad commit</code> )。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>Puck@Puck-MBPR:git-bisect-test &lt;0675162&gt;
+$ git bisect bad
+
+0675162a1b00bf8d2cdd535d4fc80e3a31196a8e is the first bad commit
+commit 0675162a1b00bf8d2cdd535d4fc80e3a31196a8e
+Author: Puck Wang &lt;me@puckwang.com&gt;
+Date:   Fri Apr 31 21:52:51 2021 +0800
+
+    Add feature 4
+
+:100755 100755 af74d9400639d947d035d1b85067ff08c6565da9 94663fe868dbc3a50b5683fe476b9a64aba89a82 M	test.sh
+</code></pre></div><p>知道第一個有問題的 Commit 後，就可以進一步去查是什麼原因造成這個 Bug。</p>
+<p>如果要離開搜尋，需要執行 <code>git bisect reset</code>。</p>
+<h2 id=重播操作>重播操作</h2>
+<p>在前面有提到可以用 <code>git bisect log</code> 查看操作記錄，我們可以將它存成檔案，再利用 <code>git bisect replay</code> 進行重播。</p>
+<p>儲存至 bisect-log.txt：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ git bisect log &gt; bisect-log.txt
+</code></pre></div><p>使用 bisect-log.txt 進行重播：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ git bisect replay bisect-log.txt
+
+We are not bisecting.
+Bisecting: 3 revisions left to test after this (roughly 2 steps)
+[1fd23627446a40e6a4899168967236d7e7ff44b5] Fix bug
+0675162a1b00bf8d2cdd535d4fc80e3a31196a8e is the first bad commit
+commit 0675162a1b00bf8d2cdd535d4fc80e3a31196a8e
+Author: Puck Wang &lt;me@puckwang.com&gt;
+Date:   Fri Apr 31 21:52:51 2021 +0800
+
+    Add feature 4
+
+:100755 100755 af74d9400639d947d035d1b85067ff08c6565da9 94663fe868dbc3a50b5683fe476b9a64aba89a82 M	test.sh
+</code></pre></div><h2 id=使用腳本自動化執行>使用腳本自動化執行</h2>
+<p>如果你有一個腳本或程式可以判斷這個 Commit 是否正常，就可以用 <code>git bisect run</code> 去自動地找到第一個有問題的 Commit。</p>
+<p>它會使用 <strong>Exit code</strong> 去判斷好壞，規則如下：</p>
+<ul>
+<li>0：代表正常</li>
+<li>1~127：代表錯誤</li>
+<li>125：代表跳過</li>
+</ul>
+<h3 id=範例-1>範例</h3>
+<p>這個範例是使用一個腳本 <code>test.sh</code> 來模擬正常與否，並利用 <code>exit 1</code> 來模擬錯誤。</p>
+<p>開始前都要先標記一個好的與一個壞的 Commit：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>git bisect start HEAD 3c7a4b7
+</code></pre></div><p>使用 <code>git bisect run</code> 並於參數中設定檢查指令，執行後就可以看到他自動檢查 Commit 有沒有問題，並找到第一個有問題的 Commit。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ git bisect run ./test.sh
+running ./test.sh
+OK!
+Bisecting: 1 revision left to test after this (roughly 1 step)
+[6eb2847db93f3a059ade76a41ca42b533a03c854] Add feature 5
+running ./test.sh
+Error!
+Bisecting: 0 revisions left to test after this (roughly 0 steps)
+[0675162a1b00bf8d2cdd535d4fc80e3a31196a8e] Add feature 4
+running ./test.sh
+Error!
+0675162a1b00bf8d2cdd535d4fc80e3a31196a8e is the first bad commit
+commit 0675162a1b00bf8d2cdd535d4fc80e3a31196a8e
+Author: Puck Wang &lt;me@puckwang.com&gt;
+Date:   Fri Apr 31 21:52:51 2021 +0800
+
+    Add feature 4
+
+:100755 100755 af74d9400639d947d035d1b85067ff08c6565da9 94663fe868dbc3a50b5683fe476b9a64aba89a82 M	test.sh
+bisect run success
+</code></pre></div><h2 id=總結>總結</h2>
+<p><strong>Git Bisect</strong> 讓我們更方便地去 Debug，可以省去大量的時間，且又是內建於 Git 的工具，不用另外安裝。</p>
+<p>而在 CI/CD 中，也可以在發生錯誤時，使用 <code>git bisect run</code> 搭配自動化測試，自動地找出有問題的 Commit 並通知作者。</p>
+<h2 id=參考資料>參考資料</h2>
+<ul>
+<li>Git - git-bisect Documentation
+<ul>
+<li><a href=https://git-scm.com/docs/git-bisect>https://git-scm.com/docs/git-bisect</a></li>
+</ul>
+</li>
+</ul>
+<div>
+<br>
+<h3>
+感謝閱讀！
+</h3>
+<div>
+喜歡這篇文章或是有幫助到你嗎？ 歡迎分享給你的朋友！
+</div>
+<br>
+<div>
+有任何問題、回饋或您認為我會感興趣的任何東西嗎？ 請在下面發表評論，或者是<a href=https://blog.puckwang.com/about target=_blank>直接聯絡我</a>。
+</div>
+<br>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fuse-git-bisect-debug%2f&text=%e4%bd%bf%e7%94%a8%20Git%20Bisect%20%e5%bf%ab%e9%80%9f%e6%89%be%e5%88%b0%e7%ac%ac%e4%b8%80%e5%80%8b%e6%9c%89%e5%95%8f%e9%a1%8c%e7%9a%84%20Commit&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fuse-git-bisect-debug%2f&t=%e4%bd%bf%e7%94%a8%20Git%20Bisect%20%e5%bf%ab%e9%80%9f%e6%89%be%e5%88%b0%e7%ac%ac%e4%b8%80%e5%80%8b%e6%9c%89%e5%95%8f%e9%a1%8c%e7%9a%84%20Commit" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2021%2fuse-git-bisect-debug%2f&title=%e4%bd%bf%e7%94%a8%20Git%20Bisect%20%e5%bf%ab%e9%80%9f%e6%89%be%e5%88%b0%e7%ac%ac%e4%b8%80%e5%80%8b%e6%9c%89%e5%95%8f%e9%a1%8c%e7%9a%84%20Commit&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div>
+<hr>
+<div class="p-4 row justify-content-center" style=align-items:center>
+<div class=col-2>
+<img src=https://blog.puckwang.com/images/logo.png alt="Puck Wang" class="img-fluid rounded-circle" width=150>
+</div>
+<div class=col-8 style=vertical-align:middle>
+<h4>
+Puck Wang
+</h4>
+<p>
+Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網站開發者，常使用 .Net 和 React 進行開發，專注於架構研究，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。
+</p>
+<p>
+更多關於我的訊息，可至關於<a href=https://blog.puckwang.com/about target=_blank>關於</a>頁面。
+</p>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar d-print-none d-none d-xl-block">
+<div id=toc>
+<h2>目錄</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#tldr>TL;DR</a></li>
+<li><a href=#git-bisect>Git Bisect</a></li>
+<li><a href=#基本指令>基本指令</a></li>
+<li><a href=#範例>範例</a></li>
+<li><a href=#重播操作>重播操作</a></li>
+<li><a href=#使用腳本自動化執行>使用腳本自動化執行</a>
+<ul>
+<li><a href=#範例-1>範例</a></li>
+</ul>
+</li>
+<li><a href=#總結>總結</a></li>
+<li><a href=#參考資料>參考資料</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<footer class="mt-auto footer d-print-none">
+<div class=container-fluid>
+<div class="row justify-content-center">
+<div class="col-md-4 col-xl-3">
+<h5>Copyright © 2017-2024, Puck Wang; all rights reserved.</h5>
+Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with.
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>Disclaimer</h5>
+See <a href=https://blog.puckwang.com/other/disclaimer/>disclaimer</a> of <a href=https://blog.puckwang.com>https://blog.puckwang.com/</a>
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>About This Site</h5>
+This blog was created using the <a href=https://gohugo.io/>Hugo</a> static site generator, using
+<a href=https://getbootstrap.com/>Bootstrap</a>, using the Silhouette Hugo theme, created by
+<a href=https://www.mattbutton.com>Matt Button</a>
+</div>
+</div>
+<hr>
+<div class="d-flex justify-content-center icons">
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</footer>
+<script src=https://code.jquery.com/jquery-3.3.1.slim.min.js integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script>
+<script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script>
+<script src=https://unpkg.com/mermaid@8.13.5/dist/mermaid.min.js></script>
+</body>
+<style>.zoom-in-thumbnail{visibility:hidden;position:fixed;z-index:100000;box-sizing:border-box;border:5px solid #fff;border-radius:3px;box-shadow:0 0 2px rgba(0,0,0,.8);opacity:0;pointer-events:none;transition-duration:.3s;transition-delay:.1s;transition-property:opacity}.zoom-in-thumbnail-img{background-repeat:no-repeat;background-size:contain}</style>
+<script>const root=document.documentElement;$(function(){mermaid.initialize({startOnLoad:!0}),$(".main-content img, .post img").each(function(){this.complete?generateImageDiv(this):$(this).on("load",function(){generateImageDiv(this)}),this.style.cursor="pointer",$(this).on("mousemove",function(d){let b=d.clientX,c=d.clientY,a;$(this).next().width()>=$(this).next().height()?innerHeight-c<=$(this).next().height()+50?a=getShowXY(this,"top",b,c):a=getShowXY(this,"bottom",b,c):innerWidth-b<=$(this).next().width()+50?a=getShowXY(this,"left",b,c):a=getShowXY(this,"right",b,c),root.style.setProperty("--zoom-image-x",a.x+250+"px"),root.style.setProperty("--zoom-image-y",a.y+"px")}),$(this).on("click",function(a){window.open(this.src)})})});function getShowXY(d,e,a,b){let c=$(d).next();switch(e){case'top':a-=c.width()/2,b-=c.height(),b-=25;break;case'bottom':a-=c.width()/2,b+=25;break;case'right':b-=c.height()/2,a+=25;break;case'left':a-=c.width(),b-=c.height()/2,a-=25;break}return{x:a,y:b}}function generateImageDiv(c){var e=screen.width*.6,f=screen.height*.5,d=0,a=c.naturalHeight,b=c.naturalWidth,g;b>e&&(d=e/b,b=e,a=a*d),a>f&&(d=f/a,a=f,b=b*d),g="<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-color: white; background-image:url('"+c.src+"'); height: "+a+"px; width: "+b+'px;"></div></div>',$(c).after(g)}</script>
+</html>

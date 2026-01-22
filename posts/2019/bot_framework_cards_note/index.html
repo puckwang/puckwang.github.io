@@ -1,0 +1,695 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta property="og:title" content="Microsoft Bot Framework 內建 Cards 種類">
+<meta property="og:description" content="在開發聊天機器人時，現今給使用者的資料呈現方式除了一般的字串形式外，另外一種較常出現的就是以卡片形式呈現，運用卡片形式呈現不僅讓使用者更容易閱讀，也不會造成聊天頻道看起來很雜亂。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.puckwang.com/posts/2019/bot_framework_cards_note/"><meta property="og:image" content="https://blog.puckwang.com/images/2019/bot_framework_hero_card_demo.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2019-01-07T12:29:01+08:00">
+<meta property="article:modified_time" content="2021-12-12T06:36:48+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://blog.puckwang.com/images/2019/bot_framework_hero_card_demo.png">
+<meta name=twitter:title content="Microsoft Bot Framework 內建 Cards 種類">
+<meta name=twitter:description content="在開發聊天機器人時，現今給使用者的資料呈現方式除了一般的字串形式外，另外一種較常出現的就是以卡片形式呈現，運用卡片形式呈現不僅讓使用者更容易閱讀，也不會造成聊天頻道看起來很雜亂。">
+<script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-4827510547436807",enable_page_level_ads:!0})</script>
+<title>
+Microsoft Bot Framework 內建 Cards 種類 | Puck's Blog
+</title>
+<link rel=icon type=image/png href=https://blog.puckwang.com/images/favicon-128x128.png sizes="16x16 32x32 64x64 128x128">
+<link rel=canonical href=https://blog.puckwang.com/posts/2019/bot_framework_cards_note/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Oswald:400" rel=stylesheet>
+<link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
+<link rel=stylesheet href=https://blog.puckwang.com/css/bundle.min.5d5448d1820d6ff5f132cb3fde480cdf60aecc3c374bacdc000c3e1bb275845c.css integrity="sha256-XVRI0YINb/XxMss/3kgM32CuzDw3S6zcAAw+G7J1hFw=">
+<link rel=me type=text/html href=//www.facebook.com/puckwang14>
+<link rel=me type=text/html href=//twitter.com/puckwang14>
+<link rel=me type=text/html href=//github.com/puckwang>
+<link rel=me type=text/html href=//linkedin.com/in/puckwang>
+<link rel=me type=text/html href="//stackoverflow.com/users/7699156/puckwang?tab=profile">
+<link rel=me type=text/html href=//g.dev/puckwang>
+<link rel=alternate type=application/rss+xml href=https://blog.puckwang.com/index.xml>
+<meta charset=utf-8>
+<meta name=author content="Puck Wang">
+<meta name=copyright content="Copyright © 2017-2024, Puck Wang; all rights reserved.">
+<meta name=description content="在開發聊天機器人時，現今給使用者的資料呈現方式除了一般的字串形式外，另外一種較常出現的就是以卡片形式呈現，運用卡片形式呈現不僅讓使用者更容易閱讀，也不會造成聊天頻道看起來很雜亂。">
+<script>(function(b,d,e,a,g){b[a]=b[a]||[],b[a].push({'gtm.start':(new Date).getTime(),event:'gtm.js'});var f=d.getElementsByTagName(e)[0],c=d.createElement(e),h=a!='dataLayer'?'&l='+a:'';c.async=!0,c.src='https://www.googletagmanager.com/gtm.js?id='+g+h,f.parentNode.insertBefore(c,f)})(window,document,'script','dataLayer','GTM-T7955DN')</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","articleSection":"posts","name":"Microsoft Bot Framework 內建 Cards 種類","headline":"Microsoft Bot Framework 內建 Cards 種類","alternativeHeadline":"","description":"在開發聊天機器人時，現今給使用者的資料呈現方式除了一般的字串形式外，另外一種較常出現的就是以卡片形式呈現，運用卡片形式呈現不僅讓使用者更容易閱讀，也不會造成聊天頻道看起來很雜亂。","inLanguage":"zh-TW","isFamilyFriendly":"true","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.puckwang.com\/posts\/2019\/bot_framework_cards_note\/"},"author":{"@type":"Person","name":"Puck Wang","url":"https:\/\/blog.puckwang.com\/about\/"},"creator":{"@type":"Person","name":"Puck Wang"},"accountablePerson":{"@type":"Person","name":"Puck Wang"},"copyrightHolder":"Puck\u0027s Blog","copyrightYear":"2019","dateCreated":"2019-01-07T12:29:01.00Z","datePublished":"2019-01-07T12:29:01.00Z","dateModified":"2021-12-12T06:36:48.00Z","publisher":{"@type":"Organization","name":"Puck\u0027s Blog","url":"https:\/\/blog.puckwang.com\/","logo":{"@type":"ImageObject","url":"https:\/\/blog.puckwang.com\/images\/favicon-128x128.png","width":"128","height":"128"}},"image":{"@type":"ImageObject","@id":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg","url":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg"},"url":"https:\/\/blog.puckwang.com\/posts\/2019\/bot_framework_cards_note\/","wordCount":"825","genre":["bot framework","chatbot","Card"]}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7955DN" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript>
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark py-1 top-nav">
+<div class=container>
+<a class="navbar-brand pr-2" href=https://blog.puckwang.com/>
+<img src=https://blog.puckwang.com/images/logo.png width=40 height=40 alt>
+PUCK'S BLOG
+</a>
+<button class="navbar-toggler collapsed" type=button data-toggle=collapse data-target=#navbarCollapse aria-controls=navbarCollapse aria-expanded=false aria-label="Toggle navigation">
+<i class="fas fa-bars"></i>
+</button>
+<div class="navbar-collapse collapse" id=navbarCollapse>
+<ul class="navbar-nav mr-auto">
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/archives/>
+Archives
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/categories/>
+Categories
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/tags/>
+Tags
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/projects/>
+MyProjects
+</a>
+</li>
+</ul>
+<div class=social-icons>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</nav>
+<style type=text/css>.feature-image{background-image:linear-gradient( rgba(0,0,0,.15),rgba(0,0,0,.15) ),url(https://blog.puckwang.com/images/hero-main.jpg);height:500px}.feature-image-text{margin-top:20px}@media(min-width:1200px){.feature-image{background-position:0 30%}}@media(max-width:768px){.feature-image{height:250px;background-position:0 0}}</style>
+<header class=feature-image>
+<div class=feature-image-text>
+</div>
+</header>
+<div class=main>
+<div class="container mt-4 post">
+<h1>Microsoft Bot Framework 內建 Cards 種類</h1>
+<div class=mb-3>
+<small>
+<i class="fas fa-user-edit"></i>&nbsp;作者<strong> Puck Wang</strong>
+| <i class="far fa-calendar-alt"></i>&nbsp;建立於 2019-01-07 12:29&nbsp;
+| <i class="far fa-calendar-alt"></i>&nbsp;更新於 2021-12-12 06:36&nbsp;
+| <i class="fas fa-code-branch"></i>&nbsp;版本 bfd595b&nbsp;
+| <i class="fa fa-folder" title=Tags aria-hidden=true></i>&nbsp;分類: <a href=https://blog.puckwang.com/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC/>軟體開發</a>, <a href=https://blog.puckwang.com/categories/cheatsheet/>CheatSheet</a>
+| <i class="fa fa-tags" title=Tags aria-hidden=true></i>&nbsp;標籤: <a href=https://blog.puckwang.com/tags/bot-framework/>bot framework</a>, <a href=https://blog.puckwang.com/tags/chatbot/>chatbot</a>, <a href=https://blog.puckwang.com/tags/card/>Card</a>
+</small>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2019%2fbot_framework_cards_note%2f&text=Microsoft%20Bot%20Framework%20%e5%85%a7%e5%bb%ba%20Cards%20%e7%a8%ae%e9%a1%9e&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2019%2fbot_framework_cards_note%2f&t=Microsoft%20Bot%20Framework%20%e5%85%a7%e5%bb%ba%20Cards%20%e7%a8%ae%e9%a1%9e" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2019%2fbot_framework_cards_note%2f&title=Microsoft%20Bot%20Framework%20%e5%85%a7%e5%bb%ba%20Cards%20%e7%a8%ae%e9%a1%9e&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div class="mt-4 mb-5 main-content">
+<p>在開發聊天機器人時，現今給使用者的資料呈現方式除了一般的字串形式外，另外一種較常出現的就是以卡片形式呈現，
+運用卡片形式呈現不僅讓使用者更容易閱讀，也不會造成聊天頻道看起來很雜亂。</p>
+<p>Bot Framework 以內建許多卡片供開發者使用，不僅支援多個平台，也很容易使用。</p>
+<h2 id=如何發送卡片訊息>如何發送卡片訊息？</h2>
+<p>可以直接呼叫 <code>IDialogContext</code> 中的 <code>MakeMessage()</code> 方法取得回覆訊息的物件，
+然後將你要發送的卡片建立出來，再轉成 <code>Attachment</code> 的物件後新增進 Attachments 中就完成了，可參考下方 Code。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#00f>private</span> <span style=color:#00f>async</span> Task AfterMessageReceivedAsync(IDialogContext context, IAwaitable&lt;CardsDemoAction&gt; result)
+{
+    <span style=color:green>// 建立回覆 Message
+</span><span style=color:green></span>    <span style=color:#2b91af>var</span> message = context.MakeMessage();
+    
+    <span style=color:green>// 建立 Hero Card
+</span><span style=color:green></span>    <span style=color:#2b91af>var</span> heroCard = <span style=color:#00f>new</span> HeroCard()
+    {
+        Title = <span style=color:#a31515>&#34;Splatoon 2&#34;</span>,
+        Text = <span style=color:#a31515>&#34;Happy New Year.  by Puck&#34;</span>,
+        Images = <span style=color:#00f>new</span> List&lt;CardImage&gt;()
+        {
+            <span style=color:#00f>new</span> CardImage(<span style=color:#a31515>&#34;https://imgur.com/hwylGzp.jpg&#34;</span>)
+        },
+        Buttons = <span style=color:#00f>new</span> List&lt;CardAction&gt;()
+        {
+            <span style=color:#00f>new</span> CardAction()
+            {
+                Type = ActionTypes.OpenUrl,
+                Title = <span style=color:#a31515>&#34;Open&#34;</span>,
+                Value = <span style=color:#a31515>&#34;https://imgur.com/hwylGzp.jpg&#34;</span>
+            }
+        }
+    };
+    
+    <span style=color:green>// 設定 Layout Type
+</span><span style=color:green></span>    message.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+    
+    <span style=color:green>// 將 Hero Card 轉成 Attachment 後放入 List
+</span><span style=color:green></span>    message.Attachments.Add(heroCard.ToAttachment());
+    
+    <span style=color:green>// 送出訊息
+</span><span style=color:green></span>    <span style=color:#00f>await</span> context.PostAsync(message);
+
+    ...
+}
+</code></pre></div><h2 id=卡片種類>卡片種類</h2>
+<ul>
+<li>Hero Card: 包含標題、內文、大圖片及按鈕等。</li>
+<li>Receipt Card: 包含標題以及收據常用內容等。</li>
+<li>Thumbnail Card: 包含標題、子標題、內文、小圖片及按鈕等。</li>
+<li>Signin Card: 包含標題及按鈕等。</li>
+<li>Animation Card: 類似 Hero Card 但圖片為 Gif 等。</li>
+<li>Audio Card: 包含標題、子標題及音樂等。</li>
+<li>Video Card: 包含標題、子標題及影片(可為 YouTube 連結)等。</li>
+<li>Adaptive Card: 可自訂版面的卡片，官方有提供工具做設計，可直接匯入 JSON 檔或自己寫 Code 等。</li>
+</ul>
+<h2 id=hero-card>Hero Card</h2>
+<p>可以用在像要呈現如 Facebook 圖片貼文樣式的時候。</p>
+<h3 id=部分可用參數>部分可用參數</h3>
+<ul>
+<li>Title: 標題 (string)</li>
+<li>Text: 內文 (string)</li>
+<li>Images: 圖片 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#cardimage-object">CardImage</a>>)</li>
+<li>Buttons: 按鈕 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#cardaction-object">CardAction</a>>)</li>
+</ul>
+<p>更多詳細內容可洽 <a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#herocard-object">官方API</a> 文件。</p>
+<h3 id=程式碼>程式碼</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#2b91af>var</span> heroCard = <span style=color:#00f>new</span> HeroCard()
+    {
+        Title = <span style=color:#a31515>&#34;Splatoon 2&#34;</span>,
+        Text = <span style=color:#a31515>&#34;Happy New Year.  by Puck&#34;</span>,
+        Images = <span style=color:#00f>new</span> List&lt;CardImage&gt;()
+        {
+            <span style=color:#00f>new</span> CardImage(<span style=color:#a31515>&#34;https://imgur.com/hwylGzp.jpg&#34;</span>)
+        },
+        Buttons = <span style=color:#00f>new</span> List&lt;CardAction&gt;()
+        {
+            <span style=color:#00f>new</span> CardAction()
+            {
+                Type = ActionTypes.OpenUrl,
+                Title = <span style=color:#a31515>&#34;Open&#34;</span>,
+                Value = <span style=color:#a31515>&#34;https://imgur.com/hwylGzp.jpg&#34;</span>
+            }
+        }
+    };
+</code></pre></div><h3 id=結果>結果</h3>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_hero_card_demo.png alt="Hero Card Demo Image" width=500>
+<h2 id=receipt-card>Receipt Card</h2>
+<p>是一個很方便的內建收據樣式，支援購買訊息可用於顯示購物日期或統一編號等購物資訊，不過可惜的一點是明明數量都輸入了卻不能自動算總計。</p>
+<h3 id=部分可用參數-1>部分可用參數</h3>
+<ul>
+<li>Title: 標題 (string)</li>
+<li>Total: 總計 (string)</li>
+<li>Items: 物品清單 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#receiptitem-object">ReceiptItem</a>>)</li>
+<li>Facts: 購買訊息清單 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#fact-object">Fact</a>>)</li>
+<li>Tax: 稅 (string)</li>
+<li>Vat: 消費稅 (string)</li>
+<li>Buttons: 按鈕 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#cardaction-object">CardAction</a>>)</li>
+</ul>
+<p>更多詳細內容可洽 <a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#receiptcard-object">官方API</a> 文件。</p>
+<h3 id=程式碼-1>程式碼</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#2b91af>var</span> receiptCard = <span style=color:#00f>new</span> ReceiptCard()
+    {
+        Title = <span style=color:#a31515>&#34;購物清單&#34;</span>,
+        Total = <span style=color:#a31515>&#34;256.0&#34;</span>,
+        Tax = <span style=color:#a31515>&#34;1.0&#34;</span>,
+        Vat = <span style=color:#a31515>&#34;5.0&#34;</span>,
+        Items = <span style=color:#00f>new</span> List&lt;ReceiptItem&gt;()
+        {
+            <span style=color:#00f>new</span> ReceiptItem()
+            {
+                Title = <span style=color:#a31515>&#34;美式咖啡&#34;</span>,
+                Subtitle = <span style=color:#a31515>&#34;1杯&#34;</span>,
+                Price = <span style=color:#a31515>&#34;120.0&#34;</span>,
+                Quantity = <span style=color:#a31515>&#34;1&#34;</span>,
+                Image = <span style=color:#00f>new</span> CardImage(<span style=color:#a31515>&#34;https://via.placeholder.com/150/e65100/FFFFFF/?text=C&#34;</span>)
+            },
+            <span style=color:#00f>new</span> ReceiptItem()
+            {
+                Title = <span style=color:#a31515>&#34;全麥土司&#34;</span>,
+                Subtitle = <span style=color:#a31515>&#34;2條&#34;</span>,
+                Price = <span style=color:#a31515>&#34;65.0&#34;</span>,
+                Quantity = <span style=color:#a31515>&#34;2&#34;</span>,
+                Image = <span style=color:#00f>new</span> CardImage(<span style=color:#a31515>&#34;https://via.placeholder.com/150/fbc02d/FFFFFF/?text=T&#34;</span>)
+            }
+        },
+        Facts = <span style=color:#00f>new</span> List&lt;Fact&gt;()
+        {
+            <span style=color:#00f>new</span> Fact()
+            {
+                Key = <span style=color:#a31515>&#34;日期&#34;</span>,
+                Value = DateTime.Now.ToShortDateString()
+            },
+            <span style=color:#00f>new</span> Fact()
+            {
+                Key = <span style=color:#a31515>&#34;編號&#34;</span>,
+                Value = <span style=color:#a31515>&#34;AB01234567&#34;</span>
+            },
+            <span style=color:#00f>new</span> Fact()
+            {
+                Key = <span style=color:#a31515>&#34;購買人&#34;</span>,
+                Value = <span style=color:#a31515>&#34;Puck&#34;</span>
+            }
+        },
+        Buttons = <span style=color:#00f>new</span> List&lt;CardAction&gt;()
+        {
+            <span style=color:#00f>new</span> CardAction()
+            {
+                Type = ActionTypes.ImBack,
+                Title = <span style=color:#a31515>&#34;確認&#34;</span>,
+                Value = <span style=color:#a31515>&#34;OK&#34;</span>
+            }
+        }
+    };
+</code></pre></div><h3 id=結果-1>結果</h3>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_receipt_card_demo.png alt="Hero Card Demo Image" width=500>
+<h2 id=thumbnail-card>Thumbnail Card</h2>
+<p>當想使用清單式顯示但圖片又不想要 Hero Card 那麼大時，就可以使用這個來顯示。</p>
+<h3 id=部分可用參數-2>部分可用參數</h3>
+<ul>
+<li>Title: 標題 (string)</li>
+<li>Text: 內文 (string)</li>
+<li>Subtitle: 子標題 (string)</li>
+<li>Images: 圖片 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#cardimage-object">CardImage</a>>)</li>
+<li>Buttons: 按鈕 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#cardaction-object">CardAction</a>>)</li>
+<li>Tap: 點擊卡片所觸發的 Action (<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#cardaction-object">CardAction</a>)</li>
+</ul>
+<p>更多詳細內容可洽 <a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#thumbnailcard-object">官方API</a> 文件。</p>
+<h3 id=程式碼-2>程式碼</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#2b91af>var</span> thumbnailCard = <span style=color:#00f>new</span> ThumbnailCard()
+    {
+        Title = <span style=color:#a31515>&#34;Splatoon 2&#34;</span>,
+        Text = <span style=color:#a31515>&#34;Happy New Year&#34;</span>,
+        Subtitle = <span style=color:#a31515>&#34;by Puck&#34;</span>,
+        Tap = <span style=color:#00f>new</span> CardAction()
+        {
+            Type = ActionTypes.OpenUrl,
+            Title = <span style=color:#a31515>&#34;Tip&#34;</span>,
+            Value = <span style=color:#a31515>&#34;https://imgur.com/hwylGzp.jpg&#34;</span>
+        },
+        Images = <span style=color:#00f>new</span> List&lt;CardImage&gt;()
+        {
+            <span style=color:#00f>new</span> CardImage(<span style=color:#a31515>&#34;https://imgur.com/hwylGzp.jpg&#34;</span>)
+        },
+        Buttons = <span style=color:#00f>new</span> List&lt;CardAction&gt;()
+        {
+            <span style=color:#00f>new</span> CardAction()
+            {
+                Type = ActionTypes.ImBack,
+                Title = <span style=color:#a31515>&#34;Like&#34;</span>,
+                Value = <span style=color:#a31515>&#34;Like&#34;</span>
+            }
+        }
+    };
+</code></pre></div><h3 id=結果-2>結果</h3>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_thumbnail_card_demo.png alt="Hero Card Demo Image" width=500>
+<h2 id=signin-card>SignIn Card</h2>
+<p>如果只想顯示按鈕群，就可以使用這種卡片。</p>
+<h3 id=部分可用參數-3>部分可用參數</h3>
+<ul>
+<li>Text: 說明文字 (string)</li>
+<li>Buttons: 按鈕 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#cardaction-object">CardAction</a>>)</li>
+</ul>
+<p>更多詳細內容可洽 <a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#signincard-object">官方API</a> 文件。</p>
+<h3 id=程式碼-3>程式碼</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#2b91af>var</span> signinCard = <span style=color:#00f>new</span> SigninCard()
+    {
+        Text = <span style=color:#a31515>&#34;請選擇操作: &#34;</span>,
+        Buttons = <span style=color:#00f>new</span> List&lt;CardAction&gt;()
+        {
+            <span style=color:#00f>new</span> CardAction()
+            {
+                Type = ActionTypes.ImBack,
+                Title = <span style=color:#a31515>&#34;新增&#34;</span>,
+                Value = <span style=color:#a31515>&#34;Add&#34;</span>
+            },
+            <span style=color:#00f>new</span> CardAction()
+            {
+                Type = ActionTypes.ImBack,
+                Title = <span style=color:#a31515>&#34;修改&#34;</span>,
+                Value = <span style=color:#a31515>&#34;Edit&#34;</span>
+            },
+            <span style=color:#00f>new</span> CardAction()
+            {
+                Type = ActionTypes.ImBack,
+                Title = <span style=color:#a31515>&#34;刪除&#34;</span>,
+                Value = <span style=color:#a31515>&#34;Delete&#34;</span>
+            }
+        }
+    };
+</code></pre></div><h3 id=結果-3>結果</h3>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_sigin_card_demo.png alt="Hero Card Demo Image" width=500>
+<h2 id=animation-card>Animation Card</h2>
+<p>跟 Hero Card 類似，但如果圖片想要用 gif 就要用這種卡片。</p>
+<h3 id=部分可用參數-4>部分可用參數</h3>
+<ul>
+<li>Title: 標題 (string)</li>
+<li>Subtitle: 子標題 (string)</li>
+<li>Text: 說明文字 (string)</li>
+<li>Media: Gif 圖片 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#mediaurl-object">MediaUrl</a>>)</li>
+<li>Buttons: 按鈕 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#cardaction-object">CardAction</a>>)</li>
+<li>Autoloop: 自動循環 (boolean)</li>
+<li>Autostart: 自動播放 (boolean)</li>
+</ul>
+<p>更多詳細內容可洽 <a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#animationcard-object">官方API</a> 文件。</p>
+<h3 id=程式碼-4>程式碼</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#2b91af>var</span> animationCard = <span style=color:#00f>new</span> AnimationCard()
+    {
+        Title = <span style=color:#a31515>&#34;Thank You!&#34;</span>,
+        Subtitle = <span style=color:#a31515>&#34;Demo, by Puck&#34;</span>,
+        Autoloop = <span style=color:#00f>true</span>,
+        Autostart = <span style=color:#00f>true</span>,
+        Media = <span style=color:#00f>new</span> List&lt;MediaUrl&gt;()
+        {
+            <span style=color:#00f>new</span> MediaUrl(<span style=color:#a31515>&#34;https://media.giphy.com/media/osjgQPWRx3cac/giphy.gif&#34;</span>)
+        }
+    };
+</code></pre></div><h3 id=結果-4>結果</h3>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_animation_card_demo.gif alt="Hero Card Demo Image" width=500>
+<h2 id=audio-card>Audio Card</h2>
+<p>可播放音樂的卡片。</p>
+<h3 id=部分可用參數-5>部分可用參數</h3>
+<ul>
+<li>Title: 標題 (string)</li>
+<li>Subtitle: 子標題 (string)</li>
+<li>Text: 說明文字 (string)</li>
+<li>Media: 音樂檔 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#mediaurl-object">MediaUrl</a>>)</li>
+<li>Buttons: 按鈕 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#cardaction-object">CardAction</a>>)</li>
+<li>Autoloop: 自動循環 (boolean)</li>
+<li>Autostart: 自動播放 (boolean)</li>
+</ul>
+<p>更多詳細內容可洽 <a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#audiocard-object">官方API</a> 文件。</p>
+<h3 id=程式碼-5>程式碼</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#2b91af>var</span> audioCard = <span style=color:#00f>new</span> AudioCard()
+    {
+        Title = <span style=color:#a31515>&#34;卡農 - 帕赫貝爾&#34;</span>,
+        Subtitle = <span style=color:#a31515>&#34;Demo, by Puck&#34;</span>,
+        Media = <span style=color:#00f>new</span> List&lt;MediaUrl&gt;()
+        {
+            <span style=color:#00f>new</span> MediaUrl(<span style=color:#a31515>&#34;https://upload.wikimedia.org/wikipedia/commons/6/62/Pachelbel%27s_Canon.ogg&#34;</span>)
+        },
+        Autoloop = <span style=color:#00f>true</span>,
+        Autostart = <span style=color:#00f>true</span>,
+    };
+</code></pre></div><h3 id=結果-5>結果</h3>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_audio_card_demo.png alt="Hero Card Demo Image" width=500>
+<h2 id=video-card>Video Card</h2>
+<p>可播放影片的卡片。</p>
+<h3 id=部分可用參數-6>部分可用參數</h3>
+<ul>
+<li>Title: 標題 (string)</li>
+<li>Subtitle: 子標題 (string)</li>
+<li>Text: 說明文字 (string)</li>
+<li>Media: 影片檔，可以是 Youtube 連結 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#mediaurl-object">MediaUrl</a>>)</li>
+<li>Buttons: 按鈕 (List&lt;<a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#cardaction-object">CardAction</a>>)</li>
+<li>Autoloop: 自動循環 (boolean)</li>
+<li>Autostart: 自動播放 (boolean)</li>
+</ul>
+<p>更多詳細內容可洽 <a href="https://docs.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-connector-api-reference?view=azure-bot-service-4.0#videocard-object">官方API</a> 文件。</p>
+<h3 id=程式碼-6>程式碼</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp><span style=color:#2b91af>var</span> videoCard = <span style=color:#00f>new</span> VideoCard()
+    {
+        Title = <span style=color:#a31515>&#34;Splatoon 2 Soundtrack&#34;</span>,
+        Media = <span style=color:#00f>new</span> List&lt;MediaUrl&gt;()
+        {
+            <span style=color:#00f>new</span> MediaUrl(<span style=color:#a31515>&#34;https://youtu.be/rZaT-PpDAl8&#34;</span>)
+        },
+        Subtitle = <span style=color:#a31515>&#34;Videmo Demo, by Puck&#34;</span>,
+        Autoloop = <span style=color:#00f>true</span>,
+        Autostart = <span style=color:#00f>true</span>,
+    };
+</code></pre></div><h3 id=結果-6>結果</h3>
+<img src=https://blog.puckwang.com/images/2019/bot_framework_video_card_demo.png alt="Hero Card Demo Image" width=500>
+<h2 id=adaptive-card>Adaptive Card</h2>
+<p>如果內建的卡片都不符合需求，可以使用 Adaptive Card 來自己設計符合需求的卡片。使用上有兩種方法，分別為使用 JSON 匯入以及用 API 自己組合，
+如果是固定的內容可以選用 JSON 就好了，而如果想要內容可以動態輸入，那就用 API 物件自己刻比較好。</p>
+<p>另外，官方也有提供線上工具供開發者可以方便設計 <a href=https://adaptivecards.io/designer/>連結</a>，想自己寫 Code 的也可以參考 <a href=https://docs.microsoft.com/en-us/adaptive-cards/authoring-cards/card-schema>API 文件</a>
+或是 <a href=https://adaptivecards.io/samples/ActivityUpdate.html>官方範例</a></p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>AdaptiveCard adaptiveCard = <span style=color:#00f>new</span> AdaptiveCard()
+    {
+        Body = <span style=color:#00f>new</span> List&lt;AdaptiveElement&gt;()
+        {
+            <span style=color:#00f>new</span> AdaptiveTextBlock()
+            {
+                Text = title,
+                Color = AdaptiveTextColor.Accent,
+                Size = AdaptiveTextSize.Medium,
+                Weight = AdaptiveTextWeight.Bolder
+            },
+            <span style=color:#00f>new</span> AdaptiveTextBlock()
+            {
+                Text = dateTime.ToLocalTime().ToString(CultureInfo.InvariantCulture),
+                Size = AdaptiveTextSize.Small,
+                Spacing = AdaptiveSpacing.Small,
+                Color = AdaptiveTextColor.Dark,
+                HorizontalAlignment = AdaptiveHorizontalAlignment.Left
+            },
+            <span style=color:#00f>new</span> AdaptiveTextBlock()
+            {
+                Text = body,
+                Wrap = <span style=color:#00f>true</span>
+            }
+        },
+        Version = <span style=color:#a31515>&#34;1.0&#34;</span>
+    };
+
+    Attachment attachment = <span style=color:#00f>new</span> Attachment()
+    {
+        ContentType = AdaptiveCard.ContentType,
+        Content = adaptiveCard  <span style=color:green>// 如果是要用 JSON 的方式匯入，直接接再這邊就可以了，不用像上面一樣。
+</span><span style=color:green></span>    };
+</code></pre></div><img src=https://blog.puckwang.com/images/2019/bot_framework_adaptive_card_demo.png alt="Hero Card Demo Image" width=500>
+<h2 id=卡片的排版>卡片的排版</h2>
+<p>當卡片有兩張以上在同一筆訊息時，就會需要排版，內建有水平跟垂直兩種排版方式。</p>
+<h3 id=list-垂直>List (垂直)</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>message.AttachmentLayout = AttachmentLayoutTypes.List;
+</code></pre></div><img src=https://blog.puckwang.com/images/2019/bot_framework_list_demo.png alt="Hero Card Demo Image" width=500>
+<h3 id=carousel-水平>Carousel (水平)</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-csharp data-lang=csharp>message.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+</code></pre></div><img src=https://blog.puckwang.com/images/2019/bot_framework_carousel_demo.png alt="Hero Card Demo Image" width=500>
+<div>
+<br>
+<h3>
+感謝閱讀！
+</h3>
+<div>
+喜歡這篇文章或是有幫助到你嗎？ 歡迎分享給你的朋友！
+</div>
+<br>
+<div>
+有任何問題、回饋或您認為我會感興趣的任何東西嗎？ 請在下面發表評論，或者是<a href=https://blog.puckwang.com/about target=_blank>直接聯絡我</a>。
+</div>
+<br>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2019%2fbot_framework_cards_note%2f&text=Microsoft%20Bot%20Framework%20%e5%85%a7%e5%bb%ba%20Cards%20%e7%a8%ae%e9%a1%9e&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2019%2fbot_framework_cards_note%2f&t=Microsoft%20Bot%20Framework%20%e5%85%a7%e5%bb%ba%20Cards%20%e7%a8%ae%e9%a1%9e" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2019%2fbot_framework_cards_note%2f&title=Microsoft%20Bot%20Framework%20%e5%85%a7%e5%bb%ba%20Cards%20%e7%a8%ae%e9%a1%9e&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div>
+<hr>
+<div class="p-4 row justify-content-center" style=align-items:center>
+<div class=col-2>
+<img src=https://blog.puckwang.com/images/logo.png alt="Puck Wang" class="img-fluid rounded-circle" width=150>
+</div>
+<div class=col-8 style=vertical-align:middle>
+<h4>
+Puck Wang
+</h4>
+<p>
+Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網站開發者，常使用 .Net 和 React 進行開發，專注於架構研究，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。
+</p>
+<p>
+更多關於我的訊息，可至關於<a href=https://blog.puckwang.com/about target=_blank>關於</a>頁面。
+</p>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar d-print-none d-none d-xl-block">
+<div id=toc>
+<h2>目錄</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#如何發送卡片訊息>如何發送卡片訊息？</a></li>
+<li><a href=#卡片種類>卡片種類</a></li>
+<li><a href=#hero-card>Hero Card</a>
+<ul>
+<li><a href=#部分可用參數>部分可用參數</a></li>
+<li><a href=#程式碼>程式碼</a></li>
+<li><a href=#結果>結果</a></li>
+</ul>
+</li>
+<li><a href=#receipt-card>Receipt Card</a>
+<ul>
+<li><a href=#部分可用參數-1>部分可用參數</a></li>
+<li><a href=#程式碼-1>程式碼</a></li>
+<li><a href=#結果-1>結果</a></li>
+</ul>
+</li>
+<li><a href=#thumbnail-card>Thumbnail Card</a>
+<ul>
+<li><a href=#部分可用參數-2>部分可用參數</a></li>
+<li><a href=#程式碼-2>程式碼</a></li>
+<li><a href=#結果-2>結果</a></li>
+</ul>
+</li>
+<li><a href=#signin-card>SignIn Card</a>
+<ul>
+<li><a href=#部分可用參數-3>部分可用參數</a></li>
+<li><a href=#程式碼-3>程式碼</a></li>
+<li><a href=#結果-3>結果</a></li>
+</ul>
+</li>
+<li><a href=#animation-card>Animation Card</a>
+<ul>
+<li><a href=#部分可用參數-4>部分可用參數</a></li>
+<li><a href=#程式碼-4>程式碼</a></li>
+<li><a href=#結果-4>結果</a></li>
+</ul>
+</li>
+<li><a href=#audio-card>Audio Card</a>
+<ul>
+<li><a href=#部分可用參數-5>部分可用參數</a></li>
+<li><a href=#程式碼-5>程式碼</a></li>
+<li><a href=#結果-5>結果</a></li>
+</ul>
+</li>
+<li><a href=#video-card>Video Card</a>
+<ul>
+<li><a href=#部分可用參數-6>部分可用參數</a></li>
+<li><a href=#程式碼-6>程式碼</a></li>
+<li><a href=#結果-6>結果</a></li>
+</ul>
+</li>
+<li><a href=#adaptive-card>Adaptive Card</a></li>
+<li><a href=#卡片的排版>卡片的排版</a>
+<ul>
+<li><a href=#list-垂直>List (垂直)</a></li>
+<li><a href=#carousel-水平>Carousel (水平)</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<footer class="mt-auto footer d-print-none">
+<div class=container-fluid>
+<div class="row justify-content-center">
+<div class="col-md-4 col-xl-3">
+<h5>Copyright © 2017-2024, Puck Wang; all rights reserved.</h5>
+Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with.
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>Disclaimer</h5>
+See <a href=https://blog.puckwang.com/other/disclaimer/>disclaimer</a> of <a href=https://blog.puckwang.com>https://blog.puckwang.com/</a>
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>About This Site</h5>
+This blog was created using the <a href=https://gohugo.io/>Hugo</a> static site generator, using
+<a href=https://getbootstrap.com/>Bootstrap</a>, using the Silhouette Hugo theme, created by
+<a href=https://www.mattbutton.com>Matt Button</a>
+</div>
+</div>
+<hr>
+<div class="d-flex justify-content-center icons">
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</footer>
+<script src=https://code.jquery.com/jquery-3.3.1.slim.min.js integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script>
+<script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script>
+<script src=https://unpkg.com/mermaid@8.13.5/dist/mermaid.min.js></script>
+</body>
+<style>.zoom-in-thumbnail{visibility:hidden;position:fixed;z-index:100000;box-sizing:border-box;border:5px solid #fff;border-radius:3px;box-shadow:0 0 2px rgba(0,0,0,.8);opacity:0;pointer-events:none;transition-duration:.3s;transition-delay:.1s;transition-property:opacity}.zoom-in-thumbnail-img{background-repeat:no-repeat;background-size:contain}</style>
+<script>const root=document.documentElement;$(function(){mermaid.initialize({startOnLoad:!0}),$(".main-content img, .post img").each(function(){this.complete?generateImageDiv(this):$(this).on("load",function(){generateImageDiv(this)}),this.style.cursor="pointer",$(this).on("mousemove",function(d){let b=d.clientX,c=d.clientY,a;$(this).next().width()>=$(this).next().height()?innerHeight-c<=$(this).next().height()+50?a=getShowXY(this,"top",b,c):a=getShowXY(this,"bottom",b,c):innerWidth-b<=$(this).next().width()+50?a=getShowXY(this,"left",b,c):a=getShowXY(this,"right",b,c),root.style.setProperty("--zoom-image-x",a.x+250+"px"),root.style.setProperty("--zoom-image-y",a.y+"px")}),$(this).on("click",function(a){window.open(this.src)})})});function getShowXY(d,e,a,b){let c=$(d).next();switch(e){case'top':a-=c.width()/2,b-=c.height(),b-=25;break;case'bottom':a-=c.width()/2,b+=25;break;case'right':b-=c.height()/2,a+=25;break;case'left':a-=c.width(),b-=c.height()/2,a-=25;break}return{x:a,y:b}}function generateImageDiv(c){var e=screen.width*.6,f=screen.height*.5,d=0,a=c.naturalHeight,b=c.naturalWidth,g;b>e&&(d=e/b,b=e,a=a*d),a>f&&(d=f/a,a=f,b=b*d),g="<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-color: white; background-image:url('"+c.src+"'); height: "+a+"px; width: "+b+'px;"></div></div>',$(c).after(g)}</script>
+</html>

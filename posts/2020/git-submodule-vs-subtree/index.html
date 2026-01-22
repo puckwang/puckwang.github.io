@@ -1,0 +1,654 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta property="og:title" content="Git 進階應用 Submodule 與 Subtree，使用它們來拆分專案">
+<meta property="og:description" content="在開發過程中，專案隨著時間變得越來越肥，不時還生出子專案，此時就會遇到需要各專案共用一些 Code 的部分。本篇文將說明使用 Git Submodule 與 Git Subtree 實現匯入子專案的差異及它們的使用方法。 Git Submodule 教學、 Git Subtree 教學">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.puckwang.com/posts/2020/git-submodule-vs-subtree/"><meta property="og:image" content="https://blog.puckwang.com/images/og_image.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2020-03-18T21:29:12+08:00">
+<meta property="article:modified_time" content="2025-08-14T18:27:37+08:00">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://blog.puckwang.com/images/og_image.png">
+<meta name=twitter:title content="Git 進階應用 Submodule 與 Subtree，使用它們來拆分專案">
+<meta name=twitter:description content="在開發過程中，專案隨著時間變得越來越肥，不時還生出子專案，此時就會遇到需要各專案共用一些 Code 的部分。本篇文將說明使用 Git Submodule 與 Git Subtree 實現匯入子專案的差異及它們的使用方法。 Git Submodule 教學、 Git Subtree 教學">
+<script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-4827510547436807",enable_page_level_ads:!0})</script>
+<title>
+Git 進階應用 Submodule 與 Subtree，使用它們來拆分專案 | Puck's Blog
+</title>
+<link rel=icon type=image/png href=https://blog.puckwang.com/images/favicon-128x128.png sizes="16x16 32x32 64x64 128x128">
+<link rel=canonical href=https://blog.puckwang.com/posts/2020/git-submodule-vs-subtree/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Oswald:400" rel=stylesheet>
+<link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous>
+<link rel=stylesheet href=https://use.fontawesome.com/releases/v5.5.0/css/all.css integrity=sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU crossorigin=anonymous>
+<link rel=stylesheet href=https://blog.puckwang.com/css/bundle.min.5d5448d1820d6ff5f132cb3fde480cdf60aecc3c374bacdc000c3e1bb275845c.css integrity="sha256-XVRI0YINb/XxMss/3kgM32CuzDw3S6zcAAw+G7J1hFw=">
+<link rel=me type=text/html href=//www.facebook.com/puckwang14>
+<link rel=me type=text/html href=//twitter.com/puckwang14>
+<link rel=me type=text/html href=//github.com/puckwang>
+<link rel=me type=text/html href=//linkedin.com/in/puckwang>
+<link rel=me type=text/html href="//stackoverflow.com/users/7699156/puckwang?tab=profile">
+<link rel=me type=text/html href=//g.dev/puckwang>
+<link rel=alternate type=application/rss+xml href=https://blog.puckwang.com/index.xml>
+<meta charset=utf-8>
+<meta name=author content="Puck Wang">
+<meta name=copyright content="Copyright © 2017-2024, Puck Wang; all rights reserved.">
+<meta name=description content="在開發過程中，專案隨著時間變得越來越肥，不時還生出子專案，此時就會遇到需要各專案共用一些 Code 的部分。本篇文將說明使用 Git Submodule 與 Git Subtree 實現匯入子專案的差異及它們的使用方法。 Git Submodule 教學、 Git Subtree 教學">
+<script>(function(b,d,e,a,g){b[a]=b[a]||[],b[a].push({'gtm.start':(new Date).getTime(),event:'gtm.js'});var f=d.getElementsByTagName(e)[0],c=d.createElement(e),h=a!='dataLayer'?'&l='+a:'';c.async=!0,c.src='https://www.googletagmanager.com/gtm.js?id='+g+h,f.parentNode.insertBefore(c,f)})(window,document,'script','dataLayer','GTM-T7955DN')</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","articleSection":"posts","name":"Git 進階應用 Submodule 與 Subtree，使用它們來拆分專案","headline":"Git 進階應用 Submodule 與 Subtree，使用它們來拆分專案","alternativeHeadline":"","description":"在開發過程中，專案隨著時間變得越來越肥，不時還生出子專案，此時就會遇到需要各專案共用一些 Code 的部分。本篇文將說明使用 Git Submodule 與 Git Subtree 實現匯入子專案的差異及它們的使用方法。 Git Submodule 教學、 Git Subtree 教學","inLanguage":"zh-TW","isFamilyFriendly":"true","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/blog.puckwang.com\/posts\/2020\/git-submodule-vs-subtree\/"},"author":{"@type":"Person","name":"Puck Wang","url":"https:\/\/blog.puckwang.com\/about\/"},"creator":{"@type":"Person","name":"Puck Wang"},"accountablePerson":{"@type":"Person","name":"Puck Wang"},"copyrightHolder":"Puck\u0027s Blog","copyrightYear":"2020","dateCreated":"2020-03-18T21:29:12.00Z","datePublished":"2020-03-18T21:29:12.00Z","dateModified":"2025-08-14T18:27:37.00Z","publisher":{"@type":"Organization","name":"Puck\u0027s Blog","url":"https:\/\/blog.puckwang.com\/","logo":{"@type":"ImageObject","url":"https:\/\/blog.puckwang.com\/images\/favicon-128x128.png","width":"128","height":"128"}},"image":{"@type":"ImageObject","@id":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg","url":"https:\/\/blog.puckwang.com\/images\/hero-main.jpg"},"url":"https:\/\/blog.puckwang.com\/posts\/2020\/git-submodule-vs-subtree\/","wordCount":"1386","genre":["Git","Git Submodule","Git Subtree","子模組","匯入","模組化","專案拆分"]}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7955DN" height=0 width=0 style=display:none;visibility:hidden></iframe></noscript>
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark py-1 top-nav">
+<div class=container>
+<a class="navbar-brand pr-2" href=https://blog.puckwang.com/>
+<img src=https://blog.puckwang.com/images/logo.png width=40 height=40 alt>
+PUCK'S BLOG
+</a>
+<button class="navbar-toggler collapsed" type=button data-toggle=collapse data-target=#navbarCollapse aria-controls=navbarCollapse aria-expanded=false aria-label="Toggle navigation">
+<i class="fas fa-bars"></i>
+</button>
+<div class="navbar-collapse collapse" id=navbarCollapse>
+<ul class="navbar-nav mr-auto">
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/>
+Home
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/about/>
+About
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/archives/>
+Archives
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/categories/>
+Categories
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/tags/>
+Tags
+</a>
+</li>
+<li class=nav-item>
+<a class=nav-link href=https://blog.puckwang.com/projects/>
+MyProjects
+</a>
+</li>
+</ul>
+<div class=social-icons>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</nav>
+<style type=text/css>.feature-image{background-image:linear-gradient( rgba(0,0,0,.15),rgba(0,0,0,.15) ),url(https://blog.puckwang.com/images/hero-main.jpg);height:500px}.feature-image-text{margin-top:20px}@media(min-width:1200px){.feature-image{background-position:0 30%}}@media(max-width:768px){.feature-image{height:250px;background-position:0 0}}</style>
+<header class=feature-image>
+<div class=feature-image-text>
+</div>
+</header>
+<div class=main>
+<div class="container mt-4 post">
+<h1>Git 進階應用 Submodule 與 Subtree，使用它們來拆分專案</h1>
+<div class=mb-3>
+<small>
+<i class="fas fa-user-edit"></i>&nbsp;作者<strong> Puck Wang</strong>
+| <i class="far fa-calendar-alt"></i>&nbsp;建立於 2020-03-18 21:29&nbsp;
+| <i class="far fa-calendar-alt"></i>&nbsp;更新於 2025-08-14 18:27&nbsp;
+| <i class="fas fa-code-branch"></i>&nbsp;版本 f13cf7b&nbsp;
+| <i class="fa fa-folder" title=Tags aria-hidden=true></i>&nbsp;分類: <a href=https://blog.puckwang.com/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/>版本控制</a>
+| <i class="fa fa-tags" title=Tags aria-hidden=true></i>&nbsp;標籤: <a href=https://blog.puckwang.com/tags/git/>Git</a>, <a href=https://blog.puckwang.com/tags/git-submodule/>Git Submodule</a>, <a href=https://blog.puckwang.com/tags/git-subtree/>Git Subtree</a>, <a href=https://blog.puckwang.com/tags/%E5%AD%90%E6%A8%A1%E7%B5%84/>子模組</a>, <a href=https://blog.puckwang.com/tags/%E5%8C%AF%E5%85%A5/>匯入</a>, <a href=https://blog.puckwang.com/tags/%E6%A8%A1%E7%B5%84%E5%8C%96/>模組化</a>, <a href=https://blog.puckwang.com/tags/%E5%B0%88%E6%A1%88%E6%8B%86%E5%88%86/>專案拆分</a>
+</small>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2020%2fgit-submodule-vs-subtree%2f&text=Git%20%e9%80%b2%e9%9a%8e%e6%87%89%e7%94%a8%20Submodule%20%e8%88%87%20Subtree%ef%bc%8c%e4%bd%bf%e7%94%a8%e5%ae%83%e5%80%91%e4%be%86%e6%8b%86%e5%88%86%e5%b0%88%e6%a1%88&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2020%2fgit-submodule-vs-subtree%2f&t=Git%20%e9%80%b2%e9%9a%8e%e6%87%89%e7%94%a8%20Submodule%20%e8%88%87%20Subtree%ef%bc%8c%e4%bd%bf%e7%94%a8%e5%ae%83%e5%80%91%e4%be%86%e6%8b%86%e5%88%86%e5%b0%88%e6%a1%88" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2020%2fgit-submodule-vs-subtree%2f&title=Git%20%e9%80%b2%e9%9a%8e%e6%87%89%e7%94%a8%20Submodule%20%e8%88%87%20Subtree%ef%bc%8c%e4%bd%bf%e7%94%a8%e5%ae%83%e5%80%91%e4%be%86%e6%8b%86%e5%88%86%e5%b0%88%e6%a1%88&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div class="mt-4 mb-5 main-content">
+<p>在開發過程中，專案隨著時間變得越來越肥，不時還生出子專案，此時就會遇到需要各專案共用一些 Code 的部分，如果共用的部分是用 <code>複製貼上</code> 的方式去同步，那勢必一定會造成兩邊不同步，維護困難。</p>
+<p>本篇文將分享 Git Submodule 與 Git Subtree 的差異及它們的使用方法。</p>
+<p>以下將以 <code>SubRepo</code> 代表要被匯入的 Repository，而 <code>SuperRepo</code> 則是把 SubRepo 匯入的 Repository。</p>
+<h2 id=submodule-vs-subtree>Submodule vs Subtree</h2>
+<p>Submodule 與 Subtree 兩個都是可以將 <code>SubRepo</code> 加入 <code>SuperRepo</code> 的解決方法，但怎麼解決的及實際使用上都有所差異。</p>
+<p>簡單來說 Submodule 是用像指標的方式，將 SubRepo 的 HASH 紀錄在 SuperRepo 中，而 Subtree 則是以副本的方式把 SubRepo 某版複製一份到 SuperRepo。</p>
+<p>用表格看可能就更清楚了：</p>
+<div class=table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Submodule</th>
+<th>SubTree</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cost</td>
+<td>僅佔用 .gitmodule</td>
+<td>佔用等同 SubRepo 的大小的空間</td>
+</tr>
+<tr>
+<td>Clone SuperRepo</td>
+<td>需多步驟</td>
+<td>原指令</td>
+</tr>
+<tr>
+<td>Push to SubRepo</td>
+<td><strong>容易</strong>，視為兩個獨立的 Repo，可以直接 push</td>
+<td><strong>不容易</strong>，因為不知道 SubRepo log，還要比對</td>
+</tr>
+<tr>
+<td>pull to SubRepo</td>
+<td><strong>不容易</strong>，需執行另外執行指令</td>
+<td><strong>容易</strong>，因為就只是 Pull SuperRepo</td>
+</tr>
+<tr>
+<td>簡單形容</td>
+<td>一個 Repo 中的另一個 Repo</td>
+<td>跟原本 Repo 合併，視為一個子目錄</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>另外也可以用一句話的方式描述：</p>
+<ul>
+<li><strong>Submodule</strong>: 較易 push，較不易 pull，只紀錄 HASH 所以不佔 remote 空間，使用者須注意額外指令。</li>
+<li><strong>Subtree</strong>: 較不易 push，較易 pull，副本存在於 remote 所以會佔空間，但使用者只需 clone SuperRepo 即可。</li>
+</ul>
+<br>
+<h3 id=git-submodule-簡介>Git Submodule 簡介</h3>
+<p>Submodule 最早出現在 <a href=https://github.com/git/git/blob/53f9a3e157dbbc901a02ac2c73346d375e24978c/Documentation/RelNotes/1.5.3.txt>v1.5.3</a> (可能吧？)，根據 Release Note 中描述，出現的目的就是用於管理 super-project 中的子專案，可能因為它比較老，網路上的文件相對就比較多了。</p>
+<p>它會將指定的 SubRepo 版本 Clone 到指定的路徑，並將這個版本的 HASH 紀錄在 SuperRepo 中。它有自己的 .git 目錄有自己的操作範圍，只要進到這個路徑就等於是進到另一個 Repo 了，外面只會記得目前在哪個版本。</p>
+<br>
+<h3 id=git-subtree-簡介>Git Subtree 簡介</h3>
+<p>Subtree 出現的時間我就更不確定了，在 <a href=https://github.com/git/git/blob/53f9a3e157dbbc901a02ac2c73346d375e24978c/Documentation/RelNotes/1.5.2.txt>v1.5.2</a> 跟 <a href=https://github.com/git/git/blob/53f9a3e157dbbc901a02ac2c73346d375e24978c/Documentation/RelNotes/1.7.11.txt>v1.7.11</a> 都有出現，且好像一開始目的是用於合併專案的 (?</p>
+<p>它一樣是將指定的 SubRepo 版本 Clone 到指定目錄，但差別在它會送一個 merge commit 到 SuperRepo，實際上看起來無故冒出一條線跟 SuperRepo 合併，然後它們就合而為一了。</p>
+<p>大概就是像這樣：</p>
+<div class=mermaid style="margin:2rem 0">
+graph LR
+subgraph SubRepo
+A1[abd7417] --> B1
+B1[c690741] --> C1
+C1[ff35922] --> D
+end
+subgraph SuperRepo
+A[7542f2f] --> B
+B[9db0cd9] --> C
+C[506df19] --> D
+D[Merge] --> F
+F[5d43e32] --> E
+E[d6cbc13]
+end
+</div>
+<h2 id=如何使用-git-submodule->如何使用 Git Submodule ?</h2>
+<h3 id=章節目錄>章節目錄</h3>
+<ul>
+<li><a href=#%E6%96%B0%E5%A2%9E-submodule>新增 Submodule</a></li>
+<li><a href=#pull-superrepo>Pull SuperRepo</a></li>
+<li><a href=#pull-submodule-%E6%9B%B4%E6%96%B0-submodule-%E7%89%88%E6%9C%AC>Pull Submodule (更新 Submodule 版本)</a></li>
+<li><a href=#push-submodule>Push Submodule</a></li>
+<li><a href=#%E5%88%AA%E9%99%A4-submodule>刪除 Submodule</a></li>
+<li><a href=#%E5%85%B6%E4%BB%96%E4%BA%BA-clone-superrepo>其他人 Clone SuperRepo</a></li>
+<li><a href=#%E5%B0%87%E7%8F%BE%E6%9C%89%E7%9A%84%E5%B0%88%E6%A1%88%E6%8B%86%E5%87%BA-submodule>將現有的專案拆出 Submodule</a></li>
+</ul>
+<h3 id=建立-submodule>建立 Submodule</h3>
+<p>要將一個 SubRepo 使用 Submodule 的方式加到 SuperRepo，流程清單如下：</p>
+<ol>
+<li><code>git submodule add &lt;repo url> &lt;folder></code></li>
+<li><code>git commit</code></li>
+<li><code>git push</code></li>
+</ol>
+<p>接下來我們看實際執行畫面：</p>
+<p>首先先執行 <code>git submodule add</code> 去加入 SubRepo</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ git submodule add git@github.com:puckwang/SubRepo.git sub-repo
+Cloning into <span style=color:#a31515>&#39;~/sub-repo&#39;</span>...
+remote: Enumerating objects: 3, <span style=color:#00f>done</span>.
+remote: Counting objects: 100% (3/3), <span style=color:#00f>done</span>.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (3/3), <span style=color:#00f>done</span>.
+</code></pre></div><p>接下來執行 <code>git status</code> 就可以看到有新增了兩個未提交的檔案</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ git status
+On branch master
+Your branch is up to date with <span style=color:#a31515>&#39;origin/master&#39;</span>.
+
+Changes to be committed:
+  (use <span style=color:#a31515>&#34;git reset HEAD &lt;file&gt;...&#34;</span> to unstage)
+
+	new file:   .gitmodules
+	new file:   sub-repo
+</code></pre></div><ul>
+<li><code>.gitmodules</code> 是用來記錄 Module 的路徑以及 Repo url。</li>
+<li><code>sub-repo</code> 放 Module 的目錄，雖然會有這個，但其實不會實際將整個 SubRepo 提交出去。</li>
+</ul>
+<p>最後記得要 <code>commit</code> 和 <code>push</code>，另外要注意的是，因為 SuperRepo pull 是不會更新 Submodule，要自己手動<a href=#%E6%9B%B4%E6%96%B0-Submodule>更新</a>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git commit
+git push
+</code></pre></div><h3 id=pull-superrepo>Pull SuperRepo</h3>
+<p>如果 SuperRepo 所記錄的 Submodule 版本有更新，執行 <code>pull</code> 時是不會自動也去把它更新，且執行 <code>status</code> 時會看到提示</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git status
+On branch master
+Your branch is up to date with <span style=color:#a31515>&#39;origin/master&#39;</span>.
+
+Changes not staged <span style=color:#00f>for</span> commit:
+  (use <span style=color:#a31515>&#34;git add &lt;file&gt;...&#34;</span> to update what will be committed)
+  (use <span style=color:#a31515>&#34;git checkout -- &lt;file&gt;...&#34;</span> to discard changes in working directory)
+
+	modified:   sub-repo (new commits)
+</code></pre></div><p>此時就要執行以下指令將 Submodule 更新，執行完再看 <code>status</code> 就不會有提示了。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git submodule update --recursive
+</code></pre></div><h3 id=pull-submodule-更新-submodule-版本>Pull Submodule (更新 Submodule 版本)</h3>
+<p>如果 Submodule 有新的 Commit，在 SuperRepo 執行 pull 是不會更新的，要自己手動執行指令：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ git submodule update --recursive --remote
+
+remote: Enumerating objects: 4, <span style=color:#00f>done</span>.
+remote: Counting objects: 100% (4/4), <span style=color:#00f>done</span>.
+remote: Compressing objects: 100% (2/2), <span style=color:#00f>done</span>.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), <span style=color:#00f>done</span>.
+From github.com:puckwang/SubRepo
+   1a39dc5..c9c4974  master     -&gt; origin/master
+Submodule path <span style=color:#a31515>&#39;sub-repo&#39;</span>: checked out <span style=color:#a31515>&#39;c9c4974e887f2362cc9f7f9d4c90b19891969d67&#39;</span>
+</code></pre></div><ul>
+<li><code>--recursive</code>: 代表如果遞迴執行，Submodule 中如果有 Submodule，有一併更新。</li>
+<li><code>--remote</code>: 使用遠端的分支來更新，而不是 SuperRepo 所記錄的 HASH (更新 Submodule 版本用)。</li>
+</ul>
+<p>或者是直接到 Submodule 裡面執行 pull 也可以。</p>
+<p>執行完後就會發現 SuperRepo 中的 Submodule 目錄會被標示 <code>(new commits)</code>，所以要記得 push。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ git status
+On branch master
+Your branch is up to date with <span style=color:#a31515>&#39;origin/master&#39;</span>.
+
+Changes not staged <span style=color:#00f>for</span> commit:
+  (use <span style=color:#a31515>&#34;git add &lt;file&gt;...&#34;</span> to update what will be committed)
+  (use <span style=color:#a31515>&#34;git checkout -- &lt;file&gt;...&#34;</span> to discard changes in working directory)
+
+	modified:   sub-repo (new commits)
+
+no changes added to commit (use <span style=color:#a31515>&#34;git add&#34;</span> and/or <span style=color:#a31515>&#34;git commit -a&#34;</span>)
+</code></pre></div><h3 id=push-submodule>Push Submodule</h3>
+<p>只要把 Submodule 當作一般 Repo 操作就可以了，但當 Submodule 有新的 <code>commit</code> 時，SuperRepo 所記錄的 HASH 都會改變，所以如果順序錯了話，會多一次 <code>commit</code>。</p>
+<p>比較好的順序如下：</p>
+<ol>
+<li>在 Submodule commit 變更。</li>
+<li>在 Submodule push 剛剛的 commit。</li>
+<li>在 SuperRepo commit 變更 (這裡會包含新的 Submodule HASH)。</li>
+<li>在 SuperRepo push 或是使用 <code>git push --recurse-submodules=on-demand</code> 就可以省略步驟 2。</li>
+</ol>
+<h3 id=刪除-submodule>刪除 Submodule</h3>
+<p>首先用以下指令將 submodule 紀錄刪除</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git submodule deinit -f &lt;submodule folder&gt;
+</code></pre></div><p>接下來刪除 submodule 的 <code>.git</code>，他會在 SuperRepo 的 <code>.git</code> 中的 <code>modules</code> 中。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>rm -rf .git/modules/path/to/submodule
+</code></pre></div><p>最後一步是刪除實體的目錄</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git rm -f path/to/submodule
+</code></pre></div><p>做完以上動作記得也要 <code>commit</code> 與 <code>push</code>。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git commit
+git push
+</code></pre></div><h3 id=其他人-clone-superrepo>其他人 Clone SuperRepo</h3>
+<p>其他人在 <code>Clone</code> 含有 Submodule 的專案時，要記得在 <code>clone</code> 指令後面加上 <code>--recurse-submodules</code>，否則預設是不會將 submodule <code>clone</code> 下來的。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone &lt;repo url&gt; --recurse-submodules
+</code></pre></div><p>如果是已經 <code>clone</code> 的也可以執行以下指令將 Submodule 拉下來</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git submodule init
+git submodule update
+
+<span style=color:green># or</span>
+
+git submodule update --init
+</code></pre></div><h3 id=將現有的專案拆出-submodule>將現有的專案拆出 Submodule</h3>
+<p>這個部分應該是大多數人都會遇到的，因為很難在專案一開始就切的這個完美，一定是長到一定的量，維護時覺得不行了才開始來切。</p>
+<p>要把現有的專案中其中的某個目錄切成 Submodule 其實不難，也不會遺失紀錄。</p>
+<p>首先執行拆解的部分，為了保險起見，請另外 <code>Clone</code> 一個乾淨的專案。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone &lt;Super Repo&gt;
+</code></pre></div><p>接下來刪除 origin，因為等等會把 Submodule 推上自己的遠端倉庫，所以這邊就先刪掉原本的 SuperRepo 的遠端倉庫。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git remote rm origin
+</code></pre></div><p>這個是可選的步驟，如果想要保留 <code>commit</code> 就要執行這個動作，他會過濾掉其他 <code>commit</code>，只保留我們要的 Submodule 的 <code>commit</code>，這就是為什麼一開始要另外 <code>clone</code> 一個新的。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git filter-branch --subdirectory-filter &lt;SubModule folder path&gt; -- --all
+</code></pre></div><p>執行過程會因為專案大小而有所不同，大一點的專案，且那個 Submodule 包含很多 <code>commit</code> 時，就會執行一段時間。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git filter-branch --subdirectory-filter app -- --all
+
+Rewrite 9ca4f14172ddcdf1aa9af5b69338bb41eb56162c (143/152) (6 seconds passed, remaining 0 predicted)
+</code></pre></div><p>執行完後應該會只剩所選路徑的 <code>commit</code>，並會發現整個根目錄只會剩剛剛所選路徑裡面的東西。</p>
+<p>檢查完沒問題後，就可以把要放 Submodule 的倉庫加進來，並推上去了。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git remote add origin &lt;SubModule Repo&gt;
+git push
+</code></pre></div><p>接下來將我們切出來的 SubRepo 加回 SuperRepo，先用 <code>git rm</code> 刪除原本的目錄，在用 <code>git submodule</code> 把他加回來，就像前面提到 &ldquo;<a href=#%E5%8A%A0%E5%85%A5-Submodule-%E6%AD%A5%E9%A9%9F>加入 Submodule 步驟</a>&rdquo; 一樣</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git rm -r &lt;folder&gt;
+git submodule add &lt;git repository B url&gt; &lt;folder&gt;
+</code></pre></div><p>確認完沒問題，能跑的都能跑了，要記得 <code>commit</code> 與 <code>push</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git commit
+git push
+</code></pre></div><h2 id=如何使用-git-subtree->如何使用 Git Subtree ?</h2>
+<p>我覺得 Subtree 比 Submodule 操作上更簡單，也更容易理解。</p>
+<h3 id=章節目錄-1>章節目錄</h3>
+<ul>
+<li><a href=#%E6%96%B0%E5%A2%9E-subtree>新增 Subtree</a></li>
+<li><a href=#pull-superrepo-subtree>Pull SuperRepo</a></li>
+<li><a href=#pull-subtree-%E6%9B%B4%E6%96%B0-subtree-%E7%89%88%E6%9C%AC>Pull Subtree (更新 Subtree 版本)</a></li>
+<li><a href=#push-subtree>Push Subtree</a></li>
+<li><a href=#%E5%88%AA%E9%99%A4-subtree>刪除 Subtree</a></li>
+<li><a href=#%E5%85%B6%E4%BB%96%E4%BA%BA-clone-superrepo-subtree>其他人 Clone SuperRepo</a></li>
+<li><a href=#%E5%B0%87%E7%8F%BE%E6%9C%89%E7%9A%84%E5%B0%88%E6%A1%88%E6%8B%86%E5%87%BA-subtree>將現有的專案拆出 Subtree</a></li>
+</ul>
+<h3 id=新增-subtree>新增 Subtree</h3>
+<p>想要把 SubRepo 用 Subtree 的方式加到 SuperRepo 的話，可以執行以下指令，你必須設定幾個參數， Subtree 的路徑、SubRepo 的遠端倉庫連結及一個版本。</p>
+<p>它會將 SubRepo Clone 下來到指定的路徑，並將他 Merge 進我們的 SuperRepo 當前的 HEAD。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git subtree push --prefix &lt;folder path&gt; &lt;repo url&gt; &lt;ref&gt;
+</code></pre></div><p>實際執行會是這樣</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git subtree add --prefix subtree git@github.com:puckwang/SubRepo.git c9c4974e887f2362cc9f7f9d4c90b19891969d67
+
+git fetch git@github.com:puckwang/SubRepo.git c9c4974e887f2362cc9f7f9d4c90b19891969d67
+warning: no common commits
+remote: Enumerating objects: 6, <span style=color:#00f>done</span>.
+remote: Counting objects: 100% (6/6), <span style=color:#00f>done</span>.
+remote: Compressing objects: 100% (3/3), <span style=color:#00f>done</span>.
+remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (6/6), <span style=color:#00f>done</span>.
+From github.com:puckwang/SubRepo
+ * branch            c9c4974e887f2362cc9f7f9d4c90b19891969d67 -&gt; FETCH_HEAD
+Added dir <span style=color:#a31515>&#39;subtree&#39;</span>
+</code></pre></div><blockquote>
+<p>小技巧：可以將遠端倉庫 Url 設別名，就像 origin 那樣，就不用每次都要輸入那麼長。</p>
+<p>在 SuperRepo 中：<code>git remote add -f subrepo &lt;repo url></code></p>
+<p>然後：<code>git subtree add --prefix &lt;folder path> subrepo &lt;ref></code></p>
+</blockquote>
+<p>使用 <code>git status</code> 後，會發現自動發了一個 Merge commit。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git status
+
+*   ae3f960 2020-03-19 | Add <span style=color:#a31515>&#39;subtree/&#39;</span> from commit <span style=color:#a31515>&#39;c9c4974e887f2362cc9f7f9d4c90b19891969d67&#39;</span> (HEAD -&gt; master) [Puck Wang]
+|<span style=color:#a31515>\
+</span><span style=color:#a31515></span>| * c9c4974 2020-03-18 | Create feature.txt [Puck Wang]
+| * 1a39dc5 2020-03-18 | Initial commit [Puck Wang]
+* 6922999 2020-03-19 | Update sub repo (origin/master, origin/HEAD) [Puck Wang]
+* 6cb24ae 2020-03-19 | Update sub repo [Puck Wang]
+* 811f46a 2020-03-19 | Update subrepo [Puck Wang]
+* 73f473c 2020-03-18 | Add sub-repo [Puck Wang]
+* 12b9412 2020-03-18 | Initial commit [Puck Wang]
+</code></pre></div><p>然後，就沒有了&mldr; 記得 <code>push</code> SuperRepo。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git push
+</code></pre></div><h3 id=pull-superrepo-subtree>Pull SuperRepo</h3>
+<p>不影響，他被視為一個資料夾而已，直接下 <code>git pull</code>。</p>
+<h3 id=pull-subtree-更新-subtree-版本>Pull Subtree (更新 Subtree 版本)</h3>
+<p>跟<a href=#%E6%96%B0%E5%A2%9E-subtree>新增</a>的語法差不多，就只是把 &lsquo;add&rsquo; 改成 &lsquo;pull&rsquo;，其他參數都一樣，執行後他會直接幫你執行 commit 並跳到輸入 message 的畫面。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>git subtree pull --prefix &lt;folder path&gt; &lt;repo url&gt; &lt;ref&gt;
+</code></pre></div><p>實際執行的範例</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git subtree pull --prefix subtree git@github.com:puckwang/SubRepo.git master
+remote: Enumerating objects: 12, <span style=color:#00f>done</span>.
+remote: Counting objects: 100% (12/12), <span style=color:#00f>done</span>.
+remote: Compressing objects: 100% (8/8), <span style=color:#00f>done</span>.
+remote: Total 11 (delta 4), reused 6 (delta 2), pack-reused 0
+Unpacking objects: 100% (11/11), <span style=color:#00f>done</span>.
+From github.com:puckwang/SubRepo
+ * branch            master     -&gt; FETCH_HEAD
+Merge made by the <span style=color:#a31515>&#39;recursive&#39;</span> strategy.
+ subtree/123.txt        | 0
+ subtree/abc.txt        | 0
+ subtree/abc1.txt       | 0
+ subtree/feafeat123.ttt | 1 +
+ subtree/feature2.txt   | 1 +
+ 5 files changed, 2 insertions(+)
+ create mode 100644 subtree/123.txt
+ create mode 100644 subtree/abc.txt
+ create mode 100644 subtree/abc1.txt
+ create mode 100644 subtree/feafeat123.ttt
+ create mode 100644 subtree/feature2.txt
+</code></pre></div><p>跟剛剛一樣，我們用 <code>git status</code> 檢視，可以看到像這樣的圖，像一個分支一直重複被合併進來。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>*   6ba2777 2020-03-19 | Merge commit <span style=color:#a31515>&#39;b9f546c57282516102e93e9a5315a7287393e805&#39;</span> (HEAD -&gt; master) [Puck Wang]
+|<span style=color:#a31515>\
+</span><span style=color:#a31515></span>| * b9f546c 2020-03-19 | Create feafeat123.ttt [Puck Wang]
+| * be3de4b 2020-03-19 | Add 123 [Puck Wang]
+| * c47d874 2020-03-19 | abc1.txt [Puck Wang]
+| * c2b399c 2020-03-19 | abc.txt [Puck Wang]
+| * c86fe17 2020-03-19 | Create feature2.txt [Puck Wang]
+* |   ae3f960 2020-03-19 | Add <span style=color:#a31515>&#39;subtree/&#39;</span> from commit <span style=color:#a31515>&#39;c9c4974e887f2362cc9f7f9d4c90b19891969d67&#39;</span> (origin/master, origin/HEAD) [Puck Wang]
+|<span style=color:#a31515>\ \
+</span><span style=color:#a31515></span>| |/
+| * c9c4974 2020-03-18 | Create feature.txt [Puck Wang]
+| * 1a39dc5 2020-03-18 | Initial commit [Puck Wang]
+* 6922999 2020-03-19 | Update sub repo [Puck Wang]
+* 6cb24ae 2020-03-19 | Update sub repo [Puck Wang]
+* 811f46a 2020-03-19 | Update subrepo [Puck Wang]
+* 73f473c 2020-03-18 | Add sub-repo [Puck Wang]
+* 12b9412 2020-03-18 | Initial commit [Puck Wang]
+</code></pre></div><h3 id=push-subtree>Push Subtree</h3>
+<p>前面比較時有提到 Subtree 再回推時會比較難處理，而他的順序如下：</p>
+<ol>
+<li>在 SuperRepo commit 變更</li>
+<li>在 Subtree push (這會執行比較久)</li>
+</ol>
+<p>而 <code>push</code> 的指令也跟前兩個一樣，改前面而已，後面都一樣。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>git subtree push --prefix &lt;folder path&gt; &lt;repo url&gt; &lt;ref&gt;
+</code></pre></div><p>實際執行範例，過程中會看到他在比對 commit，為多越慢，所以我才說他是比較難處理的。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ git subtree push --prefix subtree git@github.com:puckwang/SubRepo.git master
+git push using:  git@github.com:puckwang/SubRepo.git master
+Counting objects: 2, <span style=color:#00f>done</span>.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), <span style=color:#00f>done</span>.
+Writing objects: 100% (2/2), 237 bytes | 237.00 KiB/s, <span style=color:#00f>done</span>.
+Total 2 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:puckwang/SubRepo.git
+   b9f546c..b7107b3  b7107b38f5416503718a846cf5c85f1ecb5bb1f0 -&gt; master
+</code></pre></div><h3 id=刪除-subtree>刪除 subtree</h3>
+<p>跟 Submodule 相比，刪除 Subtree 算非常間單，就只要把資料夾刪掉就可以了。</p>
+<h3 id=其他人-clone-superrepo-subtree>其他人 Clone SuperRepo</h3>
+<p>不影響，他被視為一個資料夾而已，可直接執行 <code>git clone</code>。</p>
+<h3 id=將現有的專案拆出-subtree>將現有的專案拆出 Subtree</h3>
+<p>這個部分也比 Submodule 簡單一點，兩個指令。</p>
+<p>首先先把要切出來的資料夾切出來。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git subtree split --prefix &lt;folder path&gt;
+</code></pre></div><p>接下來直接把他推上遠端倉庫就可以了。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git subtree push --prefix &lt;folder path&gt; &lt;repo url&gt; &lt;ref&gt;
+</code></pre></div><h2 id=結論>結論</h2>
+<p>在實際實用兩種方式後，我是比較喜歡 Submodule，因為他不佔空間，實際也就是另一個 Repository，而 Subtree 是整個併進來，就不太喜歡。</p>
+<p>但實際上要用那種方式，還是要視當下需求再決定，例如為了方便使用者，Subtree 可能更好，但會苦了維護人員／貢獻者。</p>
+<h2 id=參考文章>參考文章</h2>
+<ul>
+<li><a href=https://stackoverflow.com/questions/17413493/create-a-submodule-repository-from-a-folder-and-keep-its-git-commit-history>https://stackoverflow.com/questions/17413493/create-a-submodule-repository-from-a-folder-and-keep-its-git-commit-history</a></li>
+<li><a href=https://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule/36593218#36593218>https://stackoverflow.com/questions/1260748/how-do-i-remove-a-submodule/36593218#36593218</a></li>
+<li><a href=https://www.atlassian.com/git/tutorials/git-subtree>https://www.atlassian.com/git/tutorials/git-subtree</a></li>
+</ul>
+<div>
+<br>
+<h3>
+感謝閱讀！
+</h3>
+<div>
+喜歡這篇文章或是有幫助到你嗎？ 歡迎分享給你的朋友！
+</div>
+<br>
+<div>
+有任何問題、回饋或您認為我會感興趣的任何東西嗎？ 請在下面發表評論，或者是<a href=https://blog.puckwang.com/about target=_blank>直接聯絡我</a>。
+</div>
+<br>
+</div>
+<div class="share-icons d-flex justify-content-center d-print-none">
+<a href="https://twitter.com/intent/tweet?url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2020%2fgit-submodule-vs-subtree%2f&text=Git%20%e9%80%b2%e9%9a%8e%e6%87%89%e7%94%a8%20Submodule%20%e8%88%87%20Subtree%ef%bc%8c%e4%bd%bf%e7%94%a8%e5%ae%83%e5%80%91%e4%be%86%e6%8b%86%e5%88%86%e5%b0%88%e6%a1%88&tw_p=tweetbutton" class=p-2 title="Share on Twitter" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Tweet</small></div>
+</a>
+<a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.puckwang.com%2fposts%2f2020%2fgit-submodule-vs-subtree%2f&t=Git%20%e9%80%b2%e9%9a%8e%e6%87%89%e7%94%a8%20Submodule%20%e8%88%87%20Subtree%ef%bc%8c%e4%bd%bf%e7%94%a8%e5%ae%83%e5%80%91%e4%be%86%e6%8b%86%e5%88%86%e5%b0%88%e6%a1%88" class=p-2 title="Share on Facebook" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2fblog.puckwang.com%2fposts%2f2020%2fgit-submodule-vs-subtree%2f&title=Git%20%e9%80%b2%e9%9a%8e%e6%87%89%e7%94%a8%20Submodule%20%e8%88%87%20Subtree%ef%bc%8c%e4%bd%bf%e7%94%a8%e5%ae%83%e5%80%91%e4%be%86%e6%8b%86%e5%88%86%e5%b0%88%e6%a1%88&source=mattbutton.com" class=p-2 title="Share on LinkedIn" target=_blank rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Share</small></div>
+</a>
+<a href=javascript:window.print() title="Print this article" class=p-2 rel=nofollow>
+<div>
+<span class=fa-stack>
+<i class="fas fa-circle fa-stack-2x"></i>
+<i class="fa fa-print fa-stack-1x fa-inverse"></i>
+</span>
+</div>
+<div class="fa-inverse text-center"><small>Print</small></div>
+</a>
+</div>
+<div>
+<hr>
+<div class="p-4 row justify-content-center" style=align-items:center>
+<div class=col-2>
+<img src=https://blog.puckwang.com/images/logo.png alt="Puck Wang" class="img-fluid rounded-circle" width=150>
+</div>
+<div class=col-8 style=vertical-align:middle>
+<h4>
+Puck Wang
+</h4>
+<p>
+Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網站開發者，常使用 .Net 和 React 進行開發，專注於架構研究，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。
+</p>
+<p>
+更多關於我的訊息，可至關於<a href=https://blog.puckwang.com/about target=_blank>關於</a>頁面。
+</p>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar d-print-none d-none d-xl-block">
+<div id=toc>
+<h2>目錄</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#submodule-vs-subtree>Submodule vs Subtree</a>
+<ul>
+<li><a href=#git-submodule-簡介>Git Submodule 簡介</a></li>
+<li><a href=#git-subtree-簡介>Git Subtree 簡介</a></li>
+</ul>
+</li>
+<li><a href=#如何使用-git-submodule->如何使用 Git Submodule ?</a>
+<ul>
+<li><a href=#章節目錄>章節目錄</a></li>
+<li><a href=#建立-submodule>建立 Submodule</a></li>
+<li><a href=#pull-superrepo>Pull SuperRepo</a></li>
+<li><a href=#pull-submodule-更新-submodule-版本>Pull Submodule (更新 Submodule 版本)</a></li>
+<li><a href=#push-submodule>Push Submodule</a></li>
+<li><a href=#刪除-submodule>刪除 Submodule</a></li>
+<li><a href=#其他人-clone-superrepo>其他人 Clone SuperRepo</a></li>
+<li><a href=#將現有的專案拆出-submodule>將現有的專案拆出 Submodule</a></li>
+</ul>
+</li>
+<li><a href=#如何使用-git-subtree->如何使用 Git Subtree ?</a>
+<ul>
+<li><a href=#章節目錄-1>章節目錄</a></li>
+<li><a href=#新增-subtree>新增 Subtree</a></li>
+<li><a href=#pull-superrepo-subtree>Pull SuperRepo</a></li>
+<li><a href=#pull-subtree-更新-subtree-版本>Pull Subtree (更新 Subtree 版本)</a></li>
+<li><a href=#push-subtree>Push Subtree</a></li>
+<li><a href=#刪除-subtree>刪除 subtree</a></li>
+<li><a href=#其他人-clone-superrepo-subtree>其他人 Clone SuperRepo</a></li>
+<li><a href=#將現有的專案拆出-subtree>將現有的專案拆出 Subtree</a></li>
+</ul>
+</li>
+<li><a href=#結論>結論</a></li>
+<li><a href=#參考文章>參考文章</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<footer class="mt-auto footer d-print-none">
+<div class=container-fluid>
+<div class="row justify-content-center">
+<div class="col-md-4 col-xl-3">
+<h5>Copyright © 2017-2024, Puck Wang; all rights reserved.</h5>
+Opinions expressed here are my own and may not reflect those of the company I work for, or the people I work with.
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>Disclaimer</h5>
+See <a href=https://blog.puckwang.com/other/disclaimer/>disclaimer</a> of <a href=https://blog.puckwang.com>https://blog.puckwang.com/</a>
+</div>
+<div class="col-md-4 col-xl-3">
+<h5>About This Site</h5>
+This blog was created using the <a href=https://gohugo.io/>Hugo</a> static site generator, using
+<a href=https://getbootstrap.com/>Bootstrap</a>, using the Silhouette Hugo theme, created by
+<a href=https://www.mattbutton.com>Matt Button</a>
+</div>
+</div>
+<hr>
+<div class="d-flex justify-content-center icons">
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//www.facebook.com/puckwang14><i class="fab fa-facebook-square"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//twitter.com/puckwang14><i class="fab fa-twitter"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//github.com/puckwang><i class="fab fa-github"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//linkedin.com/in/puckwang><i class="fab fa-linkedin"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href="//stackoverflow.com/users/7699156/puckwang?tab=profile"><i class="fab fa-stack-overflow"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=//g.dev/puckwang><i class="fab fa-google"></i></a>
+<a class="py-2 px-2 d-none d-lg-inline-block" href=https://blog.puckwang.com/index.xml><i class="fas fa-rss"></i></a>
+</div>
+</div>
+</footer>
+<script src=https://code.jquery.com/jquery-3.3.1.slim.min.js integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo crossorigin=anonymous></script>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script>
+<script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script>
+<script src=https://unpkg.com/mermaid@8.13.5/dist/mermaid.min.js></script>
+</body>
+<style>.zoom-in-thumbnail{visibility:hidden;position:fixed;z-index:100000;box-sizing:border-box;border:5px solid #fff;border-radius:3px;box-shadow:0 0 2px rgba(0,0,0,.8);opacity:0;pointer-events:none;transition-duration:.3s;transition-delay:.1s;transition-property:opacity}.zoom-in-thumbnail-img{background-repeat:no-repeat;background-size:contain}</style>
+<script>const root=document.documentElement;$(function(){mermaid.initialize({startOnLoad:!0}),$(".main-content img, .post img").each(function(){this.complete?generateImageDiv(this):$(this).on("load",function(){generateImageDiv(this)}),this.style.cursor="pointer",$(this).on("mousemove",function(d){let b=d.clientX,c=d.clientY,a;$(this).next().width()>=$(this).next().height()?innerHeight-c<=$(this).next().height()+50?a=getShowXY(this,"top",b,c):a=getShowXY(this,"bottom",b,c):innerWidth-b<=$(this).next().width()+50?a=getShowXY(this,"left",b,c):a=getShowXY(this,"right",b,c),root.style.setProperty("--zoom-image-x",a.x+250+"px"),root.style.setProperty("--zoom-image-y",a.y+"px")}),$(this).on("click",function(a){window.open(this.src)})})});function getShowXY(d,e,a,b){let c=$(d).next();switch(e){case'top':a-=c.width()/2,b-=c.height(),b-=25;break;case'bottom':a-=c.width()/2,b+=25;break;case'right':b-=c.height()/2,a+=25;break;case'left':a-=c.width(),b-=c.height()/2,a-=25;break}return{x:a,y:b}}function generateImageDiv(c){var e=screen.width*.6,f=screen.height*.5,d=0,a=c.naturalHeight,b=c.naturalWidth,g;b>e&&(d=e/b,b=e,a=a*d),a>f&&(d=f/a,a=f,b=b*d),g="<div class='zoom-in-thumbnail'><div class='zoom-in-thumbnail-img' style=\"background-color: white; background-image:url('"+c.src+"'); height: "+a+"px; width: "+b+'px;"></div></div>',$(c).after(g)}</script>
+</html>
