@@ -26,7 +26,7 @@ unsafe= true
 
 [Params]
 author = "Puck Wang"
-author_photo = "/images/author.jpg"
+author_photo = "/images/logo.png"
 images = ["/images/og_image.png"]
 mainSections = ["posts"]
 introDescription = "Hi！ 我是 Puck Wang，這個部落格的作者，是一位全端網站開發者，常使用 .Net 和 React 進行開發，專注於架構研究，你可以在這個部落格看到我精選的筆記內容，希望對你會有所幫助。"

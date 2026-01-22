@@ -2,7 +2,7 @@
 title: "About"
 date: 2017-09-01T22:31:10+08:00
 images:
-    - /images/author.jpg
+    - /images/logo.png
 ---
 <img src="/images/logo.png" class="rounded" style="width: 20vh">
 
